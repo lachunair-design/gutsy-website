@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { useCart } from '@/lib/shopify/cart-context';
 import { cn } from '@/lib/utils';
 import localFont from 'next/font/local';
@@ -18,17 +19,44 @@ const navigation = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showLogo, setShowLogo] = useState(true);
+  const pathname = usePathname();
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      // On the About page, hide logo between 100px and 800px scroll
+      // to let the big hero text breathe.
+      if (pathname === '/about') {
+        if (scrollY > 100 && scrollY < 800) {
+          setShowLogo(false);
+        } else {
+          setShowLogo(true);
+        }
+      } else {
+        setShowLogo(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
+
   return (
-    /* Removed py-8 from header to ensure it sits flush with the top of the viewport */
     <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-      {/* Navigation now handles its own vertical spacing via py-8 */}
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between">
           
-          <Link href="/" className="group relative">
+          {/* LOGO WITH CONDITIONAL VISIBILITY */}
+          <Link 
+            href="/" 
+            className={cn(
+              "group relative transition-all duration-500 ease-in-out",
+              showLogo ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+            )}
+          >
             <div className="relative w-32 h-16 md:w-48 md:h-20 mix-blend-multiply transition-transform hover:scale-105 active:scale-95">
               <Image
                 src="/images/gutsy-logomark.png"
@@ -41,6 +69,7 @@ export function Header() {
           </Link>
 
           <div className="flex items-center">
+            {/* Desktop Navigation Pills */}
             <div className="hidden md:flex items-center -space-x-4">
               {navigation.map((item) => (
                 <Link
@@ -66,6 +95,7 @@ export function Header() {
               </Link>
             </div>
 
+            {/* Cart & Mobile UI */}
             <div className="flex items-center ml-8 space-x-4">
               <button
                 onClick={openCart}
@@ -104,6 +134,7 @@ export function Header() {
           </div>
         </div>
 
+        {/* Mobile Navigation Menu */}
         <div
           className={cn(
             'md:hidden mt-8 overflow-hidden rounded-[2.5rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[12px_12px_0px_0px_#000000] transition-all duration-500',
