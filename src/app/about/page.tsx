@@ -10,15 +10,16 @@ const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 
 export default function AboutPage() {
   return (
-    /* The outer wrapper provides the 'Cream' frame color seen in your reference */
-    <div className="bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8">
+    /* OUTER WRAPPER: Removed top padding to allow content to hit the very top of the screen */
+    <div className="bg-[#f3eee4] min-h-screen px-4 md:px-6 lg:px-8 pb-4 md:pb-6 lg:pb-8">
       
-      {/* This is the main 'Pill' container. 
-        It uses the Gutsy Red background and heavy rounding to create the inset vibe. 
+      {/* THE INSET POUCH: 
+         - Added '-mt-8' (or adjust based on header height) to pull the red up.
+         - 'pt-48' ensures your 'The Big Fat' text doesn't actually hide behind the header pills.
       */}
-      <div className={`bg-[#f20028] min-h-[calc(100vh-4rem)] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] overflow-hidden selection:bg-[#ffb300] selection:text-black ${utoMedium.className}`}>
+      <div className={`bg-[#f20028] min-h-screen rounded-b-[40px] md:rounded-b-[60px] lg:rounded-b-[80px] overflow-hidden selection:bg-[#ffb300] selection:text-black ${utoMedium.className}`}>
         
-        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-32 pb-20">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-48 pb-20">
           
           {/* HERO SECTION */}
           <div className="text-center relative mb-16 z-10">
@@ -31,7 +32,7 @@ export default function AboutPage() {
             </h1>
           </div>
 
-          {/* MELTED ILLUSTRATION - Blends into the Red container background */}
+          {/* MELTED ILLUSTRATION */}
           <div className="relative w-full aspect-[21/9] mb-32 mix-blend-multiply pointer-events-none">
             <Image
               src="/images/MARATHON.png"
@@ -49,7 +50,7 @@ export default function AboutPage() {
                 It all started when I couldn&apos;t find a single protein powder that didn&apos;t make me bloated.
               </p>
               <p className="text-lg leading-relaxed font-medium">
-                Every brand promised the world. Every shake left me feeling heavy and uncomfortable. What&apos;s with all the gums and fillers?
+                Every brand promised the world. Every shake left me feeling heavy and uncomfortable.
               </p>
             </div>
 
@@ -58,7 +59,7 @@ export default function AboutPage() {
                 So I went ahead and made the protein I wanted to buy: one that feels light.
               </p>
               <p className="text-lg leading-relaxed font-medium">
-                Break down the protein before it hits your stomach and suddenly you skip the bloat entirely. No magic—just enzymatic pre-digestion.
+                Break down the protein before it hits your stomach. No magic—just enzymatic pre-digestion.
               </p>
             </div>
 
@@ -87,29 +88,6 @@ export default function AboutPage() {
             <div className="bg-black p-10 rounded-full border-4 border-[#f3eee4] flex flex-col justify-center items-center text-center shadow-[12px_12px_0px_0px_#ffb300]">
                <h3 className={`text-2xl mb-2 uppercase text-[#f3eee4] ${utoBlack.className}`}>No Bullshit</h3>
                <p className="text-sm font-bold uppercase tracking-widest leading-none text-[#ffb300]">5 Ingredients Only</p>
-            </div>
-          </div>
-
-          {/* FOUNDER BLOCK */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-40">
-            <div className="space-y-8 text-[#f3eee4]">
-              <h2 className={`text-5xl md:text-8xl uppercase leading-none text-black ${utoBlack.className}`}>
-                Laks, <br/> Founder
-              </h2>
-              <p className="text-xl md:text-3xl leading-tight italic font-bold">
-                GUTSY is founder-led. The person who made this in her kitchen is the same person running the company. Based in Dubai and obsessed with pre-digestion.
-              </p>
-            </div>
-            <div className="relative aspect-square bg-[#f3eee4] rounded-[4rem] border-4 border-black shadow-[20px_20px_0px_0px_#000000] overflow-hidden">
-               <Image 
-                  src="/images/gutsy-logomark.png" 
-                  alt="Gutsy Logomark"
-                  fill
-                  className="object-contain p-24 opacity-10 mix-blend-multiply"
-               />
-               <div className="absolute inset-0 flex items-center justify-center p-12 text-center">
-                  <p className={`text-4xl uppercase leading-none text-black ${utoBlack.className}`}>Born in the kitchen. <br/> Built for the road.</p>
-               </div>
             </div>
           </div>
 
