@@ -19,8 +19,30 @@ const runWild = localFont({
 
 export const metadata: Metadata = {
   title: 'GUTSY | No Bloat Protein',
-  description: 'Clean, pre-digested protein designed to feel light and work actually.',
+  description: 'Clean, pre-digested protein designed to feel light and actually work.',
   keywords: ['protein', 'supplements', 'fitness', 'dubai', 'gutsy', 'no-bloat'],
+  // FAVICON CONFIGURATION
+  icons: {
+    icon: '/images/Favicon 01.svg',
+    shortcut: '/images/Favicon 01.svg',
+    apple: '/images/Favicon 01.svg',
+  },
+  // SOCIAL SHARE (OPEN GRAPH) PREVIEW
+  openGraph: {
+    title: 'GUTSY | No Bloat Protein',
+    description: 'Clean, pre-digested protein designed to feel light.',
+    url: 'https://gutsy.life', // Update with your actual domain
+    siteName: 'GUTSY',
+    images: [
+      {
+        url: '/images/og-image.png', // Create this 1200x630px image later
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
@@ -30,15 +52,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${utoBlack.variable} ${runWild.variable}`}>
-      {/* 1. Removed min-h-screen and flex-col to prevent layout shifting.
-          2. The bg-[#f3eee4] here acts as a safety net for the brand cream.
+      {/* 1. antialiased for crisp typography.
+          2. bg-[#f3eee4] ensures no white flashes during transitions.
       */}
       <body className="antialiased bg-[#f3eee4]">
         <CartProvider>
           <Header />
-          {/* CRITICAL FIX: 
-              Removed 'pt-16'. This allows your Red Pouch on the About page 
-              to hit the top of the browser window perfectly.
+          {/* NO TOP PADDING: Allows 'About' page pouches to sit flush 
+              against the browser top.
           */}
           <main>{children}</main>
           <Footer />
