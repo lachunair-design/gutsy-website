@@ -25,7 +25,7 @@ export default function AboutPage() {
       <div ref={containerRef} className={`bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-screen overflow-hidden relative ${utoMedium.className}`}>
         
         {/* PARALLAX BG */}
-        <motion.div style={{ y: yMove }} className="absolute inset-0 w-full h-full mix-blend-multiply opacity-30 z-0 flex items-center justify-center">
+        <motion.div style={{ y: yMove }} className="absolute inset-0 w-full h-full mix-blend-multiply opacity-10 z-0 flex items-center justify-center">
           <Image src="/images/MARATHON.png" alt="BG" fill className="object-contain scale-125" priority />
         </motion.div>
 
