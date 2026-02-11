@@ -9,6 +9,7 @@ import { ChevronDown } from 'lucide-react';
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 const faqs = [
   {
@@ -61,7 +62,8 @@ export default function FAQPage() {
             <h1 className={cn("text-6xl md:text-8xl uppercase leading-none tracking-tighter mb-4", utoBlack.className)}>
               Got <br /> Questions?
             </h1>
-            <p className={cn("text-xl md:text-2xl uppercase tracking-tight opacity-80", utoBold.className)}>
+            {/* Updated to RunWild for the scrawled sub-description */}
+            <p className={cn("text-4xl lowercase leading-none text-[#ffb300]", runWild.className)}>
               Everything you need to know about the protein that actually feels light.
             </p>
           </div>
@@ -105,7 +107,8 @@ export default function FAQPage() {
                       "grid transition-all duration-300 ease-in-out",
                       openIndex === index ? "grid-rows-[1fr] opacity-100 mt-6" : "grid-rows-[0fr] opacity-0"
                     )}>
-                      <div className="overflow-hidden text-lg md:text-xl leading-relaxed italic text-black/80">
+                      {/* Updated answer to RunWild for a personal note aesthetic */}
+                      <div className={cn("overflow-hidden text-3xl md:text-4xl leading-none lowercase text-black/80", runWild.className)}>
                         {faq.answer}
                       </div>
                     </div>
@@ -121,7 +124,8 @@ export default function FAQPage() {
                   <h2 className={cn("text-3xl uppercase mb-6 leading-none", utoBlack.className)}>
                     Contacting GUTSY
                   </h2>
-                  <p className="text-lg mb-8 italic">
+                  {/* Updated note to RunWild */}
+                  <p className={cn("text-3xl lowercase leading-tight mb-8 text-black", runWild.className)}>
                     We&apos;re a small team so we&apos;ll get back to you within 24-48 hours. Include your order number if it&apos;s relevant.
                   </p>
                   <a 
