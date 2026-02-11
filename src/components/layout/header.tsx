@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '@/lib/shopify/cart-context';
 import { cn } from '@/lib/utils';
 import localFont from 'next/font/local';
@@ -19,28 +19,43 @@ const navigation = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
+  // Listen for scroll to toggle transparency
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#f3eee4] py-8 border-b border-black/5">
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 py-8 transition-all duration-500 ease-in-out",
+        isScrolled ? "bg-transparent" : "bg-[#f3eee4]"
+      )}
+    >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* MELTED Standalone GUTSY Logo */}
+          {/* Standalone Logo - Always Visible */}
           <Link href="/" className="group relative">
             <div className="relative w-32 h-16 md:w-48 md:h-20 mix-blend-multiply transition-transform hover:scale-105 active:scale-95">
               <Image
                 src="/images/gutsy-logomark.png"
                 alt="GUTSY"
                 fill
-                className="object-contain brightness-0" // Ensures the logo is pure black to "melt" into the cream
+                className="object-contain brightness-0" 
                 priority
               />
             </div>
           </Link>
 
-          {/* Overlapping Pill Navigation */}
+          {/* Nav Icons and Pills - Always Visible */}
           <div className="flex items-center">
             <div className="hidden md:flex items-center -space-x-4">
               {navigation.map((item) => (
@@ -56,7 +71,6 @@ export function Header() {
                 </Link>
               ))}
               
-              {/* Primary Action - Gutsy Red Pill */}
               <Link
                 href="/products"
                 className={cn(
@@ -90,7 +104,6 @@ export function Header() {
                 )}
               </button>
 
-              {/* Mobile Menu Toggle */}
               <button
                 type="button"
                 className="md:hidden h-14 w-14 flex items-center justify-center rounded-full bg-[#ffb300] border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000]"
@@ -108,7 +121,7 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation Overlay */}
+        {/* Mobile Overlay - Still needs its background for legibility */}
         <div
           className={cn(
             'md:hidden mt-8 overflow-hidden rounded-[2.5rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[12px_12px_0px_0px_#000000] transition-all duration-500',
