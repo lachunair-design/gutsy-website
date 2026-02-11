@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import localFont from 'next/font/local';
-import { Covered_By_Your_Grace } from 'next/font/google'; // Added Google Font
+import { Covered_By_Your_Grace } from 'next/font/google';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -22,30 +22,29 @@ export default function AboutPage() {
   const xMove = useTransform(scrollYProgress, [0, 1], [-200, 200]);
 
   return (
-    <div ref={containerRef} className="bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-8 selection:bg-[#ffb300] selection:text-black">
+    <div className="bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-8 space-y-8 selection:bg-[#ffb300] selection:text-black">
       
-      <div className={`bg-[#f20028] min-h-screen rounded-[40px] md:rounded-[60px] lg:rounded-[80px] overflow-hidden relative ${utoMedium.className}`}>
+      {/* MAIN CONTENT POUCH - Contains Hero, Illustration, and Story */}
+      <div ref={containerRef} className={`bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] overflow-hidden relative ${utoMedium.className}`}>
         
-        {/* PARALLAX TICKER */}
+        {/* PARALLAX TICKER BACKGROUND */}
         <div className="absolute top-1/4 left-0 w-full overflow-hidden pointer-events-none opacity-10 z-0">
           <motion.div style={{ x: xMove }} className={`whitespace-nowrap text-[200px] md:text-[300px] uppercase text-black ${utoBlack.className}`}>
             LIGHT LIGHT LIGHT LIGHT LIGHT
           </motion.div>
         </div>
 
-        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-32 pb-20 relative z-10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-32 pb-40 relative z-10">
           
-          {/* STAGGERED HERO - Now with Lowercase Scrawl */}
+          {/* STAGGERED HERO */}
           <div className="relative mb-32 flex flex-col items-center">
-            <h2 className={`text-[#f3eee4] text-4xl md:text-6xl lowercase tracking-tight mb-[-1rem] mr-[20%] ${handwritten.className} opacity-100 rotate-[-3deg]`}>
+            <h2 className={`text-[#f3eee4] text-4xl md:text-6xl lowercase tracking-tight mb-[-1rem] mr-[20%] ${handwritten.className} rotate-[-3deg]`}>
               the big fat
             </h2>
-            
             <h1 className={`text-[#000000] text-8xl md:text-[200px] leading-[0.75] uppercase tracking-tighter text-center ${utoBlack.className}`}>
               GUTSY
             </h1>
-            
-            <h2 className={`text-[#f3eee4] text-4xl md:text-6xl lowercase tracking-tight mt-[-1.5rem] ml-[30%] ${handwritten.className} opacity-100 rotate-[2deg]`}>
+            <h2 className={`text-[#f3eee4] text-4xl md:text-6xl lowercase tracking-tight mt-[-1.5rem] ml-[30%] ${handwritten.className} rotate-[2deg]`}>
               backstory
             </h2>
           </div>
@@ -61,8 +60,8 @@ export default function AboutPage() {
             />
           </div>
 
-          {/* STORY GRID - Staggered heights for an organic feel */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-24 mb-48 text-center md:text-left text-[#f3eee4]">
+          {/* STORY GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-24 text-center md:text-left text-[#f3eee4]">
             <div className="space-y-6 md:mt-12">
                <p className={`text-4xl leading-none text-black lowercase mb-2 ${handwritten.className}`}>
                 it started in the kitchen...
@@ -99,47 +98,32 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-
-          {/* STICKER BRAND VALUES */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40">
-            <div className="bg-[#ffb300] p-10 rounded-[3rem] border-4 border-black rotate-1 shadow-[12px_12px_0px_0px_#000000]">
-              <h3 className={`text-3xl mb-4 uppercase text-black ${utoBlack.className}`}>Feels Light</h3>
-              <p className="text-lg leading-tight italic font-bold text-black">No bloat, no brick feeling, no regret.</p>
-            </div>
-            
-            <div className="bg-white p-10 rounded-[3rem] border-4 border-black -rotate-2 shadow-[12px_12px_0px_0px_#000000]">
-              <h3 className={`text-3xl mb-4 uppercase text-[#f20028] ${utoBlack.className}`}>Actually Works</h3>
-              <p className="text-lg leading-tight italic font-bold text-black">PDCAAS score of 1.0. Your body uses all of it.</p>
-            </div>
-
-            <div className="bg-black p-10 rounded-full border-4 border-[#f3eee4] flex flex-col justify-center items-center text-center shadow-[12px_12px_0px_0px_#ffb300]">
-               <h3 className={`text-2xl mb-2 uppercase text-[#f3eee4] ${utoBlack.className}`}>No Bullshit</h3>
-               <p className="text-sm font-bold uppercase tracking-widest leading-none text-[#ffb300]">5 Ingredients Only</p>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="bg-black border-4 border-[#f3eee4] rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden shadow-[15px_15px_0px_0px_#ffb300]">
-            <div className="max-w-2xl mx-auto space-y-10">
-              <h3 className={`text-5xl md:text-7xl uppercase leading-tight text-[#f3eee4] ${utoBlack.className}`}>Ready to feel light?</h3>
-              <p className={`text-3xl lowercase text-[#ffb300] ${handwritten.className}`}>
-                get 10% off your first order when you sign up
-              </p>
-              
-              <div className="flex flex-col md:flex-row gap-4 pt-4">
-                <input 
-                  type="email" 
-                  placeholder="Your email"
-                  className="flex-1 h-18 px-8 rounded-full border-2 border-[#f3eee4] bg-transparent text-xl text-[#f3eee4] outline-none placeholder:text-[#f3eee4]/40"
-                />
-                <Button className="h-18 px-12 rounded-full bg-[#f20028] text-[#f3eee4] text-xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all active:scale-95">
-                  Sign me up
-                </Button>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+
+      {/* BREAKOUT CTA SECTION */}
+      <section className="bg-black rounded-[40px] md:rounded-[60px] lg:rounded-[80px] overflow-hidden relative py-32 border-4 border-[#f3eee4] shadow-[15px_15px_0px_0px_#ffb300]">
+        <div className="mx-auto max-w-3xl px-6 text-center relative z-10 space-y-10">
+          <h3 className={`text-5xl md:text-8xl uppercase leading-tight text-[#f3eee4] ${utoBlack.className}`}>
+            READY TO FEEL LIGHT?
+          </h3>
+          <p className={`text-4xl lowercase text-[#ffb300] ${handwritten.className}`}>
+            get 10% off your first order when you sign up
+          </p>
+          
+          <div className="flex flex-col md:flex-row gap-4 pt-4 max-w-xl mx-auto">
+            <input 
+              type="email" 
+              placeholder="Your email"
+              className="flex-1 h-18 px-8 rounded-full border-2 border-[#f3eee4] bg-transparent text-xl text-[#f3eee4] outline-none placeholder:text-[#f3eee4]/40"
+            />
+            <Button className="h-18 px-12 rounded-full bg-[#f20028] text-[#f3eee4] text-xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all active:scale-95">
+              Sign me up
+            </Button>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }
