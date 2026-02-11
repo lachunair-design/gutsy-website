@@ -7,7 +7,6 @@ import { useCart } from '@/lib/shopify/cart-context';
 import { cn } from '@/lib/utils';
 import localFont from 'next/font/local';
 
-// Initialize the custom fonts
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 
@@ -23,11 +22,12 @@ export function Header() {
   const totalItems = cart?.totalQuantity || 0;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-8 bg-transparent">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    /* Removed py-8 from header to ensure it sits flush with the top of the viewport */
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
+      {/* Navigation now handles its own vertical spacing via py-8 */}
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between">
           
-          {/* Standalone Logo - Always Visible */}
           <Link href="/" className="group relative">
             <div className="relative w-32 h-16 md:w-48 md:h-20 mix-blend-multiply transition-transform hover:scale-105 active:scale-95">
               <Image
@@ -40,7 +40,6 @@ export function Header() {
             </div>
           </Link>
 
-          {/* Nav Icons and Pills - Always Visible */}
           <div className="flex items-center">
             <div className="hidden md:flex items-center -space-x-4">
               {navigation.map((item) => (
@@ -67,7 +66,6 @@ export function Header() {
               </Link>
             </div>
 
-            {/* Cart & Mobile UI */}
             <div className="flex items-center ml-8 space-x-4">
               <button
                 onClick={openCart}
@@ -106,7 +104,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Overlay */}
         <div
           className={cn(
             'md:hidden mt-8 overflow-hidden rounded-[2.5rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[12px_12px_0px_0px_#000000] transition-all duration-500',
