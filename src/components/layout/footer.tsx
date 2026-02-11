@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 import localFont from 'next/font/local';
 
 // Corrected paths for src/components/layout/footer.tsx
@@ -22,14 +25,26 @@ const footerLinks = {
 };
 
 export function Footer() {
+  const [copied, setCopied] = useState(false);
+  const DISCOUNT_CODE = 'GUTSY10';
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(DISCOUNT_CODE);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <footer className="bg-[#121417] text-white pt-24 pb-12 rounded-t-[40px] relative overflow-hidden">
-      {/* 10% Off Tab - Matches Screenshot Aesthetic */}
-      <div className="absolute left-0 top-1/3 bg-white text-[#121417] py-8 px-3 rounded-r-2xl border border-gray-200 shadow-lg flex items-center justify-center">
+      {/* 10% Off Tab - Interactive Copy Button */}
+      <button 
+        onClick={handleCopy}
+        className="absolute left-0 top-1/3 bg-white text-[#121417] py-8 px-3 rounded-r-2xl border border-gray-200 shadow-lg flex items-center justify-center transition-transform active:scale-95 hover:bg-[#f3eee4]"
+      >
         <span className={`vertical-text text-xl font-bold rotate-180 [writing-mode:vertical-lr] ${utoBold.className}`}>
-          10% Off
+          {copied ? 'Copied!' : '10% Off'}
         </span>
-      </div>
+      </button>
 
       <div className="mx-auto max-w-7xl px-8">
         <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-32">
@@ -45,9 +60,9 @@ export function Footer() {
               />
             </Link>
             <div className="h-10 w-[1px] bg-white/30 hidden md:block" /> 
-            {/* Using &apos; to fix the unescaped entity error */}
+            
             <span className={`text-xl lowercase tracking-tight opacity-90 ${utoBold.className}`}>
-              It&apos;s clean-up time
+              no guts. no glory.
             </span>
           </div>
 
