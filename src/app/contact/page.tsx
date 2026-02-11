@@ -62,7 +62,6 @@ export default function FAQPage() {
             <h1 className={cn("text-6xl md:text-8xl uppercase leading-none tracking-tighter mb-4", utoBlack.className)}>
               Got <br /> Questions?
             </h1>
-            {/* Updated to RunWild for the scrawled sub-description */}
             <p className={cn("text-4xl lowercase leading-none text-[#ffb300]", runWild.className)}>
               Everything you need to know about the protein that actually feels light.
             </p>
@@ -75,14 +74,13 @@ export default function FAQPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             
-            {/* Collapsible FAQ List */}
             <div className="lg:col-span-8">
               <div className="space-y-4">
                 {faqs.map((faq, index) => (
                   <div 
                     key={index} 
                     className={cn(
-                      "border-b-4 border-black transition-all",
+                      "border-b-4 border-black transition-all duration-300",
                       openIndex === index ? "bg-white p-8 -mx-4 rounded-[2rem] shadow-[8px_8px_0px_0px_#000000]" : "bg-transparent pb-6"
                     )}
                   >
@@ -103,13 +101,15 @@ export default function FAQPage() {
                       )} />
                     </button>
                     
+                    {/* FIXED ACCORDION LOGIC */}
                     <div className={cn(
                       "grid transition-all duration-300 ease-in-out",
-                      openIndex === index ? "grid-rows-[1fr] opacity-100 mt-6" : "grid-rows-[0fr] opacity-0"
+                      openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                     )}>
-                      {/* Updated answer to RunWild for a personal note aesthetic */}
-                      <div className={cn("overflow-hidden text-3xl md:text-4xl leading-none lowercase text-black/80", runWild.className)}>
-                        {faq.answer}
+                      <div className="overflow-hidden">
+                        <div className={cn("text-3xl md:text-4xl leading-none lowercase text-black/80", runWild.className)}>
+                          {faq.answer}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -117,14 +117,12 @@ export default function FAQPage() {
               </div>
             </div>
 
-            {/* Sidebar / Contact Info */}
             <div className="lg:col-span-4">
               <div className="sticky top-32 space-y-8">
                 <div className="bg-[#f20028] p-10 rounded-[2rem] border-4 border-black shadow-[10px_10px_0px_0px_#000000] text-[#f3eee4]">
                   <h2 className={cn("text-3xl uppercase mb-6 leading-none", utoBlack.className)}>
                     Contacting GUTSY
                   </h2>
-                  {/* Updated note to RunWild */}
                   <p className={cn("text-3xl lowercase leading-tight mb-8 text-black", runWild.className)}>
                     We&apos;re a small team so we&apos;ll get back to you within 24-48 hours. Include your order number if it&apos;s relevant.
                   </p>
