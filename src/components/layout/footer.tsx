@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const footerLinks = {
   shop: [
@@ -29,11 +30,11 @@ const socialLinks = [
     ),
   },
   {
-    name: 'Twitter',
-    href: 'https://twitter.com',
+    name: 'YouTube',
+    href: 'https://youtube.com',
     icon: (
       <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+        <path fillRule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clipRule="evenodd" />
       </svg>
     ),
   },
@@ -41,9 +42,9 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white border-t-[12px] border-black">
-      {/* Massive Marquee / Brand Header */}
-      <div className="bg-[#FF4D4D] py-4 border-b-8 border-black overflow-hidden whitespace-nowrap">
+    <footer className="bg-black text-white border-t-[12px] border-black selection:bg-[#FF4D4D] selection:text-white">
+      {/* Ticker Marquee - High Energy Section */}
+      <div className="bg-[#FF4D4D] py-5 border-b-8 border-black overflow-hidden whitespace-nowrap">
         <div className="flex animate-marquee space-x-12">
           {[...Array(10)].map((_, i) => (
             <span key={i} className="text-4xl md:text-6xl font-black uppercase italic text-black">
@@ -54,25 +55,37 @@ export function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="py-20 md:py-28">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
+        <div className="py-20 md:py-32">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
             
-            {/* Brand Intro Block */}
+            {/* Logo & Brand Identity Block */}
             <div className="md:col-span-5 lg:col-span-6">
-              <Link href="/" className="inline-block">
-                <span className="text-8xl md:text-[120px] font-black tracking-tighter leading-none hover:text-[#FF4D4D] transition-colors">
+              <Link href="/" className="inline-block group relative">
+                {/* The Brutalist Logo Box */}
+                <div className="relative w-32 h-32 md:w-48 md:h-48 mb-10 border-8 border-white bg-white group-hover:bg-[#FF4D4D] group-hover:border-[#FF4D4D] transition-all duration-300 shadow-[15px_15px_0px_0px_rgba(255,77,77,1)] group-hover:shadow-none group-hover:translate-x-2 group-hover:translate-y-2 overflow-hidden">
+                  <Image
+                    src="/images/gutsy-logomark.png"
+                    alt="GUTSY Logomark"
+                    fill
+                    className="object-contain p-4 grayscale group-hover:grayscale-0 transition-all"
+                  />
+                </div>
+                <span className="text-8xl md:text-[140px] font-black tracking-tighter leading-none uppercase block hover:text-[#FF4D4D] transition-colors">
                   GUTSY.
                 </span>
               </Link>
-              <p className="mt-8 text-2xl md:text-3xl font-bold uppercase leading-tight max-w-md">
-                Fueling the ambitious, the lactose-intolerant, and the unapologetic.
+              <p className="mt-8 text-2xl md:text-4xl font-black uppercase leading-[0.9] max-w-md italic">
+                Supplements with backbone. <br />
+                Born in Dubai.
               </p>
-              <div className="mt-10 flex space-x-6">
+              
+              {/* Disruptive Social Buttons */}
+              <div className="mt-12 flex space-x-6">
                 {socialLinks.map((link) => (
                   <a
                     key={link.name}
                     href={link.href}
-                    className="p-4 border-4 border-white bg-white text-black hover:bg-[#FF4D4D] hover:border-[#FF4D4D] hover:text-white transition-all hover:-translate-y-2 shadow-[6px_6px_0px_0px_rgba(255,77,77,1)]"
+                    className="p-5 border-4 border-white bg-white text-black hover:bg-[#FF4D4D] hover:border-[#FF4D4D] hover:text-white transition-all hover:-translate-y-2 shadow-[8px_8px_0px_0px_rgba(255,77,77,1)] active:shadow-none active:translate-y-0"
                     aria-label={link.name}
                   >
                     {link.icon}
@@ -81,15 +94,15 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Links Grid */}
-            <div className="md:col-span-7 lg:col-span-6 grid grid-cols-2 lg:grid-cols-3 gap-12">
-              {/* Shop */}
+            {/* Links Sections with Brutalist Underlines */}
+            <div className="md:col-span-7 lg:col-span-6 grid grid-cols-1 sm:grid-cols-3 gap-12">
+              {/* Shop Column */}
               <div>
-                <h3 className="text-2xl font-black uppercase italic mb-8 text-[#FF4D4D]">Shop</h3>
-                <ul className="space-y-4">
+                <h3 className="text-2xl font-black uppercase italic mb-8 text-[#FF4D4D] underline decoration-[6px] underline-offset-8">Shop</h3>
+                <ul className="space-y-5">
                   {footerLinks.shop.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className="text-xl font-bold uppercase hover:underline decoration-4 underline-offset-8">
+                      <Link href={link.href} className="text-xl font-bold uppercase hover:text-[#FF4D4D] transition-colors tracking-tighter">
                         {link.name}
                       </Link>
                     </li>
@@ -97,13 +110,13 @@ export function Footer() {
                 </ul>
               </div>
 
-              {/* Company */}
+              {/* Company Column */}
               <div>
-                <h3 className="text-2xl font-black uppercase italic mb-8 text-[#FF4D4D]">Company</h3>
-                <ul className="space-y-4">
+                <h3 className="text-2xl font-black uppercase italic mb-8 text-[#FF4D4D] underline decoration-[6px] underline-offset-8">Company</h3>
+                <ul className="space-y-5">
                   {footerLinks.company.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className="text-xl font-bold uppercase hover:underline decoration-4 underline-offset-8">
+                      <Link href={link.href} className="text-xl font-bold uppercase hover:text-[#FF4D4D] transition-colors tracking-tighter">
                         {link.name}
                       </Link>
                     </li>
@@ -111,13 +124,13 @@ export function Footer() {
                 </ul>
               </div>
 
-              {/* Legal - Stays on its own line on smaller screens within the link grid */}
-              <div className="col-span-2 lg:col-span-1">
-                <h3 className="text-2xl font-black uppercase italic mb-8 text-[#FF4D4D]">Legal</h3>
-                <ul className="space-y-4">
+              {/* Legal Column */}
+              <div>
+                <h3 className="text-2xl font-black uppercase italic mb-8 text-[#FF4D4D] underline decoration-[6px] underline-offset-8">Legal</h3>
+                <ul className="space-y-5">
                   {footerLinks.legal.map((link) => (
                     <li key={link.name}>
-                      <Link href={link.href} className="text-xl font-bold uppercase hover:underline decoration-4 underline-offset-8">
+                      <Link href={link.href} className="text-xl font-bold uppercase hover:text-[#FF4D4D] transition-colors tracking-tighter">
                         {link.name}
                       </Link>
                     </li>
@@ -128,18 +141,21 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Massive Bottom Bar */}
-        <div className="border-t-8 border-white py-12 flex flex-col md:flex-row justify-between items-center gap-8">
-          <p className="text-2xl font-black uppercase italic">
+        {/* The Final Bottom Bar */}
+        <div className="border-t-[12px] border-white py-16 flex flex-col md:flex-row justify-between items-center gap-10">
+          <p className="text-3xl font-black uppercase italic tracking-tighter">
             &copy; {new Date().getFullYear()} GUTSY WORLDWIDE
           </p>
-          <div className="flex gap-4">
-             <div className="w-12 h-12 bg-[#FF4D4D] border-4 border-white"></div>
-             <div className="w-12 h-12 bg-white border-4 border-black"></div>
-             <div className="w-12 h-12 bg-[#FF4D4D] border-4 border-white"></div>
+          
+          {/* Decorative Desert Blocks */}
+          <div className="hidden lg:flex gap-6">
+             <div className="w-16 h-16 bg-[#FF4D4D] border-4 border-white rotate-3 shadow-[4px_4px_0px_0px_white]"></div>
+             <div className="w-16 h-16 bg-white border-4 border-black -rotate-6 shadow-[4px_4px_0px_0px_#FF4D4D]"></div>
+             <div className="w-16 h-16 bg-[#FF4D4D] border-4 border-white rotate-12 shadow-[4px_4px_0px_0px_white]"></div>
           </div>
-          <p className="text-2xl font-black uppercase italic">
-            BORN IN DUBAI
+
+          <p className="text-3xl font-black uppercase italic tracking-tighter">
+            EST. 2026 // DUBAI
           </p>
         </div>
       </div>
