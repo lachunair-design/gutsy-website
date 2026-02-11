@@ -37,36 +37,61 @@
 
 html {
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  @apply antialiased text-gutsy-black bg-white;
+  /* Updated to brand cream to kill the top white space glitch */
+  @apply antialiased text-[#000000] bg-[#f3eee4];
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Brutalist Aesthetic */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gutsy-gray-100;
+  background: #f3eee4;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gutsy-gray-400 rounded-full;
+  background: #000000;
+  border: 2px solid #f3eee4;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-gutsy-gray-500;
+  background: #f20028;
+}
+
+/* Utility to hide scrollbars for the overlapping pouch sections */
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* Focus styles */
 *:focus-visible {
-  @apply outline-none ring-2 ring-gutsy-black ring-offset-2;
+  @apply outline-none ring-2 ring-[#f20028] ring-offset-2;
 }
 
-/* Selection */
+/* Selection - Gutsy Amber */
 ::selection {
-  @apply bg-gutsy-black text-white;
+  @apply bg-[#ffb300] text-black;
+}
+
+/* Helper for the vertical text in your footer discount tab */
+.vertical-text {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
 }
