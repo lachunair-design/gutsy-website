@@ -8,11 +8,11 @@ import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 
-// FIXED FONT PATHS: Using standard root-relative strings to solve Vercel build errors
-const utoBlack = localFont({ src: '/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '/fonts/Uto Medium.otf' });
-const runWild = localFont({ src: '/fonts/RunWild.ttf' });
+// FONT CONFIGURATION - Using direct relative paths from the file location
+const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
 
 const mockProducts: ShopifyProduct[] = [
   {
@@ -53,15 +53,14 @@ const mockProducts: ShopifyProduct[] = [
 
 export default function HomePage({ featuredProducts = mockProducts }) {
   return (
-    /* OUTER FRAME: pt-32 creates the rounded gap at the top to clear the header */
     <div className={cn("bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-32 pb-8 space-y-8 selection:bg-[#ffb300]", utoMedium.className)}>
       
-      {/* HERO SECTION - THE MAIN POUCH */}
+      {/* HERO SECTION */}
       <section className="relative">
         <div className="bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-[80vh] relative overflow-hidden flex items-center">
           
           <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none">
-             <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-125 translate-x-1/4" />
+             <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-125 translate-x-1/4" priority />
           </div>
 
           <div className="mx-auto max-w-7xl px-8 md:px-12 relative z-10 w-full py-24 text-center md:text-left">
@@ -69,7 +68,6 @@ export default function HomePage({ featuredProducts = mockProducts }) {
               <h2 className={cn("text-[#f3eee4] text-5xl md:text-7xl lowercase mb-[-1rem] md:mb-[-2rem] ml-4 rotate-[-3deg]", runWild.className)}>
                 finally, a protein that
               </h2>
-              {/* FIXED BLEEDING: Switched from tracking-tighter to tracking-tight */}
               <h1 className={cn("text-black text-7xl md:text-[160px] leading-[0.8] uppercase tracking-tight mb-8", utoBlack.className)}>
                 FEELS LIGHT
               </h1>
@@ -110,7 +108,7 @@ export default function HomePage({ featuredProducts = mockProducts }) {
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
+      {/* LINEUP */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row items-baseline gap-4 mb-16">
