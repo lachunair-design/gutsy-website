@@ -4,17 +4,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/product/product-card';
-import { getProducts } from '@/lib/shopify';
 import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 
-// GUTSY Core Fonts - Using absolute paths to prevent Vercel build errors
-const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
-const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
-// Mock products preserved for development
+// FIXED FONT PATHS: Using standard root-relative strings to solve Vercel build errors
+const utoBlack = localFont({ src: '/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '/fonts/RunWild.ttf' });
+
 const mockProducts: ShopifyProduct[] = [
   {
     id: '1',
@@ -61,7 +60,6 @@ export default function HomePage({ featuredProducts = mockProducts }) {
       <section className="relative">
         <div className="bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-[80vh] relative overflow-hidden flex items-center">
           
-          {/* Background Illustration */}
           <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none">
              <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-125 translate-x-1/4" />
           </div>
@@ -71,8 +69,8 @@ export default function HomePage({ featuredProducts = mockProducts }) {
               <h2 className={cn("text-[#f3eee4] text-5xl md:text-7xl lowercase mb-[-1rem] md:mb-[-2rem] ml-4 rotate-[-3deg]", runWild.className)}>
                 finally, a protein that
               </h2>
-              {/* FIXED BLEEDING: Using tracking-normal and responsive max-size */}
-              <h1 className={cn("text-black text-7xl md:text-[180px] leading-[0.8] uppercase tracking-normal mb-8", utoBlack.className)}>
+              {/* FIXED BLEEDING: Switched from tracking-tighter to tracking-tight */}
+              <h1 className={cn("text-black text-7xl md:text-[160px] leading-[0.8] uppercase tracking-tight mb-8", utoBlack.className)}>
                 FEELS LIGHT
               </h1>
               <p className="text-[#f3eee4] text-xl md:text-2xl max-w-xl font-bold uppercase leading-tight italic mx-auto md:mx-0">
@@ -96,7 +94,7 @@ export default function HomePage({ featuredProducts = mockProducts }) {
         </div>
       </section>
 
-      {/* FEATURES SECTION - BRUTALIST TILES */}
+      {/* FEATURES SECTION */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
