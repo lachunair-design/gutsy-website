@@ -11,18 +11,6 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-// Add this to your layout.tsx or at the top of your page file if using Next.js Google Fonts loader
-import { Covered_By_Your_Grace } from 'next/font/local';
-
-const scrawledFont = localFont({
-  src: [
-    {
-      path: '../../../public/fonts/CoveredByYourGrace-Regular.ttf', // If you download it
-      weight: '400',
-    },
-  ],
-  variable: '--font-scrawled',
-});
 
 export const metadata: Metadata = {
   title: 'Gutsy | Premium Protein Supplements',
