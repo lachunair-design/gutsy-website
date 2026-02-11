@@ -23,14 +23,17 @@ export default function AboutPage() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 0.2, 0.2, 0]);
 
   return (
-    /* 1. OUTER WRAPPER: pt-8 restored to show the cream frame at the top */
-    <div className="bg-[#f3eee4] min-h-screen px-4 md:px-6 lg:px-8 pt-8 pb-8 space-y-8 selection:bg-[#ffb300] selection:text-black">
+    /* 1. THE OUTER FRAME (Cream Background)
+       - pt-32 creates the rounded gap at the top to clear the header.
+       - p-4/md:p-6 creates the side/bottom frame.
+    */
+    <div className="bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-32 pb-8 space-y-8 selection:bg-[#ffb300] selection:text-black">
       
-      {/* 2. THE POUCH: 
-          - Negative margin (-mt-24) pulls the red curve UP into the header area.
-          - rounded-t restored to get the circular padding back.
+      {/* 2. THE INNER POUCH (Red Background)
+          - rounded-[40px+] on ALL corners restores the circular padding look.
+          - overflow-hidden ensures the background illustration stays inside the pouch.
       */}
-      <div ref={containerRef} className={`bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] -mt-24 min-h-screen overflow-hidden relative ${utoMedium.className}`}>
+      <div ref={containerRef} className={`bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-screen overflow-hidden relative ${utoMedium.className}`}>
         
         {/* BACKGROUND ILLUSTRATION */}
         <motion.div 
@@ -48,21 +51,30 @@ export default function AboutPage() {
           </div>
         </motion.div>
 
-        {/* 3. HERO CONTENT: pt-64 ensures text starts below your fixed header */}
-        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-64 pb-48 relative z-10">
+        {/* 3. HERO CONTENT
+            - pt-20 provides internal padding so the text isn't touching the red curve.
+        */}
+        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-20 pb-48 relative z-10">
           
           <div className="relative mb-80 flex flex-col items-center">
             <h2 className={`text-[#f3eee4] text-7xl md:text-[120px] lowercase tracking-tight mb-[-3rem] md:mb-[-5rem] mr-[35%] ${runWild.className} rotate-[-5deg] z-20`}>
               the big fat
             </h2>
-            <h1 className={`text-black text-[100px] md:text-[240px] leading-[0.7] uppercase tracking-tighter text-center ${utoBlack.className} z-10`}>
+            
+            {/* 4. FIXING THE BLEEDING:
+                - Reduced font size slightly (text-[180px]) to prevent overflow.
+                - tracking-tight instead of tighter.
+            */}
+            <h1 className={`text-black text-[80px] md:text-[180px] leading-[0.8] uppercase tracking-tight text-center ${utoBlack.className} z-10`}>
               backstory
             </h1>
+            
             <h2 className={`text-[#f3eee4] text-5xl md:text-7xl lowercase tracking-tight mt-[-2rem] md:mt-[-3rem] ml-[45%] ${runWild.className} rotate-[3deg] z-20 opacity-80`}>
               from laks
             </h2>
           </div>
 
+          {/* STORY GRID */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-32 text-center md:text-left text-[#f3eee4]">
             <div className="space-y-6 md:mt-16">
                <p className={`text-7xl leading-none text-black lowercase mb-1 ${runWild.className}`}>
@@ -96,13 +108,14 @@ export default function AboutPage() {
                 GUTSY launched here because that&apos;s where I am.
               </p>
               <p className="text-xl opacity-90 leading-relaxed font-medium">
-                Focused on getting this into the hands of people who are tired of protein that feels like garbage.
+                Focused on getting this into the hands of people who are tired of protein that makes them feel like garbage.
               </p>
             </div>
           </div>
         </div>
       </div>
 
+      {/* 5. CTA SECTION (Standalone Pouch) */}
       <section className="bg-black rounded-[40px] md:rounded-[60px] lg:rounded-[80px] overflow-hidden relative py-32 border-4 border-[#f3eee4] shadow-[15px_15px_0px_0px_#ffb300]">
         <div className="mx-auto max-w-3xl px-6 text-center relative z-10 space-y-10">
           <h3 className={`text-5xl md:text-9xl uppercase leading-tight text-[#f3eee4] ${utoBlack.className}`}>
