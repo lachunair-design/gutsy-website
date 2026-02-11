@@ -25,23 +25,23 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-transparent py-6">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-start justify-between">
           
-          {/* Standalone GUTSY Logo - No Wordmark */}
+          {/* ENLARGED Standalone GUTSY Logo */}
           <Link href="/" className="group">
-            <div className="relative w-14 h-14 md:w-16 md:h-16 border-[3px] border-[#000000] bg-[#f3eee4] rounded-sm overflow-hidden shadow-[6px_6px_0px_0px_#000000] group-hover:shadow-none group-hover:translate-x-1 group-hover:translate-y-1 transition-all">
+            <div className="relative w-24 h-24 md:w-28 md:h-28 border-[4px] border-[#000000] bg-[#f3eee4] rounded-sm overflow-hidden shadow-[8px_8px_0px_0px_#000000] group-hover:shadow-none group-hover:translate-x-2 group-hover:translate-y-2 transition-all">
               <Image
                 src="/images/gutsy-logomark.png"
                 alt="GUTSY"
                 fill
-                className="object-contain p-2"
+                className="object-contain p-3"
                 priority
               />
             </div>
           </Link>
 
           {/* Overlapping Pill Navigation */}
-          <div className="flex items-center">
+          <div className="flex items-center pt-2"> {/* Added padding to align with the top of the larger logo */}
             <div className="hidden md:flex items-center -space-x-4">
               {navigation.map((item) => (
                 <Link
@@ -111,7 +111,7 @@ export function Header() {
         {/* Mobile Navigation Overlay */}
         <div
           className={cn(
-            'md:hidden mt-4 overflow-hidden rounded-[2rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[8px_8px_0px_0px_#000000] transition-all duration-500',
+            'md:hidden mt-6 overflow-hidden rounded-[2rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[8px_8px_0px_0px_#000000] transition-all duration-500',
             mobileMenuOpen ? 'max-h-[32rem] opacity-100 p-8' : 'max-h-0 opacity-0'
           )}
         >
