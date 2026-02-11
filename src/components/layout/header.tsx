@@ -27,23 +27,20 @@ export function Header() {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* GUTSY Logo Section */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 md:w-12 md:h-12 border-2 border-black bg-white rounded-sm overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:shadow-none group-hover:translate-x-1 group-hover:translate-y-1 transition-all">
+          {/* Standalone GUTSY Logo - No Wordmark */}
+          <Link href="/" className="group">
+            <div className="relative w-14 h-14 md:w-16 md:h-16 border-[3px] border-[#000000] bg-[#f3eee4] rounded-sm overflow-hidden shadow-[6px_6px_0px_0px_#000000] group-hover:shadow-none group-hover:translate-x-1 group-hover:translate-y-1 transition-all">
               <Image
                 src="/images/gutsy-logomark.png"
-                alt="GUTSY Logo"
+                alt="GUTSY"
                 fill
-                className="object-contain p-1"
+                className="object-contain p-2"
                 priority
               />
             </div>
-            <span className={cn("text-4xl md:text-5xl tracking-tighter uppercase leading-none text-black", utoBlack.className)}>
-              GUTSY
-            </span>
           </Link>
 
-          {/* Navigation Container - Overlapping Pills */}
+          {/* Overlapping Pill Navigation */}
           <div className="flex items-center">
             <div className="hidden md:flex items-center -space-x-4">
               {navigation.map((item) => (
@@ -51,7 +48,7 @@ export function Header() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "h-12 px-8 flex items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm text-black text-sm font-bold transition-all hover:z-10 hover:scale-105 hover:bg-[#F3EEE4]",
+                    "h-12 px-8 flex items-center justify-center rounded-full bg-[#f3eee4] border-2 border-[#000000] text-[#000000] text-sm font-bold transition-all hover:z-10 hover:scale-105 hover:bg-[#ffb300]",
                     utoBold.className
                   )}
                 >
@@ -63,7 +60,7 @@ export function Header() {
               <Link
                 href="/products"
                 className={cn(
-                  "h-12 px-10 flex items-center justify-center rounded-full bg-[#B1412D] text-white text-sm font-bold shadow-lg transition-all hover:z-10 hover:scale-105 hover:brightness-110",
+                  "h-12 px-10 flex items-center justify-center rounded-full bg-[#f20028] text-[#f3eee4] text-sm font-bold border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] transition-all hover:z-10 hover:scale-105 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#000000]",
                   utoBold.className
                 )}
               >
@@ -75,10 +72,10 @@ export function Header() {
             <div className="flex items-center ml-6 space-x-3">
               <button
                 onClick={openCart}
-                className="group relative h-12 w-12 flex items-center justify-center rounded-full bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
+                className="group relative h-12 w-12 flex items-center justify-center rounded-full bg-[#f3eee4] border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
                 aria-label="Open cart"
               >
-                <div className="relative w-9 h-9 overflow-hidden rounded-full border border-gray-100">
+                <div className="relative w-9 h-9 overflow-hidden rounded-full border border-[#000000] bg-white">
                   <Image
                     src="/images/cart-image-girl-1.png"
                     alt="Cart"
@@ -87,7 +84,7 @@ export function Header() {
                   />
                 </div>
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-black text-[10px] font-black text-white border-2 border-white">
+                  <span className="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#ffb300] text-[10px] font-black text-[#000000] border-2 border-[#000000]">
                     {totalItems}
                   </span>
                 )}
@@ -96,14 +93,14 @@ export function Header() {
               {/* Mobile Menu Toggle */}
               <button
                 type="button"
-                className="md:hidden h-12 w-12 flex items-center justify-center rounded-full bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                className="md:hidden h-12 w-12 flex items-center justify-center rounded-full bg-[#ffb300] border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000]"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
-                <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6 text-[#000000]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   {mobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
                   ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 6h16M4 12h16m-7 6h7" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 6h16M4 12h16m-7 6h7" />
                   )}
                 </svg>
               </button>
@@ -114,7 +111,7 @@ export function Header() {
         {/* Mobile Navigation Overlay */}
         <div
           className={cn(
-            'md:hidden mt-4 overflow-hidden rounded-[2rem] bg-white border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all duration-500',
+            'md:hidden mt-4 overflow-hidden rounded-[2rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[8px_8px_0px_0px_#000000] transition-all duration-500',
             mobileMenuOpen ? 'max-h-[32rem] opacity-100 p-8' : 'max-h-0 opacity-0'
           )}
         >
@@ -123,7 +120,7 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={cn("text-3xl uppercase text-black hover:italic", utoBlack.className)}
+                className={cn("text-3xl uppercase text-[#000000] hover:text-[#f20028]", utoBlack.className)}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -131,7 +128,7 @@ export function Header() {
             ))}
             <Link
               href="/products"
-              className={cn("text-4xl uppercase text-[#B1412D] pt-6 border-t-4 border-black", utoBlack.className)}
+              className={cn("text-4xl uppercase text-[#f20028] pt-6 border-t-4 border-[#000000]", utoBlack.className)}
               onClick={() => setMobileMenuOpen(false)}
             >
               Shop All
