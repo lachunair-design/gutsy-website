@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useCart } from '@/lib/shopify/cart-context';
 import { cn } from '@/lib/utils';
 import localFont from 'next/font/local';
@@ -19,26 +19,11 @@ const navigation = [
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
-  // Listen for scroll to toggle transparency
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <header 
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 py-8 transition-all duration-500 ease-in-out",
-        isScrolled ? "bg-transparent" : "bg-[#f3eee4]"
-      )}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 py-8 bg-transparent">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
@@ -121,7 +106,7 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Overlay - Still needs its background for legibility */}
+        {/* Mobile Overlay */}
         <div
           className={cn(
             'md:hidden mt-8 overflow-hidden rounded-[2.5rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[12px_12px_0px_0px_#000000] transition-all duration-500',
