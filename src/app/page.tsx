@@ -51,7 +51,8 @@ const mockProducts: ShopifyProduct[] = [
   }
 ];
 
-export default function HomePage({ featuredProducts = mockProducts }) {
+export default function HomePage() {
+  const featuredProducts = mockProducts;
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-32 pb-8 space-y-8 selection:bg-[#ffb300]", utoMedium.className)}>
       
