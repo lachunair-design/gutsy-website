@@ -19,12 +19,16 @@ export default function AboutPage() {
     offset: ["start end", "end start"]
   });
 
+  // Background Ticker move
   const xMove = useTransform(scrollYProgress, [0, 1], [-200, 200]);
+  
+  // Illustration vertical parallax (slower than text scroll)
+  const yMove = useTransform(scrollYProgress, [0, 1], [-50, 150]);
 
   return (
     <div className="bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-8 space-y-8 selection:bg-[#ffb300] selection:text-black">
       
-      {/* MAIN CONTENT POUCH - Contains Hero, Illustration, and Story */}
+      {/* MAIN CONTENT POUCH */}
       <div ref={containerRef} className={`bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] overflow-hidden relative ${utoMedium.className}`}>
         
         {/* PARALLAX TICKER BACKGROUND */}
@@ -34,10 +38,28 @@ export default function AboutPage() {
           </motion.div>
         </div>
 
+        {/* ENLARGED BACKGROUND ILLUSTRATION 
+            Now absolute and pushed to z-0 so text flows over it 
+        */}
+        <motion.div 
+          style={{ y: yMove }}
+          className="absolute inset-0 w-full h-full opacity-40 mix-blend-multiply pointer-events-none z-0"
+        >
+          <div className="relative w-full h-[120%] -top-[10%]"> {/* Over-sized to allow for parallax movement */}
+            <Image
+              src="/images/MARATHON.png"
+              alt="Marathon Illustration"
+              fill
+              className="object-contain scale-150 md:scale-125 origin-center" 
+              priority
+            />
+          </div>
+        </motion.div>
+
         <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-32 pb-40 relative z-10">
           
           {/* STAGGERED HERO */}
-          <div className="relative mb-32 flex flex-col items-center">
+          <div className="relative mb-48 flex flex-col items-center">
             <h2 className={`text-[#f3eee4] text-4xl md:text-6xl lowercase tracking-tight mb-[-1rem] mr-[20%] ${handwritten.className} rotate-[-3deg]`}>
               the big fat
             </h2>
@@ -49,51 +71,40 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          {/* MELTED ILLUSTRATION */}
-          <div className="relative w-full aspect-[21/9] mb-40 mix-blend-multiply pointer-events-none">
-            <Image
-              src="/images/MARATHON.png"
-              alt="Marathon Illustration"
-              fill
-              className="object-contain" 
-              priority
-            />
-          </div>
-
-          {/* STORY GRID */}
+          {/* STORY GRID - Now floats over the illustration */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-24 text-center md:text-left text-[#f3eee4]">
-            <div className="space-y-6 md:mt-12">
+            <div className="space-y-6 md:mt-12 bg-[#f20028]/60 backdrop-blur-sm md:backdrop-blur-none p-4 rounded-3xl md:p-0">
                <p className={`text-4xl leading-none text-black lowercase mb-2 ${handwritten.className}`}>
                 it started in the kitchen...
               </p>
               <p className="text-xl leading-tight font-bold italic text-black uppercase">
                 I couldn&apos;t find a single protein powder that didn&apos;t make me bloated.
               </p>
-              <p className="text-lg opacity-80 leading-relaxed font-medium">
+              <p className="text-lg opacity-90 leading-relaxed font-medium">
                 Every brand promised the world. Every shake left me feeling heavy and uncomfortable. What&apos;s with all the gums and fillers?
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 bg-[#f20028]/60 backdrop-blur-sm md:backdrop-blur-none p-4 rounded-3xl md:p-0">
               <p className={`text-4xl leading-none text-black lowercase mb-2 ${handwritten.className}`}>
                 the discovery
               </p>
               <p className="text-xl leading-tight font-bold italic text-black uppercase">
                 So I made the protein I wanted to buy: one that feels light.
               </p>
-              <p className="text-lg opacity-80 leading-relaxed font-medium">
+              <p className="text-lg opacity-90 leading-relaxed font-medium">
                 Break down the protein before it hits your stomach and suddenly you skip the bloat entirely. No magic—just enzymatic pre-digestion.
               </p>
             </div>
 
-            <div className="space-y-6 md:mt-24">
+            <div className="space-y-6 md:mt-24 bg-[#f20028]/60 backdrop-blur-sm md:backdrop-blur-none p-4 rounded-3xl md:p-0">
               <p className={`text-4xl leading-none text-black lowercase mb-2 ${handwritten.className}`}>
                 now in dubai
               </p>
               <p className="text-xl leading-tight font-bold italic text-black uppercase">
                 GUTSY launched here because that&apos;s where I am.
               </p>
-              <p className="text-lg opacity-80 leading-relaxed font-medium">
+              <p className="text-lg opacity-90 leading-relaxed font-medium">
                 We&apos;re focused on getting this into the hands of people who are tired of protein that makes them feel like garbage.
               </p>
             </div>
@@ -123,7 +134,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
     </div>
   );
 }
