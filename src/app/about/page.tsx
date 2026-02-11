@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import localFont from 'next/font/local';
 
-// Initialize the custom fonts
-const utoBlack = localFont({ src: '../public/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '../public/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '../public/fonts/Uto Medium.otf' });
+// FIXED PATHS: Moving up 3 levels to find the public folder from src/app/about/
+const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 
 export const metadata = {
   title: 'THE MANIFESTO | GUTSY',
@@ -17,12 +17,12 @@ const values = [
   {
     title: 'NO SECRETS',
     description: 'Proprietary blends are for brands with something to hide. We don’t. Every ingredient is listed, lab-tested, and accounted for.',
-    color: 'bg-[#f20028]', // Gutsy Red
+    color: 'bg-[#f20028]', 
   },
   {
     title: 'GUT-FIRST',
     description: 'No bloating. No synthetic fillers. Just Latvian-sourced, plant-based protein designed to keep your gut happy while you train.',
-    color: 'bg-[#000000]', // Black
+    color: 'bg-[#000000]', 
   },
   {
     title: 'DUBAI BORN',
@@ -40,8 +40,8 @@ export default function AboutPage() {
   return (
     <div className={`bg-[#f3eee4] text-[#000000] selection:bg-[#ffb300] selection:text-[#000000] ${utoMedium.className}`}>
       
-      {/* Hero Section - Maximalist Disruption */}
-      <section className="bg-[#000000] text-[#f3eee4] pt-40 pb-24 border-b-[12px] border-[#f20028] overflow-hidden">
+      {/* Hero Section */}
+      <section className="bg-[#000000] text-[#f3eee4] pt-48 pb-24 border-b-[12px] border-[#f20028] overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl">
             <h1 className={`text-6xl md:text-[150px] uppercase leading-[0.75] tracking-tighter mb-12 ${utoBlack.className}`}>
@@ -56,7 +56,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section - Brutalist Layout */}
+      {/* Story Section */}
       <section className="py-24 md:py-32 relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 border-[10px] border-[#000000] bg-white shadow-[30px_30px_0px_0px_#000000]">
@@ -66,17 +66,17 @@ export default function AboutPage() {
               </h2>
               <div className={`space-y-8 text-xl md:text-2xl font-bold leading-snug ${utoBold.className}`}>
                 <p>
-                  GUTSY started when our founder, an operator and athlete in Dubai, grew frustrated with the "trash" inside supplement bottles. Most powders are filled with junk that ruins your digestion while promising to fix your muscles.
+                  GUTSY started when our founder, an operator and athlete in Dubai, grew frustrated with the &quot;trash&quot; inside supplement bottles. Most powders are filled with junk that ruins your digestion while promising to fix your muscles.
                 </p>
-                <p className="bg-[#f20028] text-[#f3eee4] p-4 inline-block transform -rotate-1">
+                <p className="bg-[#f20028] text-[#f3eee4] px-6 py-4 inline-block transform -rotate-1 border-2 border-black">
                   We set out to disrupt the clean protein lie.
                 </p>
                 <p>
-                  We created a gut-friendly protein that actually works. Born in Dubai and formulated with Latvian precision, every batch of Vanilla Calm and Cacao Boost is built for those who treat their body like a high-performance machine.
+                  We created a gut-friendly protein that actually works. Born in Dubai and formulated with Latvian precision, every batch is built for those who treat their body like a high-performance machine.
                 </p>
               </div>
             </div>
-            <div className="lg:col-span-5 bg-[#ffb300] relative min-h-[400px] flex items-center justify-center overflow-hidden group">
+            <div className="lg:col-span-5 bg-[#ffb300] relative min-h-[500px] flex items-center justify-center overflow-hidden group">
               <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
                  <div className={`text-[180px] text-black absolute top-0 left-0 -rotate-90 origin-top-left ${utoBlack.className}`}>GUTSY</div>
               </div>
@@ -95,7 +95,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Section - Ticker Tape Style */}
+      {/* Values Section */}
       <section className="py-24 bg-[#000000] text-[#f3eee4]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
@@ -117,12 +117,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section - Full Disruption */}
+      {/* CTA Section */}
       <section className="py-32 md:py-48 bg-[#f20028] text-[#f3eee4] border-t-[12px] border-[#000000] relative overflow-hidden">
-        {/* Background Decorative Scroll */}
         <div className={`absolute top-0 left-0 w-full h-full flex flex-col justify-around opacity-10 pointer-events-none whitespace-nowrap overflow-hidden select-none ${utoBlack.className}`}>
            <div className="text-[150px] italic">GUTSY GUTSY GUTSY GUTSY</div>
-           <div className="text-[150px] italic ml-48">VANILLA CALM CACAO BOOST</div>
+           <div className="text-[150px] italic ml-48 text-[#000000]">VANILLA CALM CACAO BOOST</div>
            <div className="text-[150px] italic -ml-24">GUTSY GUTSY GUTSY GUTSY</div>
         </div>
 
@@ -132,7 +131,7 @@ export default function AboutPage() {
           </h2>
           <Link href="/products">
             <Button
-              className={`h-28 px-20 text-4xl uppercase bg-[#000000] text-[#f3eee4] border-[6px] border-[#f3eee4] rounded-none hover:bg-[#ffb300] hover:text-[#000000] transition-all shadow-[15px_15px_0px_0px_#f3eee4] active:translate-x-2 active:translate-y-2 active:shadow-none ${utoBlack.className}`}
+              className={`h-28 px-20 text-4xl uppercase bg-[#000000] text-[#f3eee4] border-[6px] border-[#f3eee4] rounded-none hover:bg-[#ffb300] hover:text-[#000000] transition-all shadow-[25px_25px_0px_0px_#f3eee4] active:translate-x-2 active:translate-y-2 active:shadow-none ${utoBlack.className}`}
             >
               Shop Now
             </Button>
