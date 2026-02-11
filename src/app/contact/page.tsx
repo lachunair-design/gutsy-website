@@ -1,7 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
+import { ChevronDown } from 'lucide-react';
 
 // Initialize the custom fonts
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
@@ -44,6 +46,12 @@ const faqs = [
 ];
 
 export default function FAQPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000]", utoMedium.className)}>
       {/* Hero Section */}
@@ -65,17 +73,42 @@ export default function FAQPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             
-            {/* FAQ List */}
+            {/* Collapsible FAQ List */}
             <div className="lg:col-span-8">
-              <div className="space-y-12">
+              <div className="space-y-4">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="group border-b-2 border-black pb-8">
-                    <h3 className={cn("text-2xl md:text-4xl uppercase leading-tight mb-4 transition-colors group-hover:text-[#f20028]", utoBlack.className)}>
-                      {faq.question}
-                    </h3>
-                    <p className="text-lg md:text-xl leading-relaxed text-black/80 italic">
-                      {faq.answer}
-                    </p>
+                  <div 
+                    key={index} 
+                    className={cn(
+                      "border-b-4 border-black transition-all",
+                      openIndex === index ? "bg-white p-8 -mx-4 rounded-[2rem] shadow-[8px_8px_0px_0px_#000000]" : "bg-transparent pb-6"
+                    )}
+                  >
+                    <button
+                      onClick={() => toggleFaq(index)}
+                      className="flex w-full items-center justify-between text-left group"
+                    >
+                      <span className={cn(
+                        "text-2xl md:text-4xl uppercase leading-tight transition-colors group-hover:text-[#f20028]",
+                        utoBlack.className,
+                        openIndex === index ? "text-[#f20028]" : "text-black"
+                      )}>
+                        {faq.question}
+                      </span>
+                      <ChevronDown className={cn(
+                        "w-8 h-8 transition-transform duration-300",
+                        openIndex === index ? "rotate-180 text-[#f20028]" : "text-black"
+                      )} />
+                    </button>
+                    
+                    <div className={cn(
+                      "grid transition-all duration-300 ease-in-out",
+                      openIndex === index ? "grid-rows-[1fr] opacity-100 mt-6" : "grid-rows-[0fr] opacity-0"
+                    )}>
+                      <div className="overflow-hidden text-lg md:text-xl leading-relaxed italic text-black/80">
+                        {faq.answer}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
