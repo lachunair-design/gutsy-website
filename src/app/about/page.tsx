@@ -14,121 +14,71 @@ const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 export default function AboutPage() {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
 
   const yMove = useTransform(scrollYProgress, [0, 1], [-50, 250]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 0.2, 0.2, 0]);
 
   return (
-    /* 1. THE OUTER FRAME (Cream Background)
-       - pt-32 creates the rounded gap at the top to clear the header.
-       - p-4/md:p-6 creates the side/bottom frame.
-    */
-    <div className="bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-32 pb-8 space-y-8 selection:bg-[#ffb300] selection:text-black">
+    <div className="bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-44 pb-8 space-y-8">
       
-      {/* 2. THE INNER POUCH (Red Background)
-          - rounded-[40px+] on ALL corners restores the circular padding look.
-          - overflow-hidden ensures the background illustration stays inside the pouch.
-      */}
+      {/* THE POUCH */}
       <div ref={containerRef} className={`bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-screen overflow-hidden relative ${utoMedium.className}`}>
         
-        {/* BACKGROUND ILLUSTRATION */}
-        <motion.div 
-          style={{ y: yMove, opacity }}
-          className="absolute inset-0 w-full h-full mix-blend-multiply pointer-events-none z-0 flex items-center justify-center"
-        >
-          <div className="relative w-full h-full max-w-[140%]">
-            <Image
-              src="/images/MARATHON.png"
-              alt="Marathon Illustration"
-              fill
-              className="object-contain scale-150 md:scale-125 origin-center" 
-              priority
-            />
-          </div>
+        {/* PARALLAX BG */}
+        <motion.div style={{ y: yMove }} className="absolute inset-0 w-full h-full mix-blend-multiply opacity-30 z-0 flex items-center justify-center">
+          <Image src="/images/MARATHON.png" alt="BG" fill className="object-contain scale-125" priority />
         </motion.div>
 
-        {/* 3. HERO CONTENT
-            - pt-20 provides internal padding so the text isn't touching the red curve.
-        */}
-        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-20 pb-48 relative z-10">
+        {/* CONTENT */}
+        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-32 pb-48 relative z-10">
           
-          <div className="relative mb-80 flex flex-col items-center">
-            <h2 className={`text-[#f3eee4] text-7xl md:text-[120px] lowercase tracking-tight mb-[-3rem] md:mb-[-5rem] mr-[35%] ${runWild.className} rotate-[-5deg] z-20`}>
+          {/* HERO - Tightened spacing */}
+          <div className="relative mb-40 flex flex-col items-center">
+            <h2 className={`text-[#f3eee4] text-6xl md:text-9xl lowercase mb-[-2.5rem] md:mb-[-4rem] mr-[30%] ${runWild.className} rotate-[-5deg] z-20`}>
               the big fat
             </h2>
             
-            {/* 4. FIXING THE BLEEDING:
-                - Reduced font size slightly (text-[180px]) to prevent overflow.
-                - tracking-tight instead of tighter.
-            */}
+            {/* FIXED BLEEDING: text size reduced to 180px, tracking relaxed to tight */}
             <h1 className={`text-black text-[80px] md:text-[180px] leading-[0.8] uppercase tracking-tight text-center ${utoBlack.className} z-10`}>
               backstory
             </h1>
             
-            <h2 className={`text-[#f3eee4] text-5xl md:text-7xl lowercase tracking-tight mt-[-2rem] md:mt-[-3rem] ml-[45%] ${runWild.className} rotate-[3deg] z-20 opacity-80`}>
+            <h2 className={`text-[#f3eee4] text-5xl md:text-7xl lowercase mt-[-1.5rem] md:mt-[-2.5rem] ml-[40%] ${runWild.className} rotate-[3deg] z-20 opacity-80`}>
               from laks
             </h2>
           </div>
 
-          {/* STORY GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-32 text-center md:text-left text-[#f3eee4]">
-            <div className="space-y-6 md:mt-16">
-               <p className={`text-7xl leading-none text-black lowercase mb-1 ${runWild.className}`}>
-                it started in the kitchen...
-              </p>
-              <p className={cn("text-2xl leading-tight font-bold italic text-black uppercase", utoBold.className)}>
-                I couldn&apos;t find a single protein powder that didn&apos;t make me bloated.
-              </p>
-              <p className="text-xl opacity-90 leading-relaxed font-medium">
-                Every brand promised the world. Every shake left me feeling heavy and uncomfortable.
-              </p>
+          {/* STORY GRID - Pulled closer to hero */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 text-center md:text-left text-[#f3eee4]">
+            <div className="space-y-4">
+               <p className={`text-6xl text-black lowercase ${runWild.className}`}>it started in the kitchen...</p>
+               <p className={cn("text-xl font-bold italic text-black uppercase leading-tight", utoBold.className)}>No protein powder worked for me.</p>
+               <p className="text-lg opacity-90 leading-relaxed font-medium">Every brand promised the world. Every shake left me feeling heavy.</p>
             </div>
 
-            <div className="space-y-6">
-              <p className={`text-7xl leading-none text-black lowercase mb-1 ${runWild.className}`}>
-                the discovery
-              </p>
-              <p className={cn("text-2xl leading-tight font-bold italic text-black uppercase", utoBold.className)}>
-                So I made the protein I wanted to buy: one that feels light.
-              </p>
-              <p className="text-xl opacity-90 leading-relaxed font-medium">
-                Break down the protein before it hits your stomach and suddenly you skip the bloat entirely.
-              </p>
+            <div className="space-y-4">
+              <p className={`text-6xl text-black lowercase ${runWild.className}`}>the discovery</p>
+              <p className={cn("text-xl font-bold italic text-black uppercase leading-tight", utoBold.className)}>One that feels light.</p>
+              <p className="text-lg opacity-90 leading-relaxed font-medium">We break down the protein before it hits your stomach. No magic—just science.</p>
             </div>
 
-            <div className="space-y-6 md:mt-32">
-              <p className={`text-7xl leading-none text-black lowercase mb-1 ${runWild.className}`}>
-                now in dubai
-              </p>
-              <p className={cn("text-2xl leading-tight font-bold italic text-black uppercase", utoBold.className)}>
-                GUTSY launched here because that&apos;s where I am.
-              </p>
-              <p className="text-xl opacity-90 leading-relaxed font-medium">
-                Focused on getting this into the hands of people who are tired of protein that makes them feel like garbage.
-              </p>
+            <div className="space-y-4">
+              <p className={`text-6xl text-black lowercase ${runWild.className}`}>now in dubai</p>
+              <p className={cn("text-xl font-bold italic text-black uppercase leading-tight", utoBold.className)}>Where I am.</p>
+              <p className="text-lg opacity-90 leading-relaxed font-medium">Focused on people tired of protein that makes them feel like garbage.</p>
             </div>
           </div>
         </div>
       </div>
-
-      {/* 5. CTA SECTION (Standalone Pouch) */}
-      <section className="bg-black rounded-[40px] md:rounded-[60px] lg:rounded-[80px] overflow-hidden relative py-32 border-4 border-[#f3eee4] shadow-[15px_15px_0px_0px_#ffb300]">
-        <div className="mx-auto max-w-3xl px-6 text-center relative z-10 space-y-10">
-          <h3 className={`text-5xl md:text-9xl uppercase leading-tight text-[#f3eee4] ${utoBlack.className}`}>
-            READY TO FEEL LIGHT?
-          </h3>
-          <p className={`text-7xl lowercase text-[#ffb300] leading-none ${runWild.className}`}>
-            get 10% off your first order when you sign up
-          </p>
+      
+      {/* CTA SECTION */}
+      <section className="bg-black rounded-[40px] md:rounded-[60px] lg:rounded-[80px] py-32 border-4 border-[#f3eee4] shadow-[15px_15px_0px_0px_#ffb300]">
+        <div className="mx-auto max-w-3xl px-6 text-center space-y-10">
+          <h3 className={`text-5xl md:text-9xl uppercase leading-tight text-[#f3eee4] ${utoBlack.className}`}>READY?</h3>
+          <p className={`text-7xl lowercase text-[#ffb300] leading-none ${runWild.className}`}>get 10% off your first order</p>
           <div className="flex flex-col md:flex-row gap-4 pt-4 max-w-xl mx-auto">
-            <input type="email" placeholder="Your email" className={cn("flex-1 h-18 px-8 rounded-full border-2 border-[#f3eee4] bg-transparent text-xl text-[#f3eee4] outline-none placeholder:text-[#f3eee4]/40 transition-all focus:border-[#ffb300]", utoBold.className)} />
-            <Button className={cn("h-18 px-12 rounded-full bg-[#f20028] text-[#f3eee4] text-xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all active:scale-95", utoBold.className)}>
-              Sign me up
-            </Button>
+            <input type="email" placeholder="Email" className={cn("flex-1 h-16 px-8 rounded-full border-2 border-[#f3eee4] bg-transparent text-[#f3eee4] outline-none", utoBold.className)} />
+            <Button className={cn("h-16 px-12 rounded-full bg-[#f20028] text-[#f3eee4] font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] transition-all", utoBold.className)}>Sign me up</Button>
           </div>
         </div>
       </section>
