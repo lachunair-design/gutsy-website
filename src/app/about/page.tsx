@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import localFont from 'next/font/local';
 
+// Resolved font paths for src/app/about/page.tsx
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
@@ -10,24 +11,9 @@ const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 export default function AboutPage() {
   return (
     <div className={`bg-[#f3eee4] min-h-screen pt-32 pb-20 ${utoMedium.className}`}>
-      
-      {/* HEADER PILLS */}
-      <div className="flex justify-center mb-16 px-4">
-        <div className="flex -space-x-4">
-          {['About', 'Contact', 'FAQs'].map((item) => (
-            <div key={item} className="h-12 px-8 flex items-center justify-center rounded-full bg-white border border-black/10 text-sm font-bold shadow-sm">
-              {item}
-            </div>
-          ))}
-          <div className="h-12 px-10 flex items-center justify-center rounded-full bg-[#f20028] text-white text-sm font-bold shadow-md">
-            Shop
-          </div>
-        </div>
-      </div>
-
       <div className="mx-auto max-w-6xl px-6 lg:px-8">
         
-        {/* HERO */}
+        {/* HERO SECTION */}
         <div className="text-center relative mb-24">
           <h2 className={`text-[#f20028] text-3xl md:text-4xl uppercase tracking-[0.2em] mb-2 ${utoBold.className}`}>
             The Big Fat
@@ -38,7 +24,7 @@ export default function AboutPage() {
           </h1>
         </div>
 
-        {/* ILLUSTRATION SECTION */}
+        {/* MARATHON ILLUSTRATION */}
         <div className="relative w-full aspect-[21/9] mb-32 rounded-[3rem] overflow-hidden border-2 border-black/5 shadow-xl bg-white">
           <Image
             src="/images/MARATHON.png"
@@ -79,7 +65,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* FEATURE BLOCKS: "STICKER" STYLE */}
+        {/* BRAND VALUES */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-40">
           <div className="bg-[#ffb300] p-10 rounded-[3rem] border-2 border-black rotate-1 shadow-[8px_8px_0px_0px_#000000]">
             <h3 className={`text-3xl mb-4 uppercase ${utoBlack.className}`}>Feels Light</h3>
@@ -97,7 +83,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* FOUNDER SECTION (LAKS) */}
+        {/* FOUNDER SECTION */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-40">
           <div className="space-y-8">
             <h2 className={`text-4xl md:text-6xl uppercase leading-tight ${utoBlack.className}`}>
@@ -110,7 +96,7 @@ export default function AboutPage() {
           <div className="relative aspect-square bg-white rounded-[4rem] border-2 border-black shadow-2xl overflow-hidden">
              <Image 
                 src="/images/gutsy-logomark.png" 
-                alt="Founder Branding"
+                alt="Gutsy Logomark"
                 fill
                 className="object-contain p-20 opacity-20"
              />
@@ -120,7 +106,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* CTA / SIGNUP */}
+        {/* EMAIL SIGNUP */}
         <div className="bg-white border-2 border-black rounded-[4rem] p-12 md:p-20 text-center relative overflow-hidden shadow-[12px_12px_0px_0px_#f20028]">
           <div className="max-w-2xl mx-auto space-y-8">
             <h3 className={`text-4xl md:text-5xl uppercase leading-tight ${utoBlack.className}`}>Ready to feel light?</h3>
@@ -140,7 +126,6 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
