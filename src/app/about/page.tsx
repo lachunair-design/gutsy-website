@@ -14,10 +14,10 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const utoBlack = localFont({ src: '/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '/fonts/Uto Medium.otf' });
-const runWild = localFont({ src: '/fonts/RunWild.ttf' });
+const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 export default function AboutPage() {
   const containerRef = useRef(null);
