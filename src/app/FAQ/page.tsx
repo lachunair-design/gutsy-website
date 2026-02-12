@@ -20,32 +20,47 @@ const faqs = [
   {
     id: 'ingredients',
     question: 'What\'s in GUTSY?',
-    answer: 'Five ingredients: enzymatically pre-digested pea and rice protein, Actazin kiwifruit extract, either reishi mushroom (Vanilla Calm) or maca root (Cacao Boost), stevia, and natural flavors. No gums, no fillers, no stuff you need a PhD to understand.',
+    answer: 'Our base consists of Hydrolysed Pea and Brown Rice protein, Coconut Milk powder, Monk Fruit extract, and Himalayan Salt. We add Actazin for digestive support. Vanilla Calm features Vanilla flavoring and Reishi Mushroom extract. Cacao Boost features Cacao flavoring and Maca Root extract. No gums, no fillers, no chemistry degree required.',
   },
   {
     id: 'science',
     question: 'Why it feels lighter?',
-    answer: 'Because the protein is enzymatically pre-digested before it gets to you. We break down the protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the brick feeling. It\'s actual chemistry doing the work upfront.',
+    answer: 'Because the protein is enzymatically pre-digested (hydrolysed) before it gets to you. We break down the massive protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the &quot;brick&quot; feeling. It\'s actual chemistry doing the work upfront.',
+  },
+  {
+    id: 'packaging',
+    question: 'GUTSY\'s Packaging',
+    answer: 'We use pouches because they work and they\'re better for the planet than giant plastic tubs. We\'re working on making them even more sustainable. If you\'ve got opinions about our packaging, we\'re all ears.',
+  },
+  {
+    id: 'buying',
+    question: 'Buying GUTSY',
+    answer: 'We ship within the UAE. More locations coming soon. Subscribe and save 10%, or buy one-off. Free shipping over 150 AED. You can manage or cancel your subscription yourself in your account settings—no jumping through hoops.',
   },
   {
     id: 'shipping',
     question: 'Shipping Info',
-    answer: 'We currently ship within the UAE. Orders are processed within 1-2 business days. Shipping is FREE for orders over 150 AED. Expect delivery within 2-3 business days in major cities.',
+    answer: 'We ship within 2-3 business days across the UAE. If something arrives damaged or wrong, email us and we\'ll sort it immediately. We won\'t make you jump through hoops.',
   },
   {
     id: 'returns',
     question: 'Returns & Refunds',
-    answer: 'If you tried it and hate it, email us within 30 days. We want you to be happy, not bloated. If your package arrives damaged, email hello@eatgutsy.com and we\'ll sort it.',
+    answer: 'If you tried it and hate it, email us within 30 days. We want you to be happy, not bloated. If your package arrives damaged, take a photo and send it to hello@eatgutsy.com and we\'ll swap it out.',
+  },
+  {
+    id: 'vegan',
+    question: 'Is GUTSY vegan?',
+    answer: 'Yes. 100% Plant-based. Pea and rice protein, kiwifruit extract, mushroom or maca, monk fruit, and coconut milk. Nothing from animals.',
+  },
+  {
+    id: 'work',
+    question: 'Will this work for me?',
+    answer: 'If regular protein powder makes you bloated, there\'s a high chance GUTSY will feel different. If you have serious digestive issues, talk to your doctor first. We aren\'t doctors; we just made protein that doesn\'t make you feel terrible.',
   },
   {
     id: 'legal',
     question: 'Privacy & Legal',
     answer: 'We value your privacy. We only use cookies to make your shopping experience better. We never sell your data. Your payment info is handled securely via encrypted partners.',
-  },
-  {
-    id: 'vegan',
-    question: 'Is GUTSY vegan?',
-    answer: 'Yes. 100% Plant-based. Pea and rice protein, kiwifruit extract, mushroom or maca, stevia, natural flavors. Nothing from animals.',
   }
 ];
 
@@ -70,7 +85,7 @@ export default function FAQPage() {
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000] selection:bg-[#ffb300] overflow-x-hidden", utoMedium.className)}>
       
-      {/* Hero Section - Optimized for Mobile Padding */}
+      {/* Hero Section */}
       <section className="bg-[#000000] text-[#f3eee4] pt-32 md:pt-44 pb-16 md:pb-20 border-b-[6px] md:border-b-[10px] border-[#f20028]">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="max-w-3xl">
@@ -122,7 +137,6 @@ export default function FAQPage() {
                       openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                     )}>
                       <div className="overflow-hidden">
-                        {/* FIX: Switched to utoMedium for readability */}
                         <div className={cn("text-lg md:text-xl leading-relaxed text-black/90 pb-2", utoMedium.className)}>
                           {faq.answer}
                         </div>
@@ -133,7 +147,7 @@ export default function FAQPage() {
               </div>
             </div>
 
-            {/* Sidebar - Mobile Stacked */}
+            {/* Sidebar */}
             <div className="lg:col-span-4">
               <div className="sticky top-32 space-y-8">
                 <div className="bg-[#f20028] p-8 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border-4 border-black shadow-[8px_8px_0px_0px_#000000] text-[#f3eee4]">
