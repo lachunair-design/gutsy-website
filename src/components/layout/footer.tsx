@@ -13,7 +13,7 @@ const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 const footerLinks = {
   column1: [
     { name: 'About Us', href: '/about' },
-    { name: 'FAQs', href: '/faq' },
+    { name: 'FAQs', href: '/FAQ' }, // Updated to match src/app/FAQ/page.tsx
     { name: 'Contact', href: '/contact' },
     { name: 'Shop', href: '/products' },
   ],
@@ -39,7 +39,7 @@ export function Footer() {
       {/* 10% Off Tab - Interactive Copy Button */}
       <button 
         onClick={handleCopy}
-        className="absolute left-0 top-1/3 bg-white text-[#121417] py-8 px-3 rounded-r-2xl border border-gray-200 shadow-lg flex items-center justify-center transition-transform active:scale-95 hover:bg-[#f3eee4]"
+        className="absolute left-0 top-1/3 bg-white text-[#121417] py-8 px-3 rounded-r-2xl border border-gray-200 shadow-lg flex items-center justify-center transition-transform active:scale-95 hover:bg-[#f3eee4] z-20"
       >
         <span className={`vertical-text text-xl font-bold rotate-180 [writing-mode:vertical-lr] ${utoBold.className}`}>
           {copied ? 'Copied!' : '10% Off'}
@@ -57,6 +57,7 @@ export function Footer() {
                 alt="GUTSY"
                 fill
                 className="object-contain brightness-0 invert" 
+                priority
               />
             </Link>
             <div className="h-10 w-[1px] bg-white/30 hidden md:block" /> 
