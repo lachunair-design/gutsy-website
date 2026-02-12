@@ -15,37 +15,47 @@ const faqs = [
   {
     id: 'use',
     question: 'How to use GUTSY?',
-    answer: 'Mix one scoop with 250-300ml of water, milk, or whatever you like. Shake it up. Drink it. That\'s it. Some people use it post-workout, some use it as breakfast, some just drink it when they need protein. There\'s no magic timing.',
+    answer: 'Mix one scoop (25g) with 250-300ml of water, milk, or whatever you like. Shake it up. Drink it. Each container has 30 servings with 20g of protein per scoop. Some people use it post-workout, some use it as breakfast, some just drink it when they need protein. There\'s no magic timing.',
+  },
+  {
+    id: 'protein-count',
+    question: 'How much protein per serving?',
+    answer: '20g of complete protein per scoop. PDCAAS score of 1.0, which means your body can actually use all of it. No amino acid spiking, no nitrogen spiking. Just real, bioavailable protein.',
   },
   {
     id: 'ingredients',
     question: 'What\'s in GUTSY?',
-    answer: 'Our base consists of Hydrolysed Pea and Brown Rice protein, Coconut Milk powder, Monk Fruit extract, and Himalayan Salt. We add Actazin for digestive support. Vanilla Calm features Vanilla flavoring and Reishi Mushroom extract. Cacao Boost features Cacao flavoring and Maca Root extract. No gums, no fillers, no chemistry degree required.',
+    answer: 'Core ingredients: Hydrolyzed pea and rice protein, coconut milk powder, monk fruit extract, Actazin (kiwifruit extract for digestion), Himalayan salt. \n\nWhat makes each flavor different: Vanilla Calm has vanilla flavoring and reishi mushroom extract. Cacao Boost has cacao flavoring and maca root extract. \n\nNo gums, no fillers, no ingredients that require a chemistry degree.',
+  },
+  {
+    id: 'actazin',
+    question: 'What\'s Actazin?',
+    answer: 'Kiwifruit extract that supports digestion. It\'s a natural enzyme that helps break down protein and keeps things moving smoothly. Science-backed, not wellness theater.',
   },
   {
     id: 'science',
-    question: 'Why it feels lighter?',
-    answer: 'Because the protein is enzymatically pre-digested (hydrolysed) before it gets to you. We break down the massive protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the &quot;brick&quot; feeling. It\'s actual chemistry doing the work upfront.',
+    question: 'Why does it feel lighter?',
+    answer: 'Because the protein is enzymatically pre-digested (hydrolyzed) before it gets to you. We break down the massive protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the &quot;brick&quot; feeling. It\'s actual chemistry doing the work upfront.',
+  },
+  {
+    id: 'allergens',
+    question: 'Any allergens?',
+    answer: 'Contains coconut. Free from: dairy, gluten, soy, nuts (except coconut), eggs. Manufactured in a facility that may process other allergens. If you have severe allergies, check the full ingredient list or email us.',
   },
   {
     id: 'packaging',
     question: 'GUTSY\'s Packaging',
-    answer: 'We use pouches because they work and they\'re better for the planet than giant plastic tubs. We\'re working on making them even more sustainable. If you\'ve got opinions about our packaging, we\'re all ears.',
+    answer: 'Comes in resealable pouches. Better for the planet than giant plastic tubs, easier to store in your kitchen. Each pouch contains 30 servings. We\'re working on making the packaging even more sustainable. If you\'ve got strong opinions about this, email us.',
   },
   {
     id: 'buying',
     question: 'Buying GUTSY',
-    answer: 'We ship within the UAE. More locations coming soon. Subscribe and save 10%, or buy one-off. Free shipping over 150 AED. You can manage or cancel your subscription yourself in your account settings—no jumping through hoops.',
+    answer: 'Ships within the UAE. Subscribe and save 10% (185 AED becomes 166.50 AED per month, cancel anytime). One-time purchase is 185 AED. Free shipping over 150 AED. Manage or cancel your subscription yourself in your account—no calling customer service and begging.',
   },
   {
     id: 'shipping',
-    question: 'Shipping Info',
-    answer: 'We ship within 2-3 business days across the UAE. If something arrives damaged or wrong, email us and we\'ll sort it immediately. We won\'t make you jump through hoops.',
-  },
-  {
-    id: 'returns',
-    question: 'Returns & Refunds',
-    answer: 'If you tried it and hate it, email us within 30 days. We want you to be happy, not bloated. If your package arrives damaged, take a photo and send it to hello@eatgutsy.com and we\'ll swap it out.',
+    question: 'Shipping & Returns',
+    answer: 'Ships within 2-3 business days across the UAE. Free shipping over 150 AED. If something arrives damaged or wrong, send a photo to hello@eatgutsy.com and we\'ll swap it immediately. If you tried it and genuinely hate it, email us within 30 days. We want you happy, not bloated.',
   },
   {
     id: 'vegan',
@@ -53,9 +63,14 @@ const faqs = [
     answer: 'Yes. 100% Plant-based. Pea and rice protein, kiwifruit extract, mushroom or maca, monk fruit, and coconut milk. Nothing from animals.',
   },
   {
+    id: 'pregnancy',
+    question: 'Can I use this if I\'m pregnant/breastfeeding?',
+    answer: 'The ingredients are safe, but we always recommend checking with your doctor first. We\'re cautious about making claims for pregnancy and breastfeeding because everyone\'s situation is different.',
+  },
+  {
     id: 'work',
     question: 'Will this work for me?',
-    answer: 'If regular protein powder makes you bloated, there\'s a high chance GUTSY will feel different. If you have serious digestive issues, talk to your doctor first. We aren\'t doctors; we just made protein that doesn\'t make you feel terrible.',
+    answer: 'If regular protein powder makes you bloated, there\'s a high chance GUTSY will feel different. Safe for lactose intolerance (dairy-free). Safe for gluten sensitivity (gluten-free). If you have serious digestive issues like IBS or Crohn\'s, talk to your doctor first. We aren\'t doctors; we just made protein that doesn\'t make you feel terrible.',
   },
   {
     id: 'legal',
@@ -137,7 +152,7 @@ export default function FAQPage() {
                       openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                     )}>
                       <div className="overflow-hidden">
-                        <div className={cn("text-lg md:text-xl leading-relaxed text-black/90 pb-2", utoMedium.className)}>
+                        <div className={cn("text-lg md:text-xl whitespace-pre-line leading-relaxed text-black/90 pb-2", utoMedium.className)}>
                           {faq.answer}
                         </div>
                       </div>
@@ -155,7 +170,7 @@ export default function FAQPage() {
                     Contact Us
                   </h2>
                   <p className={cn("text-2xl md:text-3xl lowercase leading-tight mb-8 text-black", runWild.className)}>
-                    real humans, real fast. we&apos;ll get back to you within 24 hours.
+                    real humans, real answers. we&apos;ll get back within 24-48 hours, usually faster.
                   </p>
                   <a 
                     href="mailto:hello@eatgutsy.com"
