@@ -13,14 +13,14 @@ const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 const footerLinks = {
   column1: [
     { name: 'About Us', href: '/about' },
-    { name: 'FAQs', href: '/FAQ' }, // Updated to match src/app/FAQ/page.tsx
+    { name: 'FAQs', href: '/FAQ' },
     { name: 'Contact', href: '/contact' },
     { name: 'Shop', href: '/products' },
   ],
   column2: [
-    { name: 'Shipping', href: '/shipping' },
-    { name: 'Legal', href: '/privacy' },
-    { name: 'Cookies', href: '/terms' },
+    { name: 'Shipping', href: '/FAQ#shipping' },
+    { name: 'Returns', href: '/FAQ#returns' },
+    { name: 'Legal & Privacy', href: '/FAQ#legal' },
   ],
 };
 
