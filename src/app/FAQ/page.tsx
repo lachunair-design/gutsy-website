@@ -6,10 +6,10 @@ import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 
 // Initialize the custom fonts with relative paths for Vercel stability
-const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
-const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
+const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 const faqs = [
   {
