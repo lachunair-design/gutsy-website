@@ -5,11 +5,11 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 
-// Initialize the custom fonts
-const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
-const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
+// Initialize the custom fonts with relative paths for Vercel stability
+const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
 
 const faqs = [
   {
@@ -54,9 +54,10 @@ export default function FAQPage() {
   };
 
   return (
-    <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000]", utoMedium.className)}>
-      {/* Hero Section */}
-      <section className="bg-[#000000] text-[#f3eee4] pt-40 pb-20 border-b-[10px] border-[#f20028]">
+    <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000] selection:bg-[#ffb300]", utoMedium.className)}>
+      
+      {/* Hero Section - Connected to Header spacing */}
+      <section className="bg-[#000000] text-[#f3eee4] pt-44 pb-20 border-b-[10px] border-[#f20028]">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-2xl">
             <h1 className={cn("text-6xl md:text-8xl uppercase leading-none tracking-tighter mb-4", utoBlack.className)}>
@@ -101,7 +102,7 @@ export default function FAQPage() {
                       )} />
                     </button>
                     
-                    {/* FIXED ACCORDION LOGIC */}
+                    {/* ACCORDION CONTENT */}
                     <div className={cn(
                       "grid transition-all duration-300 ease-in-out",
                       openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
@@ -117,6 +118,7 @@ export default function FAQPage() {
               </div>
             </div>
 
+            {/* SIDEBAR - Connected to Contact link intent */}
             <div className="lg:col-span-4">
               <div className="sticky top-32 space-y-8">
                 <div className="bg-[#f20028] p-10 rounded-[2rem] border-4 border-black shadow-[10px_10px_0px_0px_#000000] text-[#f3eee4]">
