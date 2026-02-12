@@ -14,10 +14,10 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
-const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
+const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
 
 export default function AboutPage() {
   const containerRef = useRef(null);
@@ -28,7 +28,6 @@ export default function AboutPage() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Adjusted parallax for mobile: less extreme horizontal movement
       gsap.to(".scrawl-top", {
         x: -30,
         rotate: -8,
@@ -71,13 +70,32 @@ export default function AboutPage() {
       {/* THE POUCH */}
       <div ref={containerRef} className={cn("bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-screen overflow-hidden relative", utoMedium.className)}>
         
+        {/* VERTICAL MARQUEE RAIL (SUBTLE SIDE TEXT) */}
+        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-black/10 z-0 flex flex-col items-center overflow-hidden py-10">
+          <div className="animate-vertical-marquee flex flex-col gap-8 whitespace-nowrap">
+             {[...Array(6)].map((_, i) => (
+               <p key={i} className={cn("text-[#f3eee4]/20 text-xs md:text-sm uppercase tracking-widest [writing-mode:vertical-lr] rotate-180 font-bold")}>
+                 NO BLOAT — FEELS LIGHT — PRE-DIGESTED —
+               </p>
+             ))}
+          </div>
+          {/* Duplicate for seamless loop */}
+          <div className="animate-vertical-marquee flex flex-col gap-8 whitespace-nowrap" aria-hidden="true">
+             {[...Array(6)].map((_, i) => (
+               <p key={i} className={cn("text-[#f3eee4]/20 text-xs md:text-sm uppercase tracking-widest [writing-mode:vertical-lr] rotate-180 font-bold")}>
+                 NO BLOAT — FEELS LIGHT — PRE-DIGESTED —
+               </p>
+             ))}
+          </div>
+        </div>
+
         {/* PARALLAX BG */}
         <motion.div style={{ y: yMove }} className="absolute inset-0 w-full h-full mix-blend-multiply opacity-10 z-0 flex items-center justify-center pointer-events-none">
           <Image src="/images/MARATHON.png" alt="BG" fill className="object-contain scale-150 md:scale-125" priority />
         </motion.div>
 
         {/* CONTENT */}
-        <div className="mx-auto max-w-6xl px-6 lg:px-8 pt-20 md:pt-32 pb-32 md:pb-48 relative z-10">
+        <div className="mx-auto max-w-6xl px-6 md:px-12 pt-20 md:pt-32 pb-32 md:pb-48 relative z-10">
           
           {/* HERO */}
           <div ref={heroRef} className="relative mb-32 md:mb-40 flex flex-col items-center">
@@ -137,6 +155,17 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* TAILWIND CUSTOM ANIMATION STYLES */}
+      <style jsx global>{`
+        @keyframes vertical-marquee {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-100%); }
+        }
+        .animate-vertical-marquee {
+          animation: vertical-marquee 30s linear infinite;
+        }
+      `}</style>
     </div>
   );
 }
