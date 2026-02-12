@@ -11,7 +11,6 @@ import localFont from 'next/font/local';
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 
-// Updated navigation to match the src/app/FAQ/page.tsx folder structure
 const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
@@ -21,15 +20,22 @@ const navigation = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
+  // Logic to determine if the current hero is dark (FAQ/Contact use black heros)
+  const isDarkHeroPage = pathname === '/FAQ' || pathname === '/contact';
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      // On the About page, hide logo between 100px and 800px scroll
-      // to let the big hero text breathe.
+      
+      // Toggle header background on scroll
+      setScrolled(scrollY > 50);
+
+      // About page specific logo visibility logic
       if (pathname === '/about') {
         if (scrollY > 100 && scrollY < 800) {
           setShowLogo(false);
@@ -46,11 +52,17 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+    <header 
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        // Adds blur and subtle background when scrolling to keep nav readable
+        scrolled ? "bg-[#f3eee4]/80 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-8"
+      )}
+    >
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* LOGO WITH CONDITIONAL VISIBILITY */}
+          {/* LOGO WITH CONTEXTUAL INVERSION */}
           <Link 
             href="/" 
             className={cn(
@@ -58,12 +70,17 @@ export function Header() {
               showLogo ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
             )}
           >
-            <div className="relative w-32 h-16 md:w-48 md:h-20 mix-blend-multiply transition-transform hover:scale-105 active:scale-95">
+            <div className="relative w-32 h-16 md:w-48 md:h-20 transition-transform hover:scale-105 active:scale-95">
               <Image
                 src="/images/gutsy-logomark.png"
                 alt="GUTSY"
                 fill
-                className="object-contain brightness-0" 
+                className={cn(
+                  "object-contain transition-all duration-300",
+                  // If we are on a dark hero and HAVEN'T scrolled yet, show white logo
+                  // Once we scroll into the cream background, show black logo
+                  isDarkHeroPage && !scrolled ? "brightness-0 invert" : "brightness-0"
+                )} 
                 priority
               />
             </div>
