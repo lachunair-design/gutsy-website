@@ -8,7 +8,7 @@ import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 
-// FONT CONFIGURATION
+// FONT CONFIGURATION - Using direct relative paths
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
@@ -108,12 +108,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEW: THE SCIENCE SECTION */}
+      {/* THE SCIENCE SECTION */}
       <section className="py-24 px-4">
         <div className="mx-auto max-w-7xl bg-white rounded-[40px] md:rounded-[60px] border-4 border-black overflow-hidden shadow-[15px_15px_0px_0px_#f20028]">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             
-            {/* Left Column: The "Why" */}
             <div className="p-8 md:p-16 space-y-8 border-b-4 lg:border-b-0 lg:border-r-4 border-black bg-[#f3eee4]">
               <h2 className={cn("text-6xl md:text-8xl uppercase leading-none text-black", utoBlack.className)}>
                 the science <br /> of light
@@ -125,25 +124,22 @@ export default function HomePage() {
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-black text-[#f3eee4] flex items-center justify-center font-bold">1</div>
-                  <p className="text-xl font-bold uppercase italic">Most protein is a "brick."</p>
+                  <p className="text-xl font-bold uppercase italic text-black">Most protein is a &quot;brick.&quot;</p>
                 </div>
-                <p className="text-lg opacity-80">Regular protein molecules are massive chains. Your stomach has to work overtime to break them down, leading to gas and that "heavy" feeling.</p>
+                <p className="text-lg opacity-80 text-black">Regular protein molecules are massive chains. Your stomach has to work overtime to break them down, leading to gas and that &quot;heavy&quot; feeling.</p>
                 
                 <div className="flex gap-4 pt-4">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#f20028] text-white flex items-center justify-center font-bold">2</div>
                   <p className="text-xl font-bold uppercase italic text-[#f20028]">We snip them early.</p>
                 </div>
-                <p className="text-lg opacity-80">We use natural enzymes to "pre-digest" those chains into tiny pieces before you even take a sip. Your gut absorbs them instantly.</p>
+                <p className="text-lg opacity-80 text-black">We use natural enzymes to &quot;pre-digest&quot; those chains into tiny pieces before you even take a sip. Your gut absorbs them instantly.</p>
               </div>
             </div>
 
-            {/* Right Column: The Visual Science */}
             <div className="bg-black p-8 md:p-16 flex flex-col justify-center items-center text-center space-y-12">
               <div className="w-full space-y-4">
                 <p className={cn("text-[#f3eee4] text-3xl lowercase opacity-60", runWild.className)}>regular protein</p>
-                {/* Visual Representation of heavy protein */}
-                
-                <div className="h-2 w-full bg-[#f3eee4]/10 rounded-full overflow-hidden">
+                                <div className="h-2 w-full bg-[#f3eee4]/10 rounded-full overflow-hidden">
                   <div className="h-full bg-white w-full animate-pulse" />
                 </div>
                 <p className={cn("text-xs uppercase tracking-widest text-white/40", utoBold.className)}>difficult to absorb</p>
@@ -151,8 +147,6 @@ export default function HomePage() {
 
               <div className="w-full space-y-4">
                 <p className={cn("text-[#f20028] text-4xl lowercase", runWild.className)}>gutsy pre-digested</p>
-                {/* Visual Representation of pre-digested protein */}
-                
                 <div className="h-2 w-full bg-[#f20028]/20 rounded-full overflow-hidden">
                   <div className="h-full bg-[#f20028] w-1/4 animate-bounce" />
                 </div>
