@@ -8,12 +8,12 @@ import { CartDrawer } from '@/components/cart/cart-drawer';
 
 // FIXED FONT PATHS: Using relative paths to ensure successful Vercel builds
 const utoBlack = localFont({ 
-  src: '../public/fonts/Uto Black.otf',
+  src: '../../public/fonts/Uto Black.otf',
   variable: '--font-uto-black'
 });
 
 const runWild = localFont({ 
-  src: '../public/fonts/RunWild.ttf',
+  src: '../../public/fonts/RunWild.ttf',
   variable: '--font-runwild'
 });
 
