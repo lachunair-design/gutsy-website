@@ -25,17 +25,14 @@ export function Header() {
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
-  // Logic to determine if the current hero is dark (FAQ/Contact use black heros)
+  // Detect dark hero pages (FAQ and Contact use black heros)
   const isDarkHeroPage = pathname === '/FAQ' || pathname === '/contact';
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      
-      // Toggle header background on scroll
       setScrolled(scrollY > 50);
 
-      // About page specific logo visibility logic
       if (pathname === '/about') {
         if (scrollY > 100 && scrollY < 800) {
           setShowLogo(false);
@@ -52,15 +49,20 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header 
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        // Adds blur and subtle background when scrolling to keep nav readable
-        scrolled ? "bg-[#f3eee4]/80 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-8"
-      )}
-    >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      {/* AUDIT ITEM #10: ANNOUNCEMENT BAR */}
+      <div className="bg-[#f20028] text-[#f3eee4] py-2 text-center overflow-hidden border-b-2 border-black">
+        <p className={cn("text-xs md:text-sm uppercase font-black tracking-widest animate-pulse", utoBold.className)}>
+          Free shipping across UAE over 150 AED — NO BLOAT. NO GUMS.
+        </p>
+      </div>
+
+      <nav className={cn(
+        "mx-auto transition-all duration-300",
+        // AUDIT ITEM #17: Readability backdrop blur
+        scrolled ? "bg-[#f3eee4]/90 backdrop-blur-md py-4 shadow-sm" : "bg-transparent py-8"
+      )}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           
           {/* LOGO WITH CONTEXTUAL INVERSION */}
           <Link 
@@ -78,7 +80,6 @@ export function Header() {
                 className={cn(
                   "object-contain transition-all duration-300",
                   // If we are on a dark hero and HAVEN'T scrolled yet, show white logo
-                  // Once we scroll into the cream background, show black logo
                   isDarkHeroPage && !scrolled ? "brightness-0 invert" : "brightness-0"
                 )} 
                 priority
@@ -94,7 +95,10 @@ export function Header() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "h-14 px-10 flex items-center justify-center rounded-full bg-[#f3eee4] border-2 border-[#000000] text-[#000000] text-lg font-bold transition-all hover:z-10 hover:scale-105 hover:bg-[#ffb300]",
+                    "h-14 px-10 flex items-center justify-center rounded-full border-2 border-[#000000] text-lg font-bold transition-all hover:z-10 hover:scale-105 hover:bg-[#ffb300]",
+                    // AUDIT ITEM #17: Pivot colors based on scroll state
+                    scrolled ? "bg-white text-black" : "bg-[#f3eee4] text-black",
+                    isDarkHeroPage && !scrolled && "border-[#f3eee4] bg-transparent text-[#f3eee4] hover:text-black",
                     utoBold.className
                   )}
                 >
@@ -105,7 +109,8 @@ export function Header() {
               <Link
                 href="/products"
                 className={cn(
-                  "h-14 px-12 flex items-center justify-center rounded-full bg-[#f20028] text-[#f3eee4] text-lg font-bold border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] transition-all hover:z-10 hover:scale-110 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#000000]",
+                  "h-14 px-12 flex items-center justify-center rounded-full bg-[#f20028] text-[#f3eee4] text-lg font-bold border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] transition-all hover:z-10 hover:scale-110 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#000000] ml-4",
+                  isDarkHeroPage && !scrolled && "border-[#f3eee4]",
                   utoBold.className
                 )}
               >
@@ -117,8 +122,11 @@ export function Header() {
             <div className="flex items-center ml-8 space-x-4">
               <button
                 onClick={openCart}
-                className="group relative h-14 w-14 flex items-center justify-center rounded-full bg-[#f3eee4] border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
-                aria-label="Open cart"
+                className={cn(
+                  "group relative h-14 w-14 flex items-center justify-center rounded-full border-2 border-[#000000] shadow-[4px_4px_0px_0px_#000000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all",
+                  scrolled ? "bg-white" : "bg-[#f3eee4]",
+                  isDarkHeroPage && !scrolled && "border-[#f3eee4] bg-transparent shadow-[4px_4px_0px_0px_#f3eee4]"
+                )}
               >
                 <div className="relative w-11 h-11 overflow-hidden rounded-full border border-[#000000] bg-white">
                   <Image
@@ -155,7 +163,7 @@ export function Header() {
         {/* Mobile Navigation Menu */}
         <div
           className={cn(
-            'md:hidden mt-8 overflow-hidden rounded-[2.5rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[12px_12px_0px_0px_#000000] transition-all duration-500',
+            'md:hidden mt-8 mx-4 overflow-hidden rounded-[2.5rem] bg-[#f3eee4] border-4 border-[#000000] shadow-[12px_12px_0px_0px_#000000] transition-all duration-500',
             mobileMenuOpen ? 'max-h-[35rem] opacity-100 p-10' : 'max-h-0 opacity-0'
           )}
         >
