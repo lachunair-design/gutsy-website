@@ -11,10 +11,11 @@ import localFont from 'next/font/local';
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 
+// Updated navigation to match the src/app/FAQ/page.tsx folder structure
 const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
-  { name: 'FAQs', href: '/faq' },
+  { name: 'FAQs', href: '/FAQ' },
 ];
 
 export function Header() {
