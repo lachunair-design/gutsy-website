@@ -30,7 +30,7 @@ export function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setScrolled(scrollY > 20); // Faster trigger for the delivery bar fade
+      setScrolled(scrollY > 20);
 
       if (pathname === '/about') {
         if (scrollY > 100 && scrollY < 800) {
@@ -48,22 +48,10 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] pointer-events-none">
-      {/* 1. DISAPPEARING FREE DELIVERY BAR */}
-      <div 
-        className={cn(
-          "bg-[#f20028] text-[#f3eee4] py-2 text-center border-b-2 border-black transition-all duration-500 ease-in-out pointer-events-auto",
-          scrolled ? "opacity-0 -translate-y-full" : "opacity-100 translate-y-0"
-        )}
-      >
-        <p className={cn("text-[10px] md:text-xs uppercase font-black tracking-widest px-4", utoBold.className)}>
-          Free shipping across UAE over 150 AED — NO BLOAT. NO GUMS.
-        </p>
-      </div>
-
+    <header className="fixed top-0 left-0 right-0 z-[100] transition-all duration-300">
       <nav className={cn(
-        "mx-auto transition-all duration-300 pointer-events-auto",
-        scrolled ? "bg-[#f3eee4]/90 backdrop-blur-md py-4 shadow-sm" : "py-6 md:py-10"
+        "mx-auto transition-all duration-300",
+        scrolled ? "bg-[#f3eee4]/90 backdrop-blur-md py-4 shadow-sm" : "py-8 md:py-12"
       )}>
         <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
           
@@ -82,7 +70,6 @@ export function Header() {
                 fill
                 className={cn(
                   "object-contain transition-all duration-300",
-                  // Logo is white on dark pages, but turns black once we scroll onto the cream body
                   isDarkHeroPage && !scrolled ? "brightness-0 invert" : "brightness-0"
                 )} 
                 priority
@@ -91,7 +78,7 @@ export function Header() {
           </Link>
 
           <div className="flex items-center gap-3 md:gap-6">
-            {/* 2. VISIBLE NAVIGATION PILLS */}
+            {/* NAVIGATION PILLS */}
             <div className="hidden lg:flex items-center -space-x-3">
               {navigation.map((item) => (
                 <Link
