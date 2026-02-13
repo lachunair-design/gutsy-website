@@ -1,15 +1,12 @@
-'use client';
-
-import { useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ProductCard } from '@/components/product/product-card';
+import { MarqueeRail } from '@/components/marquee-rail';
+import { getProducts } from '@/lib/shopify';
 import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
-import gsap from 'gsap';
-import { Observer } from 'gsap/dist/Observer';
 
 // FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -17,82 +14,19 @@ const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(Observer);
-}
+export const revalidate = 60;
 
-const mockProducts: ShopifyProduct[] = [
-  {
-    id: '1',
-    handle: 'vanilla-calm',
-    title: 'Vanilla Calm',
-    description: 'Enzymatically pre-digested protein with Reishi.',
-    descriptionHtml: '<p>Enzymatically pre-digested protein with Reishi.</p>',
-    availableForSale: true,
-    featuredImage: null,
-    images: [],
-    priceRange: {
-      minVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-      maxVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-    },
-    variants: [{ id: 'v1', title: 'Default', availableForSale: true, selectedOptions: [], price: { amount: '185.00', currencyCode: 'AED' }, compareAtPrice: null }],
-    tags: ['protein'],
-    productType: 'Protein',
-  },
-  {
-    id: '2',
-    handle: 'cacao-boost',
-    title: 'Cacao Boost',
-    description: 'Enzymatically pre-digested protein with Maca.',
-    descriptionHtml: '<p>Enzymatically pre-digested protein with Maca.</p>',
-    availableForSale: true,
-    featuredImage: null,
-    images: [],
-    priceRange: {
-      minVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-      maxVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-    },
-    variants: [{ id: 'v2', title: 'Default', availableForSale: true, selectedOptions: [], price: { amount: '185.00', currencyCode: 'AED' }, compareAtPrice: null }],
-    tags: ['protein'],
-    productType: 'Protein',
+export default async function HomePage() {
+  let products: ShopifyProduct[] = [];
+  try {
+    products = await getProducts(20);
+  } catch (error) {
+    console.error('Error fetching products:', error);
   }
-];
-
-export default function HomePage() {
-  const railRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const scrollingText = gsap.utils.toArray('.rail h4') as HTMLElement[];
-      if (!scrollingText.length) return;
-
-      const tl = horizontalLoop(scrollingText, {
-        repeat: -1,
-        paddingRight: 50,
-        speed: 1.5,
-      });
-
-      Observer.create({
-        onChangeY(self) {
-          let factor = 2.5;
-          if (self.deltaY < 0) {
-            factor *= -1;
-          } 
-          gsap.timeline({
-            defaults: { ease: "none" }
-          })
-          .to(tl, { timeScale: factor * 2.5, duration: 0.2, overwrite: true })
-          .to(tl, { timeScale: factor / 2.5, duration: 1 }, "+=0.3");
-        }
-      });
-    }, railRef);
-
-    return () => ctx.revert();
-  }, []);
 
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen p-4 md:p-6 lg:p-8 pt-32 pb-8 space-y-8 selection:bg-[#ffb300]", utoMedium.className)}>
-      
+
       {/* HERO SECTION */}
       <section className="relative">
         <div className="bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-[80vh] relative overflow-hidden flex items-center">
@@ -161,7 +95,7 @@ export default function HomePage() {
             <h2 className={cn("text-6xl md:text-8xl uppercase text-black leading-none", utoBlack.className)}>FIVE CORE INGREDIENTS.</h2>
             <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase", runWild.className)}>That&apos;s it.</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-black">
             {[
               { title: "Hydrolyzed Pea & Rice Protein", desc: "Pre-broken down protein molecules. Your stomach doesn't have to work overtime." },
@@ -180,15 +114,7 @@ export default function HomePage() {
       </section>
 
       {/* MARQUEE RAIL */}
-      <section ref={railRef} className="py-12 bg-black -mx-4 md:-mx-8 overflow-hidden border-y-4 border-black">
-        <div className="rail flex whitespace-nowrap py-4">
-          {[...Array(10)].map((_, i) => (
-            <h4 key={i} className={cn("text-[#f3eee4] text-6xl md:text-8xl uppercase tracking-tighter inline-block px-8", utoBlack.className)}>
-              FEELS LIGHT <span className="text-[#f20028]">—</span> NO BLOAT <span className="text-[#ffb300]">—</span> PRE-DIGESTED <span className="text-[#f20028]">—</span>
-            </h4>
-          ))}
-        </div>
-      </section>
+      <MarqueeRail />
 
       {/* LINEUP */}
       <section className="py-16">
@@ -197,11 +123,22 @@ export default function HomePage() {
             <h2 className={cn("text-6xl md:text-8xl uppercase tracking-tight", utoBlack.className)}>The Lineup</h2>
             <p className={cn("text-5xl text-[#f20028] lowercase", runWild.className)}>grab yours</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {mockProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          {products.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <p className={cn("text-5xl lowercase text-black/20 mb-8", runWild.className)}>
+                products loading soon
+              </p>
+              <p className="text-lg opacity-60 font-medium">
+                Check back shortly — we&apos;re stocking the shelves.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -256,57 +193,4 @@ export default function HomePage() {
       </section>
     </div>
   );
-}
-
-// GSAP HELPER FUNCTION
-function horizontalLoop(items: HTMLElement[], config: any) {
-  let tl = gsap.timeline({
-    repeat: config.repeat,
-    paused: config.paused,
-    defaults: { ease: "none" },
-    onReverseComplete: () => {
-      if (tl.duration()) {
-        tl.totalTime(tl.rawTime() + tl.duration() * 100);
-      }
-    }
-  });
-  
-  let length = items.length,
-    startX = items[0].offsetLeft,
-    times: number[] = [],
-    widths: number[] = [],
-    xPercents: number[] = [],
-    curIndex = 0,
-    pixelsPerSecond = (config.speed || 1) * 100,
-    snap = config.snap === false ? (v: number) => v : gsap.utils.snap(config.snap || 1),
-    totalWidth: number,
-    curX: number,
-    distanceToStart: number,
-    distanceToLoop: number,
-    item: HTMLElement,
-    i: number;
-
-  gsap.set(items, {
-    xPercent: (i, el) => {
-      let w = widths[i] = parseFloat(gsap.getProperty(el, "width", "px") as string);
-      xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px") as string) / w * 100 + (gsap.getProperty(el, "xPercent") as number));
-      return xPercents[i];
-    }
-  });
-
-  gsap.set(items, { x: 0 });
-  totalWidth = items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + items[length - 1].offsetWidth * (gsap.getProperty(items[length - 1], "scaleX") as number) + (parseFloat(config.paddingRight) || 0);
-
-  for (i = 0; i < length; i++) {
-    item = items[i];
-    curX = xPercents[i] / 100 * widths[i];
-    distanceToStart = item.offsetLeft + curX - startX;
-    distanceToLoop = distanceToStart + widths[i] * (gsap.getProperty(item, "scaleX") as number);
-    tl.to(item, { xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond }, 0)
-      .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) }, { xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false }, distanceToLoop / pixelsPerSecond)
-      .add("label" + i, distanceToStart / pixelsPerSecond);
-    times[i] = distanceToStart / pixelsPerSecond;
-  }
-
-  return tl;
 }
