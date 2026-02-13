@@ -31,7 +31,6 @@ export default function AboutPage() {
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setEmailStatus('sending');
-    // Prepare for Klaviyo/Mailchimp integration
     setTimeout(() => setEmailStatus('success'), 1500);
   };
 
@@ -68,6 +67,28 @@ export default function AboutPage() {
           start: "top 90%",
         }
       });
+
+      // LOGO 3D ANIMATION
+      gsap.fromTo(".logo-3d", 
+        { 
+          rotationX: 45, 
+          rotationY: -45, 
+          scale: 0.8,
+          opacity: 0
+        },
+        {
+          rotationX: 0,
+          rotationY: 0,
+          scale: 1,
+          opacity: 1,
+          scrollTrigger: {
+            trigger: ".logo-section",
+            start: "top bottom",
+            end: "center center",
+            scrub: 1,
+          }
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -135,7 +156,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* AUDIT ITEM #26: TRUST BADGES */}
+          {/* TRUST BADGES */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 border-t-4 border-black/20 pt-12">
             {[
               { icon: Leaf, text: "100% Vegan" },
@@ -151,12 +172,36 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+
+      {/* NEW: ANIMATED LOGO SECTION */}
+      <section className="logo-section py-24 md:py-48 overflow-hidden bg-[#d9ff00] rounded-[30px] md:rounded-[60px] border-4 border-black relative">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col items-center">
+          <div className="perspective-1000">
+            <div className="logo-3d relative w-64 h-32 md:w-[600px] md:h-[300px]">
+              <Image
+                src="/images/gutsy-logomark.png"
+                alt="GUTSY 3D"
+                fill
+                className="object-contain brightness-0"
+                priority
+              />
+            </div>
+          </div>
+          <div className="mt-12 text-center max-w-2xl">
+            <h3 className={cn("text-4xl md:text-7xl uppercase leading-none mb-6", utoBlack.className)}>
+              Heavy Science. <br /> Light Feeling.
+            </h3>
+            <p className={cn("text-3xl md:text-4xl lowercase text-black/70", runWild.className)}>
+              we did the heavy lifting so your gut doesn&apos;t have to.
+            </p>
+          </div>
+        </div>
+      </section>
       
-      {/* AUDIT ITEM #14: FUNCTIONAL EMAIL CAPTURE */}
+      {/* CTA SECTION */}
       <section className="bg-black rounded-[30px] md:rounded-[60px] lg:rounded-[80px] py-20 md:py-32 border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
         <div className="mx-auto max-w-3xl px-6 text-center space-y-8 md:space-y-10">
           <h3 className={cn("text-5xl md:text-9xl uppercase leading-tight text-[#f3eee4]", utoBlack.className)}>READY?</h3>
-          
           {emailStatus === 'success' ? (
             <div className="space-y-4">
               <p className={cn("text-4xl md:text-6xl text-[#ffb300] lowercase", runWild.className)}>Check your inbox!</p>
@@ -185,6 +230,9 @@ export default function AboutPage() {
       </section>
 
       <style jsx global>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
         @keyframes vertical-marquee {
           0% { transform: translateY(0); }
           100% { transform: translateY(-100%); }
