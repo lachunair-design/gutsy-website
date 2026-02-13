@@ -10,6 +10,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import gsap from 'gsap';
 import { Observer } from 'gsap/dist/Observer';
+import { motion } from 'framer-motion';
 
 // FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -95,19 +96,59 @@ export default function HomePage() {
       
       {/* HERO SECTION */}
       <section className="relative">
-        <div className="bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-[70vh] md:min-h-[80vh] relative overflow-hidden flex items-center">
-          <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none">
-             <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-150 md:scale-125 translate-x-1/4" priority />
+        <div className="bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center">
+          
+          {/* BACKGROUND DECORATION */}
+          <div className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none">
+             <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-150 md:scale-110 translate-x-1/4" priority />
           </div>
-          <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 w-full py-16 md:py-24 text-center md:text-left">
-            <div className="max-w-4xl">
-              <h2 className={cn("text-[#f3eee4] text-4xl md:text-7xl lowercase mb-[-0.5rem] md:mb-[-2rem] ml-2 md:ml-4 rotate-[-3deg]", runWild.className)}>finally, a protein that</h2>
-              <h1 className={cn("text-black text-6xl md:text-[140px] lg:text-[160px] leading-[0.85] md:leading-[0.8] uppercase tracking-normal md:tracking-tight mb-8", utoBlack.className)}>FEELS LIGHT</h1>
-              <p className="text-[#f3eee4] text-lg md:text-2xl max-w-xl font-bold uppercase leading-tight italic mx-auto md:mx-0">No bloat. No brick in your stomach. Just enzymatically pre-digested protein.</p>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Link href="/products" className="w-full sm:w-auto"><Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:shadow-none transition-all", utoBold.className)}>Shop Now</Button></Link>
-                <Link href="/about" className="w-full sm:w-auto"><Button variant="outline" className={cn("w-full h-14 md:h-16 px-12 rounded-full border-2 border-black bg-transparent text-black text-xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>Our Story</Button></Link>
+
+          <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 w-full py-16 md:py-24">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              
+              {/* LEFT: TEXT CONTENT */}
+              <div className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1">
+                <h2 className={cn("text-[#f3eee4] text-4xl md:text-7xl lowercase mb-[-0.5rem] md:mb-[-2rem] ml-2 md:ml-4 rotate-[-3deg]", runWild.className)}>
+                  finally, a protein that
+                </h2>
+                <h1 className={cn("text-black text-6xl md:text-[110px] lg:text-[140px] leading-[0.85] md:leading-[0.8] uppercase tracking-normal md:tracking-tight mb-8", utoBlack.className)}>
+                  FEELS LIGHT
+                </h1>
+                <p className="text-[#f3eee4] text-lg md:text-2xl max-w-xl font-bold uppercase leading-tight italic mx-auto lg:mx-0">
+                  No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
+                </p>
+                <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Link href="/products" className="w-full sm:w-auto">
+                    <Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
+                      Shop Now
+                    </Button>
+                  </Link>
+                  <Link href="/about" className="w-full sm:w-auto">
+                    <Button variant="outline" className={cn("w-full h-14 md:h-16 px-12 rounded-full border-2 border-black bg-transparent text-black text-xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>
+                      Our Story
+                    </Button>
+                  </Link>
+                </div>
               </div>
+
+              {/* RIGHT: PRODUCT IMAGE */}
+              <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20, rotate: -5 }}
+                  animate={{ opacity: 1, y: 0, rotate: 0 }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]"
+                >
+                  <Image 
+                    src="/images/product-shots.jpeg" 
+                    alt="GUTSY Protein Pouches" 
+                    fill 
+                    className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]"
+                    priority 
+                  />
+                </motion.div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -154,7 +195,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* RESTORED: WHAT'S INSIDE SECTION (MOBILE OPTIMIZED) */}
+      {/* WHAT'S INSIDE SECTION */}
       <section className="py-16 md:py-24 px-4 md:px-12 bg-white rounded-[30px] md:rounded-[60px] border-4 border-black shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <div className="text-center mb-12 md:mb-16 px-4">
