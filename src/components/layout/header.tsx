@@ -48,7 +48,8 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[100] transition-all duration-300">
+    // ADJUSTED: Changed z-index from z-[100] to z-[40] so the cart (usually z-50+) stays on top
+    <header className="fixed top-0 left-0 right-0 z-[40] transition-all duration-300">
       <nav className={cn(
         "mx-auto transition-all duration-300",
         scrolled ? "bg-[#f3eee4]/90 backdrop-blur-md py-4 shadow-sm" : "py-8 md:py-12"
