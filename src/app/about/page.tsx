@@ -23,6 +23,7 @@ const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 export default function AboutPage() {
   const containerRef = useRef(null);
   const heroRef = useRef(null);
+  const logoSectionRef = useRef(null);
   const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success'>('idle');
   
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
@@ -36,59 +37,43 @@ export default function AboutPage() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // Existing Parallax Scrawls
       gsap.to(".scrawl-top", {
-        x: -30,
-        rotate: -8,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top bottom",
-          scrub: 1,
-        }
+        x: -30, rotate: -8,
+        scrollTrigger: { trigger: heroRef.current, start: "top bottom", scrub: 1 }
       });
 
       gsap.to(".scrawl-bottom", {
-        x: 30,
-        rotate: 6,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top bottom",
-          scrub: 1,
-        }
+        x: 30, rotate: 6,
+        scrollTrigger: { trigger: heroRef.current, start: "top bottom", scrub: 1 }
       });
 
-      gsap.from(".story-item", {
-        y: 40,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".story-grid",
-          start: "top 90%",
-        }
-      });
-
-      // LOGO 3D ANIMATION
-      gsap.fromTo(".logo-3d", 
+      // THE LOGO ANIMATION (FIXED)
+      gsap.fromTo(".logo-3d-wrap", 
         { 
-          rotationX: 45, 
-          rotationY: -45, 
-          scale: 0.8,
-          opacity: 0
+          rotationX: 35, 
+          rotationY: -15,
+          scale: 0.85,
+          opacity: 0.4 
         },
         {
           rotationX: 0,
           rotationY: 0,
-          scale: 1,
+          scale: 1.1,
           opacity: 1,
           scrollTrigger: {
-            trigger: ".logo-section",
+            trigger: ".logo-trigger",
             start: "top bottom",
-            end: "center center",
-            scrub: 1,
+            end: "bottom center",
+            scrub: 1.5, // Smoother follow
           }
         }
       );
+
+      gsap.from(".story-item", {
+        y: 40, opacity: 0, stagger: 0.15, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: ".story-grid", start: "top 90%" }
+      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -173,28 +158,32 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* NEW: ANIMATED LOGO SECTION */}
-      <section className="logo-section py-24 md:py-48 overflow-hidden bg-[#d9ff00] rounded-[30px] md:rounded-[60px] border-4 border-black relative">
-        <div className="mx-auto max-w-7xl px-6 flex flex-col items-center">
-          <div className="perspective-1000">
-            <div className="logo-3d relative w-64 h-32 md:w-[600px] md:h-[300px]">
+      {/* BRANDED ANIMATED LOGO SECTION */}
+      <section className="logo-trigger py-24 md:py-48 overflow-hidden bg-black rounded-[30px] md:rounded-[60px] border-4 border-black relative">
+        <div className="mx-auto max-w-7xl px-6 flex flex-col items-center relative z-10">
+          <div className="perspective-1200">
+            <div className="logo-3d-wrap relative w-64 h-32 md:w-[600px] md:h-[300px]">
               <Image
                 src="/images/gutsy-logomark.png"
-                alt="GUTSY 3D"
+                alt="GUTSY LOGO"
                 fill
-                className="object-contain brightness-0"
+                className="object-contain brightness-0 invert shadow-[0px_20px_50px_rgba(242,0,40,0.3)]"
                 priority
               />
             </div>
           </div>
-          <div className="mt-12 text-center max-w-2xl">
-            <h3 className={cn("text-4xl md:text-7xl uppercase leading-none mb-6", utoBlack.className)}>
-              Heavy Science. <br /> Light Feeling.
+          <div className="mt-16 text-center max-w-2xl">
+            <h3 className={cn("text-4xl md:text-7xl uppercase leading-none mb-6 text-[#f3eee4]", utoBlack.className)}>
+              Heavy Science. <br /> <span className="text-[#f20028]">Light Feeling.</span>
             </h3>
-            <p className={cn("text-3xl md:text-4xl lowercase text-black/70", runWild.className)}>
-              we did the heavy lifting so your gut doesn&apos;t have to.
+            <p className={cn("text-3xl md:text-5xl lowercase text-[#ffb300]", runWild.className)}>
+              the protein that actually moves with you.
             </p>
           </div>
+        </div>
+        {/* Subtle Background Texture */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute inset-0 bg-[radial-gradient(#f20028_1px,transparent_1px)] [background-size:20px_20px]" />
         </div>
       </section>
       
@@ -230,8 +219,8 @@ export default function AboutPage() {
       </section>
 
       <style jsx global>{`
-        .perspective-1000 {
-          perspective: 1000px;
+        .perspective-1200 {
+          perspective: 1200px;
         }
         @keyframes vertical-marquee {
           0% { transform: translateY(0); }
