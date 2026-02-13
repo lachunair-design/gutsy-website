@@ -8,6 +8,8 @@ const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 
+export const revalidate = 60;
+
 export const metadata = {
   title: 'Shop | Gutsy',
   description: 'Enzymatically pre-digested protein that actually feels light. Shop Vanilla Calm and Cacao Boost.',
