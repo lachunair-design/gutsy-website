@@ -159,29 +159,7 @@ export default function AboutPage() {
       </div>
 
       {/* --- BRANDED LOGO ANIMATION SECTION --- */}
-      <section className="logo-animation-trigger py-32 md:py-56 bg-black rounded-[30px] md:rounded-[60px] border-4 border-black overflow-hidden relative">
-        <div className="mx-auto max-w-7xl px-6 flex flex-col items-center">
-          <div className="perspective-1000">
-            <div className="gutsy-3d-logo relative w-64 h-32 md:w-[600px] md:h-[300px]">
-              <Image
-                src="/images/gutsy-logomark.png"
-                alt="GUTSY LOGO"
-                fill
-                className="object-contain brightness-0 invert"
-                priority
-              />
-            </div>
-          </div>
-          <div className="mt-16 text-center max-w-2xl">
-            <h3 className={cn("text-4xl md:text-7xl uppercase text-[#f3eee4] leading-none mb-6", utoBlack.className)}>
-              Heavy Science. <br /> <span className="text-[#f20028]">Light Feeling.</span>
-            </h3>
-            <p className={cn("text-3xl md:text-5xl text-[#ffb300] lowercase", runWild.className)}>
-              no guts. no glory.
-            </p>
-          </div>
-        </div>
-      </section>
+    
       
       {/* CTA SECTION */}
       <section className="bg-black rounded-[30px] md:rounded-[60px] lg:rounded-[80px] py-20 md:py-32 border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
