@@ -21,7 +21,7 @@ const footerLinks = {
   ],
   column2: [
     { name: 'Shipping', href: '/FAQ#shipping' },
-    { name: 'Returns', href: '/FAQ#returns' },
+    { name: 'Returns', href: '/FAQ#shipping' },
     { name: 'Legal & Privacy', href: '/FAQ#legal' },
   ],
 };
