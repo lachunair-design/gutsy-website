@@ -140,7 +140,7 @@ export default function HomePage() {
                   className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]"
                 >
                   <Image 
-                    src="/images/product-shots.jpeg" 
+                    src="/images/floating-package.png" 
                     alt="GUTSY Protein Pouches" 
                     fill 
                     className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]"
