@@ -20,6 +20,73 @@ const FLAVOR_META: Record<string, { ingredient: string }> = {
   'Cacao Boost': { ingredient: 'with Maca Extract' },
 };
 
+/* ── Nutritional data per flavor (from supplement facts labels) ── */
+
+interface NutrientRow {
+  name: string;
+  amount: string;
+  dv?: string;
+  indent?: boolean;
+  bold?: boolean;
+}
+
+interface NutritionInfo {
+  servingSize: string;
+  servingsPerContainer: string;
+  nutrients: NutrientRow[];
+  functionalIngredients: { name: string; amount: string }[];
+  otherIngredients: string;
+}
+
+const NUTRITION_DATA: Record<string, NutritionInfo> = {
+  'Vanilla Calm': {
+    servingSize: '1 Scoop (35g)',
+    servingsPerContainer: 'About 14',
+    nutrients: [
+      { name: 'Calories', amount: '120', bold: true },
+      { name: 'Total Fat', amount: '3g', dv: '4%', bold: true },
+      { name: 'Saturated Fat', amount: '2.5g', dv: '13%', indent: true },
+      { name: 'Trans Fat', amount: '0g', indent: true },
+      { name: 'Cholesterol', amount: '0mg', dv: '0%', bold: true },
+      { name: 'Sodium', amount: '150mg', dv: '7%', bold: true },
+      { name: 'Total Carbohydrate', amount: '6g', dv: '2%', bold: true },
+      { name: 'Dietary Fiber', amount: '1g', dv: '4%', indent: true },
+      { name: 'Total Sugars', amount: '1g', indent: true },
+      { name: 'Incl. 0g Added Sugars', amount: '', dv: '0%', indent: true },
+      { name: 'Protein', amount: '20g', dv: '40%', bold: true },
+    ],
+    functionalIngredients: [
+      { name: 'Actazin\u00AE Kiwifruit Powder', amount: '300mg' },
+      { name: 'Organic Reishi Mushroom Extract', amount: '500mg' },
+    ],
+    otherIngredients:
+      'Hydrolyzed Pea Protein, Hydrolyzed Brown Rice Protein, Coconut Milk Powder, Natural Vanilla Flavor, Actazin\u00AE Kiwifruit Powder, Organic Reishi Mushroom Extract, Monk Fruit Extract.',
+  },
+  'Cacao Boost': {
+    servingSize: '1 Scoop (35g)',
+    servingsPerContainer: 'About 14',
+    nutrients: [
+      { name: 'Calories', amount: '125', bold: true },
+      { name: 'Total Fat', amount: '3.5g', dv: '4%', bold: true },
+      { name: 'Saturated Fat', amount: '2.5g', dv: '13%', indent: true },
+      { name: 'Trans Fat', amount: '0g', indent: true },
+      { name: 'Cholesterol', amount: '0mg', dv: '0%', bold: true },
+      { name: 'Sodium', amount: '140mg', dv: '6%', bold: true },
+      { name: 'Total Carbohydrate', amount: '7g', dv: '3%', bold: true },
+      { name: 'Dietary Fiber', amount: '2g', dv: '7%', indent: true },
+      { name: 'Total Sugars', amount: '1g', indent: true },
+      { name: 'Incl. 0g Added Sugars', amount: '', dv: '0%', indent: true },
+      { name: 'Protein', amount: '20g', dv: '40%', bold: true },
+    ],
+    functionalIngredients: [
+      { name: 'Actazin\u00AE Kiwifruit Powder', amount: '300mg' },
+      { name: 'Organic Maca Root Extract', amount: '500mg' },
+    ],
+    otherIngredients:
+      'Hydrolyzed Pea Protein, Hydrolyzed Brown Rice Protein, Coconut Milk Powder, Organic Cacao Powder, Actazin\u00AE Kiwifruit Powder, Organic Maca Root Extract, Monk Fruit Extract.',
+  },
+};
+
 interface ProductDetailProps {
   product: ShopifyProduct;
   /** When true, removes breadcrumb and outer wrapper — for embedding inside another page */
@@ -32,6 +99,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
   );
   const [quantity, setQuantity] = useState(1);
   const [purchaseType, setPurchaseType] = useState<'onetime' | 'subscribe'>('onetime');
+  const [showNutrition, setShowNutrition] = useState(false);
+  const [showIngredients, setShowIngredients] = useState(false);
   const { addToCart, isAdding } = useCart();
 
   const price = parseFloat(selectedVariant.price.amount);
@@ -77,6 +146,9 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
     );
     return flavorOption?.value || variant.title;
   };
+
+  const selectedFlavorName = getFlavorName(selectedVariant);
+  const nutrition = NUTRITION_DATA[selectedFlavorName] || Object.values(NUTRITION_DATA)[0] || null;
 
   return (
     <div className={cn('text-black', utoMedium.className)}>
@@ -332,6 +404,117 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                   ))}
                 </div>
               </div>
+
+              {/* ── Supplement Facts Accordion ── */}
+              {nutrition && (
+                <div className="mt-6 border-2 border-black rounded-2xl overflow-hidden">
+                  <button
+                    onClick={() => setShowNutrition(!showNutrition)}
+                    className={cn(
+                      'w-full flex items-center justify-between px-5 py-4 bg-black text-[#f3eee4] text-left',
+                      utoBold.className
+                    )}
+                  >
+                    <span className="uppercase text-sm tracking-wider">Supplement Facts</span>
+                    <svg
+                      width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      className={cn('transition-transform', showNutrition && 'rotate-180')}
+                    >
+                      <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+
+                  {showNutrition && (
+                    <div className="bg-white px-5 py-4">
+                      {/* Serving info */}
+                      <div className="border-b-[8px] border-black pb-2 mb-1">
+                        <p className={cn('text-2xl uppercase', utoBlack.className)}>Supplement Facts</p>
+                        <p className="text-sm font-bold">Serving Size {nutrition.servingSize}</p>
+                        <p className="text-sm font-bold">Servings Per Container: {nutrition.servingsPerContainer}</p>
+                      </div>
+
+                      {/* Header row */}
+                      <div className="flex justify-between border-b border-black py-1 text-xs font-bold">
+                        <span>Amount Per Serving</span>
+                        <span>% Daily Value*</span>
+                      </div>
+
+                      {/* Nutrient rows */}
+                      {nutrition.nutrients.map((row, i) => (
+                        <div
+                          key={i}
+                          className={cn(
+                            'flex justify-between py-1 text-sm',
+                            i < nutrition.nutrients.length - 1 ? 'border-b border-black/20' : 'border-b-[4px] border-black',
+                            row.indent && 'pl-4'
+                          )}
+                        >
+                          <span className={row.bold ? 'font-bold' : ''}>
+                            {row.name} {row.amount && <span className="font-normal">{row.amount}</span>}
+                          </span>
+                          {row.dv && <span className="font-bold">{row.dv}</span>}
+                        </div>
+                      ))}
+
+                      {/* Functional ingredients */}
+                      {nutrition.functionalIngredients.map((ing, i) => (
+                        <div
+                          key={i}
+                          className={cn(
+                            'flex justify-between py-1 text-sm',
+                            i < nutrition.functionalIngredients.length - 1
+                              ? 'border-b border-black/20'
+                              : 'border-b-[4px] border-black'
+                          )}
+                        >
+                          <span className="font-bold">{ing.name}</span>
+                          <span>{ing.amount} <span className="text-xs opacity-60">&dagger;</span></span>
+                        </div>
+                      ))}
+
+                      {/* Footnotes */}
+                      <p className="text-xs opacity-60 mt-2">
+                        * Percent Daily Values are based on a 2,000 calorie diet.
+                      </p>
+                      <p className="text-xs opacity-60">
+                        &dagger; Daily Value not established.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* ── Ingredients Accordion ── */}
+              {nutrition && (
+                <div className="mt-3 border-2 border-black rounded-2xl overflow-hidden">
+                  <button
+                    onClick={() => setShowIngredients(!showIngredients)}
+                    className={cn(
+                      'w-full flex items-center justify-between px-5 py-4 bg-black text-[#f3eee4] text-left',
+                      utoBold.className
+                    )}
+                  >
+                    <span className="uppercase text-sm tracking-wider">Ingredients</span>
+                    <svg
+                      width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      className={cn('transition-transform', showIngredients && 'rotate-180')}
+                    >
+                      <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+
+                  {showIngredients && (
+                    <div className="bg-white px-5 py-4">
+                      <p className={cn('text-xs uppercase tracking-wider font-bold mb-2 text-[#f20028]', utoBold.className)}>
+                        {selectedFlavorName}
+                      </p>
+                      <p className="text-sm leading-relaxed">
+                        {nutrition.otherIngredients}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
