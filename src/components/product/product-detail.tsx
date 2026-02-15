@@ -170,8 +170,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
         <div className={inline ? '' : 'mx-auto max-w-7xl'}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
 
-            {/* LEFT — Image */}
-            <div className="space-y-4">
+            {/* LEFT — Image (sticky on desktop) */}
+            <div className="space-y-4 lg:sticky lg:top-28 lg:self-start">
               <div className="relative aspect-square bg-white rounded-[2rem] border-4 border-black shadow-[10px_10px_0px_0px_#000000] overflow-hidden">
                 {displayImage ? (
                   <Image
@@ -212,8 +212,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
               )}
             </div>
 
-            {/* RIGHT — Product Info */}
-            <div className="flex flex-col justify-center">
+            {/* RIGHT — Product Info (scrolls naturally) */}
+            <div className="flex flex-col">
               {/* Tagline */}
               <p className={cn('text-sm uppercase tracking-[0.2em] font-bold text-[#f20028] mb-2', utoBold.className)}>
                 Gut-Friendly Protein Mix
