@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ProductCard } from '@/components/product/product-card';
+import { ProductDetail } from '@/components/product/product-detail';
 import { MarqueeRail } from '@/components/marquee-rail';
 import { getProducts } from '@/lib/shopify';
 import { ShopifyProduct } from '@/lib/shopify/types';
@@ -24,6 +24,9 @@ export default async function HomePage() {
     console.error('Error fetching products:', error);
   }
 
+  // Use the first product for the inline PDP — it should be the main GUTSY Protein
+  const mainProduct = products[0] || null;
+
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] overflow-x-hidden", utoMedium.className)}>
 
@@ -39,7 +42,7 @@ export default async function HomePage() {
               <h1 className={cn("text-black text-6xl sm:text-7xl md:text-[160px] leading-[0.85] md:leading-[0.8] uppercase tracking-tight mb-8 break-words", utoBlack.className)}>FEELS <br className="block md:hidden" /> LIGHT</h1>
               <p className="text-[#f3eee4] text-lg md:text-2xl max-w-xl font-bold uppercase leading-tight italic mx-auto md:mx-0 px-4 md:px-0">No bloat. No brick in your stomach. Just enzymatically pre-digested protein.</p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 md:gap-6 justify-center md:justify-start px-4 md:px-0">
-                <Link href="/products" className="w-full sm:w-auto"><Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>Shop Now</Button></Link>
+                <Link href="#lineup" className="w-full sm:w-auto"><Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>Shop Now</Button></Link>
                 <Link href="/about" className="w-full sm:w-auto"><Button variant="outline" className={cn("w-full h-14 md:h-16 px-12 rounded-full border-2 border-black bg-transparent text-black text-xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>Our Story</Button></Link>
               </div>
             </div>
@@ -118,19 +121,15 @@ export default async function HomePage() {
         <MarqueeRail />
       </div>
 
-      {/* LINEUP */}
-      <section className="py-12 md:py-16">
+      {/* LINEUP — Full product detail with variant selector + subscribe */}
+      <section id="lineup" className="py-12 md:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-2">
           <div className="flex flex-col md:flex-row items-center md:items-baseline gap-2 md:gap-4 mb-10 md:mb-16 text-black text-center md:text-left">
             <h2 className={cn("text-5xl md:text-8xl uppercase tracking-tight", utoBlack.className)}>The Lineup</h2>
             <p className={cn("text-4xl md:text-5xl text-[#f20028] lowercase", runWild.className)}>grab yours</p>
           </div>
-          {products.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+          {mainProduct ? (
+            <ProductDetail product={mainProduct} inline />
           ) : (
             <div className="text-center py-12 md:py-16">
               <p className={cn("text-4xl md:text-5xl lowercase text-black/20 mb-6", runWild.className)}>
@@ -190,7 +189,7 @@ export default async function HomePage() {
         <div className="bg-black rounded-[30px] md:rounded-[80px] py-20 md:py-32 px-6 md:px-8 text-center border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#f20028] md:shadow-[20px_20px_0px_0px_#f20028]">
           <h2 className={cn("text-5xl md:text-9xl uppercase text-[#f3eee4] leading-[1.1] mb-8 break-words", utoBlack.className)}>Ready to <br /> transform?</h2>
           <p className={cn("text-4xl md:text-5xl text-[#ffb300] lowercase mb-10", runWild.className)}>Join thousands of humans who trust their gut.</p>
-          <Link href="/products" className="w-full sm:w-auto inline-block"><Button className={cn("w-full h-16 md:h-20 px-10 md:px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Shop All</Button></Link>
+          <Link href="#lineup" className="w-full sm:w-auto inline-block"><Button className={cn("w-full h-16 md:h-20 px-10 md:px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Shop Now</Button></Link>
         </div>
       </section>
     </div>

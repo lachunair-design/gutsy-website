@@ -1,5 +1,5 @@
 import { getProducts } from '@/lib/shopify';
-import { ProductCard } from '@/components/product/product-card';
+import { ProductDetail } from '@/components/product/product-detail';
 import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
@@ -23,6 +23,8 @@ export default async function ProductsPage() {
     console.error('Error fetching products:', error);
   }
 
+  const mainProduct = products[0] || null;
+
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen text-black selection:bg-[#ffb300]", utoMedium.className)}>
       {/* Hero */}
@@ -39,15 +41,11 @@ export default async function ProductsPage() {
         </div>
       </section>
 
-      {/* Products Grid */}
+      {/* Product Detail */}
       <section className="py-20 md:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {products.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+          {mainProduct ? (
+            <ProductDetail product={mainProduct} inline />
           ) : (
             <div className="text-center py-16">
               <p className={cn("text-5xl lowercase text-black/20 mb-8", runWild.className)}>

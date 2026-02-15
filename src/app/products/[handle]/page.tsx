@@ -1,6 +1,6 @@
 import { getProductByHandle, getProducts } from '@/lib/shopify';
 import { notFound } from 'next/navigation';
-import { ProductDetails } from './product-details';
+import { ProductDetail } from '@/components/product/product-detail';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 
@@ -44,7 +44,7 @@ export default async function ProductPage({ params }: { params: { handle: string
 
   return (
     <div className={cn('bg-[#f3eee4] min-h-screen pt-28 pb-16 selection:bg-[#ffb300]', utoMedium.className)}>
-      <ProductDetails product={product} />
+      <ProductDetail product={product} />
     </div>
   );
 }

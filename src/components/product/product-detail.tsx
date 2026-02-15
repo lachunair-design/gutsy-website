@@ -8,10 +8,10 @@ import { formatPrice, cn } from '@/lib/utils';
 import { ShopifyProduct, ShopifyProductVariant, ShopifyImage } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 
-const utoBlack = localFont({ src: '../../../../public/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '../../../../public/fonts/Uto Bold.otf' });
-const utoMedium = localFont({ src: '../../../../public/fonts/Uto Medium.otf' });
-const runWild = localFont({ src: '../../../../public/fonts/RunWild.ttf' });
+const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
+const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
+const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 const SUBSCRIBE_DISCOUNT = 0.10;
 
@@ -20,17 +20,19 @@ const FLAVOR_META: Record<string, { ingredient: string }> = {
   'Cacao Boost': { ingredient: 'with Maca Extract' },
 };
 
-interface ProductDetailsProps {
+interface ProductDetailProps {
   product: ShopifyProduct;
+  /** When true, removes breadcrumb and outer wrapper — for embedding inside another page */
+  inline?: boolean;
 }
 
-export function ProductDetails({ product }: ProductDetailsProps) {
+export function ProductDetail({ product, inline = false }: ProductDetailProps) {
   const [selectedVariant, setSelectedVariant] = useState<ShopifyProductVariant>(
     product.variants[0]
   );
   const [quantity, setQuantity] = useState(1);
   const [purchaseType, setPurchaseType] = useState<'onetime' | 'subscribe'>('onetime');
-  const { addToCart, isLoading } = useCart();
+  const { addToCart, isAdding } = useCart();
 
   const price = parseFloat(selectedVariant.price.amount);
   const currency = selectedVariant.price.currencyCode;
@@ -41,11 +43,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   const currentImage: ShopifyImage | null =
     variantImage || product.featuredImage || (product.images.length > 0 ? product.images[0] : null);
 
-  // All images for thumbnails: variant images first, then product images
-  const allImages = product.images.length > 0 ? product.images : (product.featuredImage ? [product.featuredImage] : []);
+  const allImages = product.images.length > 0
+    ? product.images
+    : (product.featuredImage ? [product.featuredImage] : []);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  // When variant changes, try to find its image in the allImages array
   const handleVariantSelect = (variant: ShopifyProductVariant) => {
     setSelectedVariant(variant);
     if (variant.image) {
@@ -64,13 +66,11 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   };
 
   const handleSubscribe = async () => {
-    // For Loop Subscriptions: the subscription selling plan would be passed
-    // alongside the variant. For now, add to cart and redirect to checkout
-    // where Loop handles subscription upsell.
+    // Loop Subscriptions: selling plan ID would be passed here once set up.
+    // For now, add to cart — Loop handles subscription upsell at checkout.
     await addToCart(selectedVariant.id, quantity);
   };
 
-  // Derive flavor name from variant
   const getFlavorName = (variant: ShopifyProductVariant) => {
     const flavorOption = variant.selectedOptions.find(
       (opt) => opt.name.toLowerCase() === 'flavor' || opt.name.toLowerCase() === 'title'
@@ -80,27 +80,25 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
   return (
     <div className={cn('text-black', utoMedium.className)}>
-      {/* Breadcrumb */}
-      <div className="pb-6 px-6 lg:px-8 max-w-7xl mx-auto">
-        <nav className="flex items-center gap-2 text-sm uppercase tracking-widest font-bold opacity-60">
-          <Link href="/" className="hover:text-[#f20028] transition-colors">
-            Home
-          </Link>
-          <span>/</span>
-          <Link href="/products" className="hover:text-[#f20028] transition-colors">
-            Shop
-          </Link>
-          <span>/</span>
-          <span className="text-[#f20028]">{product.title}</span>
-        </nav>
-      </div>
+      {/* Breadcrumb — only on standalone PDP */}
+      {!inline && (
+        <div className="pb-6 px-6 lg:px-8 max-w-7xl mx-auto">
+          <nav className="flex items-center gap-2 text-sm uppercase tracking-widest font-bold opacity-60">
+            <Link href="/" className="hover:text-[#f20028] transition-colors">Home</Link>
+            <span>/</span>
+            <Link href="/products" className="hover:text-[#f20028] transition-colors">Shop</Link>
+            <span>/</span>
+            <span className="text-[#f20028]">{product.title}</span>
+          </nav>
+        </div>
+      )}
 
       {/* Product Section */}
-      <section className="px-6 lg:px-8 pb-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+      <section className={inline ? '' : 'px-6 lg:px-8 pb-20'}>
+        <div className={inline ? '' : 'mx-auto max-w-7xl'}>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
 
-            {/* LEFT — Image Gallery */}
+            {/* LEFT — Image */}
             <div className="space-y-4">
               <div className="relative aspect-square bg-white rounded-[2rem] border-4 border-black shadow-[10px_10px_0px_0px_#000000] overflow-hidden">
                 {displayImage ? (
@@ -135,13 +133,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                           : 'border-black/20 hover:border-black'
                       )}
                     >
-                      <Image
-                        src={img.url}
-                        alt={img.altText || ''}
-                        fill
-                        className="object-cover"
-                        sizes="80px"
-                      />
+                      <Image src={img.url} alt={img.altText || ''} fill className="object-cover" sizes="80px" />
                     </button>
                   ))}
                 </div>
@@ -151,45 +143,30 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             {/* RIGHT — Product Info */}
             <div className="flex flex-col justify-center">
               {/* Tagline */}
-              <p
-                className={cn(
-                  'text-sm uppercase tracking-[0.2em] font-bold text-[#f20028] mb-2',
-                  utoBold.className
-                )}
-              >
+              <p className={cn('text-sm uppercase tracking-[0.2em] font-bold text-[#f20028] mb-2', utoBold.className)}>
                 Gut-Friendly Protein Mix
               </p>
 
               {/* Title */}
-              <h1
-                className={cn(
-                  'text-5xl md:text-7xl uppercase leading-none mb-2',
-                  utoBlack.className
-                )}
-              >
+              <h2 className={cn('text-4xl md:text-6xl uppercase leading-none mb-2', utoBlack.className)}>
                 {product.title}
-              </h1>
+              </h2>
 
               {/* Price */}
-              <p className={cn('text-3xl lowercase text-[#f20028] mb-8', runWild.className)}>
+              <p className={cn('text-3xl lowercase text-[#f20028] mb-6', runWild.className)}>
                 {formatPrice(price.toFixed(2), currency)}
               </p>
 
               {/* Description */}
-              <p className="text-lg opacity-80 font-medium leading-relaxed mb-10">
+              <p className="text-base md:text-lg opacity-80 font-medium leading-relaxed mb-8">
                 Hydrolyzed pea &amp; rice protein, enzymatically pre-digested for zero bloat and
                 maximum absorption. Five clean ingredients. Nothing else.
               </p>
 
               {/* ── Flavor Selector ── */}
               {product.variants.length > 1 && (
-                <div className="mb-8">
-                  <label
-                    className={cn(
-                      'block text-xs uppercase tracking-[0.2em] font-bold mb-3',
-                      utoBold.className
-                    )}
-                  >
+                <div className="mb-6">
+                  <label className={cn('block text-xs uppercase tracking-[0.2em] font-bold mb-3', utoBold.className)}>
                     Flavor
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -223,20 +200,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                           )}
                           {isSelected && (
                             <span className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[#f20028] flex items-center justify-center">
-                              <svg
-                                width="12"
-                                height="12"
-                                viewBox="0 0 12 12"
-                                fill="none"
-                                className="text-white"
-                              >
-                                <path
-                                  d="M2 6L5 9L10 3"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="text-white">
+                                <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                               </svg>
                             </span>
                           )}
@@ -248,13 +213,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               )}
 
               {/* ── Quantity Selector ── */}
-              <div className="mb-8">
-                <label
-                  className={cn(
-                    'block text-xs uppercase tracking-[0.2em] font-bold mb-3',
-                    utoBold.className
-                  )}
-                >
+              <div className="mb-6">
+                <label className={cn('block text-xs uppercase tracking-[0.2em] font-bold mb-3', utoBold.className)}>
                   Quantity
                 </label>
                 <div className="inline-flex items-center bg-white border-2 border-black rounded-full p-1 shadow-[4px_4px_0px_0px_#000000]">
@@ -279,7 +239,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               </div>
 
               {/* ── Purchase Options ── */}
-              <div className="space-y-3 mb-8">
+              <div className="space-y-3 mb-6">
                 {/* One-time purchase */}
                 <button
                   onClick={() => setPurchaseType('onetime')}
@@ -291,15 +251,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <span
-                      className={cn(
-                        'w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0',
-                        purchaseType === 'onetime' ? 'border-[#f20028]' : 'border-black/30'
-                      )}
-                    >
-                      {purchaseType === 'onetime' && (
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#f20028]" />
-                      )}
+                    <span className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0', purchaseType === 'onetime' ? 'border-[#f20028]' : 'border-black/30')}>
+                      {purchaseType === 'onetime' && <span className="w-2.5 h-2.5 rounded-full bg-[#f20028]" />}
                     </span>
                     <span className={cn('uppercase text-sm', utoBold.className)}>One-time purchase</span>
                   </div>
@@ -319,15 +272,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <span
-                      className={cn(
-                        'w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0',
-                        purchaseType === 'subscribe' ? 'border-[#ffb300]' : 'border-black/30'
-                      )}
-                    >
-                      {purchaseType === 'subscribe' && (
-                        <span className="w-2.5 h-2.5 rounded-full bg-[#ffb300]" />
-                      )}
+                    <span className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0', purchaseType === 'subscribe' ? 'border-[#ffb300]' : 'border-black/30')}>
+                      {purchaseType === 'subscribe' && <span className="w-2.5 h-2.5 rounded-full bg-[#ffb300]" />}
                     </span>
                     <div>
                       <span className={cn('uppercase text-sm block', utoBold.className)}>
@@ -350,7 +296,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               {/* ── CTA Button ── */}
               <button
                 onClick={purchaseType === 'subscribe' ? handleSubscribe : handleAddToCart}
-                disabled={!selectedVariant.availableForSale || isLoading}
+                disabled={!selectedVariant.availableForSale || isAdding}
                 className={cn(
                   'w-full h-16 rounded-full text-xl uppercase font-bold border-2 border-black transition-all',
                   selectedVariant.availableForSale
@@ -359,17 +305,17 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   utoBold.className
                 )}
               >
-                {isLoading
+                {isAdding
                   ? 'Adding...'
                   : !selectedVariant.availableForSale
                     ? 'Sold Out'
                     : purchaseType === 'subscribe'
                       ? `Subscribe — ${formatPrice(subscribePrice.toFixed(2), currency)}/mo`
-                      : `Add to Cart — ${formatPrice((price * quantity).toFixed(2), currency)}`}
+                      : `Add to Bag — ${formatPrice((price * quantity).toFixed(2), currency)}`}
               </button>
 
               {/* ── Trust Badges ── */}
-              <div className="mt-10 pt-8 border-t-2 border-black/10">
+              <div className="mt-8 pt-6 border-t-2 border-black/10">
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { label: '100% Plant-Based', icon: PlantIcon },
@@ -377,10 +323,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                     { label: 'Free Shipping 150+ AED', icon: ShippingIcon },
                     { label: '30-Day Guarantee', icon: ShieldIcon },
                   ].map((badge) => (
-                    <div
-                      key={badge.label}
-                      className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider"
-                    >
+                    <div key={badge.label} className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider">
                       <span className="w-8 h-8 flex items-center justify-center bg-white rounded-full border-2 border-black shrink-0">
                         <badge.icon />
                       </span>
@@ -397,7 +340,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   );
 }
 
-/* ── Inline SVG icons (replace emojis for consistent rendering) ── */
+/* ── SVG Icons ── */
 
 function PlantIcon() {
   return (
