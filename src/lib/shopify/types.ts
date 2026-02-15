@@ -14,6 +14,7 @@ export interface ShopifyProductVariant {
   id: string;
   title: string;
   availableForSale: boolean;
+  image: ShopifyImage | null;
   selectedOptions: {
     name: string;
     value: string;
