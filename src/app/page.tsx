@@ -28,7 +28,7 @@ export default async function HomePage() {
   const mainProduct = products[0] || null;
 
   return (
-    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] overflow-x-hidden", utoMedium.className)}>
+    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] [overflow-x:clip]", utoMedium.className)}>
 
       {/* HERO SECTION */}
       <section className="relative">
