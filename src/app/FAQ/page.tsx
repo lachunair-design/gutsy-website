@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 
-// Initialize the custom fonts
+// Initialize fonts with relative paths for build stability
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
@@ -13,96 +13,101 @@ const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 const faqs = [
   {
-    id: 'how-to',
+    id: 'use',
     question: 'How to use GUTSY?',
-    answer: 'Mix one scoop with 250-300ml of water, milk, or whatever you like. Shake it up. Drink it. That\'s it. Some people use it post-workout, some use it as breakfast, some just drink it when they need protein. There\'s no magic timing.',
+    answer: 'Mix one scoop (25g) with 250-300ml of water, milk, or whatever you like. Shake it up. Drink it. Each container has 30 servings with 20g of protein per scoop. Some people use it post-workout, some use it as breakfast, some just drink it when they need protein. There\'s no magic timing.',
+  },
+  {
+    id: 'protein-count',
+    question: 'How much protein per serving?',
+    answer: '20g of complete protein per scoop. PDCAAS score of 1.0, which means your body can actually use all of it. No amino acid spiking, no nitrogen spiking. Just real, bioavailable protein.',
   },
   {
     id: 'ingredients',
     question: 'What\'s in GUTSY?',
-    answer: 'Five ingredients: enzymatically pre-digested pea and rice protein, Actazin kiwifruit extract, either reishi mushroom (Vanilla Calm) or maca root (Cacao Boost), stevia, and natural flavors. No gums, no fillers, no stuff you need a PhD to understand.',
+    answer: 'Core ingredients: Hydrolyzed pea and rice protein, coconut milk powder, monk fruit extract, Actazin (kiwifruit extract for digestion), Himalayan salt. \n\nWhat makes each flavor different: Vanilla Calm has vanilla flavoring and reishi mushroom extract. Cacao Boost has cacao flavoring and maca root extract. \n\nNo gums, no fillers, no ingredients that require a chemistry degree.',
+  },
+  {
+    id: 'actazin',
+    question: 'What\'s Actazin?',
+    answer: 'Kiwifruit extract that supports digestion. It\'s a natural enzyme that helps break down protein and keeps things moving smoothly. Science-backed, not wellness theater.',
   },
   {
     id: 'science',
-    question: 'Why does it feel lighter than other proteins?',
-    answer: 'Because the protein is enzymatically pre-digested before it gets to you. Basically we break down the protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the brick feeling.',
+    question: 'Why does it feel lighter?',
+    answer: 'Because the protein is enzymatically pre-digested (hydrolyzed) before it gets to you. We break down the massive protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the &quot;brick&quot; feeling. It\'s actual chemistry doing the work upfront.',
+  },
+  {
+    id: 'allergens',
+    question: 'Any allergens?',
+    answer: 'Contains coconut. Free from: dairy, gluten, soy, nuts (except coconut), eggs. Manufactured in a facility that may process other allergens. If you have severe allergies, check the full ingredient list or email us.',
   },
   {
     id: 'packaging',
     question: 'GUTSY\'s Packaging',
-    answer: 'Comes in a pouch because it works and it\'s better for the planet than a giant plastic tub. We\'re working on making it even better. If you\'ve got opinions about packaging, we want to hear them.',
+    answer: 'Comes in resealable pouches. Better for the planet than giant plastic tubs, easier to store in your kitchen. Each pouch contains 30 servings. We\'re working on making the packaging even more sustainable. If you\'ve got strong opinions about this, email us.',
   },
   {
-    id: 'legal',
-    question: 'Legal & Privacy',
-    answer: 'We value your privacy as much as your gut health. We only collect data necessary to process your orders and improve your experience. Your information is never sold to third parties. For our full terms of service, reach out to hello@eatgutsy.com.',
+    id: 'buying',
+    question: 'Buying GUTSY',
+    answer: 'Ships within the UAE. Subscribe and save 10% (185 AED becomes 166.50 AED per month, cancel anytime). One-time purchase is 185 AED. Free shipping over 150 AED. Manage or cancel your subscription yourself in your account—no calling customer service and begging.',
   },
   {
     id: 'shipping',
     question: 'Shipping & Returns',
-    answer: 'Ships within 2-3 business days in the UAE. Free shipping over 150 AED. If something arrives damaged or wrong, email us and we\'ll sort it. If you tried it and hate it, email us within 30 days and we\'ll figure it out.',
+    answer: 'Ships within 2-3 business days across the UAE. Free shipping over 150 AED. If something arrives damaged or wrong, send a photo to hello@eatgutsy.com and we\'ll swap it immediately. If you tried it and genuinely hate it, email us within 30 days. We want you happy, not bloated.',
   },
   {
     id: 'vegan',
     question: 'Is GUTSY vegan?',
-    answer: 'Yes. Pea and rice protein, kiwifruit extract, mushroom or maca, stevia, natural flavors. Nothing from animals.',
+    answer: 'Yes. 100% Plant-based. Pea and rice protein, kiwifruit extract, mushroom or maca, monk fruit, and coconut milk. Nothing from animals.',
   },
   {
-    id: 'work-for-me',
-    question: 'Will this work for me?',
-    answer: 'If regular protein powder makes you bloated, there\'s a good chance GUTSY will feel different. If you have serious digestive issues, talk to your doctor first. We just made protein that doesn\'t make you feel terrible.',
+    id: 'pregnancy',
+    question: 'Can I use this if I\'m pregnant/breastfeeding?',
+    answer: 'The ingredients are safe, but we always recommend checking with your doctor first. We\'re cautious about making claims for pregnancy and breastfeeding because everyone\'s situation is different.',
   },
+  {
+    id: 'work',
+    question: 'Will this work for me?',
+    answer: 'If regular protein powder makes you bloated, there\'s a high chance GUTSY will feel different. Safe for lactose intolerance (dairy-free). Safe for gluten sensitivity (gluten-free). If you have serious digestive issues like IBS or Crohn\'s, talk to your doctor first. We aren\'t doctors; we just made protein that doesn\'t make you feel terrible.',
+  },
+  {
+    id: 'legal',
+    question: 'Privacy & Legal',
+    answer: 'We value your privacy. We only use cookies to make your shopping experience better. We never sell your data. Your payment info is handled securely via encrypted partners.',
+  }
 ];
 
 export default function FAQPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // Handle URL Hash to auto-open sections from Footer links
   useEffect(() => {
     const handleHash = () => {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (!hash) return;
-
-      // Map hashes to their specific FAQ index
-      const hashToIndex: Record<string, number> = {
-        'shipping': 5,
-        'returns': 5,
-        'legal': 4
-      };
-
-      if (hashToIndex[hash] !== undefined) {
-        setOpenIndex(hashToIndex[hash]);
-        
-        // Smooth scroll to the element after a tiny delay to allow render
-        setTimeout(() => {
-          const element = document.getElementById(hash);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }, 100);
+      const hash = window.location.hash.replace('#', '');
+      const index = faqs.findIndex(f => f.id === hash);
+      if (index !== -1) {
+        setOpenIndex(index);
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
       }
     };
-
     handleHash();
     window.addEventListener('hashchange', handleHash);
     return () => window.removeEventListener('hashchange', handleHash);
   }, []);
 
-  const toggleFaq = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000] selection:bg-[#ffb300]", utoMedium.className)}>
-      
+    <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000] selection:bg-[#ffb300] overflow-x-hidden", utoMedium.className)}>
+
       {/* Hero Section */}
-      <section className="bg-[#000000] text-[#f3eee4] pt-44 pb-20 border-b-[10px] border-[#f20028]">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <h1 className={cn("text-6xl md:text-8xl uppercase leading-none tracking-tighter mb-4", utoBlack.className)}>
+      <section className="bg-[#000000] text-[#f3eee4] pt-32 md:pt-44 pb-16 md:pb-20 border-b-[6px] md:border-b-[10px] border-[#f20028]">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div className="max-w-3xl">
+            <h1 className={cn("text-5xl md:text-8xl uppercase leading-none tracking-tighter mb-4", utoBlack.className)}>
               Got <br /> Questions?
             </h1>
-            <p className={cn("text-4xl lowercase leading-none text-[#ffb300]", runWild.className)}>
+            <p className={cn("text-3xl md:text-4xl lowercase leading-tight text-[#ffb300]", runWild.className)}>
               Everything you need to know about the protein that actually feels light.
             </p>
           </div>
@@ -110,45 +115,45 @@ export default function FAQPage() {
       </section>
 
       {/* Main Content */}
-      <section className="py-20 md:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            
+      <section className="py-12 md:py-32">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
+
             <div className="lg:col-span-8">
-              <div className="space-y-4">
+              <div className="space-y-6">
                 {faqs.map((faq, index) => (
-                  <div 
-                    key={index} 
-                    id={faq.id} // This matches the footer hrefs (#shipping, #legal)
+                  <div
+                    key={index}
+                    id={faq.id}
                     className={cn(
-                      "border-b-4 border-black transition-all duration-300 scroll-mt-48",
-                      openIndex === index ? "bg-white p-8 -mx-4 rounded-[2rem] shadow-[8px_8px_0px_0px_#000000]" : "bg-transparent pb-6"
+                      "border-b-4 border-black transition-all duration-300 scroll-mt-32",
+                      openIndex === index ? "bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-[6px_6px_0px_0px_#000000] md:shadow-[10px_10px_0px_0px_#000000]" : "bg-transparent pb-6"
                     )}
                   >
                     <button
-                      onClick={() => toggleFaq(index)}
+                      onClick={() => setOpenIndex(openIndex === index ? null : index)}
                       aria-expanded={openIndex === index}
                       className="flex w-full items-center justify-between text-left group"
                     >
                       <span className={cn(
-                        "text-2xl md:text-4xl uppercase leading-tight transition-colors group-hover:text-[#f20028]",
+                        "text-xl md:text-3xl uppercase leading-tight transition-colors group-hover:text-[#f20028]",
                         utoBlack.className,
                         openIndex === index ? "text-[#f20028]" : "text-black"
                       )}>
                         {faq.question}
                       </span>
                       <ChevronDown className={cn(
-                        "w-8 h-8 transition-transform duration-300",
+                        "w-6 h-6 md:w-8 md:h-8 flex-shrink-0 transition-transform duration-300",
                         openIndex === index ? "rotate-180 text-[#f20028]" : "text-black"
                       )} />
                     </button>
-                    
+
                     <div className={cn(
                       "grid transition-all duration-300 ease-in-out",
                       openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                     )}>
                       <div className="overflow-hidden">
-                        <div className={cn("text-xl md:text-2xl leading-snug lowercase text-black/80", runWild.className)}>
+                        <div className={cn("text-lg md:text-xl whitespace-pre-line leading-relaxed text-black/90 pb-2", utoMedium.className)}>
                           {faq.answer}
                         </div>
                       </div>
@@ -161,16 +166,16 @@ export default function FAQPage() {
             {/* Sidebar */}
             <div className="lg:col-span-4">
               <div className="sticky top-32 space-y-8">
-                <div className="bg-[#f20028] p-10 rounded-[2rem] border-4 border-black shadow-[10px_10px_0px_0px_#000000] text-[#f3eee4]">
+                <div className="bg-[#f20028] p-8 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border-4 border-black shadow-[8px_8px_0px_0px_#000000] text-[#f3eee4]">
                   <h2 className={cn("text-3xl uppercase mb-6 leading-none", utoBlack.className)}>
-                    Contacting GUTSY
+                    Contact Us
                   </h2>
-                  <p className={cn("text-3xl lowercase leading-tight mb-8 text-black", runWild.className)}>
-                    We&apos;re a small team so we&apos;ll get back to you within 24-48 hours.
+                  <p className={cn("text-2xl md:text-3xl lowercase leading-tight mb-8 text-black", runWild.className)}>
+                    real humans, real answers. we&apos;ll get back within 24-48 hours, usually faster.
                   </p>
-                  <a 
+                  <a
                     href="mailto:hello@eatgutsy.com"
-                    className={cn("inline-block w-full py-4 bg-white text-black border-2 border-black text-center text-xl uppercase rounded-full shadow-[4px_4px_0px_0px_#000000] hover:bg-[#ffb300] transition-all", utoBold.className)}
+                    className={cn("inline-block w-full py-4 bg-white text-black border-2 border-black text-center text-xl uppercase rounded-full shadow-[4px_4px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}
                   >
                     Email Us
                   </a>

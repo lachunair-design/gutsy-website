@@ -48,17 +48,16 @@ export function Header() {
   }, [pathname]);
 
   return (
-    // ADJUSTED: Changed z-index from z-[100] to z-[40] so the cart (usually z-50+) stays on top
     <header className="fixed top-0 left-0 right-0 z-[40] transition-all duration-300">
       <nav className={cn(
         "mx-auto transition-all duration-300",
         scrolled ? "bg-[#f3eee4]/90 backdrop-blur-md py-4 shadow-sm" : "py-8 md:py-12"
       )}>
         <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
-          
+
           {/* LOGO VISIBILITY */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className={cn(
               "group relative transition-all duration-500",
               showLogo ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
@@ -72,7 +71,7 @@ export function Header() {
                 className={cn(
                   "object-contain transition-all duration-300",
                   isDarkHeroPage && !scrolled ? "brightness-0 invert" : "brightness-0"
-                )} 
+                )}
                 priority
               />
             </div>
@@ -104,7 +103,7 @@ export function Header() {
                   </Link>
                 );
               })}
-              
+
               <Link
                 href="/products"
                 aria-current={pathname === '/products' ? 'page' : undefined}
