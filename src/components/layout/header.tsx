@@ -81,31 +81,40 @@ export function Header() {
           <div className="flex items-center gap-3 md:gap-6">
             {/* NAVIGATION PILLS */}
             <div className="hidden lg:flex items-center -space-x-3">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    "h-12 px-8 flex items-center justify-center rounded-full border-2 transition-all hover:z-10 hover:scale-105",
-                    scrolled 
-                      ? "bg-white border-black text-black hover:bg-[#ffb300]" 
-                      : isDarkHeroPage 
-                        ? "bg-transparent border-[#f3eee4] text-[#f3eee4] hover:bg-[#f3eee4] hover:text-black" 
-                        : "bg-[#f3eee4] border-black text-black hover:bg-[#ffb300]",
-                    utoBold.className
-                  )}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={cn(
+                      "h-12 px-8 flex items-center justify-center rounded-full border-2 transition-all hover:z-10 hover:scale-105",
+                      isActive
+                        ? "bg-[#ffb300] border-black text-black z-10 shadow-[3px_3px_0px_0px_#000000]"
+                        : scrolled
+                          ? "bg-white border-black text-black hover:bg-[#ffb300]"
+                          : isDarkHeroPage
+                            ? "bg-transparent border-[#f3eee4] text-[#f3eee4] hover:bg-[#f3eee4] hover:text-black"
+                            : "bg-[#f3eee4] border-black text-black hover:bg-[#ffb300]",
+                      utoBold.className
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
               
               <Link
                 href="/products"
+                aria-current={pathname === '/products' ? 'page' : undefined}
                 className={cn(
                   "h-12 px-10 flex items-center justify-center rounded-full bg-[#f20028] text-[#f3eee4] font-bold border-2 transition-all hover:z-10 hover:scale-110 ml-4",
-                  scrolled || !isDarkHeroPage 
-                    ? "border-black shadow-[4px_4px_0px_0px_#000000]" 
-                    : "border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]",
+                  pathname === '/products'
+                    ? "border-black shadow-[4px_4px_0px_0px_#ffb300] ring-2 ring-[#ffb300]"
+                    : scrolled || !isDarkHeroPage
+                      ? "border-black shadow-[4px_4px_0px_0px_#000000]"
+                      : "border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]",
                   utoBold.className
                 )}
               >
@@ -176,7 +185,12 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={cn("text-3xl uppercase text-black hover:text-[#f20028]", utoBlack.className)}
+                aria-current={pathname === item.href ? 'page' : undefined}
+                className={cn(
+                  "text-3xl uppercase hover:text-[#f20028]",
+                  pathname === item.href ? "text-[#f20028]" : "text-black",
+                  utoBlack.className
+                )}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}

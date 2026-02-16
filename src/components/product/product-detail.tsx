@@ -313,10 +313,12 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
               </div>
 
               {/* ── Purchase Options ── */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-3 mb-6" role="radiogroup" aria-label="Purchase type">
                 {/* One-time purchase */}
                 <button
                   onClick={() => setPurchaseType('onetime')}
+                  role="radio"
+                  aria-checked={purchaseType === 'onetime'}
                   className={cn(
                     'w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 transition-all text-left',
                     purchaseType === 'onetime'
@@ -325,7 +327,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <span className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0', purchaseType === 'onetime' ? 'border-[#f20028]' : 'border-black/30')}>
+                    <span className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0', purchaseType === 'onetime' ? 'border-[#f20028]' : 'border-black/30')} aria-hidden="true">
                       {purchaseType === 'onetime' && <span className="w-2.5 h-2.5 rounded-full bg-[#f20028]" />}
                     </span>
                     <span className={cn('uppercase text-sm', utoBold.className)}>One-time purchase</span>
@@ -338,6 +340,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                 {/* Subscribe & Save */}
                 <button
                   onClick={() => setPurchaseType('subscribe')}
+                  role="radio"
+                  aria-checked={purchaseType === 'subscribe'}
                   className={cn(
                     'w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 transition-all text-left',
                     purchaseType === 'subscribe'
@@ -346,7 +350,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                   )}
                 >
                   <div className="flex items-center gap-3">
-                    <span className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0', purchaseType === 'subscribe' ? 'border-[#ffb300]' : 'border-black/30')}>
+                    <span className={cn('w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0', purchaseType === 'subscribe' ? 'border-[#ffb300]' : 'border-black/30')} aria-hidden="true">
                       {purchaseType === 'subscribe' && <span className="w-2.5 h-2.5 rounded-full bg-[#ffb300]" />}
                     </span>
                     <div>

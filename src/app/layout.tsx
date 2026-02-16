@@ -18,6 +18,8 @@ const runWild = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://eatgutsy.com'),
+
   // SEO/AEO OPTIMIZED TITLE & DESCRIPTION
   title: 'GUTSY | Protein Powder for Bloating | No Gums, Pre-Digested | Dubai',
   description: 'Finally, a protein powder that won&apos;t make you bloated. Enzymatically pre-digested pea and rice protein with kiwifruit extract. Ships across UAE. Feel light, not heavy.',
@@ -59,6 +61,14 @@ export const metadata: Metadata = {
     type: 'website',
   },
   
+  // TWITTER CARD CONFIGURATION
+  twitter: {
+    card: 'summary_large_image',
+    title: 'GUTSY | Protein Powder That Won\'t Make You Bloated',
+    description: 'Stop the bloat. Enzymatically pre-digested protein designed to feel light and absorb instantly.',
+    images: ['/images/og-image.png'],
+  },
+
   // ROBOTS CONFIG FOR SEARCH ENGINES
   robots: {
     index: true,

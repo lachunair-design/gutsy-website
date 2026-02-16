@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { useCart } from '@/lib/shopify/cart-context';
 import { formatPrice } from '@/lib/utils';
@@ -13,9 +14,52 @@ const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 export function CartDrawer() {
   const { cart, isOpen, closeCart, updateItemQuantity, removeItem, isLoading } = useCart();
+  const drawerRef = useRef<HTMLDivElement>(null);
 
   const lines = cart?.lines || [];
   const totalAmount = cart?.cost.totalAmount;
+
+  // ESC key handler
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeCart();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, closeCart]);
+
+  // Focus trap
+  const handleFocusTrap = useCallback((e: KeyboardEvent) => {
+    if (e.key !== 'Tab' || !drawerRef.current) return;
+    const focusable = drawerRef.current.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    document.addEventListener('keydown', handleFocusTrap);
+    // Focus the close button when drawer opens
+    const timer = setTimeout(() => {
+      const closeBtn = drawerRef.current?.querySelector<HTMLElement>('[aria-label="Close cart"]');
+      closeBtn?.focus();
+    }, 100);
+    return () => {
+      document.removeEventListener('keydown', handleFocusTrap);
+      clearTimeout(timer);
+    };
+  }, [isOpen, handleFocusTrap]);
 
   return (
     <>
@@ -30,6 +74,10 @@ export function CartDrawer() {
 
       {/* Drawer - The "Cart Pouch" */}
       <div
+        ref={drawerRef}
+        role="dialog"
+        aria-label="Shopping cart"
+        aria-modal="true"
         className={cn(
           'fixed top-0 right-0 h-full w-full max-w-md bg-[#f3eee4] z-[70] shadow-[-20px_0px_50px_rgba(0,0,0,0.2)] transition-transform duration-500 ease-in-out border-l-4 border-black',
           // Rounded left corners to match the pouch aesthetic
@@ -106,7 +154,7 @@ export function CartDrawer() {
                             onClick={() => updateItemQuantity(item.id, item.merchandise.id, item.quantity - 1)}
                             disabled={isLoading}
                             aria-label={`Decrease quantity of ${item.merchandise.product.title}`}
-                            className="w-8 h-8 flex items-center justify-center font-bold hover:text-[#f20028]"
+                            className="w-10 h-10 flex items-center justify-center font-bold hover:text-[#f20028]"
                           >
                             -
                           </button>
@@ -117,7 +165,7 @@ export function CartDrawer() {
                             onClick={() => updateItemQuantity(item.id, item.merchandise.id, item.quantity + 1)}
                             disabled={isLoading}
                             aria-label={`Increase quantity of ${item.merchandise.product.title}`}
-                            className="w-8 h-8 flex items-center justify-center font-bold hover:text-[#f20028]"
+                            className="w-10 h-10 flex items-center justify-center font-bold hover:text-[#f20028]"
                           >
                             +
                           </button>
