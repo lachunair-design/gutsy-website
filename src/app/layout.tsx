@@ -75,9 +75,15 @@ export default function RootLayout({
     <html lang="en" className={`${utoBlack.variable} ${runWild.variable}`}>
       <body className="antialiased bg-[#f3eee4] selection:bg-[#ffb300] selection:text-black">
         <CartProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#f20028] focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:text-sm focus:font-bold focus:uppercase focus:outline-none"
+          >
+            Skip to content
+          </a>
           <Header />
           {/* Main content wrapper */}
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
           <CartDrawer />
         </CartProvider>

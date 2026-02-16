@@ -10,6 +10,9 @@ const config: Config = {
     extend: {
       colors: {
         gutsy: {
+          cream: '#f3eee4',
+          red: '#f20028',
+          gold: '#ffb300',
           black: '#0a0a0a',
           white: '#fafafa',
           gray: {
@@ -24,7 +27,6 @@ const config: Config = {
             800: '#1f2937',
             900: '#111827',
           },
-          accent: '#10b981',
         },
       },
       fontFamily: {

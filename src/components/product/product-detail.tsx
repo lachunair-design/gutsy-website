@@ -251,6 +251,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                           key={variant.id}
                           onClick={() => handleVariantSelect(variant)}
                           disabled={!variant.availableForSale}
+                          aria-label={`Select flavor: ${name}${!variant.availableForSale ? ' (sold out)' : ''}${isSelected ? ' (selected)' : ''}`}
+                          aria-pressed={isSelected}
                           className={cn(
                             'relative flex flex-col items-start text-left px-5 py-4 rounded-2xl border-2 transition-all',
                             isSelected
@@ -410,6 +412,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                 <div className="mt-6 border-2 border-black rounded-2xl overflow-hidden">
                   <button
                     onClick={() => setShowNutrition(!showNutrition)}
+                    aria-expanded={showNutrition}
+                    aria-label="Supplement Facts"
                     className={cn(
                       'w-full flex items-center justify-between px-5 py-4 bg-black text-[#f3eee4] text-left',
                       utoBold.className
@@ -489,6 +493,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                 <div className="mt-3 border-2 border-black rounded-2xl overflow-hidden">
                   <button
                     onClick={() => setShowIngredients(!showIngredients)}
+                    aria-expanded={showIngredients}
+                    aria-label="Ingredients"
                     className={cn(
                       'w-full flex items-center justify-between px-5 py-4 bg-black text-[#f3eee4] text-left',
                       utoBold.className

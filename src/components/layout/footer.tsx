@@ -6,6 +6,7 @@ import { useState } from 'react';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { Instagram } from 'lucide-react';
+import { EmailCapture } from '@/components/email-capture';
 
 // Corrected paths for src/components/layout/footer.tsx
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
@@ -95,6 +96,11 @@ export function Footer() {
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* Email Capture */}
+        <div className="mb-16 md:mb-20 max-w-md">
+          <EmailCapture compact />
         </div>
 
         {/* Footer Metadata */}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ProductDetail } from '@/components/product/product-detail';
 import { MarqueeRail } from '@/components/marquee-rail';
+import { EmailCapture } from '@/components/email-capture';
 import { getProducts } from '@/lib/shopify';
 import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
@@ -64,7 +65,7 @@ export default async function HomePage() {
 
       {/* SCIENCE SECTION */}
       <section className="py-8 md:py-16">
-        <div className="mx-auto max-w-7xl bg-white rounded-[30px] md:rounded-[60px] border-4 border-black overflow-hidden shadow-[10px_10px_0px_0px_#f20028] md:shadow-[15px_15px_0px_0px_#f20028]">
+        <div className="mx-auto max-w-7xl bg-white rounded-[30px] md:rounded-[60px] border-4 border-black overflow-hidden shadow-[6px_6px_0px_0px_#f20028] sm:shadow-[10px_10px_0px_0px_#f20028] lg:shadow-[15px_15px_0px_0px_#f20028]">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="p-8 md:p-16 space-y-6 md:space-y-8 border-b-4 lg:border-b-0 lg:border-r-4 border-black bg-[#f3eee4]">
               <h2 className={cn("text-5xl md:text-8xl uppercase leading-[0.9] text-black", utoBlack.className)}>the science <br className="hidden md:block" /> of light</h2>
@@ -92,7 +93,7 @@ export default async function HomePage() {
       </section>
 
       {/* WHAT'S INSIDE SECTION */}
-      <section className="py-16 md:py-24 px-5 md:px-12 bg-white rounded-[30px] md:rounded-[60px] border-4 border-black shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
+      <section className="py-16 md:py-24 px-5 md:px-12 bg-white rounded-[30px] md:rounded-[60px] border-4 border-black shadow-[6px_6px_0px_0px_#ffb300] sm:shadow-[10px_10px_0px_0px_#ffb300] lg:shadow-[15px_15px_0px_0px_#ffb300]">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <div className="text-center mb-10 md:mb-16">
             <h2 className={cn("text-5xl md:text-8xl uppercase text-black leading-[0.9]", utoBlack.className)}>FIVE CORE INGREDIENTS.</h2>
@@ -145,7 +146,7 @@ export default async function HomePage() {
 
       {/* SOCIAL PROOF SECTION */}
       <section className="py-16 md:py-24 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto bg-[#ffb300] rounded-[30px] md:rounded-[60px] p-8 md:p-12 border-4 border-black shadow-[10px_10px_0px_0px_#000000] md:shadow-[15px_15px_0px_0px_#000000]">
+        <div className="max-w-7xl mx-auto bg-[#ffb300] rounded-[30px] md:rounded-[60px] p-8 md:p-12 border-4 border-black shadow-[6px_6px_0px_0px_#000000] sm:shadow-[10px_10px_0px_0px_#000000] lg:shadow-[15px_15px_0px_0px_#000000]">
           <h2 className={cn("text-4xl md:text-7xl uppercase text-black text-center mb-10 md:mb-16 leading-tight", utoBlack.className)}>WHAT PEOPLE SAY</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-black">
             {[
@@ -184,9 +185,14 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* EMAIL CAPTURE */}
+      <section className="px-4 md:px-6 max-w-5xl mx-auto">
+        <EmailCapture />
+      </section>
+
       {/* FOOTER CTA */}
       <section className="pb-8 px-2">
-        <div className="bg-black rounded-[30px] md:rounded-[80px] py-20 md:py-32 px-6 md:px-8 text-center border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#f20028] md:shadow-[20px_20px_0px_0px_#f20028]">
+        <div className="bg-black rounded-[30px] md:rounded-[80px] py-20 md:py-32 px-6 md:px-8 text-center border-4 border-[#f3eee4] shadow-[6px_6px_0px_0px_#f20028] sm:shadow-[10px_10px_0px_0px_#f20028] lg:shadow-[20px_20px_0px_0px_#f20028]">
           <h2 className={cn("text-5xl md:text-9xl uppercase text-[#f3eee4] leading-[1.1] mb-8 break-words", utoBlack.className)}>Ready to <br /> transform?</h2>
           <p className={cn("text-4xl md:text-5xl text-[#ffb300] lowercase mb-10", runWild.className)}>Join thousands of humans who trust their gut.</p>
           <Link href="#lineup" className="w-full sm:w-auto inline-block"><Button className={cn("w-full h-16 md:h-20 px-10 md:px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Shop Now</Button></Link>

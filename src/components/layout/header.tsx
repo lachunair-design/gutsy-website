@@ -117,12 +117,13 @@ export function Header() {
             <div className="flex items-center gap-3">
               <button
                 onClick={openCart}
+                aria-label={`Open cart${totalItems > 0 ? `, ${totalItems} items` : ''}`}
                 className={cn(
                   "group relative h-12 w-12 flex items-center justify-center rounded-full border-2 transition-all",
-                  scrolled 
-                    ? "bg-white border-black shadow-[4px_4px_0px_0px_#000000]" 
-                    : isDarkHeroPage 
-                      ? "bg-transparent border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]" 
+                  scrolled
+                    ? "bg-white border-black shadow-[4px_4px_0px_0px_#000000]"
+                    : isDarkHeroPage
+                      ? "bg-transparent border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]"
                       : "bg-[#f3eee4] border-black shadow-[4px_4px_0px_0px_#000000]"
                 )}
               >
@@ -143,6 +144,8 @@ export function Header() {
 
               <button
                 type="button"
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={mobileMenuOpen}
                 className={cn(
                   "lg:hidden h-12 w-12 flex items-center justify-center rounded-full border-2 shadow-[4px_4px_0px_0px_#000000] bg-[#ffb300] active:translate-y-1 active:shadow-none transition-all",
                   isDarkHeroPage && !scrolled ? "border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]" : "border-black"

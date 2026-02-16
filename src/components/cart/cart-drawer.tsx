@@ -105,16 +105,18 @@ export function CartDrawer() {
                           <button
                             onClick={() => updateItemQuantity(item.id, item.merchandise.id, item.quantity - 1)}
                             disabled={isLoading}
+                            aria-label={`Decrease quantity of ${item.merchandise.product.title}`}
                             className="w-8 h-8 flex items-center justify-center font-bold hover:text-[#f20028]"
                           >
                             -
                           </button>
-                          <span className={cn("w-6 text-center text-sm font-bold", utoBold.className)}>
+                          <span className={cn("w-6 text-center text-sm font-bold", utoBold.className)} aria-label={`Quantity: ${item.quantity}`}>
                             {item.quantity}
                           </span>
                           <button
                             onClick={() => updateItemQuantity(item.id, item.merchandise.id, item.quantity + 1)}
                             disabled={isLoading}
+                            aria-label={`Increase quantity of ${item.merchandise.product.title}`}
                             className="w-8 h-8 flex items-center justify-center font-bold hover:text-[#f20028]"
                           >
                             +

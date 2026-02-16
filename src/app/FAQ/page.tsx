@@ -127,6 +127,7 @@ export default function FAQPage() {
                   >
                     <button
                       onClick={() => toggleFaq(index)}
+                      aria-expanded={openIndex === index}
                       className="flex w-full items-center justify-between text-left group"
                     >
                       <span className={cn(
@@ -147,7 +148,7 @@ export default function FAQPage() {
                       openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                     )}>
                       <div className="overflow-hidden">
-                        <div className={cn("text-3xl md:text-4xl leading-none lowercase text-black/80", runWild.className)}>
+                        <div className={cn("text-xl md:text-2xl leading-snug lowercase text-black/80", runWild.className)}>
                           {faq.answer}
                         </div>
                       </div>
