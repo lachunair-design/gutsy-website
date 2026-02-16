@@ -99,7 +99,7 @@ export default function FAQPage() {
 
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000] selection:bg-[#ffb300] overflow-x-hidden", utoMedium.className)}>
-      
+
       {/* Hero Section */}
       <section className="bg-[#000000] text-[#f3eee4] pt-32 md:pt-44 pb-16 md:pb-20 border-b-[6px] md:border-b-[10px] border-[#f20028]">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -118,12 +118,12 @@ export default function FAQPage() {
       <section className="py-12 md:py-32">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
-            
+
             <div className="lg:col-span-8">
               <div className="space-y-6">
                 {faqs.map((faq, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     id={faq.id}
                     className={cn(
                       "border-b-4 border-black transition-all duration-300 scroll-mt-32",
@@ -132,6 +132,7 @@ export default function FAQPage() {
                   >
                     <button
                       onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                      aria-expanded={openIndex === index}
                       className="flex w-full items-center justify-between text-left group"
                     >
                       <span className={cn(
@@ -146,7 +147,7 @@ export default function FAQPage() {
                         openIndex === index ? "rotate-180 text-[#f20028]" : "text-black"
                       )} />
                     </button>
-                    
+
                     <div className={cn(
                       "grid transition-all duration-300 ease-in-out",
                       openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
@@ -172,7 +173,7 @@ export default function FAQPage() {
                   <p className={cn("text-2xl md:text-3xl lowercase leading-tight mb-8 text-black", runWild.className)}>
                     real humans, real answers. we&apos;ll get back within 24-48 hours, usually faster.
                   </p>
-                  <a 
+                  <a
                     href="mailto:hello@eatgutsy.com"
                     className={cn("inline-block w-full py-4 bg-white text-black border-2 border-black text-center text-xl uppercase rounded-full shadow-[4px_4px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}
                   >

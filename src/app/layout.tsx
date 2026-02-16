@@ -18,6 +18,8 @@ const runWild = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://eatgutsy.com'),
+
   // SEO/AEO OPTIMIZED TITLE & DESCRIPTION
   title: 'GUTSY | Protein Powder for Bloating | No Gums, Pre-Digested | Dubai',
   description: 'Finally, a protein powder that won&apos;t make you bloated. Enzymatically pre-digested pea and rice protein with kiwifruit extract. Ships across UAE. Feel light, not heavy.',
@@ -59,6 +61,14 @@ export const metadata: Metadata = {
     type: 'website',
   },
   
+  // TWITTER CARD CONFIGURATION
+  twitter: {
+    card: 'summary_large_image',
+    title: 'GUTSY | Protein Powder That Won\'t Make You Bloated',
+    description: 'Stop the bloat. Enzymatically pre-digested protein designed to feel light and absorb instantly.',
+    images: ['/images/og-image.png'],
+  },
+
   // ROBOTS CONFIG FOR SEARCH ENGINES
   robots: {
     index: true,
@@ -75,9 +85,15 @@ export default function RootLayout({
     <html lang="en" className={`${utoBlack.variable} ${runWild.variable}`}>
       <body className="antialiased bg-[#f3eee4] selection:bg-[#ffb300] selection:text-black">
         <CartProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#f20028] focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:text-sm focus:font-bold focus:uppercase focus:outline-none"
+          >
+            Skip to content
+          </a>
           <Header />
           {/* Main content wrapper */}
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
           <CartDrawer />
         </CartProvider>

@@ -41,6 +41,9 @@ const productFragment = `
           id
           title
           availableForSale
+          image {
+            ...image
+          }
           selectedOptions {
             name
             value

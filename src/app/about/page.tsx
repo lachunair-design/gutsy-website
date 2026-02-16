@@ -24,7 +24,7 @@ export default function AboutPage() {
   const containerRef = useRef(null);
   const heroRef = useRef(null);
   const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success'>('idle');
-  
+
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
   const yMove = useTransform(scrollYProgress, [0, 1], [-50, 250]);
 
@@ -54,9 +54,9 @@ export default function AboutPage() {
       });
 
       // --- LOGO ANIMATION LOGIC ---
-      gsap.fromTo(".gutsy-3d-logo", 
-        { 
-          rotationY: -20, 
+      gsap.fromTo(".gutsy-3d-logo",
+        {
+          rotationY: -20,
           rotationX: 10,
           scale: 0.9,
           filter: "drop-shadow(0px 0px 0px rgba(242,0,40,0))"
@@ -81,10 +81,10 @@ export default function AboutPage() {
 
   return (
     <div className="bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-32 md:pt-44 pb-8 space-y-8 overflow-x-hidden selection:bg-[#ffb300]">
-      
+
       {/* THE POUCH */}
       <div ref={containerRef} className={cn("bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-screen overflow-hidden relative", utoMedium.className)}>
-        
+
         {/* VERTICAL MARQUEE RAIL */}
         <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-black/10 z-0 flex flex-col items-center overflow-hidden py-10 pointer-events-none">
           <div className="animate-vertical-marquee flex flex-col gap-8 whitespace-nowrap">
@@ -110,7 +110,7 @@ export default function AboutPage() {
 
         {/* CONTENT */}
         <div className="mx-auto max-w-6xl px-6 md:px-12 pt-20 md:pt-32 pb-32 md:pb-48 relative z-10">
-          
+
           <div ref={heroRef} className="relative mb-32 md:mb-40 flex flex-col items-center">
             <h2 className={cn("scrawl-top text-[#f3eee4] text-5xl md:text-9xl lowercase mb-[-1.5rem] md:mb-[-4rem] mr-[20%] md:mr-[30%] rotate-[-5deg] z-20", runWild.className)}>
               the big fat
@@ -159,8 +159,8 @@ export default function AboutPage() {
       </div>
 
       {/* --- BRANDED LOGO ANIMATION SECTION --- */}
-    
-      
+
+
       {/* CTA SECTION */}
       <section className="bg-black rounded-[30px] md:rounded-[60px] lg:rounded-[80px] py-20 md:py-32 border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
         <div className="mx-auto max-w-3xl px-6 text-center space-y-8 md:space-y-10">
@@ -174,13 +174,13 @@ export default function AboutPage() {
             <>
               <p className={cn("text-4xl md:text-7xl lowercase text-[#ffb300] leading-none", runWild.className)}>get 10% off your first order</p>
               <form onSubmit={handleEmailSubmit} className="flex flex-col md:flex-row gap-4 pt-4 max-w-xl mx-auto">
-                <input 
+                <input
                   required
-                  type="email" 
-                  placeholder="Email" 
-                  className={cn("flex-1 h-14 md:h-16 px-8 rounded-full border-2 border-[#f3eee4] bg-transparent text-[#f3eee4] text-lg outline-none placeholder:text-[#f3eee4]/50 focus:bg-[#f3eee4]/10 transition-all", utoBold.className)} 
+                  type="email"
+                  placeholder="Email"
+                  className={cn("flex-1 h-14 md:h-16 px-8 rounded-full border-2 border-[#f3eee4] bg-transparent text-[#f3eee4] text-lg outline-none placeholder:text-[#f3eee4]/50 focus:bg-[#f3eee4]/10 transition-all", utoBold.className)}
                 />
-                <Button 
+                <Button
                   disabled={emailStatus === 'sending'}
                   className={cn("h-14 md:h-16 px-12 rounded-full bg-[#f20028] text-[#f3eee4] font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all disabled:opacity-50", utoBold.className)}
                 >

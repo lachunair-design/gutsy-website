@@ -18,12 +18,14 @@ import {
   removeFromCart as removeFromCartApi,
 } from './index';
 
-const CART_ID_KEY = 'gutsy-cart-id';
+// BRANDED CONSTANTS
+const CART_ID_KEY = 'gutsy-bag-id'; // Changed to 'bag' to match 'Your Bag' aesthetic
 
 interface CartContextType {
   cart: ShopifyCart | null;
   isLoading: boolean;
   isOpen: boolean;
+  isAdding: boolean; // Added to trigger "floating" button animations
   openCart: () => void;
   closeCart: () => void;
   addToCart: (variantId: string, quantity?: number) => Promise<void>;
@@ -36,8 +38,10 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<ShopifyCart | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdding, setIsAdding] = useState(false); // New Gutsy adding state
   const [isOpen, setIsOpen] = useState(false);
 
+  // Initialize the Gutsy Bag
   useEffect(() => {
     async function initializeCart() {
       const cartId = localStorage.getItem(CART_ID_KEY);
@@ -51,7 +55,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             return;
           }
         } catch (error) {
-          console.error('Error fetching cart:', error);
+          console.error('GUTSY Error: Fetching bag failed', error);
         }
       }
 
@@ -60,7 +64,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         localStorage.setItem(CART_ID_KEY, newCart.id);
         setCart(newCart);
       } catch (error) {
-        console.error('Error creating cart:', error);
+        console.error('GUTSY Error: Creating bag failed', error);
       }
 
       setIsLoading(false);
@@ -76,17 +80,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
     async (variantId: string, quantity: number = 1) => {
       if (!cart) return;
 
-      setIsLoading(true);
+      setIsAdding(true); // Trigger loading/floating state for Gutsy UI
       try {
         const updatedCart = await addToCartApi(cart.id, [
           { merchandiseId: variantId, quantity },
         ]);
         setCart(updatedCart);
-        setIsOpen(true);
+        
+        // Brief delay before opening to allow "Add to Bag" animations to complete
+        setTimeout(() => {
+          setIsOpen(true);
+          setIsAdding(false);
+        }, 500);
+
       } catch (error) {
-        console.error('Error adding to cart:', error);
+        console.error('GUTSY Error: Could not add to bag', error);
+        setIsAdding(false);
       }
-      setIsLoading(false);
     },
     [cart]
   );
@@ -107,7 +117,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           setCart(updatedCart);
         }
       } catch (error) {
-        console.error('Error updating cart:', error);
+        console.error('GUTSY Error: Update failed', error);
       }
       setIsLoading(false);
     },
@@ -123,7 +133,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         const updatedCart = await removeFromCartApi(cart.id, [lineId]);
         setCart(updatedCart);
       } catch (error) {
-        console.error('Error removing from cart:', error);
+        console.error('GUTSY Error: Removal failed', error);
       }
       setIsLoading(false);
     },
@@ -134,6 +144,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     () => ({
       cart,
       isLoading,
+      isAdding,
       isOpen,
       openCart,
       closeCart,
@@ -141,7 +152,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       updateItemQuantity,
       removeItem,
     }),
-    [cart, isLoading, isOpen, openCart, closeCart, addToCart, updateItemQuantity, removeItem]
+    [cart, isLoading, isAdding, isOpen, openCart, closeCart, addToCart, updateItemQuantity, removeItem]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
@@ -150,7 +161,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 export function useCart() {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error('GUTSY Hook Error: useCart must be used within a CartProvider');
   }
   return context;
 }

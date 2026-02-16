@@ -1,16 +1,13 @@
-'use client';
-
-import { useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ProductCard } from '@/components/product/product-card';
+import { ProductDetail } from '@/components/product/product-detail';
+import { MarqueeRail } from '@/components/marquee-rail';
+import { EmailCapture } from '@/components/email-capture';
+import { getProducts } from '@/lib/shopify';
 import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
-import gsap from 'gsap';
-import { Observer } from 'gsap/dist/Observer';
-import { motion } from 'framer-motion';
 
 // FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -18,86 +15,26 @@ const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(Observer);
-}
+export const revalidate = 60;
 
-const mockProducts: ShopifyProduct[] = [
-  {
-    id: '1',
-    handle: 'vanilla-calm',
-    title: 'Vanilla Calm',
-    description: 'Enzymatically pre-digested protein with Reishi.',
-    descriptionHtml: '<p>Enzymatically pre-digested protein with Reishi.</p>',
-    availableForSale: true,
-    featuredImage: null,
-    images: [],
-    priceRange: {
-      minVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-      maxVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-    },
-    variants: [{ id: 'v1', title: 'Default', availableForSale: true, selectedOptions: [], price: { amount: '185.00', currencyCode: 'AED' }, compareAtPrice: null }],
-    tags: ['protein'],
-    productType: 'Protein',
-  },
-  {
-    id: '2',
-    handle: 'cacao-boost',
-    title: 'Cacao Boost',
-    description: 'Enzymatically pre-digested protein with Maca.',
-    descriptionHtml: '<p>Enzymatically pre-digested protein with Maca.</p>',
-    availableForSale: true,
-    featuredImage: null,
-    images: [],
-    priceRange: {
-      minVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-      maxVariantPrice: { amount: '185.00', currencyCode: 'AED' },
-    },
-    variants: [{ id: 'v2', title: 'Default', availableForSale: true, selectedOptions: [], price: { amount: '185.00', currencyCode: 'AED' }, compareAtPrice: null }],
-    tags: ['protein'],
-    productType: 'Protein',
+export default async function HomePage() {
+  let products: ShopifyProduct[] = [];
+  try {
+    products = await getProducts(20);
+  } catch (error) {
+    console.error('Error fetching products:', error);
   }
-];
 
-export default function HomePage() {
-  const railRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const scrollingText = gsap.utils.toArray('.rail h4') as HTMLElement[];
-      if (!scrollingText.length) return;
-
-      const tl = horizontalLoop(scrollingText, {
-        repeat: -1,
-        paddingRight: 50,
-        speed: 1.5,
-      });
-
-      Observer.create({
-        onChangeY(self) {
-          let factor = 2.5;
-          if (self.deltaY < 0) {
-            factor *= -1;
-          } 
-          gsap.timeline({
-            defaults: { ease: "none" }
-          })
-          .to(tl, { timeScale: factor * 2.5, duration: 0.2, overwrite: true })
-          .to(tl, { timeScale: factor / 2.5, duration: 1 }, "+=0.3");
-        }
-      });
-    }, railRef);
-
-    return () => ctx.revert();
-  }, []);
+  // Use the first product for the inline PDP — it should be the main GUTSY Protein
+  const mainProduct = products[0] || null;
 
   return (
-    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] overflow-x-hidden", utoMedium.className)}>
-      
+    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] [overflow-x:clip]", utoMedium.className)}>
+
       {/* HERO SECTION */}
       <section className="relative">
         <div className="bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center">
-          
+
           {/* BACKGROUND DECORATION */}
           <div className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none">
              <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-150 md:scale-110 translate-x-1/4" priority />
@@ -105,7 +42,7 @@ export default function HomePage() {
 
           <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 w-full py-16 md:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
+
               {/* LEFT: TEXT CONTENT */}
               <div className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1">
                 <h2 className={cn("text-[#f3eee4] text-4xl md:text-7xl lowercase mb-[-0.5rem] md:mb-[-2rem] ml-2 md:ml-4 rotate-[-3deg]", runWild.className)}>
@@ -118,7 +55,7 @@ export default function HomePage() {
                   No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
                 </p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Link href="/products" className="w-full sm:w-auto">
+                  <Link href="#lineup" className="w-full sm:w-auto">
                     <Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
                       Shop Now
                     </Button>
@@ -133,20 +70,17 @@ export default function HomePage() {
 
               {/* RIGHT: PRODUCT IMAGE */}
               <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-                <motion.div 
-                  initial={{ opacity: 0, y: 20, rotate: -5 }}
-                  animate={{ opacity: 1, y: 0, rotate: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                <div
                   className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]"
                 >
-                  <Image 
-                    src="/images/floating-package.png" 
-                    alt="GUTSY Protein Pouches" 
-                    fill 
+                  <Image
+                    src="/images/floating-package.png"
+                    alt="GUTSY Protein Pouches"
+                    fill
                     className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]"
-                    priority 
+                    priority
                   />
-                </motion.div>
+                </div>
               </div>
 
             </div>
@@ -168,7 +102,7 @@ export default function HomePage() {
 
       {/* SCIENCE SECTION */}
       <section className="py-8 md:py-16">
-        <div className="mx-auto max-w-7xl bg-white rounded-[30px] md:rounded-[60px] border-4 border-black overflow-hidden shadow-[10px_10px_0px_0px_#f20028] md:shadow-[15px_15px_0px_0px_#f20028]">
+        <div className="mx-auto max-w-7xl bg-white rounded-[30px] md:rounded-[60px] border-4 border-black overflow-hidden shadow-[6px_6px_0px_0px_#f20028] sm:shadow-[10px_10px_0px_0px_#f20028] lg:shadow-[15px_15px_0px_0px_#f20028]">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="p-8 md:p-16 space-y-6 md:space-y-8 border-b-4 lg:border-b-0 lg:border-r-4 border-black bg-[#f3eee4]">
               <h2 className={cn("text-4xl md:text-8xl uppercase leading-none text-black", utoBlack.className)}>the science <br className="hidden md:block" /> of light</h2>
@@ -186,23 +120,23 @@ export default function HomePage() {
                   <div className="h-3 md:h-4 w-full bg-white/10 rounded-full overflow-hidden"><div className="h-full bg-white w-full animate-pulse" /></div>
                </div>
                <div className="w-full">
-                  <p className={cn("text-[#f20028] text-4xl lowercase mb-4", runWild.className)}>gutsy pre-digested</p>
+                  <p className={cn("text-[#f20028] text-3xl md:text-4xl lowercase mb-4", runWild.className)}>gutsy pre-digested</p>
                   <div className="h-3 md:h-4 w-full bg-[#f20028]/20 rounded-full overflow-hidden"><div className="h-full bg-[#f20028] w-1/4 animate-bounce" /></div>
                </div>
-               <Link href="/about" className="w-full sm:w-auto"><Button className={cn("w-full bg-[#f20028] text-white rounded-full px-10 py-6 uppercase font-bold text-lg hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Full Backstory</Button></Link>
+               <Link href="/about" className="w-full sm:w-auto"><Button className={cn("w-full bg-[#f20028] text-white rounded-full px-10 py-6 h-14 md:h-16 uppercase font-bold text-lg hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Full Backstory</Button></Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* WHAT'S INSIDE SECTION */}
-      <section className="py-16 md:py-24 px-4 md:px-12 bg-white rounded-[30px] md:rounded-[60px] border-4 border-black shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
+      <section className="py-16 md:py-24 px-4 md:px-12 bg-white rounded-[30px] md:rounded-[60px] border-4 border-black shadow-[6px_6px_0px_0px_#ffb300] sm:shadow-[10px_10px_0px_0px_#ffb300] lg:shadow-[15px_15px_0px_0px_#ffb300]">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <div className="text-center mb-12 md:mb-16 px-4">
             <h2 className={cn("text-5xl md:text-8xl uppercase text-black leading-none", utoBlack.className)}>FIVE CORE INGREDIENTS.</h2>
             <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase", runWild.className)}>That&apos;s it.</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-black w-full">
             {[
               { title: "Hydrolyzed Pea & Rice Protein", desc: "Pre-broken down protein molecules. Your stomach doesn't have to work overtime." },
@@ -221,26 +155,46 @@ export default function HomePage() {
       </section>
 
       {/* MARQUEE RAIL */}
-      <section ref={railRef} className="py-8 md:py-12 bg-black -mx-4 md:-mx-8 overflow-hidden border-y-4 border-black">
-        <div className="rail flex whitespace-nowrap py-2 md:py-4">
-          {[...Array(10)].map((_, i) => (
-            <h4 key={i} className={cn("text-[#f3eee4] text-4xl md:text-8xl uppercase tracking-tighter inline-block px-4 md:px-8", utoBlack.className)}>
-              FEELS LIGHT <span className="text-[#f20028]">—</span> NO BLOAT <span className="text-[#ffb300]">—</span> PRE-DIGESTED <span className="text-[#f20028]">—</span>
-            </h4>
-          ))}
-        </div>
-      </section>
+      <div className="-mx-3 md:-mx-6 lg:-mx-8">
+        <MarqueeRail />
+      </div>
 
-      {/* LINEUP */}
-      <section className="py-12 md:py-16 px-4">
-        <div className="mx-auto max-w-7xl">
+      {/* LINEUP — Full product detail with variant selector + subscribe */}
+      <section id="lineup" className="py-12 md:py-16 scroll-mt-28">
+        <div className="mx-auto max-w-7xl px-2">
           <div className="flex flex-col md:flex-row items-center md:items-baseline gap-2 md:gap-4 mb-10 md:mb-16 text-black text-center md:text-left">
             <h2 className={cn("text-5xl md:text-8xl uppercase tracking-tight", utoBlack.className)}>The Lineup</h2>
             <p className={cn("text-4xl md:text-5xl text-[#f20028] lowercase", runWild.className)}>grab yours</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {mockProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+          {mainProduct ? (
+            <ProductDetail product={mainProduct} inline />
+          ) : (
+            <div className="text-center py-12 md:py-16">
+              <p className={cn("text-4xl md:text-5xl lowercase text-black/20 mb-6", runWild.className)}>
+                products loading soon
+              </p>
+              <p className="text-base md:text-lg opacity-60 font-medium px-6">
+                Check back shortly — we&apos;re stocking the shelves.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* SOCIAL PROOF SECTION */}
+      <section className="py-16 md:py-24 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto bg-[#ffb300] rounded-[30px] md:rounded-[60px] p-8 md:p-12 border-4 border-black shadow-[6px_6px_0px_0px_#000000] sm:shadow-[10px_10px_0px_0px_#000000] lg:shadow-[15px_15px_0px_0px_#000000]">
+          <h2 className={cn("text-4xl md:text-7xl uppercase text-black text-center mb-10 md:mb-16 leading-tight", utoBlack.className)}>WHAT PEOPLE SAY</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 text-black">
+            {[
+              { quote: "Super light. I can finally have protein without feeling heavy.", author: "Beta Tester, Dubai" },
+              { quote: "No bloating. First protein powder that doesn't make me regret it.", author: "Beta Tester, Abu Dhabi" },
+              { quote: "I was skeptical but this actually works. Feels completely different.", author: "Beta Tester, Dubai" }
+            ].map((t, i) => (
+              <div key={i} className="flex flex-col space-y-3 text-center md:text-left">
+                <p className={cn("text-3xl md:text-4xl lowercase leading-tight", runWild.className)}>&quot;{t.quote}&quot;</p>
+                <p className={cn("text-xs md:text-sm uppercase tracking-widest font-black", utoBold.className)}>— {t.author}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -255,10 +209,10 @@ export default function HomePage() {
             <div className="text-[#ffb300]">GUTSY</div>
           </div>
           {[
-            ["Massive molecules your gut struggles with", "Pre-digested into tiny pieces"],
-            ["Gums and thickeners that cause bloating", "Zero fillers"],
-            ["15+ ingredients you can't pronounce", "5 core ingredients"],
-            ["\"Gut-friendly\" claims with no science", "Actual enzymatic pre-digestion"]
+            ["Massive molecules gut struggles with", "Pre-digested tiny pieces"],
+            ["Gums and thickeners bloat", "Zero fillers"],
+            ["15+ ingredients unknown", "5 core ingredients"],
+            ["Claims with no science", "Enzymatic science"]
           ].map((row, i) => (
             <div key={i} className="grid grid-cols-2 border-b-2 border-black/10 last:border-b-0 py-6 md:py-8 px-4 md:px-8 text-sm md:text-lg">
               <div className="opacity-50 pr-2 md:pr-4">{row[0]}</div>
@@ -268,67 +222,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* EMAIL CAPTURE */}
+      <section className="px-4 md:px-6 max-w-5xl mx-auto">
+        <EmailCapture />
+      </section>
+
       {/* FOOTER CTA */}
       <section className="pb-8 px-4">
-        <div className="bg-black rounded-[30px] md:rounded-[80px] py-20 md:py-32 px-6 text-center border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#f20028] md:shadow-[20px_20px_0px_0px_#f20028]">
+        <div className="bg-black rounded-[30px] md:rounded-[80px] py-20 md:py-32 px-6 text-center border-4 border-[#f3eee4] shadow-[6px_6px_0px_0px_#f20028] sm:shadow-[10px_10px_0px_0px_#f20028] lg:shadow-[20px_20px_0px_0px_#f20028]">
           <h2 className={cn("text-4xl md:text-9xl uppercase text-[#f3eee4] leading-[1.1] mb-8 px-4", utoBlack.className)}>Ready to <br /> transform?</h2>
           <p className={cn("text-4xl md:text-5xl text-[#ffb300] lowercase mb-10 px-4", runWild.className)}>Join thousands of humans who trust their gut.</p>
-          <Link href="/products" className="inline-block w-full sm:w-auto"><Button className={cn("w-full sm:w-auto h-16 md:h-20 px-12 md:px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Shop All Products</Button></Link>
+          <Link href="#lineup" className="inline-block w-full sm:w-auto"><Button className={cn("w-full sm:w-auto h-16 md:h-20 px-12 md:px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Shop Now</Button></Link>
         </div>
       </section>
     </div>
   );
-}
-
-// GSAP HELPER FUNCTION
-function horizontalLoop(items: HTMLElement[], config: any) {
-  let tl = gsap.timeline({
-    repeat: config.repeat,
-    paused: config.paused,
-    defaults: { ease: "none" },
-    onReverseComplete: () => {
-      if (tl.duration()) {
-        tl.totalTime(tl.rawTime() + tl.duration() * 100);
-      }
-    }
-  });
-  
-  let length = items.length,
-    startX = items[0].offsetLeft,
-    times: number[] = [],
-    widths: number[] = [],
-    xPercents: number[] = [],
-    curIndex = 0,
-    pixelsPerSecond = (config.speed || 1) * 100,
-    snap = config.snap === false ? (v: number) => v : gsap.utils.snap(config.snap || 1),
-    totalWidth: number,
-    curX: number,
-    distanceToStart: number,
-    distanceToLoop: number,
-    item: HTMLElement,
-    i: number;
-
-  gsap.set(items, {
-    xPercent: (i, el) => {
-      let w = widths[i] = parseFloat(gsap.getProperty(el, "width", "px") as string);
-      xPercents[i] = snap(parseFloat(gsap.getProperty(el, "x", "px") as string) / w * 100 + (gsap.getProperty(el, "xPercent") as number));
-      return xPercents[i];
-    }
-  });
-
-  gsap.set(items, { x: 0 });
-  totalWidth = items[length - 1].offsetLeft + xPercents[length - 1] / 100 * widths[length - 1] - startX + items[length - 1].offsetWidth * (gsap.getProperty(items[length - 1], "scaleX") as number) + (parseFloat(config.paddingRight) || 0);
-
-  for (i = 0; i < length; i++) {
-    item = items[i];
-    curX = xPercents[i] / 100 * widths[i];
-    distanceToStart = item.offsetLeft + curX - startX;
-    distanceToLoop = distanceToStart + widths[i] * (gsap.getProperty(item, "scaleX") as number);
-    tl.to(item, { xPercent: snap((curX - distanceToLoop) / widths[i] * 100), duration: distanceToLoop / pixelsPerSecond }, 0)
-      .fromTo(item, { xPercent: snap((curX - distanceToLoop + totalWidth) / widths[i] * 100) }, { xPercent: xPercents[i], duration: (curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond, immediateRender: false }, distanceToLoop / pixelsPerSecond)
-      .add("label" + i, distanceToStart / pixelsPerSecond);
-    times[i] = distanceToStart / pixelsPerSecond;
-  }
-
-  return tl;
 }
