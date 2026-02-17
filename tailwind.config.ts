@@ -33,6 +33,21 @@ const config: Config = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         uto: ['Uto', 'system-ui', 'sans-serif'],
       },
+      keyframes: {
+        slideUp: {
+          '0%': { transform: 'translateY(100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        'slide-up': 'slideUp 1s ease-out forwards',
+        'fade-in': 'fadeIn 1s ease-out forwards',
+        'pulse-slow': 'pulse 8s ease-in-out infinite',
+      },
     },
   },
   plugins: [],
