@@ -30,191 +30,187 @@ export default async function HomePage() {
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen selection:bg-[#ffb300] [overflow-x:clip]", utoMedium.className)}>
 
-      {/* HERO SECTION - Parallax & Kinetic Typography */}
-      <section className="relative h-[95vh] flex items-center justify-center overflow-hidden">
+      {/* HERO SECTION - Rhode Inspired: Wide Tracking & Airy Layout */}
+      <section className="relative h-[100vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/images/MARATHON.png" 
             alt="Gutsy Background" 
             fill 
-            className="object-cover opacity-25 scale-110 motion-safe:animate-[pulse_8s_ease-in-out_infinite]" 
+            className="object-cover opacity-[0.15] scale-105 motion-safe:animate-[pulse_10s_ease-in-out_infinite]" 
             priority 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f3eee4] via-transparent to-transparent" />
         </div>
 
         <div className="relative z-10 w-full max-w-7xl px-6 text-center">
-          <div className="overflow-hidden mb-2">
-            <h2 className={cn("text-[#f20028] text-4xl md:text-7xl lowercase motion-safe:animate-[slideUp_1s_ease-out]", runWild.className)}>
+          <div className="mb-4">
+            <h2 className={cn("text-[#f20028] text-4xl md:text-6xl lowercase tracking-tight motion-safe:animate-fade-in", runWild.className)}>
               finally, a protein that
             </h2>
           </div>
-          <div className="overflow-hidden mb-8">
-            <h1 className={cn("text-black text-7xl md:text-[150px] lg:text-[190px] leading-[0.75] uppercase tracking-tighter motion-safe:animate-[slideUp_1.2s_ease-out]", utoBlack.className)}>
+          <div className="mb-10">
+            <h1 className={cn("text-black text-7xl md:text-[140px] lg:text-[170px] leading-[0.8] uppercase tracking-[-0.05em] motion-safe:animate-slide-up", utoBlack.className)}>
               FEELS LIGHT
             </h1>
           </div>
-          <p className="text-black text-lg md:text-2xl max-w-2xl mx-auto font-bold uppercase italic leading-tight mb-12 opacity-0 motion-safe:animate-[fadeIn_1s_ease-out_1s_forwards]">
-            No bloat. No brick in your stomach. <br/> Just enzymatically pre-digested protein.
+          <p className="text-black/80 text-sm md:text-lg max-w-lg mx-auto font-bold uppercase tracking-[0.2em] leading-relaxed mb-12 opacity-0 motion-safe:animate-[fadeIn_1s_ease-out_1s_forwards] italic">
+            Enzymatically pre-digested. <br/> Zero bloat. Pure Bioavailability.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 motion-safe:animate-[fadeIn_1s_ease-out_1.2s_forwards]">
+          <div className="opacity-0 motion-safe:animate-[fadeIn_1s_ease-out_1.2s_forwards]">
             <Link href="#lineup">
-              <Button className={cn("h-16 px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl font-bold hover:bg-black hover:scale-105 transition-all duration-300 shadow-xl shadow-red-500/20", utoBold.className)}>
-                Shop Now
+              <Button className={cn("h-14 px-14 rounded-full bg-black text-[#f3eee4] text-sm uppercase tracking-widest font-black hover:bg-[#f20028] transition-all duration-500", utoBold.className)}>
+                Shop Collection
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* MARQUEE - Interactive Hover */}
-      <div className="border-y border-black/5 bg-white py-6 cursor-pointer group">
+      {/* MARQUEE - Soft Tonal Separator */}
+      <div className="border-y border-black/5 bg-white/50 backdrop-blur-sm py-4 group">
         <MarqueeRail />
       </div>
 
-      {/* THE PROBLEM - High Contrast Storytelling */}
-      <section className="py-24 md:py-40 px-6 md:px-12 bg-black text-[#f3eee4] relative">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
-          <div className="relative group">
-            {/* Placeholder for high-quality lifestyle video/image */}
-            <div className="aspect-[4/5] bg-[#1a1a1a] rounded-[40px] overflow-hidden relative border border-white/10">
+      {/* THE PROBLEM - Tonal Layering (Rhode signature) */}
+      <section className="py-24 md:py-40 px-6 md:px-12 bg-[#0a0a0a] text-[#f3eee4] relative overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-5 relative group">
+            <div className="aspect-[3/4] bg-neutral-900 rounded-[60px] overflow-hidden relative shadow-2xl">
                <Image 
                 src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&w=2069&auto=format&fit=crop" 
                 alt="Movement lifestyle" 
                 fill 
-                className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-1000"
+                className="object-cover opacity-70 group-hover:scale-105 transition-transform duration-[2s]"
                />
-               <div className="absolute inset-0 flex items-center justify-center p-8">
-                  <h2 className={cn("text-5xl md:text-8xl uppercase text-[#f20028] leading-[0.8] text-center", utoBlack.className)}>
-                    WHY MOST <br /> PROTEIN SUCKS
-                  </h2>
-               </div>
+               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             </div>
           </div>
-          <div className="space-y-10">
-            <p className={cn("text-5xl md:text-7xl text-[#ffb300] lowercase", runWild.className)}>We fixed it.</p>
-            <div className="space-y-8 text-xl md:text-3xl leading-snug opacity-90 font-medium">
+          <div className="lg:col-span-7 space-y-12">
+            <h2 className={cn("text-6xl md:text-9xl uppercase text-[#f20028] leading-[0.85] tracking-tighter", utoBlack.className)}>
+              WHY MOST <br /> PROTEIN SUCKS
+            </h2>
+            <div className="h-px w-24 bg-[#ffb300]" />
+            <div className="space-y-8 text-xl md:text-3xl leading-snug opacity-90 font-medium max-w-2xl">
               <p>Regular protein powder makes you bloated. That heavy, uncomfortable feeling after every shake isn&apos;t normal.</p>
-              <p>It&apos;s because your stomach is struggling to break down massive protein molecules. Most brands add gums and fillers that make it worse.</p>
+              <p className={cn("text-5xl md:text-7xl text-[#ffb300] lowercase", runWild.className)}>We fixed it.</p>
+              <p className="text-base md:text-lg opacity-60 uppercase tracking-widest leading-relaxed italic">
+                It&apos;s because your stomach is struggling to break down massive protein molecules. Most brands add gums and fillers that make it worse.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SCIENCE SECTION -  */}
-      <section className="py-24 bg-white">
+      {/* SCIENCE SECTION - Interactive Fluid Cards */}
+      <section className="py-32 bg-white relative">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-             <h2 className={cn("text-7xl md:text-[120px] uppercase leading-none text-black", utoBlack.className)}>the science <br className="md:hidden" /> of light</h2>
-             <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase mt-4", runWild.className)}>how pre-digestion skips the bloat</p>
+          <div className="flex flex-col md:flex-row items-baseline justify-between mb-24 border-b border-black/5 pb-10">
+             <h2 className={cn("text-6xl md:text-[100px] uppercase leading-none text-black tracking-tighter", utoBlack.className)}>the science</h2>
+             <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase", runWild.className)}>of light</p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="p-10 bg-[#f3eee4] rounded-[40px] space-y-6 hover:-translate-y-2 transition-transform">
-              <span className="w-12 h-12 flex items-center justify-center rounded-full bg-black text-white font-bold">1</span>
-              <h3 className={cn("text-2xl uppercase", utoBlack.className)}>Most protein is a &quot;brick.&quot;</h3>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="p-12 bg-[#f3eee4] rounded-[60px] space-y-8 group hover:bg-black hover:text-white transition-all duration-700 shadow-sm hover:shadow-2xl">
+              <p className="text-xs uppercase tracking-[0.3em] font-black opacity-40">Phase 01</p>
+              <h3 className={cn("text-3xl uppercase leading-none", utoBlack.className)}>The Brick</h3>
               <p className="opacity-70 leading-relaxed font-bold italic uppercase text-sm">Regular molecules are massive chains. Your gut works overtime to break them down.</p>
             </div>
-            <div className="p-10 bg-[#f20028] text-white rounded-[40px] space-y-6 hover:-translate-y-2 transition-transform lg:translate-y-12">
-              <span className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#f20028] font-bold">2</span>
-              <h3 className={cn("text-2xl uppercase", utoBlack.className)}>We snip them early.</h3>
+            <div className="p-12 bg-[#f20028] text-white rounded-[60px] space-y-8 group hover:scale-[1.02] transition-all duration-700 shadow-xl shadow-red-500/20 lg:-translate-y-6">
+              <p className="text-xs uppercase tracking-[0.3em] font-black opacity-60">Phase 02</p>
+              <h3 className={cn("text-3xl uppercase leading-none", utoBlack.className)}>The Snip</h3>
               <p className="opacity-90 leading-relaxed font-bold italic uppercase text-sm">Enzymes break those chains into tiny pieces before you take a sip. Instant bioavailability.</p>
             </div>
-            <div className="p-10 bg-[#ffb300] text-black rounded-[40px] space-y-6 hover:-translate-y-2 transition-transform">
-              <span className="w-12 h-12 flex items-center justify-center rounded-full bg-black text-[#ffb300] font-bold">3</span>
-              <h3 className={cn("text-2xl uppercase", utoBlack.className)}>Zero Gravity Gut.</h3>
+            <div className="p-12 bg-[#ffb300] text-black rounded-[60px] space-y-8 group hover:bg-black hover:text-[#ffb300] transition-all duration-700 shadow-sm">
+              <p className="text-xs uppercase tracking-[0.3em] font-black opacity-40">Phase 03</p>
+              <h3 className={cn("text-3xl uppercase leading-none", utoBlack.className)}>Lightness</h3>
               <p className="opacity-80 leading-relaxed font-bold italic uppercase text-sm">Because the work is already done, your body absorbs it effortlessly. No bloat, just fuel.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHAT'S INSIDE SECTION - Glossier Inspired Product Grid */}
+      {/* WHAT'S INSIDE SECTION - Rhode Editorial Layout */}
       <section className="py-24 px-6 bg-[#f3eee4]">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-black/10 border border-black/10 rounded-[40px] overflow-hidden shadow-2xl">
-            <div className="bg-white p-12 md:p-24 flex flex-col justify-center">
-                <h2 className={cn("text-6xl md:text-8xl uppercase text-black leading-[0.85] mb-6", utoBlack.className)}>FIVE CORE <br/> INGREDIENTS.</h2>
-                <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase mb-12", runWild.className)}>That&apos;s it.</p>
-                <div className="space-y-12">
+          <div className="bg-white rounded-[80px] overflow-hidden shadow-sm border border-black/5 flex flex-col lg:flex-row min-h-[700px]">
+            <div className="lg:w-1/2 p-12 md:p-24 flex flex-col justify-center">
+                <div className="mb-12">
+                  <h2 className={cn("text-6xl md:text-8xl uppercase text-black leading-[0.8] mb-4 tracking-tighter", utoBlack.className)}>CORE <br/> ELEMENTS.</h2>
+                  <p className={cn("text-4xl md:text-5xl text-[#f20028] lowercase", runWild.className)}>just five.</p>
+                </div>
+                <div className="space-y-10">
                    {[
-                    { title: "Hydrolyzed Pea & Rice", desc: "Pre-broken down protein." },
+                    { title: "Hydrolyzed Protein", desc: "Pre-broken down molecules." },
                     { title: "Actazin Kiwifruit", desc: "Natural enzyme support." },
-                    { title: "Functional Adaptogens", desc: "Reishi or Maca." },
-                    { title: "Coconut & Monk Fruit", desc: "Clean, natural texture." }
+                    { title: "Functional Adaptogens", desc: "Reishi or Maca root." },
+                    { title: "Clean Sweeteners", desc: "Coconut milk & Monk fruit." }
                    ].map((ing, i) => (
-                    <div key={i} className="flex items-start gap-6 group">
-                      <div className="w-2 h-2 rounded-full bg-[#f20028] mt-2 group-hover:scale-150 transition-transform" />
-                      <div>
-                        <h4 className={cn("text-xl uppercase", utoBlack.className)}>{ing.title}</h4>
-                        <p className="opacity-50 text-sm font-bold uppercase tracking-widest">{ing.desc}</p>
-                      </div>
+                    <div key={i} className="flex items-center justify-between border-b border-black/5 pb-4 group cursor-default">
+                      <h4 className={cn("text-lg md:text-xl uppercase tracking-tight group-hover:text-[#f20028] transition-colors", utoBlack.className)}>{ing.title}</h4>
+                      <p className="opacity-40 text-[10px] md:text-xs font-black uppercase tracking-widest">{ing.desc}</p>
                     </div>
                    ))}
                 </div>
             </div>
-            <div className="relative min-h-[500px] bg-black">
+            <div className="lg:w-1/2 relative bg-black">
               <Image 
                 src="https://images.unsplash.com/photo-1615485290382-441e4d0c9cb5?q=80&w=1974&auto=format&fit=crop" 
                 alt="Clean ingredients" 
                 fill 
-                className="object-cover opacity-80"
+                className="object-cover opacity-90 transition-all duration-[3s] hover:scale-110"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* LINEUP - Gisou Inspired Full Screen PDP */}
-      <section id="lineup" className="py-24 bg-white scroll-mt-20">
+      {/* LINEUP - High-End Product Grid */}
+      <section id="lineup" className="py-32 bg-white scroll-mt-20">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-4">
-            <div className="text-left">
+          <div className="flex flex-col md:flex-row items-baseline justify-between mb-24 gap-4">
                <h2 className={cn("text-7xl md:text-9xl uppercase tracking-tighter leading-none", utoBlack.className)}>The Lineup</h2>
                <p className={cn("text-4xl md:text-5xl text-[#f20028] lowercase", runWild.className)}>grab yours</p>
-            </div>
-            <div className="text-right hidden md:block">
-               <p className="text-xs uppercase tracking-[0.3em] font-black opacity-30">SCROLL TO DISCOVER — 01 / 02</p>
-            </div>
           </div>
           {mainProduct ? (
-            <div className="hover:shadow-3xl transition-shadow duration-700">
+            <div className="rounded-[80px] bg-[#f3eee4]/50 p-6 md:p-20 hover:bg-[#f3eee4] transition-colors duration-700">
               <ProductDetail product={mainProduct} inline />
             </div>
           ) : (
-            <div className="text-center py-24 opacity-10">
-              <p className={cn("text-5xl lowercase", runWild.className)}>products loading...</p>
+            <div className="text-center py-24 opacity-10 uppercase tracking-widest font-black text-xs">
+              <p>Restocking shelves</p>
             </div>
           )}
         </div>
       </section>
 
-      {/* SOCIAL PROOF - Interactive Cards */}
-      <section className="py-24 px-6 bg-[#f3eee4]">
+      {/* SOCIAL PROOF - Tonal Minimalist Quotes */}
+      <section className="py-32 px-6 bg-[#f3eee4]">
         <div className="max-w-7xl mx-auto">
-          <h2 className={cn("text-5xl md:text-[100px] uppercase text-black text-center mb-20 leading-none", utoBlack.className)}>WHAT PEOPLE SAY</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
             {[
               { quote: "Super light. I can finally have protein without feeling heavy.", author: "Beta Tester, Dubai" },
               { quote: "No bloating. First protein powder that doesn't make me regret it.", author: "Beta Tester, Abu Dhabi" },
               { quote: "I was skeptical but this actually works. Feels completely different.", author: "Beta Tester, Dubai" }
             ].map((t, i) => (
-              <div key={i} className="bg-white p-12 rounded-[40px] border border-black/5 flex flex-col justify-between hover:bg-black group transition-colors duration-500">
-                <p className={cn("text-3xl md:text-4xl lowercase leading-tight group-hover:text-[#f3eee4] transition-colors", runWild.className)}>&quot;{t.quote}&quot;</p>
-                <p className={cn("text-xs md:text-sm uppercase tracking-widest font-black mt-10 group-hover:text-[#f20028] transition-colors", utoBold.className)}>— {t.author}</p>
+              <div key={i} className="flex flex-col space-y-8">
+                <div className="flex gap-1 text-[#f20028]">
+                  {[...Array(5)].map((_, i) => <span key={i} className="text-sm">★</span>)}
+                </div>
+                <p className={cn("text-3xl md:text-4xl lowercase leading-tight text-black", runWild.className)}>&quot;{t.quote}&quot;</p>
+                <p className="text-[10px] uppercase tracking-[0.4em] font-black opacity-30">— {t.author}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* COMPARISON TABLE - Clean & Minimal */}
-      <section className="py-24 px-6 max-w-5xl mx-auto">
-        <h2 className={cn("text-6xl md:text-9xl uppercase text-black text-center mb-16 leading-[0.8]", utoBlack.className)}>HOW WE&apos;RE <br/> DIFFERENT</h2>
-        <div className="overflow-hidden bg-white border border-black/10 rounded-[40px] shadow-sm">
-          <div className="grid grid-cols-2 bg-black text-[#f3eee4] py-8 px-8 md:px-12 text-xs md:text-sm uppercase tracking-[0.3em] font-black">
-            <div>Regular</div>
-            <div className="text-[#ffb300]">GUTSY</div>
+      {/* COMPARISON - Rhode Style Clean Comparison */}
+      <section className="py-32 px-6 max-w-5xl mx-auto">
+        <h2 className={cn("text-6xl md:text-9xl uppercase text-black text-center mb-24 leading-[0.8] tracking-tighter", utoBlack.className)}>HOW WE&apos;RE <br/> DIFFERENT</h2>
+        <div className="bg-white rounded-[60px] overflow-hidden shadow-2xl shadow-black/5 border border-black/5">
+          <div className="grid grid-cols-2 bg-black text-[#f3eee4] py-10 px-12 text-[10px] uppercase tracking-[0.5em] font-black">
+            <div className="opacity-40">Industry Standard</div>
+            <div className="text-[#ffb300]">GUTSY CORE</div>
           </div>
           {[
             ["Massive molecules", "Pre-digested pieces"],
@@ -222,33 +218,33 @@ export default async function HomePage() {
             ["15+ ingredients", "5 core ingredients"],
             ["Claims with no science", "Enzymatic science"]
           ].map((row, i) => (
-            <div key={i} className="grid grid-cols-2 border-b border-black/5 last:border-b-0 py-8 px-8 md:px-12 items-center hover:bg-[#f20028]/5 transition-colors">
-              <div className="opacity-40 font-bold uppercase text-xs pr-4">{row[0]}</div>
-              <div className="text-[#f20028] font-black uppercase text-sm md:text-lg">{row[1]}</div>
+            <div key={i} className="grid grid-cols-2 border-b border-black/5 last:border-b-0 py-10 px-12 items-center group hover:bg-[#f3eee4]/50 transition-colors">
+              <div className="opacity-30 font-bold uppercase text-[10px] md:text-xs tracking-widest pr-4">{row[0]}</div>
+              <div className="text-[#f20028] font-black uppercase text-sm md:text-lg tracking-tight">{row[1]}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* EMAIL CAPTURE */}
-      <section className="py-24 px-6 flex justify-center">
-        <div className="w-full max-w-2xl text-center">
+      {/* EMAIL CAPTURE - Minimalist Centered */}
+      <section className="py-24 px-6">
+        <div className="max-w-xl mx-auto text-center">
            <EmailCapture />
         </div>
       </section>
 
-      {/* FOOTER CTA - Rhode Inspired High Impact */}
+      {/* FOOTER CTA - Rhode High Impact Typography */}
       <section className="p-6">
-        <div className="bg-black rounded-[60px] md:rounded-[120px] py-32 px-6 text-center border border-white/10 relative overflow-hidden group">
-          <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity">
+        <div className="bg-black rounded-[80px] md:rounded-[150px] py-40 px-6 text-center relative overflow-hidden group">
+          <div className="absolute inset-0 opacity-10 pointer-events-none transition-transform duration-[10s] group-hover:scale-110">
             <Image src="/images/MARATHON.png" alt="" fill className="object-cover scale-150 rotate-12" />
           </div>
           <div className="relative z-10">
-            <h2 className={cn("text-7xl md:text-[180px] uppercase text-[#f3eee4] leading-[0.7] mb-12 tracking-tighter", utoBlack.className)}>Ready to <br /> transform?</h2>
-            <p className={cn("text-4xl md:text-6xl text-[#ffb300] lowercase mb-12", runWild.className)}>Join thousands who trust their gut.</p>
+            <h2 className={cn("text-7xl md:text-[160px] lg:text-[220px] uppercase text-[#f3eee4] leading-[0.7] mb-12 tracking-[-0.07em]", utoBlack.className)}>Ready to <br /> transform?</h2>
+            <p className={cn("text-5xl md:text-7xl text-[#ffb300] lowercase mb-16", runWild.className)}>Join the gut revolution.</p>
             <Link href="#lineup">
-              <Button className={cn("h-24 px-24 rounded-full bg-[#f20028] text-[#f3eee4] text-3xl font-bold hover:scale-110 transition-transform duration-500 shadow-2xl shadow-red-500/40", utoBold.className)}>
-                Shop Now
+              <Button className={cn("h-20 px-24 rounded-full bg-[#f20028] text-[#f3eee4] text-xl font-black hover:scale-105 transition-all duration-700 shadow-2xl shadow-red-500/30", utoBold.className)}>
+                Shop Collection
               </Button>
             </Link>
           </div>
