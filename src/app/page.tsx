@@ -9,6 +9,7 @@ import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
+import { ArrowUp } from 'lucide-react';
 
 // BRANDED FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -29,13 +30,23 @@ export default async function HomePage() {
   const mainProduct = products[0] || null;
 
   return (
-    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] [overflow-x:clip]", utoMedium.className)}>
+    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] relative [overflow-x:clip]", utoMedium.className)}>
+
+      {/* STICKY DISCOUNTS & UTILITIES */}
+      <div className="fixed left-6 bottom-10 z-[100] hidden md:block">
+        <Button className={cn("h-14 px-6 rounded-full bg-[#ffb300] text-black text-xl font-black border-4 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
+          10% OFF
+        </Button>
+      </div>
+
+      <Link href="#" className="fixed right-6 bottom-10 z-[100] hidden md:flex h-14 w-14 items-center justify-center rounded-full bg-white border-4 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-y-1 hover:shadow-none transition-all">
+        <ArrowUp className="w-8 h-8 text-black stroke-[3px]" />
+      </Link>
 
       {/* SEAMLESS HERO SECTION */}
       <section className="relative">
         <div className="bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center border-4 border-black">
           
-          {/* VISIBLE MARATHON ILLUSTRATION - Fixed visibility and layering */}
           <div className="absolute inset-0 opacity-20 mix-blend-soft-light pointer-events-none z-0">
              <Image 
                src="/images/MARATHON.png" 
@@ -46,7 +57,6 @@ export default async function HomePage() {
              />
           </div>
 
-          {/* SEAMLESS IMAGE POSITIONING (RIGHT SIDE) - Fixed bleed and sitting */}
           <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 hidden lg:block z-10">
             <Image 
               src="/images/girl-on-tennis-with-cacao.png" 
@@ -59,8 +69,6 @@ export default async function HomePage() {
 
           <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-20 w-full py-16 md:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              
-              {/* LEFT: TEXT CONTENT */}
               <div className="lg:col-span-7 text-center lg:text-left">
                 <h2 className={cn("text-[#f3eee4] text-5xl md:text-8xl lowercase mb-[-1.5rem] md:mb-[-2.5rem] ml-2 md:ml-4 rotate-[-4deg] relative z-30 drop-shadow-sm", runWild.className)}>
                   finally, a protein that
@@ -86,7 +94,6 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              {/* MOBILE ONLY IMAGE */}
               <div className="lg:hidden w-full aspect-square relative rounded-[20px] overflow-hidden border-4 border-black z-10">
                 <Image 
                   src="/images/girl-on-tennis-with-cacao.png" 
@@ -100,14 +107,24 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* THE PROBLEM SECTION */}
-      <section className="py-16 md:py-24 px-6 md:px-12 bg-black rounded-[30px] md:rounded-[60px] text-[#f3eee4] border-4 border-black">
-        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
-          <h2 className={cn("text-4xl md:text-8xl uppercase text-[#f20028] leading-none", utoBlack.className)}>WHY MOST <br /> PROTEIN SUCKS</h2>
-          <div className="space-y-4 md:space-y-6 text-lg md:text-2xl leading-relaxed opacity-90 font-medium">
-            <p>Regular protein powder makes you bloated. That heavy, uncomfortable feeling after every shake isn&apos;t normal.</p>
-            <p>It&apos;s because your stomach is struggling to break down massive protein molecules. Most brands add gums and fillers that make it worse.</p>
-            <p className={cn("text-4xl md:text-6xl text-[#ffb300] lowercase pt-4", runWild.className)}>We fixed it.</p>
+      {/* THE PROBLEM SECTION - Added Visual */}
+      <section className="py-16 md:py-24 px-6 md:px-12 bg-black rounded-[30px] md:rounded-[60px] text-[#f3eee4] border-4 border-black overflow-hidden">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6 md:space-y-8">
+            <h2 className={cn("text-4xl md:text-8xl uppercase text-[#f20028] leading-none", utoBlack.className)}>WHY MOST <br /> PROTEIN SUCKS</h2>
+            <div className="space-y-4 md:space-y-6 text-lg md:text-2xl leading-relaxed opacity-90 font-medium">
+              <p>Regular protein powder makes you bloated. That heavy, uncomfortable feeling after every shake isn&apos;t normal.</p>
+              <p>It&apos;s because your stomach is struggling to break down massive protein molecules. Most brands add gums and fillers that make it worse.</p>
+              <p className={cn("text-4xl md:text-6xl text-[#ffb300] lowercase pt-4", runWild.className)}>We fixed it.</p>
+            </div>
+          </div>
+          <div className="relative aspect-video lg:aspect-square w-full rounded-[20px] border-4 border-[#f20028] overflow-hidden">
+            <Image 
+              src="/images/bloat-visual.png" 
+              alt="Visualizing digestive brick vs light protein" 
+              fill 
+              className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+            />
           </div>
         </div>
       </section>
@@ -168,8 +185,8 @@ export default async function HomePage() {
       {/* FUN FACT SECTION */}
       <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
-      {/* MARQUEE RAIL */}
-      <div className="-mx-3 md:-mx-6 lg:-mx-8">
+      {/* SLIM MARQUEE RAIL */}
+      <div className="-mx-3 md:-mx-6 lg:-mx-8 py-2 md:py-4 overflow-hidden">
         <MarqueeRail />
       </div>
 
