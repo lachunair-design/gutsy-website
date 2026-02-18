@@ -64,7 +64,7 @@ export default async function HomePage() {
               </div>
               <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
                 <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]">
-                  <Image src="/images/floating-package.png" alt="GUTSY Protein Pouches" fill className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]" priority />
+                  <Image src="/images/girl-on-tennis-with-cacao.png" alt="GUTSY Protein Pouches" fill className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]" priority />
                 </div>
               </div>
             </div>
