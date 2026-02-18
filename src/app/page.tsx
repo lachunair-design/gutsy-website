@@ -34,7 +34,7 @@ export default async function HomePage() {
       {/* HERO SECTION */}
       <section className="relative">
         <div className="bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center">
-          <div className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none">
+          <div className="absolute inset-0 opacity-40 mix-blend-multiply pointer-events-none">
              <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-150 md:scale-110 translate-x-1/4" priority />
           </div>
           <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 w-full py-16 md:py-24">
