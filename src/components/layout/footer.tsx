@@ -121,7 +121,7 @@ export function Footer() {
 
         {/* Massive Logomark Bottom Section (Reference: Graza Style) */}
         <div className="relative pt-8 pb-4 flex justify-center items-end overflow-hidden">
-          <div className="relative w-full h-[15vw] md:h-[20vw] pointer-events-none select-none opacity-[0.95]">
+          <div className="relative w-full h-[25vw] md:h-[35vw] pointer-events-none select-none opacity-[0.95]">
             <Image
               src="/images/gutsy-logomark.png"
               alt="GUTSY"
