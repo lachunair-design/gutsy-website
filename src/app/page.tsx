@@ -31,41 +31,69 @@ export default async function HomePage() {
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] [overflow-x:clip]", utoMedium.className)}>
 
-      {/* HERO SECTION */}
+      {/* SEAMLESS HERO SECTION */}
       <section className="relative">
-        <div className="bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center">
-          <div className="absolute inset-0 opacity-100 mix-blend-multiply pointer-events-none">
-             <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-150 md:scale-110 translate-x-1/4" priority />
+        <div className="bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center border-4 border-black">
+          
+          {/* VISIBLE MARATHON ILLUSTRATION - Fixed visibility and layering */}
+          <div className="absolute inset-0 opacity-20 mix-blend-soft-light pointer-events-none z-0">
+             <Image 
+               src="/images/MARATHON.png" 
+               alt="" 
+               fill 
+               className="object-contain scale-150 md:scale-110 translate-x-1/4" 
+               priority 
+             />
           </div>
-          <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 w-full py-16 md:py-24">
+
+          {/* SEAMLESS IMAGE POSITIONING (RIGHT SIDE) - Fixed bleed and sitting */}
+          <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 hidden lg:block z-10">
+            <Image 
+              src="/images/girl-on-tennis-with-cacao.png" 
+              alt="GUTSY Lifestyle" 
+              fill 
+              className="object-cover object-center" 
+              priority 
+            />
+          </div>
+
+          <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-20 w-full py-16 md:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1">
-                <h2 className={cn("text-[#f3eee4] text-4xl md:text-7xl lowercase mb-[-0.5rem] md:mb-[-2rem] ml-2 md:ml-4 rotate-[-3deg]", runWild.className)}>
+              
+              {/* LEFT: TEXT CONTENT */}
+              <div className="lg:col-span-7 text-center lg:text-left">
+                <h2 className={cn("text-[#f3eee4] text-5xl md:text-8xl lowercase mb-[-1.5rem] md:mb-[-2.5rem] ml-2 md:ml-4 rotate-[-4deg] relative z-30 drop-shadow-sm", runWild.className)}>
                   finally, a protein that
                 </h2>
-                <h1 className={cn("text-black text-6xl md:text-[110px] lg:text-[140px] leading-[0.85] md:leading-[0.8] uppercase tracking-normal md:tracking-tight mb-8", utoBlack.className)}>
+                <h1 className={cn("text-black text-7xl md:text-[120px] lg:text-[140px] leading-[0.8] uppercase tracking-tighter mb-8 drop-shadow-md", utoBlack.className)}>
                   FEELS LIGHT
                 </h1>
-                <p className="text-[#f3eee4] text-lg md:text-2xl max-w-xl font-bold uppercase leading-tight italic mx-auto lg:mx-0">
+                <p className="text-[#f3eee4] text-xl md:text-2xl max-w-lg font-bold uppercase leading-tight italic mx-auto lg:mx-0 mb-10 lg:bg-transparent p-2 rounded-lg">
                   No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
                 </p>
-                <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                
+                <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
                   <Link href="#lineup" className="w-full sm:w-auto">
-                    <Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
+                    <Button className={cn("w-full h-16 md:h-20 px-12 rounded-full bg-black text-[#f3eee4] text-2xl font-bold border-4 border-black shadow-[6px_6px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
                       Shop Now
                     </Button>
                   </Link>
                   <Link href="/about" className="w-full sm:w-auto">
-                    <Button variant="outline" className={cn("w-full h-14 md:h-16 px-12 rounded-full border-2 border-black bg-transparent text-black text-xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>
+                    <Button variant="outline" className={cn("w-full h-16 md:h-20 px-12 rounded-full border-4 border-black bg-transparent text-black text-2xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>
                       Our Story
                     </Button>
                   </Link>
                 </div>
               </div>
-              <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]">
-                  <Image src="/images/girl-on-tennis-with-cacao.png" alt="GUTSY Protein Pouches" fill className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]" priority />
-                </div>
+
+              {/* MOBILE ONLY IMAGE */}
+              <div className="lg:hidden w-full aspect-square relative rounded-[20px] overflow-hidden border-4 border-black z-10">
+                <Image 
+                  src="/images/girl-on-tennis-with-cacao.png" 
+                  alt="GUTSY Lifestyle" 
+                  fill 
+                  className="object-cover" 
+                />
               </div>
             </div>
           </div>
