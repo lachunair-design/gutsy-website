@@ -31,7 +31,8 @@ export default async function HomePage() {
   const mainProduct = products[0] || null;
 
   return (
-    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] relative [overflow-x:clip]", utoMedium.className)}>
+    /* ADJUSTED pt-24 md:pt-32 to pt-32 md:pt-44 to clear the header */
+    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-32 md:pt-44 pb-8 space-y-8 selection:bg-[#ffb300] relative [overflow-x:clip]", utoMedium.className)}>
 
       {/* STICKY DISCOUNTS & UTILITIES */}
       <div className="fixed left-6 bottom-10 z-[100] hidden md:block">
