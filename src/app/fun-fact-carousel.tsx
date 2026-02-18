@@ -43,7 +43,7 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
             </p>
             <div className="relative w-[320px] h-[240px] md:w-[500px] md:h-[400px] mt-4">
               <Image 
-                src="public/images/JUMPING.png" 
+                src="../../public/images/JUMPING.png" 
                 alt="GUTSY Branded Illustration" 
                 fill 
                 className="object-contain"
