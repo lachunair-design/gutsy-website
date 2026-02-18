@@ -73,7 +73,6 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
 
     // --- TEXT & BG FLOW (Using GUTSY Palette) ---
     sections.forEach((section: any, i) => {
-      // Transitioning through the GUTSY core colors
       const bgColors = ["#000000", "#000000", "#f20028", "#f3eee4"];
       tl.to(triggerRef.current, { backgroundColor: bgColors[i], duration: 0.4 }, i);
 
@@ -87,12 +86,12 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
 
   return (
     <div ref={containerRef} className="w-full">
-      {/* Container overhaul: Removed border-4 and added expansive rounded corners */}
-      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden md:rounded-[120px] transition-colors duration-500">
+      {/* NO BORDERS: Edge-to-edge background for a seamless transition */}
+      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden transition-colors duration-700">
         
-        {/* SVG CONTAINER - Premium Minimalist Visuals */}
+        {/* SVG CONTAINER - Subtle ambient visuals */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-          <svg viewBox="0 0 200 200" className="w-full h-[50vh] md:h-full max-w-[700px] opacity-40">
+          <svg viewBox="0 0 200 200" className="w-full h-[50vh] md:h-full max-w-[700px] opacity-30">
             <circle ref={bit1} cx="70" cy="100" r="10" fill="#f20028" />
             <circle ref={bit2} cx="100" cy="100" r="10" fill="#f20028" />
             <circle ref={bit3} cx="130" cy="100" r="10" fill="#f20028" />
@@ -105,11 +104,11 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
         {/* CONTENT */}
         <div className="relative z-10 h-full w-full">
           
-          {/* BEAT 1: WHY MOST PROTEIN SUCKS */}
+          {/* BEAT 1 */}
           <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
             <div className="max-w-4xl space-y-8">
               <h2 className={cn("text-6xl md:text-[160px] uppercase text-[#f20028] leading-[0.8] tracking-tighter", utoBlack.className)}>
-                  WHY MOST<br/>PROTEIN SUCKS
+                  Why Most<br/>Protein Sucks
               </h2>
               <p className="text-[#f3eee4] text-xl md:text-4xl font-medium leading-tight max-w-2xl opacity-80">
                 Regular protein molecules are massive chains. Your stomach works overtime trying to break them down.
@@ -117,21 +116,21 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
             </div>
           </section>
 
-          {/* BEAT 2: THE SCIENCE */}
+          {/* BEAT 2 */}
           <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
             <div className="max-w-4xl space-y-6">
               <p className={cn("text-4xl md:text-7xl text-[#ffb300] lowercase mb-[-1rem]", runWild.className)}>the science of light</p>
               <h2 className={cn("text-6xl md:text-[140px] uppercase text-[#f3eee4] leading-[0.8] tracking-tighter", utoBlack.className)}>
-                  WE BREAK IT<br/>DOWN FIRST
+                  We Break It<br/>Down First
               </h2>
             </div>
           </section>
 
-          {/* BEAT 3: FIVE CORE INGREDIENTS */}
+          {/* BEAT 3 */}
           <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
             <div className="max-w-5xl space-y-10">
               <h2 className={cn("text-6xl md:text-[140px] uppercase text-[#000000] leading-[0.8] tracking-tighter", utoBlack.className)}>
-                FIVE CORE<br/>INGREDIENTS.
+                Five Core<br/>Ingredients.
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#000000] font-bold uppercase tracking-[0.2em] text-sm md:text-2xl">
                 {["Pea & Rice", "Kiwifruit", "Adaptogens", "Coconut Milk"].map((item, i) => (
@@ -144,13 +143,14 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
             </div>
           </section>
 
-          {/* BEAT 4: FEELS LIGHT */}
+          {/* BEAT 4 */}
           <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
             <div className="max-w-4xl space-y-12">
               <h2 className={cn("text-8xl md:text-[220px] uppercase text-[#000000] leading-[0.75] tracking-tighter", utoBlack.className)}>
                 FEELS<br/>LIGHT
               </h2>
-              <button className={cn("bg-[#f20028] text-[#f3eee4] px-12 py-6 md:px-20 md:py-8 rounded-full text-xl md:text-3xl font-bold uppercase transition-transform hover:scale-105 shadow-2xl active:scale-95", utoBold.className)}>
+              {/* BUTTON: Removed brutalist shadow for a clean, premium scale effect */}
+              <button className={cn("bg-[#f20028] text-[#f3eee4] px-12 py-6 md:px-20 md:py-8 rounded-full text-xl md:text-3xl font-bold uppercase transition-all hover:scale-105 hover:bg-black active:scale-95 shadow-2xl", utoBold.className)}>
                 Shop Gutsy
               </button>
             </div>
