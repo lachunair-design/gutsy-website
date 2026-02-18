@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { MagneticButton } from '@/components/ui/magnetic-button';
 import { ProductDetail } from '@/components/product/product-detail';
 import { MarqueeRail } from '@/components/marquee-rail';
 import { EmailCapture } from '@/components/email-capture';
@@ -55,16 +56,20 @@ export default async function HomePage() {
                   No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
                 </p>
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Link href="#lineup" className="w-full sm:w-auto">
-                    <Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
-                      Shop Now
-                    </Button>
-                  </Link>
-                  <Link href="/about" className="w-full sm:w-auto">
-                    <Button variant="outline" className={cn("w-full h-14 md:h-16 px-12 rounded-full border-2 border-black bg-transparent text-black text-xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>
-                      Our Story
-                    </Button>
-                  </Link>
+                  <MagneticButton className="w-full sm:w-auto">
+                    <Link href="#lineup" className="w-full sm:w-auto block">
+                      <Button className={cn("w-full h-14 md:h-16 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold border-2 border-black shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
+                        Shop Now
+                      </Button>
+                    </Link>
+                  </MagneticButton>
+                  <MagneticButton className="w-full sm:w-auto">
+                    <Link href="/about" className="w-full sm:w-auto block">
+                      <Button variant="outline" className={cn("w-full h-14 md:h-16 px-12 rounded-full border-2 border-black bg-transparent text-black text-xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>
+                        Our Story
+                      </Button>
+                    </Link>
+                  </MagneticButton>
                 </div>
               </div>
 
@@ -123,7 +128,11 @@ export default async function HomePage() {
                   <p className={cn("text-[#f20028] text-3xl md:text-4xl lowercase mb-4", runWild.className)}>gutsy pre-digested</p>
                   <div className="h-3 md:h-4 w-full bg-[#f20028]/20 rounded-full overflow-hidden"><div className="h-full bg-[#f20028] w-1/4 animate-bounce" /></div>
                </div>
-               <Link href="/about" className="w-full sm:w-auto"><Button className={cn("w-full bg-[#f20028] text-white rounded-full px-10 py-6 h-14 md:h-16 uppercase font-bold text-lg hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Full Backstory</Button></Link>
+               <MagneticButton className="w-full sm:w-auto">
+                 <Link href="/about" className="block">
+                   <Button className={cn("w-full bg-[#f20028] text-white rounded-full px-10 py-6 h-14 md:h-16 uppercase font-bold text-lg hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Full Backstory</Button>
+                 </Link>
+               </MagneticButton>
             </div>
           </div>
         </div>
@@ -232,7 +241,11 @@ export default async function HomePage() {
         <div className="bg-black rounded-[30px] md:rounded-[80px] py-20 md:py-32 px-6 text-center border-4 border-[#f3eee4] shadow-[6px_6px_0px_0px_#f20028] sm:shadow-[10px_10px_0px_0px_#f20028] lg:shadow-[20px_20px_0px_0px_#f20028]">
           <h2 className={cn("text-4xl md:text-9xl uppercase text-[#f3eee4] leading-[1.1] mb-8 px-4", utoBlack.className)}>Ready to <br /> transform?</h2>
           <p className={cn("text-4xl md:text-5xl text-[#ffb300] lowercase mb-10 px-4", runWild.className)}>Join thousands of humans who trust their gut.</p>
-          <Link href="#lineup" className="inline-block w-full sm:w-auto"><Button className={cn("w-full sm:w-auto h-16 md:h-20 px-12 md:px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Shop Now</Button></Link>
+          <MagneticButton className="inline-block w-full sm:w-auto">
+            <Link href="#lineup" className="block">
+              <Button className={cn("w-full sm:w-auto h-16 md:h-20 px-12 md:px-16 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all", utoBold.className)}>Shop Now</Button>
+            </Link>
+          </MagneticButton>
         </div>
       </section>
     </div>

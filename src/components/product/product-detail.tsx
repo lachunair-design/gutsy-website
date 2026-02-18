@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useCart } from '@/lib/shopify/cart-context';
 import { formatPrice, cn } from '@/lib/utils';
 import { ShopifyProduct, ShopifyProductVariant, ShopifyImage } from '@/lib/shopify/types';
+import { MagneticButton } from '@/components/ui/magnetic-button';
 import localFont from 'next/font/local';
 
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
@@ -372,25 +373,27 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
               </div>
 
               {/* ── CTA Button ── */}
-              <button
-                onClick={purchaseType === 'subscribe' ? handleSubscribe : handleAddToCart}
-                disabled={!selectedVariant.availableForSale || isAdding}
-                className={cn(
-                  'w-full h-16 rounded-full text-xl uppercase font-bold border-2 border-black transition-all',
-                  selectedVariant.availableForSale
-                    ? 'bg-[#f20028] text-[#f3eee4] shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#000000] active:translate-x-0 active:translate-y-0 active:shadow-[2px_2px_0px_0px_#000000]'
-                    : 'bg-black/20 text-black/40 cursor-not-allowed',
-                  utoBold.className
-                )}
-              >
-                {isAdding
-                  ? 'Adding...'
-                  : !selectedVariant.availableForSale
-                    ? 'Sold Out'
-                    : purchaseType === 'subscribe'
-                      ? `Subscribe — ${formatPrice(subscribePrice.toFixed(2), currency)}/mo`
-                      : `Add to Bag — ${formatPrice((price * quantity).toFixed(2), currency)}`}
-              </button>
+              <MagneticButton strength={selectedVariant.availableForSale && !isAdding ? 0.3 : 0}>
+                <button
+                  onClick={purchaseType === 'subscribe' ? handleSubscribe : handleAddToCart}
+                  disabled={!selectedVariant.availableForSale || isAdding}
+                  className={cn(
+                    'w-full h-16 rounded-full text-xl uppercase font-bold border-2 border-black transition-all',
+                    selectedVariant.availableForSale
+                      ? 'bg-[#f20028] text-[#f3eee4] shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#000000] active:translate-x-0 active:translate-y-0 active:shadow-[2px_2px_0px_0px_#000000]'
+                      : 'bg-black/20 text-black/40 cursor-not-allowed',
+                    utoBold.className
+                  )}
+                >
+                  {isAdding
+                    ? 'Adding...'
+                    : !selectedVariant.availableForSale
+                      ? 'Sold Out'
+                      : purchaseType === 'subscribe'
+                        ? `Subscribe — ${formatPrice(subscribePrice.toFixed(2), currency)}/mo`
+                        : `Add to Bag — ${formatPrice((price * quantity).toFixed(2), currency)}`}
+                </button>
+              </MagneticButton>
 
               {/* ── Trust Badges ── */}
               <div className="mt-8 pt-6 border-t-2 border-black/10">

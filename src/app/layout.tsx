@@ -5,6 +5,7 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { CartProvider } from '@/lib/shopify/cart-context';
 import { CartDrawer } from '@/components/cart/cart-drawer';
+import { SmoothScroll } from '@/components/smooth-scroll';
 
 // FIXED FONT PATHS: Using relative paths to ensure successful Vercel builds
 const utoBlack = localFont({ 
@@ -91,6 +92,7 @@ export default function RootLayout({
           >
             Skip to content
           </a>
+          <SmoothScroll />
           <Header />
           {/* Main content wrapper */}
           <main id="main-content">{children}</main>
