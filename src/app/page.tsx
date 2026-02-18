@@ -10,7 +10,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
 
-// FONT CONFIGURATION
+// BRANDED FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
@@ -138,7 +138,7 @@ export default async function HomePage() {
       </section>
 
       {/* FUN FACT SECTION */}
-      <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} />
+      <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
       {/* MARQUEE RAIL */}
       <div className="-mx-3 md:-mx-6 lg:-mx-8">
