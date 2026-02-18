@@ -87,7 +87,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 4. COMPARISON (Minimal, no box) */}
+      {/* 4. COMPARISON (Minimal, no box) 
       <section className="py-40 px-8 max-w-5xl mx-auto">
         <h2 className={cn("text-6xl md:text-[100px] uppercase text-black text-center mb-24 tracking-tighter leading-none", utoBlack.className)}>HOW WE DIFFERENT</h2>
         <div className="divide-y divide-black/5">
@@ -102,11 +102,11 @@ export default async function HomePage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       <EmailCapture />
       
-      {/* 5. FOOTER CTA (Edge-to-edge color) */}
+      {/* 5. FOOTER CTA (Edge-to-edge color) 
       <section className="bg-[#f20028] py-48 text-center">
         <h2 className={cn("text-8xl md:text-[200px] uppercase text-[#f3eee4] mb-16 leading-[0.75] tracking-tighter", utoBlack.className)}>
           Ready to <br /> transform?
@@ -116,7 +116,7 @@ export default async function HomePage() {
             Shop Now
           </Button>
         </Link>
-      </section>
+      </section> */}
     </div>
   );
 }
