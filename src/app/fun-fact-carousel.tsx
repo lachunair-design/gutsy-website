@@ -30,7 +30,7 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentFactIndex((prev) => (prev + 1) % funFacts.length);
-    }, 10000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [funFacts.length]);
 
