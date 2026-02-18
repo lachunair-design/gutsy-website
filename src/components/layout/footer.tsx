@@ -5,8 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
-import { Instagram } from 'lucide-react';
-import { EmailCapture } from '@/components/email-capture';
+import { Instagram, ArrowUpRight } from 'lucide-react';
 
 // Corrected paths for src/components/layout/footer.tsx
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
@@ -15,113 +14,116 @@ const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 
 const footerLinks = {
   column1: [
-    { name: 'About Us', href: '/about' },
-    { name: 'FAQs', href: '/FAQ' },
-    { name: 'Contact', href: '/contact' },
     { name: 'Shop All', href: '/products' },
+    { name: 'The Duo Bundle', href: '/products' },
+    { name: 'Gutsy Starter Kit', href: '/products' },
+    { name: 'Gift Cards', href: '/products' },
+    { name: 'Wholesale', href: '/contact' },
   ],
   column2: [
-    { name: 'Shipping', href: '/FAQ#shipping' },
-    { name: 'Returns', href: '/FAQ#shipping' },
-    { name: 'Legal & Privacy', href: '/FAQ#legal' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Contact', href: '/contact' },
+    { name: 'FAQs', href: '/FAQ' },
+    { name: 'Shipping & Returns', href: '/FAQ#shipping' },
+    { name: 'Terms of Service', href: '/FAQ#legal' },
   ],
+  social: [
+    { name: 'Instagram', href: 'https://instagram.com/gutsy.world' },
+    { name: 'TikTok', href: '#' },
+    { name: 'Twitter', href: '#' },
+    { name: 'Facebook', href: '#' },
+  ]
 };
 
 export function Footer() {
-  const [copied, setCopied] = useState(false);
-  const DISCOUNT_CODE = 'GUTSY10';
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(DISCOUNT_CODE);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
-    <footer className="bg-[#121417] text-white pt-16 md:pt-24 pb-8 md:pb-12 rounded-t-[30px] md:rounded-t-[40px] relative overflow-hidden selection:bg-[#ffb300]">
-      {/* 10% Off Tab - Interactive Copy Button */}
-      <button
-        onClick={handleCopy}
-        className="absolute left-0 top-1/4 md:top-1/3 bg-white text-[#121417] py-6 md:py-8 px-2 md:px-3 rounded-r-xl md:rounded-r-2xl border border-gray-200 shadow-lg flex items-center justify-center transition-transform active:scale-95 hover:bg-[#f3eee4] z-20"
-      >
-        <span className={cn("vertical-text text-lg md:text-xl font-bold rotate-180 [writing-mode:vertical-lr]", utoBold.className)}>
-          {copied ? 'Copied!' : '10% Off'}
-        </span>
-      </button>
-
+    <footer className="bg-[#f3eee4] text-[#121417] pt-16 md:pt-24 pb-8 md:pb-12 border-t border-black/10 selection:bg-[#ffb300]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-12 md:gap-24 mb-20 md:mb-32">
-
-          {/* Logo Section */}
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-            <Link href="/" className="relative w-32 h-8 md:w-40 md:h-10">
-              <Image
-                src="/images/gutsy-logomark.png"
-                alt="GUTSY"
-                fill
-                className="object-contain brightness-0 invert"
-                priority
+        
+        {/* Top Section: Newsletter and Links */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16 md:mb-24">
+          
+          {/* Left: Newsletter Sign-up */}
+          <div className="md:col-span-5 space-y-8">
+            <p className={cn("text-xl md:text-2xl leading-relaxed max-w-sm font-medium", utoMedium.className)}>
+              Friends let friends know about fresh products and content.
+            </p>
+            
+            <form className="relative max-w-md group">
+              <input 
+                type="email" 
+                placeholder="Your Email" 
+                className={cn("w-full bg-transparent border-2 border-black/20 rounded-xl px-6 py-4 focus:outline-none focus:border-black transition-all uppercase text-sm tracking-widest", utoBold.className)}
               />
-            </Link>
-            <div className="h-8 w-[1px] bg-white/30 hidden md:block" />
-            <span className={cn("text-lg md:text-xl lowercase tracking-tight opacity-90 text-center md:text-left", utoBold.className)}>
-              no guts. no glory.
-            </span>
+              <button 
+                type="submit" 
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#ffb300] hover:bg-black hover:text-white text-black p-2 px-4 rounded-lg border-2 border-black flex items-center gap-2 transition-all active:scale-95"
+              >
+                <span className={cn("text-xs font-black uppercase", utoBold.className)}>Submit</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </button>
+            </form>
           </div>
 
-          {/* Navigation Links */}
-          <div className="grid grid-cols-2 gap-x-12 md:gap-x-24 gap-y-10 w-full md:w-auto text-center md:text-left">
-            <ul className="space-y-4 md:space-y-3">
-              {footerLinks.column1.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className={cn("text-xl md:text-3xl hover:line-through transition-all block md:inline", utoBlack.className)}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-4 md:space-y-3">
-              {footerLinks.column2.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className={cn("text-xl md:text-3xl hover:line-through transition-all block md:inline", utoBlack.className)}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Email Capture */}
-        <div className="mb-16 md:mb-20 max-w-md">
-          <EmailCapture compact />
-        </div>
-
-        {/* Footer Metadata */}
-        <div className={cn("flex flex-col md:flex-row justify-between items-center pt-8 md:pt-10 border-t border-white/5 text-[12px] md:text-[14px] tracking-[0.2em] text-center md:text-left uppercase", utoMedium.className)}>
-          <p className="opacity-60 mb-6 md:mb-0">
-            © 2026. GUTSY LIFE. ALL RIGHTS RESERVED.
-          </p>
-
-          <a
-            href="https://instagram.com/gutsy.world"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 group cursor-pointer"
-          >
-            <span className="opacity-60 group-hover:opacity-100 transition-opacity lowercase font-mono tracking-normal">
-              @gutsy.world
-            </span>
-            <div className="p-2 border border-white/20 rounded-full group-hover:bg-[#ffb300] group-hover:text-black group-hover:border-black transition-all">
-              <Instagram className="w-4 h-4 md:w-5 md:h-5" />
+          {/* Right: Link Columns */}
+          <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8 md:border-l border-black/10 md:pl-12">
+            <div>
+              <h4 className={cn("text-sm uppercase tracking-widest mb-6 opacity-40", utoBold.className)}>Shop</h4>
+              <ul className="space-y-3">
+                {footerLinks.column1.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={cn("text-sm md:text-base hover:underline", utoMedium.className)}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </a>
+
+            <div>
+              <h4 className={cn("text-sm uppercase tracking-widest mb-6 opacity-40", utoBold.className)}>About Us</h4>
+              <ul className="space-y-3">
+                {footerLinks.column2.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={cn("text-sm md:text-base hover:underline", utoMedium.className)}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="col-span-2 md:col-span-1">
+              <h4 className={cn("text-sm uppercase tracking-widest mb-6 opacity-40", utoBold.className)}>Social</h4>
+              <ul className="space-y-3">
+                {footerLinks.social.map((link) => (
+                  <li key={link.name}>
+                    <Link href={link.href} className={cn("text-sm md:text-base hover:underline", utoMedium.className)}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Middle Section: Bottom Links */}
+        <div className="flex flex-col md:flex-row justify-between items-center py-8 border-t border-black/10 gap-4">
+          <div className="flex gap-8">
+            <Link href="/privacy" className={cn("text-sm uppercase tracking-widest hover:underline opacity-60", utoBold.className)}>Privacy Policy</Link>
+            <Link href="/terms" className={cn("text-sm uppercase tracking-widest hover:underline opacity-60", utoBold.className)}>Terms of Service</Link>
+          </div>
+          <p className={cn("text-sm uppercase tracking-widest opacity-60", utoBold.className)}>
+            © GUTSY 2026
+          </p>
+        </div>
+
+        {/* Massive Logo Bottom Section (Reference: Graza Footer) */}
+        <div className="relative pt-8 overflow-hidden">
+          <h2 className={cn("text-[18vw] leading-[0.8] text-[#121417] select-none text-center pointer-events-none", utoBlack.className)}>
+            GUTSY
+          </h2>
         </div>
 
       </div>
