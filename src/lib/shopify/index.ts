@@ -16,10 +16,10 @@ import {
   getCartQuery,
 } from './queries';
 
-const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN!;
-const storefrontAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN!;
+const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+const storefrontAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
-const endpoint = `https://${domain}/api/2024-01/graphql.json`;
+const endpoint = domain ? `https://${domain}/api/2024-01/graphql.json` : '';
 
 type ShopifyResponse<T> = {
   data: T;
@@ -33,6 +33,10 @@ async function shopifyFetch<T>({
   query: string;
   variables?: Record<string, unknown>;
 }): Promise<T> {
+  if (!domain || !storefrontAccessToken) {
+    return null as T;
+  }
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -80,6 +84,7 @@ export async function getProducts(first: number = 20): Promise<ShopifyProduct[]>
     variables: { first },
   });
 
+  if (!data) return [];
   return reshapeProducts(data.products.edges.map((edge) => edge.node));
 }
 
@@ -91,7 +96,7 @@ export async function getProductByHandle(
     variables: { handle },
   });
 
-  return data.product ? reshapeProduct(data.product) : null;
+  return data?.product ? reshapeProduct(data.product) : null;
 }
 
 // Collections
@@ -103,6 +108,7 @@ export async function getCollections(first: number = 20) {
     variables: { first },
   });
 
+  if (!data) return [];
   return data.collections.edges.map((edge) => edge.node);
 }
 
@@ -115,7 +121,7 @@ export async function getCollectionByHandle(
     variables: { handle, first },
   });
 
-  if (!data.collection) return null;
+  if (!data?.collection) return null;
 
   return {
     ...data.collection,
