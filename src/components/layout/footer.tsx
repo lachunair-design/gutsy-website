@@ -7,7 +7,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { Instagram, ArrowUpRight } from 'lucide-react';
 
-// Corrected paths for src/components/layout/footer.tsx
+// BRANDED FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
@@ -119,11 +119,17 @@ export function Footer() {
           </p>
         </div>
 
-        {/* Massive Logo Bottom Section (Reference: Graza Footer) */}
-        <div className="relative pt-8 overflow-hidden">
-          <h2 className={cn("text-[18vw] leading-[0.8] text-[#121417] select-none text-center pointer-events-none", utoBlack.className)}>
-            GUTSY
-          </h2>
+        {/* Massive Logomark Bottom Section (Reference: Graza Style) */}
+        <div className="relative pt-8 pb-4 flex justify-center items-end overflow-hidden">
+          <div className="relative w-full h-[15vw] md:h-[20vw] pointer-events-none select-none opacity-[0.95]">
+            <Image
+              src="/images/gutsy-logomark.png"
+              alt="GUTSY"
+              fill
+              className="object-contain object-bottom brightness-0"
+              priority
+            />
+          </div>
         </div>
 
       </div>
