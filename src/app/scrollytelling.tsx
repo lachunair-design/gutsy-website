@@ -1,4 +1,4 @@
- "use client";
+"use client";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,8 +16,7 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
   const containerRef = useRef(null);
   const triggerRef = useRef(null);
   
-  // Refs for SVG elements
-  const chainRef = useRef(null);
+  // Refs for the Protein Animation
   const scissorsRef = useRef(null);
   const bit1 = useRef(null);
   const bit2 = useRef(null);
@@ -30,46 +29,45 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
       scrollTrigger: {
         trigger: triggerRef.current,
         start: "top top",
-        end: "+=400%", // Extra length for 4th beat
+        end: "+=400%", 
         pin: true,
-        scrub: 1,
+        scrub: 1.2,
       },
     });
 
-    // --- ANIMATION SEQUENCE ---
+    // --- PROTEIN ANIMATION SEQUENCE ---
+    // Beat 1 to 2: Scissors appear and "Snip" the chain apart
+    tl.to(scissorsRef.current, { opacity: 1, x: 10, rotate: -20, duration: 0.4 }, 0.6)
+      .to(bit1.current, { x: -60, y: -30, rotate: -25, duration: 0.8, ease: "power2.out" }, 1)
+      .to(bit2.current, { x: 0, y: 50, rotate: 15, duration: 0.8, ease: "power2.out" }, 1)
+      .to(bit3.current, { x: 60, y: -30, rotate: 30, duration: 0.8, ease: "power2.out" }, 1)
+      .to(scissorsRef.current, { opacity: 0, scale: 0.5, duration: 0.2 }, 1.2);
 
-    // 1. BEAT 1 -> 2: SCISSORS APPEAR & SNIP
-    tl.to(scissorsRef.current, { opacity: 1, x: 20, rotate: -20, duration: 0.5 }, 0.5)
-      .to(bit1.current, { x: -40, y: -20, rotate: -15, duration: 0.8 }, 1)
-      .to(bit2.current, { x: 0, y: 30, rotate: 10, duration: 0.8 }, 1)
-      .to(bit3.current, { x: 40, y: -20, rotate: 20, duration: 0.8 }, 1)
-      .to(scissorsRef.current, { opacity: 0, duration: 0.2 }, 1.2);
-
-    // 2. BEAT 2 -> 3: BITS FLOAT & MULTIPLY (Simulated)
+    // Beat 2 to 3: The pieces float and turn "Gutsy Gold"
     tl.to([bit1.current, bit2.current, bit3.current], { 
-      scale: 0.8, 
       fill: "#ffb300", 
+      scale: 0.8,
       duration: 1 
-    }, 1.5);
+    }, 1.8);
 
-    // 3. BEAT 3 -> 4: BITS TRANSITION TO RADIANCE
+    // Beat 3 to 4: The pieces dissolve into a "glow"
     tl.to([bit1.current, bit2.current, bit3.current], { 
-      y: "+=100", 
-      opacity: 0, 
-      stagger: 0.1, 
+      opacity: 0,
+      y: "+=50",
+      stagger: 0.1,
       duration: 0.5 
-    }, 2.5);
+    }, 3);
 
-    // --- TEXT & BACKGROUND TRANSITIONS ---
+    // --- TEXT & BACKGROUND FLOW ---
     sections.forEach((section: any, i) => {
-      // Background Color Shifts
-      const bgColors = ["#000000", "#1a1a1a", "#f20028", "#ffb300"];
+      // Background shifts from Dark to Light
+      const bgColors = ["#000000", "#111111", "#f20028", "#f3eee4"];
       tl.to(triggerRef.current, { backgroundColor: bgColors[i], duration: 0.5 }, i);
 
-      // Text Fade In/Out
+      // Left-aligned Text Transitions
       tl.to(section, { opacity: 1, x: 0, duration: 0.5 }, i);
       if (i < sections.length - 1) {
-        tl.to(section, { opacity: 0, x: -20, duration: 0.5 }, i + 0.75);
+        tl.to(section, { opacity: 0, x: -30, duration: 0.5 }, i + 0.75);
       }
     });
 
@@ -77,60 +75,71 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
 
   return (
     <div ref={containerRef} className="w-full">
-      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden rounded-[40px] md:rounded-[80px] border-4 border-black transition-colors duration-500">
+      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden rounded-[40px] md:rounded-[80px] border-4 border-black transition-colors duration-700">
         
-        {/* DYNAMIC PROTEIN SVG */}
+        {/* VISUAL DEMONSTRATION: THE PROTEIN SNIP */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-          <svg width="400" height="400" viewBox="0 0 200 200" className="w-64 h-64 md:w-[500px] md:h-[500px]">
-            {/* The Chain Bits */}
-            <circle ref={bit1} cx="70" cy="100" r="15" fill="#f20028" stroke="black" strokeWidth="2" />
-            <circle ref={bit2} cx="100" cy="100" r="15" fill="#f20028" stroke="black" strokeWidth="2" />
-            <circle ref={bit3} cx="130" cy="100" r="15" fill="#f20028" stroke="black" strokeWidth="2" />
+          <svg width="400" height="400" viewBox="0 0 200 200" className="w-64 h-64 md:w-[600px] md:h-[600px]">
+            {/* Protein Chain Bits */}
+            <circle ref={bit1} cx="70" cy="100" r="12" fill="#f20028" stroke="currentColor" className="text-black/20" strokeWidth="1" />
+            <circle ref={bit2} cx="100" cy="100" r="12" fill="#f20028" stroke="currentColor" className="text-black/20" strokeWidth="1" />
+            <circle ref={bit3} cx="130" cy="100" r="12" fill="#f20028" stroke="currentColor" className="text-black/20" strokeWidth="1" />
             
-            {/* The Enzyme Scissors (Simplified SVG) */}
-            <g ref={scissorsRef} style={{ opacity: 0 }} transform="translate(85, 70)">
-               <path d="M0,0 L20,20 M0,20 L20,0" stroke="#ffb300" strokeWidth="4" strokeLinecap="round" />
-               <circle cx="0" cy="0" r="3" fill="#ffb300" />
-               <circle cx="0" cy="20" r="3" fill="#ffb300" />
+            {/* The Enzyme "Scissors" */}
+            <g ref={scissorsRef} style={{ opacity: 0 }} transform="translate(90, 80)">
+               <path d="M-10,-10 L10,10 M-10,10 L10,-10" stroke="#ffb300" strokeWidth="3" strokeLinecap="round" />
+               <circle cx="-10" cy="-10" r="2" fill="#ffb300" />
+               <circle cx="-10" cy="10" r="2" fill="#ffb300" />
             </g>
           </svg>
         </div>
 
-        {/* LEFT-ALIGNED CONTENT LAYERS */}
+        {/* CONTENT LAYERS */}
         <div className="relative z-10 h-full w-full">
-          {/* BEAT 1: THE BRICK */}
+          
+          {/* BEAT 1: THE PROBLEM */}
           <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
-            <div className="max-w-2xl space-y-4">
-              <h2 className={cn("text-5xl md:text-[110px] uppercase text-[#f3eee4] leading-[0.85]", utoBlack.className)}>
-                 STUCK IN<br/>THE GUT.
+            <div className="max-w-2xl space-y-6">
+              <h2 className={cn("text-6xl md:text-[130px] uppercase text-[#f20028] leading-[0.8]", utoBlack.className)}>
+                 WHY MOST<br/>PROTEIN SUCKS
               </h2>
-              <p className="text-[#f3eee4] text-xl md:text-2xl font-medium max-w-lg">
-                Regular protein molecules are massive chains. Your stomach works overtime just to move the needle.
+              <p className="text-[#f3eee4] text-xl md:text-3xl font-medium leading-tight">
+                Regular protein molecules are massive chains. Your stomach works overtime trying to break them down. That&apos;s why you feel heavy, bloated, and uncomfortable after every shake.
               </p>
             </div>
           </section>
 
-          {/* BEAT 2: THE SNIP */}
+          {/* BEAT 2: THE BREAKTHROUGH */}
           <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
-            <div className="max-w-2xl space-y-4">
-              <p className={cn("text-4xl text-[#ffb300] lowercase", runWild.className)}>we snip them early</p>
-              <h2 className={cn("text-5xl md:text-[110px] uppercase text-[#f3eee4] leading-[0.85]", utoBlack.className)}>
-                 ENZYMATIC<br/>SCIENCE.
+            <div className="max-w-2xl space-y-6">
+              <p className={cn("text-4xl md:text-6xl text-[#ffb300] lowercase", runWild.className)}>the science of light</p>
+              <h2 className={cn("text-6xl md:text-[110px] uppercase text-[#f3eee4] leading-[0.8]", utoBlack.className)}>
+                 WE BREAK IT<br/>DOWN FIRST
               </h2>
-              <p className="text-[#f3eee4] text-xl md:text-2xl font-medium max-w-lg">
-                We use natural enzymes to break those chains into tiny, bioavailable pieces before you take a sip.
+              <p className="text-[#f3eee4] text-xl md:text-3xl font-medium leading-tight">
+                Enzymes snip those massive chains into tiny pieces before the protein even hits your stomach. No grinding, no bloating. Just instant bioavailability.
               </p>
             </div>
           </section>
 
-          {/* BEAT 3: THE PURITY */}
+          {/* BEAT 3: WHAT'S INSIDE */}
           <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
-            <div className="max-w-2xl space-y-4">
-              <h2 className={cn("text-5xl md:text-[110px] uppercase text-black leading-[0.85]", utoBlack.className)}>
-                NO GUMS.<br/>NO FILLERS.
+            <div className="max-w-4xl space-y-8">
+              <h2 className={cn("text-6xl md:text-[110px] uppercase text-black leading-[0.8]", utoBlack.className)}>
+                FIVE CORE<br/>INGREDIENTS.
               </h2>
-              <p className="text-black text-xl md:text-2xl font-medium max-w-lg">
-                Because when protein is this light, you don&apos;t need chemistry to hide the bloat.
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black font-bold uppercase tracking-tight text-lg">
+                {[
+                  "Hydrolyzed Pea & Rice Protein",
+                  "Actazin Kiwifruit Extract",
+                  "Reishi or Maca (adaptogens)",
+                  "Monk Fruit & Coconut Milk"
+                ].map((item, i) => (
+                  <div key={i} className="border-l-4 border-black pl-6 py-2 bg-white/10">{item}</div>
+                ))}
+              </div>
+              <p className={cn("text-3xl md:text-5xl text-white lowercase", runWild.className)}>
+                No gums. No fillers. No chemistry degree required.
               </p>
             </div>
           </section>
@@ -138,17 +147,18 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
           {/* BEAT 4: THE RESULT */}
           <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
             <div className="max-w-3xl space-y-6">
-              <h2 className={cn("text-5xl md:text-[120px] uppercase text-black leading-[0.8]", utoBlack.className)}>
-                FEEL THE<br/>LIGHTNESS.
+              <h2 className={cn("text-8xl md:text-[180px] uppercase text-black leading-[0.75] tracking-tighter", utoBlack.className)}>
+                FEELS<br/>LIGHT
               </h2>
-              <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase", runWild.className)}>
-                energy without the anchor.
+              <p className="text-black text-xl md:text-3xl font-medium leading-tight max-w-xl">
+                Your stomach doesn&apos;t have to work overtime. No bloat, no brick feeling, no avoiding protein before important events. Just protein that actually works.
               </p>
-              <button className="bg-black text-[#ffb300] px-12 py-6 rounded-full text-2xl font-bold uppercase border-2 border-black hover:bg-transparent transition-all">
-                Shop GUTSY
+              <button className="bg-[#f20028] text-white px-12 py-6 rounded-full text-2xl font-bold uppercase shadow-[6px_6px_0px_0px_#000000] hover:translate-y-1 hover:shadow-none transition-all">
+                Experience Gutsy
               </button>
             </div>
           </section>
+
         </div>
       </div>
     </div>
