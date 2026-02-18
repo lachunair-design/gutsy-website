@@ -32,19 +32,19 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
     <section className="py-20 bg-[#f3eee4]">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-12">
         
-        {/* LEFT: IMAGE & BRANDED TITLE */}
+        {/* LEFT: BRANDED TITLE & ILLUSTRATION */}
         <div className="relative w-full md:w-1/2 flex justify-center md:justify-start">
           <div className="relative">
-            <h2 className={cn("text-6xl md:text-9xl uppercase text-black leading-none mb-[-1rem]", utoBlack.className)}>
+            <h2 className={cn("text-6xl md:text-9xl uppercase text-black leading-none mb-[-1.5rem]", utoBlack.className)}>
               FUN FACT
             </h2>
-            <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase ml-4 md:ml-8 rotate-[-3deg]", runWild.className)}>
+            <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase ml-6 md:ml-12 rotate-[-3deg] relative z-10", runWild.className)}>
               just for fun
             </p>
-            <div className="relative w-[300px] h-[220px] md:w-[480px] md:h-[380px] mt-8">
+            <div className="relative w-[320px] h-[240px] md:w-[500px] md:h-[400px] mt-4">
               <Image 
                 src="/images/fun-fact-illustration.png" 
-                alt="GUTSY Mascot Illustration" 
+                alt="GUTSY Branded Illustration" 
                 fill 
                 className="object-contain"
               />
@@ -52,35 +52,38 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
           </div>
         </div>
 
-        {/* RIGHT: BRANDED CONTENT & CONTROLS */}
+        {/* RIGHT: CONTENT & BRANDED CONTROLS */}
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start">
-          <div className="min-h-[240px] flex flex-col justify-center items-center md:items-start text-center md:text-left">
-            <div className="mb-6 p-4 bg-black rounded-full text-[#ffb300]">
+          <div className="min-h-[250px] flex flex-col justify-center items-center md:items-start text-center md:text-left">
+            <div className="mb-8 p-5 bg-black rounded-full text-[#ffb300] shadow-[4px_4px_0px_0px_#f20028]">
               {funFacts[currentFactIndex].icon}
             </div>
-            <p className={cn("text-2xl md:text-3xl text-black leading-tight mb-12 max-w-md italic", utoBold.className)}>
-              {funFacts[currentFactIndex].text}
+            
+            <p className={cn("text-2xl md:text-4xl text-black leading-tight mb-12 max-w-lg italic font-bold", utoBold.className)}>
+               <span className="text-[#f20028]">&quot;</span>{funFacts[currentFactIndex].text}<span className="text-[#f20028]">&quot;</span>
             </p>
           </div>
           
-          {/* BRANDED BUTTON DESIGN */}
-          <div className="flex border-4 border-black rounded-full overflow-hidden w-48 bg-white shadow-[4px_4px_0px_0px_#f20028]">
+          {/* BRANDED SLIM CONTROLS */}
+          <div className="flex border-4 border-black rounded-full overflow-hidden w-56 bg-white shadow-[6px_6px_0px_0px_#ffb300]">
             <button 
               onClick={() => setCurrentFactIndex((prev) => (prev - 1 + funFacts.length) % funFacts.length)}
-              className="flex-1 py-4 flex justify-center hover:bg-[#ffb300] transition-all border-r-4 border-black"
+              className="flex-1 py-4 flex justify-center hover:bg-[#f3eee4] transition-all border-r-4 border-black group"
+              aria-label="Previous fact"
             >
-              <ArrowLeft className="w-6 h-6 text-black" />
+              <ArrowLeft className="w-7 h-7 text-black group-hover:scale-110 transition-transform" />
             </button>
             <button 
               onClick={() => setCurrentFactIndex((prev) => (prev + 1) % funFacts.length)}
-              className="flex-1 py-4 flex justify-center hover:bg-[#ffb300] transition-all"
+              className="flex-1 py-4 flex justify-center hover:bg-[#f3eee4] transition-all group"
+              aria-label="Next fact"
             >
-              <ArrowRight className="w-6 h-6 text-black" />
+              <ArrowRight className="w-7 h-7 text-black group-hover:scale-110 transition-transform" />
             </button>
           </div>
 
-          <div className={cn("mt-6 text-black/40 uppercase tracking-widest text-sm font-bold", utoBold.className)}>
-            Discovery {currentFactIndex + 1} / {funFacts.length}
+          <div className={cn("mt-8 text-black/40 uppercase tracking-[0.2em] text-xs font-black", utoBold.className)}>
+            Deep Dive {currentFactIndex + 1} of {funFacts.length}
           </div>
         </div>
       </div>
