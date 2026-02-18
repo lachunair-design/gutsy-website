@@ -106,17 +106,33 @@ export default async function HomePage() {
 
       <EmailCapture />
       
-      {/* 5. FOOTER CTA (Edge-to-edge color) 
-      <section className="bg-[#f20028] py-48 text-center">
-        <h2 className={cn("text-8xl md:text-[200px] uppercase text-[#f3eee4] mb-16 leading-[0.75] tracking-tighter", utoBlack.className)}>
-          Ready to <br /> transform?
-        </h2>
-        <Link href="#lineup">
-          <Button className={cn("h-24 px-24 rounded-full bg-white text-[#f20028] text-3xl font-bold hover:scale-105 transition-all shadow-2xl border-none", utoBold.className)}>
-            Shop Now
-          </Button>
-        </Link>
-      </section> */}
+  {/* 5. FOOTER CTA: High-Performance Nutrition Style */}
+      <section className="py-40 bg-[#f3eee4] px-6">
+        <div className="max-w-5xl mx-auto text-center space-y-12">
+          {/* Subtle Accent Script */}
+          <p className={cn("text-3xl md:text-5xl text-[#f20028] lowercase italic", runWild.className)}>
+            fuel that actually feels good
+          </p>
+          
+          {/* Sentence Case Heading */}
+          <h2 className={cn("text-7xl md:text-[160px] text-black leading-[0.85] tracking-tighter", utoBlack.className)}>
+            Ready to<br />transform?
+          </h2>
+          
+          <div className="pt-8">
+            <Link href="#lineup">
+              <Button className={cn("h-20 md:h-24 px-16 md:px-24 rounded-full bg-black text-[#f3eee4] text-2xl md:text-3xl font-bold hover:bg-[#f20028] hover:scale-105 transition-all duration-500 shadow-2xl border-none", utoBold.className)}>
+                Shop Gutsy
+              </Button>
+            </Link>
+          </div>
+          
+          {/* Protein-Specific Trust Signals */}
+          <p className={cn("text-xs md:text-sm uppercase tracking-[0.3em] text-black/30 font-black pt-12", utoBold.className)}>
+            Enzymatically Pre-Digested • Zero Bloat • 20g Plant Protein
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
