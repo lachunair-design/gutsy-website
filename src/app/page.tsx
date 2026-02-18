@@ -70,16 +70,14 @@ export default async function HomePage() {
       {/* 2. FIXED SCROLLYTELLING (Passing utoBold to fix the error) */}
       <Scrollytelling utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
-      <section className="py-40 bg-white">
-        <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
-      </section>
+      <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
       <MarqueeRail />
 
       {/* 3. LINEUP (Open Editorial Layout) */}
-      <section id="lineup" className="py-40 bg-[#f3eee4]">
+      <section id="lineup" className="py-20 bg-[#f3eee4]">
         <div className="max-w-7xl mx-auto px-8">
-          <div className="flex flex-col md:flex-row items-end gap-6 mb-24">
+          <div className="flex flex-col md:flex-row items-end gap-6 mb-12">
             <h2 className={cn("text-7xl md:text-[140px] uppercase tracking-tighter text-black leading-none", utoBlack.className)}>The Lineup</h2>
             <p className={cn("text-4xl md:text-6xl text-[#f20028] mb-2", runWild.className)}>grab yours</p>
           </div>
