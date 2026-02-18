@@ -9,10 +9,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface Props {
   utoBlack: any;
+  utoBold: any;
   runWild: any;
 }
 
-export function HomeScrollytelling({ utoBlack, runWild }: Props) {
+export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
   const containerRef = useRef(null);
   const triggerRef = useRef(null);
   const scissorsRef = useRef(null);

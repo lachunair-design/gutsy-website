@@ -87,7 +87,7 @@ export default async function HomePage() {
       </section>
 
       {/* THE SCROLLYTELLING MASTER SECTION */}
-      <Scrollytelling utoBlack={utoBlack} runWild={runWild} />
+      <Scrollytelling utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
       {/* FUN FACT SECTION */}
       <div className="py-32 bg-[#f3eee4]">
