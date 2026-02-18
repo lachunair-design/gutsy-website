@@ -10,7 +10,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
 import { ArrowUp } from 'lucide-react';
-import { HomeScrollytelling } from '@/components/home-scrollytelling'; // New Component
+import { HomeScrollytelling } from 'src/app/scrollytelling.tsx'; // New Component
 
 // BRANDED FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
