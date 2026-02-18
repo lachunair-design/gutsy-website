@@ -8,6 +8,7 @@ import { getProducts } from '@/lib/shopify';
 import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -25,7 +26,6 @@ export default async function HomePage() {
     console.error('Error fetching products:', error);
   }
 
-  // Use the first product for the inline PDP — it should be the main GUTSY Protein
   const mainProduct = products[0] || null;
 
   return (
@@ -34,16 +34,11 @@ export default async function HomePage() {
       {/* HERO SECTION */}
       <section className="relative">
         <div className="bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center">
-
-          {/* BACKGROUND DECORATION */}
           <div className="absolute inset-0 opacity-10 mix-blend-multiply pointer-events-none">
              <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-150 md:scale-110 translate-x-1/4" priority />
           </div>
-
           <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-10 w-full py-16 md:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-              {/* LEFT: TEXT CONTENT */}
               <div className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1">
                 <h2 className={cn("text-[#f3eee4] text-4xl md:text-7xl lowercase mb-[-0.5rem] md:mb-[-2rem] ml-2 md:ml-4 rotate-[-3deg]", runWild.className)}>
                   finally, a protein that
@@ -67,22 +62,11 @@ export default async function HomePage() {
                   </Link>
                 </div>
               </div>
-
-              {/* RIGHT: PRODUCT IMAGE */}
               <div className="lg:col-span-5 order-1 lg:order-2 flex justify-center">
-                <div
-                  className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]"
-                >
-                  <Image
-                    src="/images/floating-package.png"
-                    alt="GUTSY Protein Pouches"
-                    fill
-                    className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]"
-                    priority
-                  />
+                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]">
+                  <Image src="/images/floating-package.png" alt="GUTSY Protein Pouches" fill className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.4)]" priority />
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -136,7 +120,6 @@ export default async function HomePage() {
             <h2 className={cn("text-5xl md:text-8xl uppercase text-black leading-none", utoBlack.className)}>FIVE CORE INGREDIENTS.</h2>
             <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase", runWild.className)}>That&apos;s it.</p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-black w-full">
             {[
               { title: "Hydrolyzed Pea & Rice Protein", desc: "Pre-broken down protein molecules. Your stomach doesn't have to work overtime." },
@@ -154,12 +137,52 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* FUN FACT SECTION */}
+      <section className="py-20 bg-[#f3eee4]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-12">
+          {/* Illustration Side */}
+          <div className="relative w-full md:w-1/2 flex justify-center md:justify-start">
+            <div className="relative">
+              <h2 className={cn("text-5xl md:text-7xl uppercase text-[#3a4128] tracking-tight mb-4", utoBlack.className)}>
+                FUN FACT
+              </h2>
+              {/* Illustration Placeholder - replace with your actual SVG or Image */}
+              <div className="relative w-[280px] h-[200px] md:w-[400px] md:h-[300px]">
+                <Image 
+                  src="/images/fun-fact-illustration.png" 
+                  alt="Fun fact illustration" 
+                  fill 
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Text & Control Side */}
+          <div className="w-full md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left">
+            <p className="text-xl md:text-2xl text-[#3a4128] font-mono leading-tight mb-8">
+              A chicken can live for MONTHS with its head cut off. Isn&apos;t that crazy??!
+            </p>
+            
+            {/* Carousel-style Controls */}
+            <div className="flex border border-[#3a4128] rounded-full overflow-hidden w-40">
+              <button className="flex-1 py-2 flex justify-center hover:bg-black/5 transition-colors border-r border-[#3a4128]">
+                <ChevronLeft className="w-6 h-6 text-[#3a4128]" />
+              </button>
+              <button className="flex-1 py-2 flex justify-center hover:bg-black/5 transition-colors">
+                <ChevronRight className="w-6 h-6 text-[#3a4128]" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* MARQUEE RAIL */}
       <div className="-mx-3 md:-mx-6 lg:-mx-8">
         <MarqueeRail />
       </div>
 
-      {/* LINEUP — Full product detail with variant selector + subscribe */}
+      {/* LINEUP */}
       <section id="lineup" className="py-12 md:py-16 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-2">
           <div className="flex flex-col md:flex-row items-center md:items-baseline gap-2 md:gap-4 mb-10 md:mb-16 text-black text-center md:text-left">
@@ -170,12 +193,8 @@ export default async function HomePage() {
             <ProductDetail product={mainProduct} inline />
           ) : (
             <div className="text-center py-12 md:py-16">
-              <p className={cn("text-4xl md:text-5xl lowercase text-black/20 mb-6", runWild.className)}>
-                products loading soon
-              </p>
-              <p className="text-base md:text-lg opacity-60 font-medium px-6">
-                Check back shortly — we&apos;re stocking the shelves.
-              </p>
+              <p className={cn("text-4xl md:text-5xl lowercase text-black/20 mb-6", runWild.className)}>products loading soon</p>
+              <p className="text-base md:text-lg opacity-60 font-medium px-6">Check back shortly — we&apos;re stocking the shelves.</p>
             </div>
           )}
         </div>
