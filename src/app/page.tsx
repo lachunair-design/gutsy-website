@@ -289,7 +289,9 @@ export default async function HomePage() {
           <div className="bg-white rounded-3xl shadow-md overflow-hidden">
             <div className="grid grid-cols-2 py-4 px-6 uppercase text-[10px] tracking-[0.3em] text-black/40 font-black border-b border-black/5">
               <div>Regular Protein</div>
-              <div className="text-[#f20028]">GUTSY</div>
+              <div>
+                <Image src="/images/gutsy-logomark.png" alt="GUTSY" width={80} height={24} className="h-3 w-auto object-contain brightness-0" />
+              </div>
             </div>
             {[
               ["Massive molecules gut struggles with", "Pre-digested tiny peptides"],
