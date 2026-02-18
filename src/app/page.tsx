@@ -12,13 +12,11 @@ import { FunFactCarousel } from './fun-fact-carousel';
 import { ArrowUp } from 'lucide-react';
 import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 
-// BRANDED FONT CONFIGURATION
+// FONTS
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
-
-export const revalidate = 60;
 
 export default async function HomePage() {
   let products: ShopifyProduct[] = [];
@@ -31,108 +29,124 @@ export default async function HomePage() {
   const mainProduct = products[0] || null;
 
   return (
-    /* ADJUSTED pt-24 md:pt-32 to pt-32 md:pt-44 to clear the header */
-    <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-16 md:pt-24 pb-8 space-y-8 selection:bg-[#ffb300] relative [overflow-x:clip]", utoMedium.className)}>
-
-      {/* STICKY DISCOUNTS & UTILITIES */}
+    <div className={cn("bg-[#f3eee4] min-h-screen pt-20 md:pt-28 pb-12 selection:bg-[#ffb300]/30", utoMedium.className)}>
+      
+      {/* FLOATING PREMIUM UTILITIES (Softened) */}
       <div className="fixed left-6 bottom-10 z-[100] hidden md:block">
-        <Button className={cn("h-14 px-6 rounded-full bg-[#ffb300] text-black text-xl font-black border-4 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>
+        <Button className={cn("h-14 px-8 rounded-full bg-[#ffb300] text-black text-lg font-bold shadow-xl hover:scale-105 transition-transform duration-300 border-none", utoBold.className)}>
           10% OFF
         </Button>
       </div>
 
-      <Link href="#" className="fixed right-6 bottom-10 z-[100] hidden md:flex h-14 w-14 items-center justify-center rounded-full bg-white border-4 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-y-1 hover:shadow-none transition-all">
-        <ArrowUp className="w-8 h-8 text-black stroke-[3px]" />
+      <Link href="#" className="fixed right-6 bottom-10 z-[100] hidden md:flex h-14 w-14 items-center justify-center rounded-full bg-white/80 backdrop-blur-md shadow-lg hover:bg-white transition-all">
+        <ArrowUp className="w-6 h-6 text-black" />
       </Link>
 
-      {/* SEAMLESS HERO SECTION */}
-      <section className="relative">
-        <div className="bg-[#f20028] rounded-[40px] md:rounded-[60px] lg:rounded-[80px] min-h-[85vh] md:min-h-[90vh] relative overflow-hidden flex items-center border-4 border-black">
-          <div className="absolute inset-0 opacity-20 mix-blend-soft-light pointer-events-none z-0">
-             <Image src="/images/MARATHON.png" alt="" fill className="object-contain scale-150 md:scale-110 translate-x-1/4" priority />
+      {/* HERO SECTION: EDITORIAL STYLE */}
+      <section className="px-3 md:px-6">
+        <div className="bg-[#f20028] rounded-[60px] md:rounded-[100px] min-h-[85vh] relative overflow-hidden flex items-center shadow-2xl">
+          {/* Subtle Background Texture/Image */}
+          <div className="absolute inset-0 z-0 overflow-hidden">
+             <Image src="/images/girl-on-tennis-with-cacao.png" alt="" fill className="object-cover brightness-[0.85] scale-105" priority />
           </div>
-          <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 hidden lg:block z-10">
-            <Image src="/images/girl-on-tennis-with-cacao.png" alt="GUTSY Lifestyle" fill className="object-cover object-center" priority />
-          </div>
-          <div className="mx-auto max-w-7xl px-6 md:px-12 relative z-20 w-full py-16 md:py-24">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-7 text-center lg:text-left">
-                <h2 className={cn("text-[#f3eee4] text-5xl md:text-8xl lowercase mb-[-1.5rem] md:mb-[-2.5rem] ml-2 md:ml-4 rotate-[-4deg] relative z-30 drop-shadow-sm", runWild.className)}>finally, a protein that</h2>
-                <h1 className={cn("text-black text-7xl md:text-[120px] lg:text-[140px] leading-[0.8] uppercase tracking-tighter mb-8 drop-shadow-md", utoBlack.className)}>FEELS LIGHT</h1>
-                <p className="text-[#f3eee4] text-xl md:text-2xl max-w-lg font-bold uppercase leading-tight italic mx-auto lg:mx-0 mb-10">No bloat. No brick in your stomach. Just enzymatically pre-digested protein.</p>
-                <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                  <Link href="#lineup" className="w-full sm:w-auto"><Button className={cn("w-full h-16 md:h-20 px-12 rounded-full bg-black text-[#f3eee4] text-2xl font-bold border-4 border-black shadow-[6px_6px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}>Shop Now</Button></Link>
-                  <Link href="/about" className="w-full sm:w-auto"><Button variant="outline" className={cn("w-full h-16 md:h-20 px-12 rounded-full border-4 border-black bg-transparent text-black text-2xl font-bold hover:bg-[#f3eee4] transition-all", utoBold.className)}>Our Story</Button></Link>
-                </div>
-              </div>
-              <div className="lg:hidden w-full aspect-square relative rounded-[20px] overflow-hidden border-4 border-black z-10">
-                <Image src="/images/girl-on-tennis-with-cacao.png" alt="GUTSY Lifestyle" fill className="object-cover" />
+          
+          <div className="mx-auto max-w-7xl px-8 md:px-16 relative z-20 w-full py-20">
+            <div className="max-w-3xl">
+              <h2 className={cn("text-[#f3eee4] text-4xl md:text-6xl lowercase mb-2 drop-shadow-md", runWild.className)}>
+                finally, a protein that
+              </h2>
+              <h1 className={cn("text-[#f3eee4] text-7xl md:text-[130px] leading-[0.85] uppercase tracking-tighter mb-8 drop-shadow-xl", utoBlack.className)}>
+                FEELS LIGHT
+              </h1>
+              <p className="text-[#f3eee4] text-xl md:text-2xl max-w-md font-medium uppercase leading-snug mb-10 opacity-90">
+                No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="#lineup">
+                  <Button className={cn("h-16 md:h-20 px-12 rounded-full bg-white text-black text-xl font-bold hover:bg-[#ffb300] transition-colors shadow-lg", utoBold.className)}>
+                    Shop Now
+                  </Button>
+                </Link>
+                <Link href="/about">
+                  <Button variant="outline" className={cn("h-16 md:h-20 px-12 rounded-full border-2 border-white/40 bg-white/10 backdrop-blur-md text-white text-xl font-bold hover:bg-white/20 transition-all", utoBold.className)}>
+                    Our Story
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* THE SCROLLYTELLING MASTER SECTION (Replaces Problem, Science, & Inside sections) */}
+      {/* SCROLLYTELLING */}
       <Scrollytelling utoBlack={utoBlack} runWild={runWild} />
 
-      {/* FUN FACT SECTION */}
-      <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
-
-      {/* SLIM MARQUEE RAIL */}
-      <div className="-mx-3 md:-mx-6 lg:-mx-4 py-2 md:py-4 overflow-hidden">
-        <MarqueeRail />
+      {/* FUN FACT CAROUSEL (Spacing adjusted for "Premium" breathability) */}
+      <div className="py-20">
+        <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
       </div>
 
-      {/* LINEUP */}
-      <section id="lineup" className="py-12 md:py-16 scroll-mt-28">
-        <div className="mx-auto max-w-7xl px-2">
-          <div className="flex flex-col md:flex-row items-center md:items-baseline gap-2 md:gap-4 mb-10 md:mb-16 text-black text-center md:text-left">
-            <h2 className={cn("text-5xl md:text-8xl uppercase tracking-tight", utoBlack.className)}>The Lineup</h2>
-            <p className={cn("text-4xl md:text-5xl text-[#f20028] lowercase", runWild.className)}>grab yours</p>
+      <MarqueeRail />
+
+      {/* LINEUP (Softened borders, centered editorial feel) */}
+      <section id="lineup" className="py-24 scroll-mt-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-16">
+            <h2 className={cn("text-6xl md:text-9xl uppercase tracking-tighter text-black", utoBlack.className)}>The Lineup</h2>
+            <p className={cn("text-4xl md:text-5xl text-[#f20028] mt-[-1rem]", runWild.className)}>grab yours</p>
           </div>
-          {mainProduct ? <ProductDetail product={mainProduct} inline /> : <div className="text-center py-12 md:py-16 text-black/20 font-medium">products loading soon</div>}
+          <div className="bg-white rounded-[50px] p-8 md:p-16 shadow-sm border border-black/5">
+             {mainProduct ? <ProductDetail product={mainProduct} inline /> : <div className="text-center py-16 opacity-20">loading...</div>}
+          </div>
         </div>
       </section>
 
-      {/* SOCIAL PROOF */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto bg-[#ffb300] rounded-[30px] md:rounded-[60px] p-8 md:p-12 border-4 border-black shadow-[15px_15px_0px_0px_#000000]">
-          <h2 className={cn("text-4xl md:text-7xl uppercase text-black text-center mb-10 md:mb-16", utoBlack.className)}>WHAT PEOPLE SAY</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-black">
+      {/* SOCIAL PROOF: THE "POLAROID" LIFESTYLE LOOK */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto bg-[#ffb300] rounded-[80px] p-12 md:p-24 shadow-2xl relative overflow-hidden">
+          <h2 className={cn("text-5xl md:text-8xl uppercase text-black text-center mb-20", utoBlack.className)}>WHAT PEOPLE SAY</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
             {[{ quote: "Super light. I can finally have protein without feeling heavy.", author: "Beta Tester, Dubai" }, { quote: "No bloating. First protein powder that doesn't make me regret it.", author: "Beta Tester, Abu Dhabi" }, { quote: "I was skeptical but this actually works. Feels completely different.", author: "Beta Tester, Dubai" }].map((t, i) => (
-              <div key={i} className="flex flex-col space-y-3 text-center md:text-left">
-                <p className={cn("text-3xl md:text-4xl lowercase leading-tight", runWild.className)}>&ldquo;{t.quote}&rdquo;</p>
-                <p className={cn("text-xs md:text-sm uppercase tracking-widest font-black", utoBold.className)}>— {t.author}</p>
+              <div key={i} className="flex flex-col space-y-6">
+                <p className={cn("text-3xl md:text-4xl lowercase leading-tight text-black/80", runWild.className)}>&ldquo;{t.quote}&rdquo;</p>
+                <div className="h-px w-12 bg-black/20" />
+                <p className={cn("text-sm uppercase tracking-[0.2em] font-black opacity-60", utoBold.className)}>{t.author}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* COMPARISON TABLE */}
-      <section className="py-16 md:py-24 px-4 max-w-5xl mx-auto">
-        <h2 className={cn("text-4xl md:text-8xl uppercase text-black text-center mb-10 leading-none", utoBlack.className)}>HOW WE&apos;RE DIFFERENT</h2>
-        <div className="border-4 border-black rounded-[20px] overflow-hidden bg-white text-black font-bold">
-          <div className="grid grid-cols-2 bg-black text-[#f3eee4] py-6 px-8 uppercase text-xl">
+      {/* COMPARISON TABLE: REFINED & MINIMAL */}
+      <section className="py-24 px-6 max-w-5xl mx-auto">
+        <h2 className={cn("text-5xl md:text-8xl uppercase text-black text-center mb-16", utoBlack.className)}>HOW WE&apos;RE DIFFERENT</h2>
+        <div className="rounded-[40px] overflow-hidden bg-white shadow-xl border border-black/5">
+          <div className="grid grid-cols-2 bg-zinc-950 py-8 px-10 uppercase text-sm tracking-widest text-zinc-400">
             <div>Regular Protein</div>
             <div className="text-[#ffb300]">GUTSY</div>
           </div>
           {[["Massive molecules gut struggles with", "Pre-digested tiny pieces"], ["Gums and thickeners bloat", "Zero fillers"], ["15+ ingredients unknown", "5 core ingredients"]].map((row, i) => (
-            <div key={i} className="grid grid-cols-2 border-b-2 border-black/10 py-8 px-8">
-              <div className="opacity-50">{row[0]}</div>
-              <div className="text-[#f20028]">{row[1]}</div>
+            <div key={i} className="grid grid-cols-2 border-b border-zinc-100 py-10 px-10 text-lg md:text-xl font-medium">
+              <div className="text-zinc-400 pr-4">{row[0]}</div>
+              <div className="text-black">{row[1]}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* EMAIL & FOOTER */}
-      <section className="px-4 md:px-6 max-w-5xl mx-auto"><EmailCapture /></section>
-      <section className="pb-8 px-4">
-        <div className="bg-black rounded-[30px] md:rounded-[80px] py-20 px-6 text-center border-4 border-[#f3eee4] shadow-[20px_20px_0px_0px_#f20028]">
-          <h2 className={cn("text-4xl md:text-9xl uppercase text-[#f3eee4] mb-8", utoBlack.className)}>Ready to <br /> transform?</h2>
-          <Link href="#lineup"><Button className={cn("h-16 md:h-20 px-16 rounded-full bg-[#f20028] text-white text-2xl font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] transition-all", utoBold.className)}>Shop Now</Button></Link>
+      {/* EMAIL & FOOTER: HIGH-CONTRAST PREMIUM */}
+      <section className="px-6 mb-12"><EmailCapture /></section>
+      
+      <section className="px-6 pb-12">
+        <div className="bg-zinc-950 rounded-[60px] md:rounded-[100px] py-32 px-10 text-center shadow-2xl">
+          <h2 className={cn("text-6xl md:text-[150px] uppercase text-[#f3eee4] mb-12 leading-[0.85] tracking-tighter", utoBlack.className)}>
+            Ready to <br /> transform?
+          </h2>
+          <Link href="#lineup">
+            <Button className={cn("h-20 px-20 rounded-full bg-[#f20028] text-white text-2xl font-bold hover:scale-105 transition-transform shadow-xl", utoBold.className)}>
+              Shop Now
+            </Button>
+          </Link>
         </div>
       </section>
     </div>
