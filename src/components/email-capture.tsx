@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 
@@ -62,9 +61,8 @@ export function EmailCapture({ compact = false }: EmailCaptureProps) {
   return (
     <div className="py-24 text-center">
       {/* Editorial Heading: Sentence case, no-screaming */}
-      <h2 className={cn('text-6xl md:text-[100px] text-black leading-[0.85] tracking-tighter mb-4 flex items-center justify-center gap-4 flex-wrap', utoBlack.className)}>
-        Stay
-        <Image src="/images/gutsy-logomark.png" alt="Gutsy" width={320} height={96} className="inline-block h-[0.8em] w-auto brightness-0 relative top-[0.02em]" />
+      <h2 className={cn('text-6xl md:text-[100px] text-black leading-[0.85] tracking-tighter mb-4', utoBlack.className)}>
+        Stay Gutsy
       </h2>
       
       <p className={cn('text-3xl md:text-5xl text-[#f20028] mb-12', runWild.className)}>

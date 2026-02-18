@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 
@@ -108,9 +107,8 @@ export function WelcomePopup() {
                 </div>
 
                 <div className="text-center">
-                  <h2 className={cn("text-4xl md:text-5xl text-black tracking-tighter mb-2 flex items-center justify-center gap-3 flex-wrap", utoBlack.className)}>
-                    Welcome to
-                    <Image src="/images/gutsy-logomark.png" alt="GUTSY" width={160} height={48} className="inline-block h-[1em] w-auto brightness-0 relative top-[0.05em]" />
+                  <h2 className={cn("text-4xl md:text-5xl text-black tracking-tighter mb-2", utoBlack.className)}>
+                    Welcome to GUTSY
                   </h2>
                   <p className={cn("text-2xl text-[#f20028]", runWild.className)}>
                     Get 10% off your first order
