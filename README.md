@@ -1,45 +1,78 @@
-# Gutsy - Premium Protein E-Commerce
+# GUTSY — Gut-Friendly Protein
 
-A modern, headless e-commerce website for Gutsy protein supplements built with Next.js and Shopify.
+A premium e-commerce website for GUTSY protein supplements, built with Next.js 14 and Shopify Headless.
 
 ## Tech Stack
 
 - **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **E-commerce**: Shopify Storefront API (Headless)
+- **E-commerce**: Shopify Storefront API (2024-01)
+- **Animations**: GSAP (ScrollTrigger, Observer) + Framer Motion
 - **Deployment**: Vercel (recommended)
 
 ## Features
 
-- Clean, minimal design
-- Fully responsive
-- Shopify integration for products and cart
-- Server-side rendering for SEO
-- Fast page loads with Next.js optimization
+- Premium lifestyle aesthetic with scroll-driven storytelling
+- GSAP-powered scrollytelling section with animated protein molecule breakdown
+- Welcome popup with quiz flow and email capture
+- Marquee rail with scroll-velocity-reactive speed
+- Fun fact carousel with auto-advance timer
+- Shopify headless cart with drawer UI and focus trapping
+- Fully responsive across all breakpoints
+- WCAG AA accessibility (skip-to-content, ARIA labels, focus rings, reduced motion support)
+- SEO-optimized metadata with Open Graph and Twitter cards
+- Static generation with ISR for product pages
 
 ## Pages
 
-- **Home** - Hero section, featured products, and CTA
-- **Products** - Product grid with all items
-- **Product Detail** - Individual product pages
-- **About** - Company story and values
-- **Contact** - Contact form and FAQ
+| Route | Description |
+|---|---|
+| `/` | Homepage — hero, scrollytelling, science, ingredients, product lineup, social proof, comparison |
+| `/about` | Brand story with parallax hero and vertical marquee |
+| `/contact` | Contact form, WhatsApp, and Instagram cards |
+| `/FAQ` | Accordion FAQ with deep-linking via hash and sidebar contact card |
+| `/products` | Product grid |
+| `/products/[handle]` | Dynamic product detail (SSG with revalidation) |
+| `/privacy` | Privacy Policy |
+| `/terms` | Terms of Service |
+| `/shipping` | Shipping Policy |
+| Custom 404 | Illustrated lost-gut-character page |
+
+## Brand
+
+### Colors
+
+| Token | Hex | Usage |
+|---|---|---|
+| Black | `#000000` | Primary text, backgrounds |
+| Red | `#f20028` | CTAs, accents, energy |
+| Gold | `#ffb300` | Highlights, secondary CTAs |
+| Cream | `#f3eee4` | Page backgrounds, light text |
+
+### Fonts
+
+| Font | Weights | Usage |
+|---|---|---|
+| **Uto** | Black, Bold, Medium, Regular | Headlines, UI, body |
+| **RunWild** | Regular | Handwritten accents, subheadings |
+
+Font files live in `public/fonts/` and are loaded via `next/font/local`.
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js 18+
-- npm or yarn
+- npm
 - Shopify store with Storefront API access
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/gutsy.git
-   cd gutsy
+   git clone <repo-url>
+   cd gutsy-website
    ```
 
 2. Install dependencies:
@@ -84,21 +117,42 @@ A modern, headless e-commerce website for Gutsy protein supplements built with N
 
 ```
 src/
-├── app/                    # Next.js App Router pages
-│   ├── about/             # About page
-│   ├── contact/           # Contact page
-│   ├── products/          # Products listing and detail pages
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
-├── components/            # React components
-│   ├── cart/              # Cart components
-│   ├── layout/            # Header, Footer
-│   ├── product/           # Product components
-│   └── ui/                # UI primitives
-└── lib/                   # Utilities and integrations
-    ├── shopify/           # Shopify API integration
-    └── utils.ts           # Helper functions
+├── app/
+│   ├── about/              # Brand story page
+│   ├── contact/            # Contact form page
+│   ├── FAQ/                # Accordion FAQ page
+│   ├── privacy/            # Privacy Policy
+│   ├── products/
+│   │   └── [handle]/       # Dynamic product detail (SSG)
+│   ├── shipping/           # Shipping Policy
+│   ├── terms/              # Terms of Service
+│   ├── fun-fact-carousel.tsx  # Auto-advancing fun facts
+│   ├── scrollytelling.tsx     # GSAP scroll-pinned story
+│   ├── globals.css         # Global styles and animations
+│   ├── layout.tsx          # Root layout (header, footer, cart, skip-to-content)
+│   ├── not-found.tsx       # Custom 404
+│   └── page.tsx            # Homepage
+├── components/
+│   ├── cart/
+│   │   └── cart-drawer.tsx    # Slide-out cart with focus trap
+│   ├── layout/
+│   │   ├── header.tsx         # Fixed header with scroll state
+│   │   └── footer.tsx         # 4-column footer with newsletter
+│   ├── product/
+│   │   ├── product-card.tsx   # Product grid card
+│   │   └── product-detail.tsx # Full product page component
+│   ├── ui/
+│   │   └── button.tsx         # Base button component
+│   ├── email-capture.tsx      # Newsletter signup section
+│   ├── marquee-rail.tsx       # GSAP horizontal marquee
+│   ├── wave-divider.tsx       # SVG section divider
+│   └── welcome-popup.tsx      # Quiz-style welcome modal
+└── lib/
+    ├── shopify/
+    │   ├── cart-context.tsx    # Cart state (React Context + localStorage)
+    │   ├── index.ts           # Storefront API queries
+    │   └── types.ts           # Shopify type definitions
+    └── utils.ts               # cn(), formatPrice()
 ```
 
 ## Development
@@ -128,31 +182,7 @@ npm run lint
 
 ### Other Platforms
 
-The project can be deployed to any platform that supports Next.js, including:
-- Netlify
-- AWS Amplify
-- Railway
-- Self-hosted
-
-## Customization
-
-### Colors
-
-Edit the color palette in `tailwind.config.ts`:
-
-```typescript
-colors: {
-  gutsy: {
-    black: '#0a0a0a',
-    accent: '#10b981', // Change accent color
-    // ...
-  }
-}
-```
-
-### Fonts
-
-The project uses Inter by default. Change fonts in `src/app/layout.tsx`.
+The project can be deployed to any platform that supports Next.js, including Netlify, AWS Amplify, Railway, or self-hosted.
 
 ## License
 
