@@ -142,7 +142,7 @@ export default function AboutPage() {
           </div>
 
           {/* TRUST BADGES */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 border-t-4 border-black/20 pt-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 border-t border-black/10 pt-12">
             {[
               { icon: Leaf, text: "100% Vegan" },
               { icon: ShieldCheck, text: "No Gums/Fillers" },
@@ -162,7 +162,7 @@ export default function AboutPage() {
 
 
       {/* CTA SECTION */}
-      <section className="bg-black rounded-[30px] md:rounded-[60px] lg:rounded-[80px] py-20 md:py-32 border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
+      <section className="bg-black rounded-[30px] md:rounded-[60px] lg:rounded-[80px] py-20 md:py-32 shadow-xl">
         <div className="mx-auto max-w-3xl px-6 text-center space-y-8 md:space-y-10">
           <h3 className={cn("text-5xl md:text-9xl uppercase leading-tight text-[#f3eee4]", utoBlack.className)}>READY?</h3>
           {emailStatus === 'success' ? (

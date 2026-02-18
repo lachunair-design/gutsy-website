@@ -42,17 +42,16 @@ html {
 }
 
 body {
-  /* Updated to brand cream to kill the top white space glitch */
   @apply antialiased text-[#000000] bg-[#f3eee4];
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-/* Custom scrollbar - Brutalist Aesthetic */
+/* Custom scrollbar - Premium */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -60,16 +59,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #000000;
+  background: rgba(0, 0, 0, 0.2);
   border: 2px solid #f3eee4;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f20028;
+  background: rgba(0, 0, 0, 0.4);
 }
 
-/* Utility to hide scrollbars for the overlapping pouch sections */
+/* Utility to hide scrollbars */
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -85,13 +84,70 @@ body {
   @apply outline-none ring-2 ring-[#f20028] ring-offset-2;
 }
 
-/* Selection - Gutsy Amber */
+/* Selection */
 ::selection {
   @apply bg-[#ffb300] text-black;
 }
 
-/* Helper for the vertical text in your footer discount tab */
+/* Vertical text helper */
 .vertical-text {
   writing-mode: vertical-lr;
   text-orientation: mixed;
+}
+
+/* ── Animations ── */
+
+/* Fade in */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Fade in and slide up */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+/* Timer progress for fun facts carousel */
+@keyframes timer-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.animate-timer-progress {
+  animation: timer-progress 10s linear forwards;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in,
+  .animate-fade-in-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }

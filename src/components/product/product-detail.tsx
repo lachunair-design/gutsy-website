@@ -172,7 +172,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
 
             {/* LEFT — Image (sticky on desktop) */}
             <div className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-              <div className="relative aspect-square bg-white rounded-[2rem] border-4 border-black shadow-[10px_10px_0px_0px_#000000] overflow-hidden">
+              <div className="relative aspect-square bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                 {displayImage ? (
                   <Image
                     src={displayImage.url}
@@ -201,8 +201,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                       className={cn(
                         'relative w-20 h-20 rounded-xl border-2 overflow-hidden transition-all shrink-0',
                         selectedImageIndex === i
-                          ? 'border-[#f20028] shadow-[3px_3px_0px_0px_#f20028]'
-                          : 'border-black/20 hover:border-black'
+                          ? 'border-[#f20028] shadow-md'
+                          : 'border-black/10 hover:border-black/30'
                       )}
                     >
                       <Image src={img.url} alt={img.altText || ''} fill className="object-cover" sizes="80px" />
@@ -256,8 +256,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                           className={cn(
                             'relative flex flex-col items-start text-left px-5 py-4 rounded-2xl border-2 transition-all',
                             isSelected
-                              ? 'border-[#f20028] bg-white shadow-[4px_4px_0px_0px_#f20028]'
-                              : 'border-black/20 bg-white hover:border-black',
+                              ? 'border-[#f20028] bg-white shadow-md'
+                              : 'border-black/10 bg-white hover:border-black/30',
                             !variant.availableForSale && 'opacity-40 cursor-not-allowed'
                           )}
                         >
@@ -291,7 +291,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                 <label className={cn('block text-xs uppercase tracking-[0.2em] font-bold mb-3', utoBold.className)}>
                   Quantity
                 </label>
-                <div className="inline-flex items-center bg-white border-2 border-black rounded-full p-1 shadow-[4px_4px_0px_0px_#000000]">
+                <div className="inline-flex items-center bg-white border border-black/10 rounded-full p-1 shadow-md">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="w-12 h-12 flex items-center justify-center text-xl font-bold hover:text-[#f20028] transition-colors"
@@ -322,8 +322,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                   className={cn(
                     'w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 transition-all text-left',
                     purchaseType === 'onetime'
-                      ? 'border-black bg-white shadow-[4px_4px_0px_0px_#000000]'
-                      : 'border-black/20 bg-white hover:border-black'
+                      ? 'border-black bg-white shadow-md'
+                      : 'border-black/10 bg-white hover:border-black/30'
                   )}
                 >
                   <div className="flex items-center gap-3">
@@ -345,8 +345,8 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                   className={cn(
                     'w-full flex items-center justify-between px-5 py-4 rounded-2xl border-2 transition-all text-left',
                     purchaseType === 'subscribe'
-                      ? 'border-[#ffb300] bg-[#ffb300]/10 shadow-[4px_4px_0px_0px_#ffb300]'
-                      : 'border-black/20 bg-white hover:border-[#ffb300]'
+                      ? 'border-[#ffb300] bg-[#ffb300]/10 shadow-md'
+                      : 'border-black/10 bg-white hover:border-[#ffb300]'
                   )}
                 >
                   <div className="flex items-center gap-3">
@@ -376,9 +376,9 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                 onClick={purchaseType === 'subscribe' ? handleSubscribe : handleAddToCart}
                 disabled={!selectedVariant.availableForSale || isAdding}
                 className={cn(
-                  'w-full h-16 rounded-full text-xl uppercase font-bold border-2 border-black transition-all',
+                  'w-full h-16 rounded-full text-xl uppercase font-bold transition-all duration-300',
                   selectedVariant.availableForSale
-                    ? 'bg-[#f20028] text-[#f3eee4] shadow-[4px_4px_0px_0px_#000000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_#000000] active:translate-x-0 active:translate-y-0 active:shadow-[2px_2px_0px_0px_#000000]'
+                    ? 'bg-[#f20028] text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]'
                     : 'bg-black/20 text-black/40 cursor-not-allowed',
                   utoBold.className
                 )}
@@ -393,7 +393,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
               </button>
 
               {/* ── Trust Badges ── */}
-              <div className="mt-8 pt-6 border-t-2 border-black/10">
+              <div className="mt-8 pt-6 border-t border-black/10">
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { label: '100% Plant-Based', icon: PlantIcon },
@@ -402,7 +402,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                     { label: '30-Day Guarantee', icon: ShieldIcon },
                   ].map((badge) => (
                     <div key={badge.label} className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider">
-                      <span className="w-8 h-8 flex items-center justify-center bg-white rounded-full border-2 border-black shrink-0">
+                      <span className="w-8 h-8 flex items-center justify-center bg-[#f3eee4] rounded-full border border-black/10 shrink-0">
                         <badge.icon />
                       </span>
                       {badge.label}
@@ -413,7 +413,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
 
               {/* ── Supplement Facts Accordion ── */}
               {nutrition && (
-                <div className="mt-6 border-2 border-black rounded-2xl overflow-hidden">
+                <div className="mt-6 border border-black/10 rounded-2xl overflow-hidden shadow-sm">
                   <button
                     onClick={() => setShowNutrition(!showNutrition)}
                     aria-expanded={showNutrition}
@@ -494,7 +494,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
 
               {/* ── Ingredients Accordion ── */}
               {nutrition && (
-                <div className="mt-3 border-2 border-black rounded-2xl overflow-hidden">
+                <div className="mt-3 border border-black/10 rounded-2xl overflow-hidden shadow-sm">
                   <button
                     onClick={() => setShowIngredients(!showIngredients)}
                     aria-expanded={showIngredients}

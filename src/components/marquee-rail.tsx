@@ -45,7 +45,7 @@ export function MarqueeRail() {
   }, []);
 
   return (
-    <section ref={railRef} className="py-12 bg-black -mx-4 md:-mx-8 overflow-hidden border-y-4 border-black">
+    <section ref={railRef} className="py-12 bg-black overflow-hidden">
       <div className="rail flex whitespace-nowrap py-4">
         {[...Array(10)].map((_, i) => (
           <h4 key={i} className={cn("text-[#f3eee4] text-6xl md:text-8xl uppercase tracking-tighter inline-block px-8", utoBlack.className)}>
