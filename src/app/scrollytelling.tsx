@@ -21,11 +21,9 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
   const bit3 = useRef(null);
 
   useGSAP(() => {
-    // 1. Check if we're on mobile
     const isMobile = window.innerWidth < 768;
     const sections = gsap.utils.toArray(".story-beat");
     
-    // Performance: Use will-change to prep the GPU
     gsap.set([bit1.current, bit2.current, bit3.current, scissorsRef.current], { 
       willChange: "transform, opacity" 
     });
@@ -36,12 +34,11 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
         start: "top top",
         end: "+=400%", 
         pin: true,
-        scrub: 0.8, // Reduced scrub for less "lag" feel
-        anticipatePin: 1, // Fixes jitter during the pin transition
+        scrub: 1, 
+        anticipatePin: 1,
       },
     });
 
-    // Mobile vs Desktop Animation Paths
     const xDist = isMobile ? 0 : 70;
     const yDist = isMobile ? 80 : 0;
 
@@ -73,14 +70,15 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
       duration: 1 
     }, 1.8);
 
-    // --- TEXT & BG FLOW ---
+    // --- TEXT & BG FLOW (Using GUTSY Palette) ---
     sections.forEach((section: any, i) => {
-      const bgColors = ["#000000", "#111111", "#f20028", "#f3eee4"];
+      // Transitioning through the GUTSY core colors
+      const bgColors = ["#000000", "#000000", "#f20028", "#f3eee4"];
       tl.to(triggerRef.current, { backgroundColor: bgColors[i], duration: 0.4 }, i);
 
-      tl.to(section, { opacity: 1, x: 0, duration: 0.4 }, i);
+      tl.to(section, { opacity: 1, y: 0, duration: 0.4 }, i);
       if (i < sections.length - 1) {
-        tl.to(section, { opacity: 0, x: -20, duration: 0.4 }, i + 0.75);
+        tl.to(section, { opacity: 0, y: -30, duration: 0.4 }, i + 0.75);
       }
     });
 
@@ -88,66 +86,70 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
 
   return (
     <div ref={containerRef} className="w-full">
-      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden rounded-[30px] md:rounded-[80px] border-4 border-black">
+      {/* Container overhaul: Removed border-4 and added expansive rounded corners */}
+      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden md:rounded-[120px] transition-colors duration-500">
         
-        {/* SVG CONTAINER - Responsive Sizing */}
+        {/* SVG CONTAINER - Premium Minimalist Visuals */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-          <svg viewBox="0 0 200 200" className="w-full h-[50vh] md:h-full max-w-[600px]">
-            <circle ref={bit1} cx="70" cy="100" r="12" fill="#f20028" stroke="currentColor" className="text-black/10" strokeWidth="1" />
-            <circle ref={bit2} cx="100" cy="100" r="12" fill="#f20028" stroke="currentColor" className="text-black/10" strokeWidth="1" />
-            <circle ref={bit3} cx="130" cy="100" r="12" fill="#f20028" stroke="currentColor" className="text-black/10" strokeWidth="1" />
+          <svg viewBox="0 0 200 200" className="w-full h-[50vh] md:h-full max-w-[700px] opacity-40">
+            <circle ref={bit1} cx="70" cy="100" r="10" fill="#f20028" />
+            <circle ref={bit2} cx="100" cy="100" r="10" fill="#f20028" />
+            <circle ref={bit3} cx="130" cy="100" r="10" fill="#f20028" />
             <g ref={scissorsRef} style={{ opacity: 0 }} transform="translate(90, 85)">
-               <path d="M-8,-8 L8,8 M-8,8 L8,-8" stroke="#ffb300" strokeWidth="3" strokeLinecap="round" />
+                <path d="M-8,-8 L8,8 M-8,8 L8,-8" stroke="#ffb300" strokeWidth="2" strokeLinecap="round" />
             </g>
           </svg>
         </div>
 
-        {/* CONTENT - Responsive Padding & Sizing */}
+        {/* CONTENT */}
         <div className="relative z-10 h-full w-full">
           
-          {/* BEAT 1 */}
-          <section className="story-beat absolute inset-0 flex items-end md:items-center px-6 md:px-24 pb-20 md:pb-0 opacity-0 -translate-x-5">
-            <div className="max-w-2xl space-y-4">
-              <h2 className={cn("text-5xl md:text-[130px] uppercase text-[#f20028] leading-[0.8]", utoBlack.className)}>
-                 WHY MOST<br/>PROTEIN SUCKS
+          {/* BEAT 1: WHY MOST PROTEIN SUCKS */}
+          <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
+            <div className="max-w-4xl space-y-8">
+              <h2 className={cn("text-6xl md:text-[160px] uppercase text-[#f20028] leading-[0.8] tracking-tighter", utoBlack.className)}>
+                  WHY MOST<br/>PROTEIN SUCKS
               </h2>
-              <p className="text-[#f3eee4] text-lg md:text-3xl font-medium leading-tight">
+              <p className="text-[#f3eee4] text-xl md:text-4xl font-medium leading-tight max-w-2xl opacity-80">
                 Regular protein molecules are massive chains. Your stomach works overtime trying to break them down.
               </p>
             </div>
           </section>
 
-          {/* BEAT 2 */}
-          <section className="story-beat absolute inset-0 flex items-end md:items-center px-6 md:px-24 pb-20 md:pb-0 opacity-0 -translate-x-5">
-            <div className="max-w-2xl space-y-4">
-              <p className={cn("text-3xl md:text-6xl text-[#ffb300] lowercase", runWild.className)}>the science of light</p>
-              <h2 className={cn("text-5xl md:text-[110px] uppercase text-[#f3eee4] leading-[0.8]", utoBlack.className)}>
-                 WE BREAK IT<br/>DOWN FIRST
+          {/* BEAT 2: THE SCIENCE */}
+          <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
+            <div className="max-w-4xl space-y-6">
+              <p className={cn("text-4xl md:text-7xl text-[#ffb300] lowercase mb-[-1rem]", runWild.className)}>the science of light</p>
+              <h2 className={cn("text-6xl md:text-[140px] uppercase text-[#f3eee4] leading-[0.8] tracking-tighter", utoBlack.className)}>
+                  WE BREAK IT<br/>DOWN FIRST
               </h2>
             </div>
           </section>
 
-          {/* BEAT 3 */}
-          <section className="story-beat absolute inset-0 flex items-end md:items-center px-6 md:px-24 pb-20 md:pb-0 opacity-0 -translate-x-5">
-            <div className="max-w-4xl space-y-6">
-              <h2 className={cn("text-5xl md:text-[110px] uppercase text-black leading-[0.8]", utoBlack.className)}>
+          {/* BEAT 3: FIVE CORE INGREDIENTS */}
+          <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
+            <div className="max-w-5xl space-y-10">
+              <h2 className={cn("text-6xl md:text-[140px] uppercase text-[#000000] leading-[0.8] tracking-tighter", utoBlack.className)}>
                 FIVE CORE<br/>INGREDIENTS.
               </h2>
-              <div className="grid grid-cols-2 gap-3 text-black font-bold uppercase text-[10px] md:text-lg">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#000000] font-bold uppercase tracking-[0.2em] text-sm md:text-2xl">
                 {["Pea & Rice", "Kiwifruit", "Adaptogens", "Coconut Milk"].map((item, i) => (
-                  <div key={i} className="border-l-2 md:border-l-4 border-black pl-3 py-1 bg-white/5">{item}</div>
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="w-12 h-[2px] bg-[#000000]/20" />
+                    <span>{item}</span>
+                  </div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* BEAT 4 */}
-          <section className="story-beat absolute inset-0 flex items-end md:items-center px-6 md:px-24 pb-20 md:pb-0 opacity-0 -translate-x-5">
-            <div className="max-w-3xl space-y-4">
-              <h2 className={cn("text-7xl md:text-[180px] uppercase text-black leading-[0.75]", utoBlack.className)}>
+          {/* BEAT 4: FEELS LIGHT */}
+          <section className="story-beat absolute inset-0 flex items-center px-6 md:px-32 opacity-0 translate-y-10">
+            <div className="max-w-4xl space-y-12">
+              <h2 className={cn("text-8xl md:text-[220px] uppercase text-[#000000] leading-[0.75] tracking-tighter", utoBlack.className)}>
                 FEELS<br/>LIGHT
               </h2>
-              <button className="bg-[#f20028] text-white px-8 py-4 md:px-12 md:py-6 rounded-full text-lg md:text-2xl font-bold uppercase shadow-[4px_4px_0px_0px_#000000]">
+              <button className={cn("bg-[#f20028] text-[#f3eee4] px-12 py-6 md:px-20 md:py-8 rounded-full text-xl md:text-3xl font-bold uppercase transition-transform hover:scale-105 shadow-2xl active:scale-95", utoBold.className)}>
                 Shop Gutsy
               </button>
             </div>
