@@ -378,7 +378,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                 className={cn(
                   'w-full h-16 rounded-full text-xl uppercase font-bold transition-all duration-300',
                   selectedVariant.availableForSale
-                    ? 'bg-[#f20028] text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]'
+                    ? 'bg-[#f20028] text-white shadow-lg hover:shadow-xl active:scale-[0.98] hover-bounce'
                     : 'bg-black/20 text-black/40 cursor-not-allowed',
                   utoBold.className
                 )}

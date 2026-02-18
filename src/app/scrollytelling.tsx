@@ -334,7 +334,7 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
                 No bloat. No brick in your stomach. Just protein that works with your body, not against it.
               </p>
               <Link href="/products" className={cn(
-                "scrolly-cta inline-flex items-center h-16 md:h-20 px-14 md:px-20 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300",
+                "scrolly-cta inline-flex items-center h-16 md:h-20 px-14 md:px-20 rounded-full bg-[#f20028] text-[#f3eee4] text-xl md:text-2xl font-bold shadow-xl hover:shadow-2xl active:scale-95 transition-all duration-300 hover-bounce",
                 utoBold.className
               )}>
                 Shop Gutsy

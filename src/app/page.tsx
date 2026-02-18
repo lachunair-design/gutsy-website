@@ -46,8 +46,12 @@ export default async function HomePage() {
             <h2 className={cn("text-[#f3eee4] text-4xl md:text-6xl lowercase mb-2", runWild.className)}>
               finally, a protein that
             </h2>
-            <h1 className={cn("text-white text-8xl md:text-[160px] leading-[0.8] uppercase tracking-tighter mb-10", utoBlack.className)}>
+            <h1 className={cn("text-white text-8xl md:text-[160px] leading-[0.8] uppercase tracking-tighter mb-10 relative inline-block", utoBlack.className)}>
               FEELS LIGHT
+              {/* Hand-drawn circle accent on "LIGHT" */}
+              <svg className="absolute -right-4 top-1/2 w-[55%] h-[120%] -translate-y-1/2 pointer-events-none" viewBox="0 0 200 100" fill="none" aria-hidden="true">
+                <ellipse cx="100" cy="50" rx="90" ry="40" stroke="#f20028" strokeWidth="2" strokeLinecap="round" className="animate-draw-circle" opacity="0.5" />
+              </svg>
             </h1>
             <p className="text-[#f3eee4] text-xl md:text-2xl max-w-md font-medium leading-tight mb-12 opacity-90">
               No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
@@ -55,7 +59,7 @@ export default async function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
               <Link href="#lineup">
-                <Button className={cn("h-14 md:h-16 px-10 rounded-full bg-black text-white text-lg md:text-xl font-bold hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg", utoBold.className)}>
+                <Button className={cn("h-14 md:h-16 px-10 rounded-full bg-black text-white text-lg md:text-xl font-bold hover:shadow-xl transition-all duration-300 shadow-lg hover-bounce", utoBold.className)}>
                   Shop Now
                 </Button>
               </Link>
@@ -85,7 +89,14 @@ export default async function HomePage() {
                 The Problem
               </p>
               <h2 className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter", utoBlack.className)}>
-                Most protein makes you feel like garbage.
+                Most protein makes you feel like{' '}
+                <span className="relative inline-block">
+                  garbage.
+                  {/* Hand-drawn underline accent */}
+                  <svg className="absolute -bottom-2 left-0 w-full h-3 pointer-events-none" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M2 8 Q50 2 100 7 Q150 12 198 4" stroke="#f20028" strokeWidth="3" strokeLinecap="round" className="animate-draw-underline" opacity="0.6" />
+                  </svg>
+                </span>
               </h2>
               <p className="text-lg md:text-xl text-black/70 leading-relaxed max-w-lg">
                 Massive protein molecules your gut can&apos;t break down. Gums and thickeners that bloat.
@@ -176,7 +187,14 @@ export default async function HomePage() {
               What&apos;s Inside
             </p>
             <h2 className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter mb-4", utoBlack.className)}>
-              Five core ingredients.
+              <span className="relative inline-block">
+                Five
+                {/* Hand-drawn circle accent */}
+                <svg className="absolute -inset-3 w-[calc(100%+24px)] h-[calc(100%+24px)] pointer-events-none" viewBox="0 0 120 80" fill="none" aria-hidden="true">
+                  <ellipse cx="60" cy="40" rx="52" ry="32" stroke="#ffb300" strokeWidth="2.5" strokeLinecap="round" className="animate-draw-circle" opacity="0.5" />
+                </svg>
+              </span>{' '}
+              core ingredients.
             </h2>
             <p className={cn("text-2xl md:text-3xl text-[#f20028] lowercase", runWild.className)}>
               nothing else.
@@ -239,7 +257,7 @@ export default async function HomePage() {
               { quote: "I've tried everything. This is the first protein powder that doesn't bloat me. Period.", name: "Ahmed R.", location: "Abu Dhabi" },
               { quote: "The taste is incredible and my stomach actually thanks me. Will never go back.", name: "Maya L.", location: "Dubai" },
             ].map((testimonial, i) => (
-              <div key={i} className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+              <div key={i} className="bg-white/80 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, j) => (
                     <svg key={j} className="w-5 h-5 text-[#ffb300]" fill="currentColor" viewBox="0 0 20 20">
@@ -311,7 +329,7 @@ export default async function HomePage() {
 
           <div className="flex flex-col items-center gap-8">
             <Link href="#lineup">
-              <Button className={cn("h-14 md:h-16 px-16 rounded-full bg-[#f20028] text-white text-xl md:text-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl", utoBold.className)}>
+              <Button className={cn("h-14 md:h-16 px-16 rounded-full bg-[#f20028] text-white text-xl md:text-2xl font-bold transition-all duration-300 shadow-xl hover-bounce", utoBold.className)}>
                 Shop Gutsy
               </Button>
             </Link>

@@ -48,7 +48,7 @@ export function Header() {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
-      scrolled ? "bg-white/80 backdrop-blur-lg py-4 shadow-sm" : "bg-transparent py-8 md:py-10"
+      scrolled ? "bg-white/70 backdrop-blur-xl backdrop-saturate-150 py-4 shadow-sm border-b border-white/30" : "bg-transparent py-8 md:py-10"
     )}>
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         

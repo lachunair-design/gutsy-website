@@ -57,7 +57,7 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
           </div>
 
           {/* CONTENT AREA: Reduced padding and smaller text for better density */}
-          <div className="flex-1 w-full bg-white/40 backdrop-blur-sm rounded-[40px] p-8 md:p-12 shadow-sm border border-black/5">
+          <div className="flex-1 w-full bg-white/50 backdrop-blur-xl backdrop-saturate-150 rounded-[40px] p-8 md:p-12 shadow-sm border border-white/40">
             <div className="flex flex-col gap-6">
               <div className="w-12 h-12 flex items-center justify-center bg-black rounded-full text-[#ffb300]">
                 {funFacts[currentFactIndex].icon}

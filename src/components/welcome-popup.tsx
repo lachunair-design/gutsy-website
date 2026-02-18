@@ -78,7 +78,7 @@ export function WelcomePopup() {
           prefersReducedMotion ? '' : 'animate-fade-in-up'
         )}
       >
-        <div className="bg-[#f3eee4] rounded-3xl md:rounded-[40px] shadow-2xl w-full max-w-lg relative overflow-hidden">
+        <div className="bg-[#f3eee4]/90 backdrop-blur-xl backdrop-saturate-150 border border-white/30 rounded-3xl md:rounded-[40px] shadow-2xl w-full max-w-lg relative overflow-hidden">
           {/* Close button */}
           <button
             onClick={handleClose}

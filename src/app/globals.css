@@ -133,6 +133,55 @@ body {
   animation: timer-progress 10s linear forwards;
 }
 
+/* CTA bounce on hover — tactile, rewarding */
+@keyframes cta-bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.07); }
+  50% { transform: scale(0.97); }
+  70% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.hover-bounce:hover {
+  animation: cta-bounce 0.45s ease-out;
+}
+
+/* Gentle float — for empty states and illustrations */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-gentle-float {
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+/* Hand-drawn circle accent — draws on scroll/load */
+@keyframes draw-circle {
+  from { stroke-dashoffset: 300; }
+  to { stroke-dashoffset: 0; }
+}
+
+.animate-draw-circle {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: draw-circle 1.2s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+/* Hand-drawn underline accent */
+@keyframes draw-underline {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+.animate-draw-underline {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: draw-underline 0.8s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -145,9 +194,16 @@ body {
   }
 
   .animate-fade-in,
-  .animate-fade-in-up {
+  .animate-fade-in-up,
+  .animate-gentle-float,
+  .animate-draw-circle,
+  .animate-draw-underline {
     animation: none;
     opacity: 1;
     transform: none;
+  }
+
+  .hover-bounce:hover {
+    animation: none;
   }
 }
