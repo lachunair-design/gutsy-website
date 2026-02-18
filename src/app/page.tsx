@@ -106,31 +106,35 @@ export default async function HomePage() {
 
       <EmailCapture />
       
-  {/* 5. FOOTER CTA: High-Performance Nutrition Style */}
-      <section className="py-40 bg-[#f3eee4] px-6">
-        <div className="max-w-5xl mx-auto text-center space-y-12">
-          {/* Subtle Accent Script */}
-          <p className={cn("text-3xl md:text-5xl text-[#f20028] lowercase italic", runWild.className)}>
+  {/* 5. FOOTER CTA: Compact & Refined */}
+      <section className="py-24 bg-[#f3eee4] px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Minimal Accent */}
+          <p className={cn("text-2xl md:text-3xl text-[#f20028] lowercase italic mb-4", runWild.className)}>
             fuel that actually feels good
           </p>
           
-          {/* Sentence Case Heading */}
-          <h2 className={cn("text-7xl md:text-[160px] text-black leading-[0.85] tracking-tighter", utoBlack.className)}>
-            Ready to<br />transform?
+          {/* Sentence Case Heading - Reduced vertical impact */}
+          <h2 className={cn("text-6xl md:text-[120px] text-black leading-[0.9] tracking-tighter mb-10", utoBlack.className)}>
+            Ready to transform?
           </h2>
           
-          <div className="pt-8">
+          <div className="flex flex-col items-center gap-8">
             <Link href="#lineup">
-              <Button className={cn("h-20 md:h-24 px-16 md:px-24 rounded-full bg-black text-[#f3eee4] text-2xl md:text-3xl font-bold hover:bg-[#f20028] hover:scale-105 transition-all duration-500 shadow-2xl border-none", utoBold.className)}>
+              <Button className={cn("h-16 md:h-20 px-16 rounded-full bg-black text-[#f3eee4] text-xl md:text-2xl font-bold hover:bg-[#f20028] transition-all duration-500 shadow-xl border-none", utoBold.className)}>
                 Shop Gutsy
               </Button>
             </Link>
+
+            {/* Protein-Specific Trust Signals: Horizontal Row */}
+            <div className={cn("flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-black/30 font-black", utoBold.className)}>
+              <span>Enzymatically Pre-Digested</span>
+              <span className="hidden md:inline">•</span>
+              <span>Zero Bloat</span>
+              <span className="hidden md:inline">•</span>
+              <span>20g Plant Protein</span>
+            </div>
           </div>
-          
-          {/* Protein-Specific Trust Signals */}
-          <p className={cn("text-xs md:text-sm uppercase tracking-[0.3em] text-black/30 font-black pt-12", utoBold.className)}>
-            Enzymatically Pre-Digested • Zero Bloat • 20g Plant Protein
-          </p>
         </div>
       </section>
     </div>
