@@ -49,7 +49,7 @@ export function MarqueeRail() {
       <div className="rail flex whitespace-nowrap py-4">
         {[...Array(10)].map((_, i) => (
           <h4 key={i} className={cn("text-[#f3eee4] text-6xl md:text-8xl uppercase tracking-tighter inline-block px-8", utoBlack.className)}>
-            FEELS LIGHT <span className="text-[#f20028]">—</span> NO BLOAT <span className="text-[#ffb300]">—</span> PRE-DIGESTED <span className="text-[#f20028]">—</span>
+            Feels Light <span className="text-[#f20028]">—</span> No Bloat <span className="text-[#ffb300]">—</span> Hydrolysed <span className="text-[#f20028]">—</span>
           </h4>
         ))}
       </div>

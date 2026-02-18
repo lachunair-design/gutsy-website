@@ -5,78 +5,20 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { ChevronDown } from 'lucide-react';
 
-// Initialize fonts with relative paths for build stability
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 const faqs = [
-  {
-    id: 'use',
-    question: 'How to use GUTSY?',
-    answer: 'Mix one scoop (25g) with 250-300ml of water, milk, or whatever you like. Shake it up. Drink it. Each container has 30 servings with 20g of protein per scoop. Some people use it post-workout, some use it as breakfast, some just drink it when they need protein. There\'s no magic timing.',
-  },
-  {
-    id: 'protein-count',
-    question: 'How much protein per serving?',
-    answer: '20g of complete protein per scoop. PDCAAS score of 1.0, which means your body can actually use all of it. No amino acid spiking, no nitrogen spiking. Just real, bioavailable protein.',
-  },
-  {
-    id: 'ingredients',
-    question: 'What\'s in GUTSY?',
-    answer: 'Core ingredients: Hydrolyzed pea and rice protein, coconut milk powder, monk fruit extract, Actazin (kiwifruit extract for digestion), Himalayan salt. \n\nWhat makes each flavor different: Vanilla Calm has vanilla flavoring and reishi mushroom extract. Cacao Boost has cacao flavoring and maca root extract. \n\nNo gums, no fillers, no ingredients that require a chemistry degree.',
-  },
-  {
-    id: 'actazin',
-    question: 'What\'s Actazin?',
-    answer: 'Kiwifruit extract that supports digestion. It\'s a natural enzyme that helps break down protein and keeps things moving smoothly. Science-backed, not wellness theater.',
-  },
-  {
-    id: 'science',
-    question: 'Why does it feel lighter?',
-    answer: 'Because the protein is enzymatically pre-digested (hydrolyzed) before it gets to you. We break down the massive protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the &quot;brick&quot; feeling. It\'s actual chemistry doing the work upfront.',
-  },
-  {
-    id: 'allergens',
-    question: 'Any allergens?',
-    answer: 'Contains coconut. Free from: dairy, gluten, soy, nuts (except coconut), eggs. Manufactured in a facility that may process other allergens. If you have severe allergies, check the full ingredient list or email us.',
-  },
-  {
-    id: 'packaging',
-    question: 'GUTSY\'s Packaging',
-    answer: 'Comes in resealable pouches. Better for the planet than giant plastic tubs, easier to store in your kitchen. Each pouch contains 30 servings. We\'re working on making the packaging even more sustainable. If you\'ve got strong opinions about this, email us.',
-  },
-  {
-    id: 'buying',
-    question: 'Buying GUTSY',
-    answer: 'Ships within the UAE. Subscribe and save 10% (185 AED becomes 166.50 AED per month, cancel anytime). One-time purchase is 185 AED. Free shipping over 150 AED. Manage or cancel your subscription yourself in your account—no calling customer service and begging.',
-  },
-  {
-    id: 'shipping',
-    question: 'Shipping & Returns',
-    answer: 'Ships within 2-3 business days across the UAE. Free shipping over 150 AED. If something arrives damaged or wrong, send a photo to hello@eatgutsy.com and we\'ll swap it immediately. If you tried it and genuinely hate it, email us within 30 days. We want you happy, not bloated.',
-  },
-  {
-    id: 'vegan',
-    question: 'Is GUTSY vegan?',
-    answer: 'Yes. 100% Plant-based. Pea and rice protein, kiwifruit extract, mushroom or maca, monk fruit, and coconut milk. Nothing from animals.',
-  },
-  {
-    id: 'pregnancy',
-    question: 'Can I use this if I\'m pregnant/breastfeeding?',
-    answer: 'The ingredients are safe, but we always recommend checking with your doctor first. We\'re cautious about making claims for pregnancy and breastfeeding because everyone\'s situation is different.',
-  },
-  {
-    id: 'work',
-    question: 'Will this work for me?',
-    answer: 'If regular protein powder makes you bloated, there\'s a high chance GUTSY will feel different. Safe for lactose intolerance (dairy-free). Safe for gluten sensitivity (gluten-free). If you have serious digestive issues like IBS or Crohn\'s, talk to your doctor first. We aren\'t doctors; we just made protein that doesn\'t make you feel terrible.',
-  },
-  {
-    id: 'legal',
-    question: 'Privacy & Legal',
-    answer: 'We value your privacy. We only use cookies to make your shopping experience better. We never sell your data. Your payment info is handled securely via encrypted partners.',
-  }
+  { id: 'use', question: 'How to use Gutsy?', answer: 'Mix one scoop (25g) with 250-300ml of water, milk, or whatever you like. Shake it up. Drink it. Each container has 30 servings with 20g of protein per scoop. Some people use it post-workout, some use it as breakfast, some just drink it when they need protein. There\'s no magic timing.' },
+  { id: 'protein-count', question: 'How much protein per serving?', answer: '20g of complete protein per scoop. PDCAAS score of 1.0, which means your body can actually use all of it. No amino acid spiking, no nitrogen spiking. Just real, bioavailable protein.' },
+  { id: 'ingredients', question: 'What\'s in Gutsy?', answer: 'Core ingredients: Hydrolyzed pea and rice protein, coconut milk powder, monk fruit extract, Actazin (kiwifruit extract for digestion), Himalayan salt. \n\nWhat makes each flavor different: Vanilla Calm has vanilla flavoring and reishi mushroom extract. Cacao Boost has cacao flavoring and maca root extract. \n\nNo gums, no fillers, no ingredients that require a chemistry degree.' },
+  { id: 'actazin', question: 'What\'s Actazin?', answer: 'Kiwifruit extract that supports digestion. It\'s a natural enzyme that helps break down protein and keeps things moving smoothly. Science-backed, not wellness theater.' },
+  { id: 'science', question: 'Why does it feel lighter?', answer: 'Because the protein is enzymatically pre-digested (hydrolyzed) before it gets to you. We break down the massive protein molecules so your stomach doesn\'t have to work as hard. That\'s why you skip the bloat and the "brick" feeling. It\'s actual chemistry doing the work upfront.' },
+  { id: 'allergens', question: 'Any allergens?', answer: 'Contains coconut. Free from: dairy, gluten, soy, nuts (except coconut), eggs. Manufactured in a facility that may process other allergens.' },
+  { id: 'packaging', question: 'Gutsy\'s packaging', answer: 'Comes in resealable pouches. Better for the planet than giant plastic tubs, easier to store in your kitchen. Each pouch contains 30 servings.' },
+  { id: 'buying', question: 'Buying Gutsy', answer: 'Ships within the UAE. Subscribe and save 10% (185 AED becomes 166.50 AED per month, cancel anytime). One-time purchase is 185 AED. Free shipping over 150 AED.' }
 ];
 
 export default function FAQPage() {
@@ -98,62 +40,54 @@ export default function FAQPage() {
   }, []);
 
   return (
-    <div className={cn("bg-[#f3eee4] min-h-screen text-[#000000] selection:bg-[#ffb300] overflow-x-hidden", utoMedium.className)}>
+    <div className={cn("bg-[#f3eee4] min-h-screen text-black selection:bg-[#ffb300]/30 overflow-x-hidden", utoMedium.className)}>
 
-      {/* Hero Section */}
-      <section className="bg-[#000000] text-[#f3eee4] pt-32 md:pt-44 pb-16 md:pb-20 border-b-[6px] md:border-b-[10px] border-[#f20028]">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <div className="max-w-3xl">
-            <h1 className={cn("text-5xl md:text-8xl uppercase leading-none tracking-tighter mb-4", utoBlack.className)}>
-              Got <br /> Questions?
+      {/* COMPACT HERO: Seamless transition */}
+      <section className="bg-black text-[#f3eee4] pt-32 md:pt-40 pb-12 md:pb-16">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="max-w-4xl">
+            <h1 className={cn("text-6xl md:text-[120px] leading-[0.85] tracking-tighter mb-4", utoBlack.className)}>
+              Got <br /> questions?
             </h1>
-            <p className={cn("text-3xl md:text-4xl lowercase leading-tight text-[#ffb300]", runWild.className)}>
-              Everything you need to know about the protein that actually feels light.
+            <p className={cn("text-3xl md:text-5xl text-[#ffb300] lowercase italic opacity-90", runWild.className)}>
+              everything you need to know about the protein that actually feels light.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="py-12 md:py-32">
-        <div className="mx-auto max-w-7xl px-4 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
+      {/* MAIN CONTENT: Editorial list layout */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
 
             <div className="lg:col-span-8">
-              <div className="space-y-6">
+              <div className="divide-y divide-black/5">
                 {faqs.map((faq, index) => (
-                  <div
-                    key={index}
-                    id={faq.id}
-                    className={cn(
-                      "border-b-4 border-black transition-all duration-300 scroll-mt-32",
-                      openIndex === index ? "bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] shadow-[6px_6px_0px_0px_#000000] md:shadow-[10px_10px_0px_0px_#000000]" : "bg-transparent pb-6"
-                    )}
-                  >
+                  <div key={index} id={faq.id} className="py-8 scroll-mt-32 group">
                     <button
                       onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                      aria-expanded={openIndex === index}
-                      className="flex w-full items-center justify-between text-left group"
+                      className="flex w-full items-center justify-between text-left"
                     >
                       <span className={cn(
-                        "text-xl md:text-3xl uppercase leading-tight transition-colors group-hover:text-[#f20028]",
-                        utoBlack.className,
-                        openIndex === index ? "text-[#f20028]" : "text-black"
+                        "text-2xl md:text-4xl leading-none tracking-tight transition-colors",
+                        utoBold.className,
+                        openIndex === index ? "text-[#f20028]" : "text-black group-hover:text-[#f20028]"
                       )}>
                         {faq.question}
                       </span>
                       <ChevronDown className={cn(
-                        "w-6 h-6 md:w-8 md:h-8 flex-shrink-0 transition-transform duration-300",
-                        openIndex === index ? "rotate-180 text-[#f20028]" : "text-black"
+                        "w-6 h-6 md:w-8 md:h-8 transition-transform duration-500",
+                        openIndex === index ? "rotate-180 text-[#f20028]" : "text-black/20"
                       )} />
                     </button>
 
                     <div className={cn(
-                      "grid transition-all duration-300 ease-in-out",
+                      "grid transition-all duration-500 ease-in-out",
                       openIndex === index ? "grid-rows-[1fr] mt-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                     )}>
                       <div className="overflow-hidden">
-                        <div className={cn("text-lg md:text-xl whitespace-pre-line leading-relaxed text-black/90 pb-2", utoMedium.className)}>
+                        <div className="text-lg md:text-xl leading-relaxed text-black/70 max-w-2xl">
                           {faq.answer}
                         </div>
                       </div>
@@ -163,21 +97,21 @@ export default function FAQPage() {
               </div>
             </div>
 
-            {/* Sidebar */}
+            {/* SIDEBAR: Compacted and clean */}
             <div className="lg:col-span-4">
-              <div className="sticky top-32 space-y-8">
-                <div className="bg-[#f20028] p-8 md:p-10 rounded-[1.5rem] md:rounded-[2rem] border-4 border-black shadow-[8px_8px_0px_0px_#000000] text-[#f3eee4]">
-                  <h2 className={cn("text-3xl uppercase mb-6 leading-none", utoBlack.className)}>
-                    Contact Us
+              <div className="sticky top-32 space-y-6">
+                <div className="bg-white p-8 md:p-10 rounded-[40px] shadow-2xl border border-black/5">
+                  <h2 className={cn("text-3xl text-black mb-4 leading-none", utoBlack.className)}>
+                    Contact us
                   </h2>
-                  <p className={cn("text-2xl md:text-3xl lowercase leading-tight mb-8 text-black", runWild.className)}>
-                    real humans, real answers. we&apos;ll get back within 24-48 hours, usually faster.
+                  <p className={cn("text-2xl text-[#f20028] lowercase mb-8", runWild.className)}>
+                    real humans, real answers. we&apos;ll get back within 24-48 hours.
                   </p>
                   <a
                     href="mailto:hello@eatgutsy.com"
-                    className={cn("inline-block w-full py-4 bg-white text-black border-2 border-black text-center text-xl uppercase rounded-full shadow-[4px_4px_0px_0px_#000000] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all", utoBold.className)}
+                    className={cn("inline-flex items-center justify-center w-full h-14 bg-black text-[#f3eee4] rounded-full text-lg font-bold hover:bg-[#f20028] transition-all duration-500", utoBold.className)}
                   >
-                    Email Us
+                    Email us
                   </a>
                 </div>
               </div>

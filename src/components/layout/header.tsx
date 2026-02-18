@@ -25,19 +25,17 @@ export function Header() {
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
-  const isDarkHeroPage = pathname === '/FAQ' || pathname === '/contact';
+  // On the home page, the header starts transparent over the full-bleed image
+  const isHomePage = pathname === '/';
+  const isDarkHeroPage = pathname === '/FAQ' || pathname === '/contact' || (isHomePage && !scrolled);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      setScrolled(scrollY > 20);
+      setScrolled(scrollY > 50);
 
       if (pathname === '/about') {
-        if (scrollY > 100 && scrollY < 800) {
-          setShowLogo(false);
-        } else {
-          setShowLogo(true);
-        }
+        setShowLogo(!(scrollY > 100 && scrollY < 800));
       } else {
         setShowLogo(true);
       }
@@ -48,148 +46,117 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[40] transition-all duration-300">
-      <nav className={cn(
-        "mx-auto transition-all duration-300",
-        scrolled ? "bg-[#f3eee4]/90 backdrop-blur-md py-4 shadow-sm" : "py-8 md:py-12"
-      )}>
-        <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between">
-
-          {/* LOGO VISIBILITY */}
-          <Link
-            href="/"
-            className={cn(
-              "group relative transition-all duration-500",
-              showLogo ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
-            )}
-          >
-            <div className="relative w-28 h-10 md:w-40 md:h-14">
-              <Image
-                src="/images/gutsy-logomark.png"
-                alt="GUTSY"
-                fill
-                className={cn(
-                  "object-contain transition-all duration-300",
-                  isDarkHeroPage && !scrolled ? "brightness-0 invert" : "brightness-0"
-                )}
-                priority
-              />
-            </div>
-          </Link>
-
-          <div className="flex items-center gap-3 md:gap-6">
-            {/* NAVIGATION PILLS */}
-            <div className="hidden lg:flex items-center -space-x-3">
-              {navigation.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    aria-current={isActive ? 'page' : undefined}
-                    className={cn(
-                      "h-12 px-8 flex items-center justify-center rounded-full border-2 transition-all hover:z-10 hover:scale-105",
-                      isActive
-                        ? "bg-[#ffb300] border-black text-black z-10 shadow-[3px_3px_0px_0px_#000000]"
-                        : scrolled
-                          ? "bg-white border-black text-black hover:bg-[#ffb300]"
-                          : isDarkHeroPage
-                            ? "bg-transparent border-[#f3eee4] text-[#f3eee4] hover:bg-[#f3eee4] hover:text-black"
-                            : "bg-[#f3eee4] border-black text-black hover:bg-[#ffb300]",
-                      utoBold.className
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
-
-              <Link
-                href="/products"
-                aria-current={pathname === '/products' ? 'page' : undefined}
-                className={cn(
-                  "h-12 px-10 flex items-center justify-center rounded-full bg-[#f20028] text-[#f3eee4] font-bold border-2 transition-all hover:z-10 hover:scale-110 ml-4",
-                  pathname === '/products'
-                    ? "border-black shadow-[4px_4px_0px_0px_#ffb300] ring-2 ring-[#ffb300]"
-                    : scrolled || !isDarkHeroPage
-                      ? "border-black shadow-[4px_4px_0px_0px_#000000]"
-                      : "border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]",
-                  utoBold.className
-                )}
-              >
-                Shop Now
-              </Link>
-            </div>
-
-            {/* CART & MOBILE TOGGLE */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={openCart}
-                aria-label={`Open cart${totalItems > 0 ? `, ${totalItems} items` : ''}`}
-                className={cn(
-                  "group relative h-12 w-12 flex items-center justify-center rounded-full border-2 transition-all",
-                  scrolled
-                    ? "bg-white border-black shadow-[4px_4px_0px_0px_#000000]"
-                    : isDarkHeroPage
-                      ? "bg-transparent border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]"
-                      : "bg-[#f3eee4] border-black shadow-[4px_4px_0px_0px_#000000]"
-                )}
-              >
-                <div className="relative w-8 h-8 overflow-hidden rounded-full border border-black bg-white">
-                  <Image
-                    src="/images/cart-image-girl-1.png"
-                    alt="Cart"
-                    fill
-                    className="object-cover grayscale group-hover:grayscale-0"
-                  />
-                </div>
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-[#ffb300] text-[10px] font-black text-black border-2 border-black">
-                    {totalItems}
-                  </span>
-                )}
-              </button>
-
-              <button
-                type="button"
-                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
-                aria-expanded={mobileMenuOpen}
-                className={cn(
-                  "lg:hidden h-12 w-12 flex items-center justify-center rounded-full border-2 shadow-[4px_4px_0px_0px_#000000] bg-[#ffb300] active:translate-y-1 active:shadow-none transition-all",
-                  isDarkHeroPage && !scrolled ? "border-[#f3eee4] shadow-[4px_4px_0px_0px_#f3eee4]" : "border-black"
-                )}
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                <svg className="w-6 h-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {mobileMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 6h16M4 12h16m-7 6h7" />
-                  )}
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* MOBILE MENU */}
-        <div
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
+      scrolled ? "bg-white/80 backdrop-blur-lg py-4 shadow-sm" : "bg-transparent py-8 md:py-10"
+    )}>
+      <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        
+        {/* LOGO - Premium Inversion */}
+        <Link
+          href="/"
           className={cn(
-            'lg:hidden mt-4 mx-4 overflow-hidden rounded-[2rem] bg-[#f3eee4] border-4 border-black shadow-[8px_8px_0px_0px_#000000] transition-all duration-500',
-            mobileMenuOpen ? 'max-h-[30rem] opacity-100 p-8' : 'max-h-0 opacity-0'
+            "group relative transition-all duration-500",
+            showLogo ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"
           )}
         >
-          <div className="flex flex-col space-y-6">
+          <div className="relative w-28 h-10 md:w-36 md:h-12">
+            <Image
+              src="/images/gutsy-logomark.png"
+              alt="GUTSY"
+              fill
+              className={cn(
+                "object-contain transition-all duration-300",
+                isDarkHeroPage ? "brightness-0 invert" : "brightness-0"
+              )}
+              priority
+            />
+          </div>
+        </Link>
+
+        <div className="flex items-center gap-6 md:gap-10">
+          {/* NAVIGATION LINKS - Minimal Editorial Style */}
+          <div className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                aria-current={pathname === item.href ? 'page' : undefined}
                 className={cn(
-                  "text-3xl uppercase hover:text-[#f20028]",
-                  pathname === item.href ? "text-[#f20028]" : "text-black",
-                  utoBlack.className
+                  "text-sm uppercase tracking-[0.2em] transition-all hover:opacity-60",
+                  isDarkHeroPage ? "text-white" : "text-black",
+                  utoBold.className
                 )}
+              >
+                {item.name}
+              </Link>
+            ))}
+
+            <Link
+              href="/products"
+              className={cn(
+                "h-12 px-8 flex items-center justify-center rounded-full transition-all hover:scale-105 active:scale-95",
+                isDarkHeroPage 
+                  ? "bg-white text-black hover:bg-[#ffb300]" 
+                  : "bg-[#f20028] text-white hover:bg-black",
+                utoBold.className
+              )}
+            >
+              Shop Now
+            </Link>
+          </div>
+
+          {/* CART & MOBILE TOGGLE */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={openCart}
+              className="group relative flex items-center justify-center transition-transform hover:scale-110"
+            >
+              <div className={cn(
+                "relative w-10 h-10 overflow-hidden rounded-full border-2 transition-colors",
+                isDarkHeroPage ? "border-white/20 bg-white/10" : "border-black/10 bg-black/5"
+              )}>
+                <Image
+                  src="/images/cart-image-girl-1.png"
+                  alt="Cart"
+                  fill
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all"
+                />
+              </div>
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#f20028] text-[10px] font-bold text-white shadow-lg">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+
+            <button
+              type="button"
+              className={cn(
+                "lg:hidden flex items-center transition-all",
+                isDarkHeroPage ? "text-white" : "text-black"
+              )}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"} />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* MOBILE MENU - Soft Overlay */}
+        <div
+          className={cn(
+            'fixed inset-0 top-[80px] z-[90] lg:hidden bg-white px-8 py-12 transition-all duration-500 ease-in-out',
+            mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
+          )}
+        >
+          <div className="flex flex-col space-y-8">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={cn("text-5xl uppercase tracking-tighter text-black", utoBlack.className)}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -197,7 +164,7 @@ export function Header() {
             ))}
             <Link
               href="/products"
-              className={cn("text-4xl uppercase text-[#f20028] pt-6 border-t-2 border-black/10", utoBlack.className)}
+              className={cn("text-6xl uppercase text-[#f20028] pt-8 border-t border-zinc-100", utoBlack.className)}
               onClick={() => setMobileMenuOpen(false)}
             >
               Shop All

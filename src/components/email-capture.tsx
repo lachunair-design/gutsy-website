@@ -21,34 +21,32 @@ export function EmailCapture({ compact = false }: EmailCaptureProps) {
     e.preventDefault();
     if (!email) return;
     setStatus('submitting');
-    // TODO: wire up to email service (Klaviyo, Mailchimp, etc.)
     setTimeout(() => setStatus('success'), 800);
   };
 
   if (compact) {
     return (
       <div className="w-full">
-        <p className={cn('text-sm uppercase tracking-[0.2em] font-bold mb-3 opacity-60', utoBold.className)}>
+        <p className={cn('text-xs uppercase tracking-[0.3em] font-bold mb-4 opacity-40 text-white', utoBold.className)}>
           Stay in the loop
         </p>
         {status === 'success' ? (
           <p className={cn('text-2xl lowercase text-[#ffb300]', runWild.className)}>you&apos;re in!</p>
         ) : (
-          <form onSubmit={handleSubmit} className="flex gap-2">
+          <form onSubmit={handleSubmit} className="flex gap-3">
             <input
               type="email"
               required
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              aria-label="Email address"
-              className="flex-1 h-12 px-4 rounded-full bg-white/10 border-2 border-white/20 text-white placeholder:text-white/40 text-sm font-medium focus:outline-none focus:border-[#ffb300] transition-colors"
+              className="flex-1 h-12 px-6 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-white/20 text-sm focus:outline-none focus:bg-white/10 transition-all"
             />
             <button
               type="submit"
               disabled={status === 'submitting'}
               className={cn(
-                'h-12 px-6 rounded-full bg-[#ffb300] text-black border-2 border-black text-sm uppercase font-bold transition-all hover:bg-white disabled:opacity-60',
+                'h-12 px-8 rounded-full bg-[#ffb300] text-black text-sm font-bold transition-transform hover:scale-105 active:scale-95 disabled:opacity-60',
                 utoBold.className
               )}
             >
@@ -61,28 +59,30 @@ export function EmailCapture({ compact = false }: EmailCaptureProps) {
   }
 
   return (
-    <div className="bg-[#f20028] rounded-[30px] md:rounded-[60px] p-8 md:p-16 border-4 border-black shadow-[6px_6px_0px_0px_#000] sm:shadow-[10px_10px_0px_0px_#000] lg:shadow-[15px_15px_0px_0px_#000] text-center">
-      <h2 className={cn('text-4xl md:text-7xl uppercase text-black leading-[0.9] mb-4', utoBlack.className)}>
+    <div className="py-24 text-center">
+      {/* Editorial Heading: Sentence case, no-screaming */}
+      <h2 className={cn('text-6xl md:text-[100px] text-black leading-[0.85] tracking-tighter mb-4', utoBlack.className)}>
         Stay Gutsy
       </h2>
-      <p className={cn('text-3xl md:text-4xl lowercase text-[#f3eee4] mb-8', runWild.className)}>
-        tips, drops &amp; gut-friendly goodness — straight to your inbox.
+      
+      <p className={cn('text-3xl md:text-5xl text-[#f20028] mb-12', runWild.className)}>
+        tips, drops & gut-friendly goodness — straight to your inbox.
       </p>
+
       {status === 'success' ? (
         <p className={cn('text-4xl md:text-5xl lowercase text-[#ffb300]', runWild.className)}>
           you&apos;re on the list!
         </p>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto px-4">
           <input
             type="email"
             required
             placeholder="your@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            aria-label="Email address"
             className={cn(
-              'flex-1 h-14 md:h-16 px-6 rounded-full bg-white border-2 border-black text-black text-lg font-bold placeholder:text-black/30 focus:outline-none focus:ring-2 focus:ring-[#ffb300] transition-all',
+              'flex-1 h-16 md:h-20 px-8 rounded-full bg-white border border-black/5 text-black text-xl placeholder:text-black/20 focus:outline-none focus:ring-2 focus:ring-[#ffb300]/20 transition-all shadow-sm',
               utoBold.className
             )}
           />
@@ -90,14 +90,18 @@ export function EmailCapture({ compact = false }: EmailCaptureProps) {
             type="submit"
             disabled={status === 'submitting'}
             className={cn(
-              'h-14 md:h-16 px-10 rounded-full bg-black text-[#f3eee4] border-2 border-black text-lg uppercase font-bold shadow-[4px_4px_0px_0px_#ffb300] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all disabled:opacity-60',
+              'h-16 md:h-20 px-12 rounded-full bg-black text-[#f3eee4] text-xl font-bold transition-all hover:bg-[#f20028] hover:scale-105 active:scale-95 shadow-xl disabled:opacity-60',
               utoBold.className
             )}
           >
-            {status === 'submitting' ? 'Joining...' : 'Sign Me Up'}
+            {status === 'submitting' ? 'Joining...' : 'Sign me up'}
           </button>
         </form>
       )}
+      
+      <p className={cn("mt-8 text-[10px] uppercase tracking-[0.3em] text-black/20 font-black", utoBold.className)}>
+        enzymatically pre-digested updates only
+      </p>
     </div>
   );
 }

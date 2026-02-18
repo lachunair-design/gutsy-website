@@ -17,8 +17,8 @@
     "tailwind-merge": "^2.3.0",
     "framer-motion": "^11.2.10",
     "gsap": "^3.12.5",
-    "gsap/react": "^2.1.1",
-  "lottie-react": "^2.4.0"
+    "@gsap/react": "^2.1.1",
+    "lottie-react": "^2.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.12",
