@@ -1,25 +1,14 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ProductDetail } from '@/components/product/product-detail';
 import { MarqueeRail } from '@/components/marquee-rail';
 import { EmailCapture } from '@/components/email-capture';
+import { getProducts } from '@/lib/shopify';
+import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  Brain, 
-  FlaskConical, 
-  Apple, 
-  Droplets, 
-  Sword, 
-  ShieldCheck, 
-  Clock 
-} from 'lucide-react';
+import { FunFactCarousel } from './fun-fact-carousel';
 
 // FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -27,50 +16,17 @@ const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
 
-export default function HomePage({ products = [] }: { products?: any[] }) {
-  const [currentFactIndex, setCurrentFactIndex] = useState(0);
+export const revalidate = 60;
+
+export default async function HomePage() {
+  let products: ShopifyProduct[] = [];
+  try {
+    products = await getProducts(20);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
 
   const mainProduct = products[0] || null;
-
-  // FUN FACTS DATA
-  const funFacts = [
-    { 
-      icon: <Brain className="w-8 h-8 md:w-10 md:h-10 text-[#3a4128]" />, 
-      text: "Your gut has more neurons than your spinal cord. That's why it's called your \"second brain.\" Listen to it." 
-    },
-    { 
-      icon: <FlaskConical className="w-8 h-8 md:w-10 md:h-10 text-[#3a4128]" />, 
-      text: "Most protein powders use the same base ingredients. The difference? How broken down the molecules are before you drink them." 
-    },
-    { 
-      icon: <Apple className="w-8 h-8 md:w-10 md:h-10 text-[#3a4128]" />, 
-      text: "Kiwifruit contains actinidin, an enzyme that breaks down protein naturally. That's why we put it in GUTSY." 
-    },
-    { 
-      icon: <Droplets className="w-8 h-8 md:w-10 md:h-10 text-[#3a4128]" />, 
-      text: "Your stomach produces about 2 liters of hydrochloric acid daily just to digest food. We save it some work." 
-    },
-    { 
-      icon: <Sword className="w-8 h-8 md:w-10 md:h-10 text-[#3a4128]" />, 
-      text: "Pea protein was used by Roman gladiators for strength. Rice protein was a staple for ancient warriors. We combined both." 
-    },
-    { 
-      icon: <ShieldCheck className="w-8 h-8 md:w-10 md:h-10 text-[#3a4128]" />, 
-      text: "\"Gut-friendly\" became marketing jargon in 2019. Before that, brands just made protein that worked without the label." 
-    },
-    { 
-      icon: <Clock className="w-8 h-8 md:w-10 md:h-10 text-[#3a4128]" />, 
-      text: "The average person tolerates digestive discomfort from protein for 6-12 months before trying a different brand. You don't have to." 
-    }
-  ];
-
-  const nextFact = () => {
-    setCurrentFactIndex((prev) => (prev + 1) % funFacts.length);
-  };
-
-  const prevFact = () => {
-    setCurrentFactIndex((prev) => (prev - 1 + funFacts.length) % funFacts.length);
-  };
 
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-24 md:pt-32 pb-8 space-y-8 selection:bg-[#ffb300] [overflow-x:clip]", utoMedium.className)}>
@@ -181,59 +137,8 @@ export default function HomePage({ products = [] }: { products?: any[] }) {
         </div>
       </section>
 
-      {/* FUN FACT SECTION - CAROUSEL ACTIVATED */}
-      <section className="py-20 bg-[#f3eee4]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-12">
-          {/* Illustration Side */}
-          <div className="relative w-full md:w-1/2 flex justify-center md:justify-start">
-            <div className="relative">
-              <h2 className={cn("text-5xl md:text-8xl uppercase text-[#3a4128] tracking-tight mb-4", utoBlack.className)}>
-                FUN FACT
-              </h2>
-              <div className="relative w-[280px] h-[200px] md:w-[450px] md:h-[350px]">
-                <Image 
-                  src="/images/fun-fact-illustration.png" 
-                  alt="GUTSY Mascot Illustration" 
-                  fill 
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Text & Control Side */}
-          <div className="w-full md:w-1/2 flex flex-col items-center md:items-start">
-            <div className="min-h-[280px] md:min-h-[320px] flex flex-col justify-center items-center md:items-start transition-all duration-300">
-              <div className="bg-[#3a4128]/10 p-6 rounded-full mb-8 animate-in fade-in zoom-in duration-500">
-                {funFacts[currentFactIndex].icon}
-              </div>
-              <p className={cn("text-2xl md:text-4xl text-[#3a4128] leading-[1.1] mb-8 text-center md:text-left animate-in slide-in-from-right-4 duration-500", utoBold.className)}>
-                {funFacts[currentFactIndex].text}
-              </p>
-            </div>
-            
-            <div className="flex border-2 border-[#3a4128] rounded-full overflow-hidden w-48 shadow-[4px_4px_0px_0px_#3a4128] bg-white">
-              <button 
-                onClick={prevFact}
-                className="flex-1 py-4 flex justify-center hover:bg-[#3a4128] hover:text-white transition-all border-r-2 border-[#3a4128]"
-                aria-label="Previous fact"
-              >
-                <ChevronLeft className="w-8 h-8" />
-              </button>
-              <button 
-                onClick={nextFact}
-                className="flex-1 py-4 flex justify-center hover:bg-[#3a4128] hover:text-white transition-all"
-                aria-label="Next fact"
-              >
-                <ChevronRight className="w-8 h-8" />
-              </button>
-            </div>
-            <div className="mt-4 text-[#3a4128]/40 font-bold tracking-widest uppercase text-xs">
-              Fact {currentFactIndex + 1} / {funFacts.length}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* FUN FACT SECTION */}
+      <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} />
 
       {/* MARQUEE RAIL */}
       <div className="-mx-3 md:-mx-6 lg:-mx-8">
