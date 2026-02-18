@@ -75,7 +75,7 @@ export function HomeScrollytelling({ utoBlack, runWild }: Props) {
         <section className="story-beat absolute inset-0 flex items-center px-6 md:px-24 opacity-0 translate-y-10">
           <div className="max-w-2xl space-y-6">
             <h2 className={cn("text-5xl md:text-8xl uppercase text-[#f20028] leading-none", utoBlack.className)}>WHY MOST <br /> PROTEIN SUCKS</h2>
-            <p className="text-[#f3eee4] text-xl md:text-2xl font-medium">Regular protein is a "brick." Your stomach struggles to break down massive molecules, causing that heavy bloat.</p>
+            <p className="text-[#f3eee4] text-xl md:text-2xl font-medium">Regular protein is a &ldquo;brick.&rdquo; Your stomach struggles to break down massive molecules, causing that heavy bloat.</p>
           </div>
         </section>
 

@@ -10,7 +10,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
 import { ArrowUp } from 'lucide-react';
-import Scrollytelling from './scrollytelling'; // New Component
+import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 
 // BRANDED FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -101,7 +101,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-black">
             {[{ quote: "Super light. I can finally have protein without feeling heavy.", author: "Beta Tester, Dubai" }, { quote: "No bloating. First protein powder that doesn't make me regret it.", author: "Beta Tester, Abu Dhabi" }, { quote: "I was skeptical but this actually works. Feels completely different.", author: "Beta Tester, Dubai" }].map((t, i) => (
               <div key={i} className="flex flex-col space-y-3 text-center md:text-left">
-                <p className={cn("text-3xl md:text-4xl lowercase leading-tight", runWild.className)}>"{t.quote}"</p>
+                <p className={cn("text-3xl md:text-4xl lowercase leading-tight", runWild.className)}>&ldquo;{t.quote}&rdquo;</p>
                 <p className={cn("text-xs md:text-sm uppercase tracking-widest font-black", utoBold.className)}>— {t.author}</p>
               </div>
             ))}
