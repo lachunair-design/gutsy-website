@@ -10,7 +10,7 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
 import { ArrowUp } from 'lucide-react';
-import { HomeScrollytelling } from 'src/app/scrollytelling.tsx'; // New Component
+import Scrollytelling from './scrollytelling'; // New Component
 
 // BRANDED FONT CONFIGURATION
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
@@ -73,7 +73,7 @@ export default async function HomePage() {
       </section>
 
       {/* THE SCROLLYTELLING MASTER SECTION (Replaces Problem, Science, & Inside sections) */}
-      <HomeScrollytelling utoBlack={utoBlack} runWild={runWild} />
+      <Scrollytelling utoBlack={utoBlack} runWild={runWild} />
 
       {/* FUN FACT SECTION */}
       <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
