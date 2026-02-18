@@ -56,25 +56,25 @@ export default function ContactPage() {
                   <CheckCircle2 className="w-16 h-16 text-[#f20028] mx-auto" />
                   <h2 className={cn("text-4xl text-[#f20028]", utoBlack.className)}>Got it!</h2>
                   <p className={cn("text-xl lowercase", runWild.className)}>We&apos;ll get back to you soon.</p>
-                  <Button onClick={() => setStatus('idle')} className={cn("bg-black text-white rounded-full px-10 h-14", utoBold.className)}>Send another</Button>
+                  <Button onClick={() => setStatus('idle')} className={cn("bg-black text-white rounded-full px-10 h-14 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300", utoBold.className)}>Send another</Button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className={cn("text-[10px] uppercase tracking-widest font-black opacity-30 ml-4", utoBold.className)}>Name</label>
-                      <input required type="text" placeholder="Your name" className="w-full h-14 px-6 rounded-full bg-[#f3eee4] border-none focus:ring-1 focus:ring-[#ffb300] outline-none text-base" />
+                      <input required type="text" placeholder="Your name" className="w-full h-14 px-6 rounded-full bg-[#f3eee4] border border-black/5 focus:ring-2 focus:ring-[#f20028]/20 focus:border-[#f20028] outline-none text-base transition-all duration-300" />
                     </div>
                     <div className="space-y-2">
                       <label className={cn("text-[10px] uppercase tracking-widest font-black opacity-30 ml-4", utoBold.className)}>Email</label>
-                      <input required type="email" placeholder="hello@example.com" className="w-full h-14 px-6 rounded-full bg-[#f3eee4] border-none focus:ring-1 focus:ring-[#ffb300] outline-none text-base" />
+                      <input required type="email" placeholder="hello@example.com" className="w-full h-14 px-6 rounded-full bg-[#f3eee4] border border-black/5 focus:ring-2 focus:ring-[#f20028]/20 focus:border-[#f20028] outline-none text-base transition-all duration-300" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className={cn("text-[10px] uppercase tracking-widest font-black opacity-30 ml-4", utoBold.className)}>Message</label>
-                    <textarea required rows={4} placeholder="What&apos;s on your mind?" className="w-full p-6 rounded-[24px] bg-[#f3eee4] border-none focus:ring-1 focus:ring-[#ffb300] outline-none resize-none text-base" />
+                    <textarea required rows={4} placeholder="What&apos;s on your mind?" className="w-full p-6 rounded-[24px] bg-[#f3eee4] border border-black/5 focus:ring-2 focus:ring-[#f20028]/20 focus:border-[#f20028] outline-none resize-none text-base transition-all duration-300" />
                   </div>
-                  <button className={cn("w-full h-16 bg-[#f20028] text-white text-xl rounded-full transition-all flex items-center justify-center gap-3 hover:bg-black hover:scale-[1.01]", utoBold.className)}>
+                  <button className={cn("w-full h-16 bg-[#f20028] text-white text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-3 hover:bg-black hover:scale-[1.02] active:scale-[0.98]", utoBold.className)}>
                     {status === 'sending' ? 'Sending...' : 'Send message'}
                     <Send className="w-5 h-5" />
                   </button>
@@ -85,11 +85,11 @@ export default function ContactPage() {
             {/* Right: Compact Sidecards */}
             <div className="lg:col-span-5 flex flex-col gap-4">
               <div className="grid grid-cols-2 gap-4">
-                <a href="https://wa.me/971500000000" className="bg-[#25D366] p-6 rounded-[30px] shadow-lg flex flex-col justify-between aspect-square md:aspect-auto md:h-32 transition-transform hover:scale-105">
+                <a href="https://wa.me/971500000000" className="bg-[#25D366] p-6 rounded-[30px] shadow-lg flex flex-col justify-between aspect-square md:aspect-auto md:h-32 transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <MessageCircle className="w-6 h-6 text-black" />
                   <h3 className={cn("text-xl md:text-2xl leading-none", utoBlack.className)}>WhatsApp</h3>
                 </a>
-                <a href="https://instagram.com/gutsy.world" className="bg-[#ffb300] p-6 rounded-[30px] shadow-lg flex flex-col justify-between aspect-square md:aspect-auto md:h-32 transition-transform hover:scale-105">
+                <a href="https://instagram.com/gutsy.world" className="bg-[#ffb300] p-6 rounded-[30px] shadow-lg flex flex-col justify-between aspect-square md:aspect-auto md:h-32 transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <Instagram className="w-6 h-6 text-black" />
                   <h3 className={cn("text-xl md:text-2xl leading-none", utoBlack.className)}>Instagram</h3>
                 </a>

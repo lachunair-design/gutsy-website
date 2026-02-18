@@ -18,7 +18,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               variant === 'primary',
             'bg-gutsy-gray-100 text-gutsy-black hover:bg-gutsy-gray-200 focus:ring-gutsy-gray-400':
               variant === 'secondary',
-            'border-2 border-gutsy-black text-gutsy-black hover:bg-gutsy-black hover:text-white focus:ring-gutsy-black':
+            'border border-gutsy-black text-gutsy-black hover:bg-gutsy-black hover:text-white focus:ring-gutsy-black':
               variant === 'outline',
             'text-gutsy-black hover:bg-gutsy-gray-100 focus:ring-gutsy-gray-400':
               variant === 'ghost',

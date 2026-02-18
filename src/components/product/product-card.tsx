@@ -64,7 +64,7 @@ export function ProductCard({ product }: ProductCardProps) {
           <Button
             onClick={handleAddToCart}
             disabled={!product.availableForSale || isLoading}
-            className="w-full h-14 rounded-full bg-black text-[#f3eee4] hover:bg-[#f20028] border-none shadow-2xl transition-all duration-300"
+            className="w-full h-14 rounded-full bg-black text-[#f3eee4] hover:bg-[#f20028] border-none shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
           >
             {product.availableForSale ? 'Add to cart' : 'Sold out'}
           </Button>
