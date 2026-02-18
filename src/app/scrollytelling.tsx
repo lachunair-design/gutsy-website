@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -14,103 +14,142 @@ interface Props {
 
 export function HomeScrollytelling({ utoBlack, runWild }: Props) {
   const containerRef = useRef(null);
-  const blobRef = useRef(null);
+  const triggerRef = useRef(null);
+  
+  // Refs for SVG elements
+  const chainRef = useRef(null);
+  const scissorsRef = useRef(null);
+  const bit1 = useRef(null);
+  const bit2 = useRef(null);
+  const bit3 = useRef(null);
 
   useGSAP(() => {
     const sections = gsap.utils.toArray(".story-beat");
     
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: containerRef.current,
+        trigger: triggerRef.current,
         start: "top top",
-        end: "+=300%",
+        end: "+=400%", // Extra length for 4th beat
         pin: true,
-        scrub: 1.5, // Slower scrub for a "viscous" feel
+        scrub: 1,
       },
     });
 
-    // Visual Story: From Rigid Brick to Flowing Liquid
-    tl.to(blobRef.current, { 
-      rotate: 15, 
-      scale: 1.1, 
-      borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%", // Organic "blob" shape
-      duration: 1 
-    }, 0);
+    // --- ANIMATION SEQUENCE ---
 
-    tl.to(blobRef.current, { 
-      scale: 0.9, 
-      borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%", // Teardrop/Drip shape
-      backgroundColor: "#ffb300", 
+    // 1. BEAT 1 -> 2: SCISSORS APPEAR & SNIP
+    tl.to(scissorsRef.current, { opacity: 1, x: 20, rotate: -20, duration: 0.5 }, 0.5)
+      .to(bit1.current, { x: -40, y: -20, rotate: -15, duration: 0.8 }, 1)
+      .to(bit2.current, { x: 0, y: 30, rotate: 10, duration: 0.8 }, 1)
+      .to(bit3.current, { x: 40, y: -20, rotate: 20, duration: 0.8 }, 1)
+      .to(scissorsRef.current, { opacity: 0, duration: 0.2 }, 1.2);
+
+    // 2. BEAT 2 -> 3: BITS FLOAT & MULTIPLY (Simulated)
+    tl.to([bit1.current, bit2.current, bit3.current], { 
+      scale: 0.8, 
+      fill: "#ffb300", 
       duration: 1 
     }, 1.5);
 
+    // 3. BEAT 3 -> 4: BITS TRANSITION TO RADIANCE
+    tl.to([bit1.current, bit2.current, bit3.current], { 
+      y: "+=100", 
+      opacity: 0, 
+      stagger: 0.1, 
+      duration: 0.5 
+    }, 2.5);
+
+    // --- TEXT & BACKGROUND TRANSITIONS ---
     sections.forEach((section: any, i) => {
-      tl.to(section, { opacity: 1, y: 0, duration: 0.5 }, i);
+      // Background Color Shifts
+      const bgColors = ["#000000", "#1a1a1a", "#f20028", "#ffb300"];
+      tl.to(triggerRef.current, { backgroundColor: bgColors[i], duration: 0.5 }, i);
+
+      // Text Fade In/Out
+      tl.to(section, { opacity: 1, x: 0, duration: 0.5 }, i);
       if (i < sections.length - 1) {
-        tl.to(section, { opacity: 0, y: -40, duration: 0.5 }, i + 0.75);
+        tl.to(section, { opacity: 0, x: -20, duration: 0.5 }, i + 0.75);
       }
     });
 
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative h-screen w-full overflow-hidden bg-[#111] rounded-[40px] md:rounded-[80px] border-4 border-black">
-      
-      {/* THE MORPHING "GUTSY" DROP */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <div 
-          ref={blobRef} 
-          className="w-56 h-56 md:w-80 md:h-80 border-2 border-[#f20028]/30 bg-[#f20028] flex items-center justify-center p-12 transition-colors duration-700 shadow-[0_0_80px_rgba(242,0,40,0.2)]"
-        >
-             <div className={cn("text-black text-4xl md:text-6xl text-center uppercase leading-none font-black tracking-tighter", utoBlack.className)}>
-                GUTSY<br/>DRIP
-             </div>
+    <div ref={containerRef} className="w-full">
+      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden rounded-[40px] md:rounded-[80px] border-4 border-black transition-colors duration-500">
+        
+        {/* DYNAMIC PROTEIN SVG */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <svg width="400" height="400" viewBox="0 0 200 200" className="w-64 h-64 md:w-[500px] md:h-[500px]">
+            {/* The Chain Bits */}
+            <circle ref={bit1} cx="70" cy="100" r="15" fill="#f20028" stroke="black" strokeWidth="2" />
+            <circle ref={bit2} cx="100" cy="100" r="15" fill="#f20028" stroke="black" strokeWidth="2" />
+            <circle ref={bit3} cx="130" cy="100" r="15" fill="#f20028" stroke="black" strokeWidth="2" />
+            
+            {/* The Enzyme Scissors (Simplified SVG) */}
+            <g ref={scissorsRef} style={{ opacity: 0 }} transform="translate(85, 70)">
+               <path d="M0,0 L20,20 M0,20 L20,0" stroke="#ffb300" strokeWidth="4" strokeLinecap="round" />
+               <circle cx="0" cy="0" r="3" fill="#ffb300" />
+               <circle cx="0" cy="20" r="3" fill="#ffb300" />
+            </g>
+          </svg>
         </div>
-      </div>
 
-      <div className="relative z-10 h-full w-full">
-        {/* BEAT 1: THE VIBE */}
-        <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 translate-y-10">
-          <div className="max-w-2xl space-y-4">
-            <h2 className={cn("text-5xl md:text-[120px] uppercase text-[#f3eee4] leading-[0.85]", utoBlack.className)}>
-               PROTEIN<br/>WITHOUT<br/>THE PUNCH
-            </h2>
-            <p className="text-[#f3eee4] text-xl md:text-2xl font-medium opacity-90 max-w-lg">
-              Most protein feels like a &quot;brick&quot; in your gut. We think you deserve to feel light, not loaded.
-            </p>
-          </div>
-        </section>
-
-        {/* BEAT 2: THE MAGIC */}
-        <section className="story-beat absolute inset-0 flex items-center justify-end px-8 md:px-24 opacity-0 translate-y-10 text-right">
-          <div className="max-w-2xl space-y-6">
-             <p className={cn("text-4xl md:text-7xl text-[#ffb300] lowercase", runWild.className)}>
-              we snip the chains early
-            </p>
-            <h2 className={cn("text-4xl md:text-[90px] uppercase text-[#f3eee4] leading-[0.85]", utoBlack.className)}>
-               PRE-DIGESTED<br/>FOR THE PEOPLE
-            </h2>
-            <p className="text-[#f3eee4] text-lg md:text-xl font-medium opacity-80 max-w-sm ml-auto leading-tight">
-              Our enzymes do the heavy lifting before you even take a sip. It&apos;s simple science, for a happy gut.
-            </p>
-          </div>
-        </section>
-
-        {/* BEAT 3: THE GOODS */}
-        <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 translate-y-10">
-          <div className="max-w-4xl space-y-8">
-            <h2 className={cn("text-5xl md:text-[100px] uppercase text-[#f20028] leading-[0.8]", utoBlack.className)}>
-              ONLY THE<br/>GOOD STUFF.
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[#f3eee4] font-bold uppercase tracking-widest text-sm md:text-base">
-                <div className="bg-white/5 backdrop-blur-sm border-l-4 border-[#f20028] p-4">Hydrolyzed Pea & Rice</div>
-                <div className="bg-white/5 backdrop-blur-sm border-l-4 border-[#f20028] p-4">Actazin Kiwifruit</div>
-                <div className="bg-white/5 backdrop-blur-sm border-l-4 border-[#f20028] p-4">Functional Adaptogens</div>
-                <div className="bg-white/5 backdrop-blur-sm border-l-4 border-[#f20028] p-4">Coconut & Monk Fruit</div>
+        {/* LEFT-ALIGNED CONTENT LAYERS */}
+        <div className="relative z-10 h-full w-full">
+          {/* BEAT 1: THE BRICK */}
+          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
+            <div className="max-w-2xl space-y-4">
+              <h2 className={cn("text-5xl md:text-[110px] uppercase text-[#f3eee4] leading-[0.85]", utoBlack.className)}>
+                 STUCK IN<br/>THE GUT.
+              </h2>
+              <p className="text-[#f3eee4] text-xl md:text-2xl font-medium max-w-lg">
+                Regular protein molecules are massive chains. Your stomach works overtime just to move the needle.
+              </p>
             </div>
-            <p className={cn("text-4xl text-[#ffb300] lowercase", runWild.className)}>Zero gums. Zero fillers. Just fuel.</p>
-          </div>
-        </section>
+          </section>
+
+          {/* BEAT 2: THE SNIP */}
+          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
+            <div className="max-w-2xl space-y-4">
+              <p className={cn("text-4xl text-[#ffb300] lowercase", runWild.className)}>we snip them early</p>
+              <h2 className={cn("text-5xl md:text-[110px] uppercase text-[#f3eee4] leading-[0.85]", utoBlack.className)}>
+                 ENZYMATIC<br/>SCIENCE.
+              </h2>
+              <p className="text-[#f3eee4] text-xl md:text-2xl font-medium max-w-lg">
+                We use natural enzymes to break those chains into tiny, bioavailable pieces before you take a sip.
+              </p>
+            </div>
+          </section>
+
+          {/* BEAT 3: THE PURITY */}
+          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
+            <div className="max-w-2xl space-y-4">
+              <h2 className={cn("text-5xl md:text-[110px] uppercase text-black leading-[0.85]", utoBlack.className)}>
+                NO GUMS.<br/>NO FILLERS.
+              </h2>
+              <p className="text-black text-xl md:text-2xl font-medium max-w-lg">
+                Because when protein is this light, you don&apos;t need chemistry to hide the bloat.
+              </p>
+            </div>
+          </section>
+
+          {/* BEAT 4: THE RESULT */}
+          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-24 opacity-0 -translate-x-10">
+            <div className="max-w-3xl space-y-6">
+              <h2 className={cn("text-5xl md:text-[120px] uppercase text-black leading-[0.8]", utoBlack.className)}>
+                FEEL THE<br/>LIGHTNESS.
+              </h2>
+              <p className={cn("text-4xl md:text-6xl text-[#f20028] lowercase", runWild.className)}>
+                energy without the anchor.
+              </p>
+              <button className="bg-black text-[#ffb300] px-12 py-6 rounded-full text-2xl font-bold uppercase border-2 border-black hover:bg-transparent transition-all">
+                Shop GUTSY
+              </button>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );
