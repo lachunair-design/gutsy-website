@@ -12,11 +12,11 @@ import SplitType from 'split-type';
 gsap.registerPlugin(ScrollTrigger);
 
 export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
-  const containerRef = useRef(null);
-  const sliderRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Fixed the 'never' type error by defining this as an HTMLDivElement
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initialize Lenis for smooth scrolling
     const lenis = new Lenis();
     function raf(time: number) {
       lenis.raf(time);
@@ -29,7 +29,6 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
   useGSAP(() => {
     const panels = gsap.utils.toArray(".story-panel");
     
-    // Master Horizontal Scroll Tween
     const scrollTween = gsap.to(panels, {
       xPercent: -100 * (panels.length - 1),
       ease: "none",
@@ -38,11 +37,11 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
         pin: true,
         scrub: 1,
         snap: 1 / (panels.length - 1),
-        end: () => "+=" + (sliderRef.current?.offsetWidth || "3000"),
+        // Use a fallback value to ensure TypeScript is happy
+        end: () => "+=" + (sliderRef.current?.offsetWidth || 3000),
       }
     });
 
-    // High-Contrast Text Reveal
     const revealTexts = gsap.utils.toArray('.reveal-text');
     revealTexts.forEach((text: any) => {
       const split = new SplitType(text, { types: 'chars' });
@@ -60,7 +59,6 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
       });
     });
 
-    // Color Sync: Ensuring high contrast text on light backgrounds
     const bgColors = ["#000000", "#F9F8F6", "#f20028", "#F9F8F6"];
     panels.forEach((panel: any, i: number) => {
       ScrollTrigger.create({
@@ -77,14 +75,14 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
     <div ref={containerRef} className="w-full overflow-hidden transition-colors duration-1000">
       <div ref={sliderRef} className="flex w-[400%] h-screen">
         
-        {/* PANEL 1: DARK (Contrast Red/White) */}
+        {/* PANEL 1: BLACK BG */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-black">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-8 text-left">
               <h2 className={cn("reveal-text text-7xl md:text-[140px] text-[#f20028] leading-[0.8] tracking-tighter", utoBlack.className)}>
                 Why most<br />protein sucks
               </h2>
-              <p className="text-[#f3eee4]/60 text-xl md:text-2xl max-w-md">
+              <p className="text-[#f3eee4]/70 text-xl md:text-2xl max-w-md">
                 Standard molecules are tangled and clunky. They sit in your gut like a brick.
               </p>
             </div>
@@ -96,7 +94,7 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           </div>
         </section>
 
-        {/* PANEL 2: LIGHT (Contrast Black/Red) */}
+        {/* PANEL 2: BONE BG - FIXED TEXT COLOR */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-[#F9F8F6]">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-8 text-left">
@@ -104,10 +102,10 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
               <h2 className={cn("reveal-text text-7xl md:text-[120px] text-black leading-[0.8] tracking-tighter", utoBlack.className)}>
                 We break it<br />down first
               </h2>
-              <p className="text-black/50 text-xl md:text-2xl max-w-md">
+              <p className="text-black/60 text-xl md:text-2xl max-w-md">
                 Enzymes split massive molecules into tiny, bioavailable peptides.
               </p>
-            </div>
+                          </div>
             <div className="w-full md:w-1/2 flex justify-end">
               <div className="w-full max-w-lg aspect-square">
                 <DotLottieReact src="https://lottie.host/505373a0-8a4e-4f3b-85d7-8d8a7c1e57c6/XGq6WfS1Ue.lottie" loop autoplay />
@@ -116,7 +114,7 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           </div>
         </section>
 
-        {/* PANEL 3: RED (Contrast White) */}
+        {/* PANEL 3: RED BG */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-[#f20028]">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-8 text-left">
@@ -139,7 +137,7 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           </div>
         </section>
 
-        {/* PANEL 4: LIGHT (Contrast Black) */}
+        {/* PANEL 4: BONE BG - FIXED TEXT COLOR */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-[#F9F8F6]">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-12 text-left">
