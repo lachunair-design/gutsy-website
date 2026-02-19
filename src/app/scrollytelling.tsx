@@ -19,7 +19,7 @@ interface Props {
 
 export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
   const containerRef = useRef(null);
-  const sliderRef = useRef(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Initialize Lenis for smooth, premium scroll feel
