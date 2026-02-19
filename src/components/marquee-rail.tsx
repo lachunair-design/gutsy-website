@@ -6,37 +6,44 @@ import { Observer } from 'gsap/dist/Observer';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 
-const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
+const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(Observer);
 }
+
+const MARQUEE_ITEMS = [
+  'No Gluten',
+  'No Heavy Metals',
+  'Vegan',
+  'Allergen-Free',
+  'No Unnecessary Fillers',
+  'Dairy-Free',
+  'Third-Party Tested',
+];
 
 export function MarqueeRail() {
   const railRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      const scrollingText = gsap.utils.toArray('.rail h4') as HTMLElement[];
+      const scrollingText = gsap.utils.toArray('.rail-item') as HTMLElement[];
       if (!scrollingText.length) return;
 
       const tl = horizontalLoop(scrollingText, {
         repeat: -1,
-        paddingRight: 50,
-        speed: 1.5,
+        paddingRight: 0, 
+        speed: 1.2, // Slightly slower for "softer" feel
       });
 
       Observer.create({
         onChangeY(self) {
-          let factor = 2.5;
-          if (self.deltaY < 0) {
-            factor *= -1;
-          }
-          gsap.timeline({
-            defaults: { ease: "none" }
-          })
-          .to(tl, { timeScale: factor * 2.5, duration: 0.2, overwrite: true })
-          .to(tl, { timeScale: factor / 2.5, duration: 1 }, "+=0.3");
+          let factor = 2.0;
+          if (self.deltaY < 0) factor *= -1;
+          
+          gsap.timeline({ defaults: { ease: "none" } })
+            .to(tl, { timeScale: factor * 2, duration: 0.3, overwrite: true })
+            .to(tl, { timeScale: factor / 2, duration: 1.2 }, "+=0.3");
         }
       });
     }, railRef);
@@ -45,19 +52,40 @@ export function MarqueeRail() {
   }, []);
 
   return (
-    <section ref={railRef} className="py-12 bg-black overflow-hidden">
-      <div className="rail flex whitespace-nowrap py-4">
-        {[...Array(10)].map((_, i) => (
-          <h4 key={i} className={cn("text-[#f3eee4] text-6xl md:text-8xl uppercase tracking-tighter inline-block px-8", utoBlack.className)}>
-            Feels Light <span className="text-[#f20028]">—</span> No Bloat <span className="text-[#ffb300]">—</span> Hydrolysed <span className="text-[#f20028]">—</span>
-          </h4>
+    <section 
+      ref={railRef} 
+      className="py-10 bg-[#F9F8F6] border-y border-black/5 overflow-hidden"
+    >
+      <div className="rail flex whitespace-nowrap">
+        {/* Render multiple sets to ensure the loop is seamless */}
+        {[...Array(4)].map((_, setIndex) => (
+          <div key={setIndex} className="rail-item flex items-center">
+            {MARQUEE_ITEMS.map((item, i) => (
+              <div key={i} className="flex items-center px-6">
+                {/* Graza-style Hand-drawn Bullet */}
+                <svg width="12" height="12" viewBox="0 0 100 100" className="mr-6 text-[#f20028]">
+                  <circle cx="50" cy="50" r="40" fill="currentColor" opacity="0.8" />
+                </svg>
+                
+                <span className={cn(
+                  "text-black text-sm md:text-base uppercase tracking-[0.3em] font-black",
+                  utoBold.className
+                )}>
+                  {item}
+                </span>
+
+                {/* Rhode-style Asymmetrical Divider (only between text) */}
+                <div className="ml-12 h-8 w-[1px] bg-black/10 rotate-[20deg]" />
+              </div>
+            ))}
+          </div>
         ))}
       </div>
     </section>
   );
 }
 
-// GSAP HELPER FUNCTION
+// GSAP HELPER (Keep your existing function, just ensure items passed are the .rail-item divs)
 function horizontalLoop(items: HTMLElement[], config: any) {
   let tl = gsap.timeline({
     repeat: config.repeat,
