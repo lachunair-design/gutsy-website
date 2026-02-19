@@ -81,7 +81,7 @@ export default async function HomePage() {
       </section>
 
       {/* ═══ PROBLEM SECTION — White Background ═══ */}
-      <section className="py-20 md:py-32 bg-[#FDFBF7]">
+      {/*<section className="py-20 md:py-32 bg-[#FDFBF7]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="space-y-8">
@@ -91,9 +91,9 @@ export default async function HomePage() {
               <h2 className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter", utoBlack.className)}>
                 Most protein makes you feel like{' '}
                 <span className="relative inline-block">
-                  garbage.
+                  garbage.*/}
                   {/* Hand-drawn underline accent */}
-                  <svg className="absolute -bottom-2 left-0 w-full h-3 pointer-events-none" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
+                  {/*<svg className="absolute -bottom-2 left-0 w-full h-3 pointer-events-none" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none" aria-hidden="true">
                     <path d="M2 8 Q50 2 100 7 Q150 12 198 4" stroke="#f20028" strokeWidth="3" strokeLinecap="round" className="animate-draw-underline" opacity="0.6" />
                   </svg>
                 </span>
@@ -102,9 +102,9 @@ export default async function HomePage() {
                 Massive protein molecules your gut can&apos;t break down. Gums and thickeners that bloat.
                 15+ ingredients you can&apos;t pronounce. Sound familiar?
               </p>
-            </div>
+            </div> */}
             {/* Illustrated gut character - sad/bloated */}
-            <div className="flex items-center justify-center">
+            {/*<div className="flex items-center justify-center">
               <svg viewBox="0 0 200 200" className="w-64 h-64 md:w-80 md:h-80" aria-hidden="true">
                 <path d="M100 30c-30 0-55 20-60 48-3 18 2 35 12 48 8 10 8 25 3 38-4 10 0 22 10 28 8 5 18 5 25-2 10-10 25-15 35-10 15 8 30-5 30-22 0-12-5-22-8-32-5-18 0-38 10-50 8-10 12-25 8-40-5-18-25-30-48-30z"
                   fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 2"/>
@@ -120,7 +120,7 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section>*/}
 
       {/* ═══ WAVE DIVIDER ═══ */}
       <WaveDivider from="#FDFBF7" to="#f3eee4" />
