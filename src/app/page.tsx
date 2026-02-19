@@ -309,9 +309,9 @@ export default async function HomePage() {
       </section>
 
       {/* ═══ EMAIL CAPTURE — White Background ═══ */}
-      <section className="bg-[#FDFBF7]">
+      {/*<section className="bg-[#FDFBF7]">
         <EmailCapture />
-      </section>
+      </section>*/}
 
       {/* ═══ WAVE DIVIDER ═══ */}
       <WaveDivider from="#FDFBF7" to="black" />
