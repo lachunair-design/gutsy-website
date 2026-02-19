@@ -9,7 +9,7 @@ import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
-import { Scrollytelling } from './scrollytelling';
+import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 import { WelcomePopup } from '@/components/welcome-popup';
 import { WaveDivider } from '@/components/wave-divider';
 
