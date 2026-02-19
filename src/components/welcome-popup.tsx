@@ -80,7 +80,7 @@ export function WelcomePopup() {
               )}>
                 Welcome to <br/>
                 <span className="inline-block mt-4 h-[0.9em]">
-                  <Image src="/images/gutsy-logomark.png" alt="GUTSY" width={180} height={50} className="h-full w-auto brightness-0" />
+                  <Image src="/images/gutsy-logomark.png" alt="GUTSY" width={180} height={80} className="h-full w-auto brightness-0" />
                 </span>
               </h2>
               <p className={cn("text-3xl md:text-5xl text-[#f20028] -rotate-2", runWild.className)}>
