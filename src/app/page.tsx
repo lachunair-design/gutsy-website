@@ -49,9 +49,9 @@ export default async function HomePage() {
             <h1 className={cn("text-white text-8xl md:text-[160px] leading-[0.8] uppercase tracking-tighter mb-10 relative inline-block", utoBlack.className)}>
               FEELS LIGHT
               {/* Hand-drawn circle accent on "LIGHT" */}
-              <svg className="absolute -right-4 top-1/2 w-[55%] h-[120%] -translate-y-1/2 pointer-events-none" viewBox="0 0 200 100" fill="none" aria-hidden="true">
+              {/*<svg className="absolute -right-4 top-1/2 w-[55%] h-[120%] -translate-y-1/2 pointer-events-none" viewBox="0 0 200 100" fill="none" aria-hidden="true">
                 <ellipse cx="100" cy="50" rx="90" ry="40" stroke="#f20028" strokeWidth="2" strokeLinecap="round" className="animate-draw-circle" opacity="0.5" />
-              </svg>
+              </svg>*/}
             </h1>
             <p className="text-[#f3eee4] text-xl md:text-2xl max-w-md font-medium leading-tight mb-12 opacity-90">
               No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
@@ -123,7 +123,9 @@ export default async function HomePage() {
       </section>*/}
 
       {/* ═══ WAVE DIVIDER ═══ */}
-      <WaveDivider from="#FDFBF7" to="#f3eee4" />
+      {/*<WaveDivider from="#FDFBF7" to="#f3eee4" />*/}
+
+       <MarqueeRail />
 
       {/* ═══ SCROLLYTELLING — Keep current (black with transitions) ═══ */}
       <Scrollytelling utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
@@ -177,7 +179,7 @@ export default async function HomePage() {
 
       <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
-      <MarqueeRail />
+     
 
       {/* ═══ INGREDIENTS SECTION — White Background ═══ */}
       <section className="py-20 md:py-32 bg-[#FDFBF7]">
