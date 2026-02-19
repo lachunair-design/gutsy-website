@@ -79,16 +79,15 @@ export function CartDrawer() {
         aria-label="Shopping cart"
         aria-modal="true"
         className={cn(
-          'fixed top-0 right-0 h-full w-full max-w-md bg-[#f3eee4] z-[70] shadow-[-20px_0px_50px_rgba(0,0,0,0.2)] transition-transform duration-500 ease-in-out border-l-4 border-black',
-          // Rounded left corners to match the pouch aesthetic
-          'rounded-l-[40px] md:rounded-l-[60px]',
+          'fixed top-0 right-0 h-full w-full max-w-md bg-[#f3eee4] z-[70] shadow-2xl transition-transform duration-500 ease-in-out',
+          'rounded-l-[30px] md:rounded-l-[40px]',
           isOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
         <div className="flex flex-col h-full p-4 md:p-6">
           
           {/* Header */}
-          <div className="flex items-center justify-between pb-6 border-b-2 border-black/10">
+          <div className="flex items-center justify-between pb-6 border-b border-black/10">
             <div className="flex flex-col">
               <h2 className={cn("text-4xl lowercase leading-none text-[#f20028]", runWild.className)}>
                 your bag
@@ -99,7 +98,7 @@ export function CartDrawer() {
             </div>
             <button
               onClick={closeCart}
-              className="h-12 w-12 flex items-center justify-center rounded-full bg-black text-white hover:bg-[#f20028] transition-colors shadow-[4px_4px_0px_0px_#ffb300]"
+              className="h-12 w-12 flex items-center justify-center rounded-full bg-black text-white hover:bg-[#f20028] transition-all duration-300 shadow-md"
               aria-label="Close cart"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
@@ -111,11 +110,36 @@ export function CartDrawer() {
           {/* Cart Items */}
           <div className="flex-1 overflow-y-auto py-8 scrollbar-hide">
             {lines.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full text-center space-y-4">
-                <p className={cn("text-5xl lowercase text-black/20", runWild.className)}>it&apos;s empty here</p>
-                <Button 
-                  onClick={closeCart} 
-                  className={cn("bg-black text-[#f3eee4] rounded-full px-8 py-6 uppercase font-bold", utoBold.className)}
+              <div className="flex flex-col items-center justify-center h-full text-center space-y-6">
+                {/* Animated empty cart illustration */}
+                <div className="animate-gentle-float">
+                  <svg viewBox="0 0 160 160" className="w-32 h-32 mx-auto" aria-hidden="true">
+                    {/* Lonely gut character */}
+                    <path d="M80 25c-24 0-44 16-48 38-2 14 1 28 10 38 6 8 6 20 2 30-3 8 0 18 8 22 6 4 14 4 20-2 8-8 20-12 28-8 12 6 24-4 24-18 0-10-4-18-6-26-4-14 0-30 8-40 6-8 10-20 6-32-4-14-20-24-38-24z"
+                      fill="none" stroke="black" strokeWidth="1.5" strokeLinecap="round" opacity="0.3"/>
+                    {/* Eyes looking left/right */}
+                    <circle cx="66" cy="68" r="4" fill="black" opacity="0.25">
+                      <animate attributeName="cx" values="66;62;66;70;66" dur="3s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="94" cy="68" r="4" fill="black" opacity="0.25">
+                      <animate attributeName="cx" values="94;90;94;98;94" dur="3s" repeatCount="indefinite" />
+                    </circle>
+                    {/* Slight frown */}
+                    <path d="M72 90 Q80 84 88 90" fill="none" stroke="black" strokeWidth="1.5" strokeLinecap="round" opacity="0.2"/>
+                    {/* Question mark floating above */}
+                    <text x="110" y="30" textAnchor="middle" className="text-2xl fill-[#ffb300]/40 font-bold" opacity="0.5">
+                      ?
+                      <animate attributeName="y" values="30;26;30" dur="2s" repeatCount="indefinite" />
+                    </text>
+                  </svg>
+                </div>
+                <div className="space-y-1">
+                  <p className={cn("text-4xl lowercase text-black/20", runWild.className)}>it&apos;s empty here</p>
+                  <p className="text-sm text-black/30">Your gut is waiting for something good.</p>
+                </div>
+                <Button
+                  onClick={closeCart}
+                  className={cn("bg-black text-[#f3eee4] rounded-full px-8 py-6 uppercase font-bold shadow-lg hover:shadow-xl transition-all duration-300 hover-bounce", utoBold.className)}
                 >
                   Go Shop
                 </Button>
@@ -125,7 +149,7 @@ export function CartDrawer() {
                 {lines.map((item) => (
                   <li key={item.id} className="flex gap-4 group">
                     {/* Product Image - Sticker Style */}
-                    <div className="relative w-24 h-24 flex-shrink-0 bg-white border-2 border-black rounded-2xl overflow-hidden shadow-[4px_4px_0px_0px_#000000] group-hover:rotate-2 transition-transform">
+                    <div className="relative w-24 h-24 flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-md group-hover:shadow-lg transition-all duration-300">
                       {item.merchandise.product.featuredImage ? (
                         <Image
                           src={item.merchandise.product.featuredImage.url}
@@ -149,7 +173,7 @@ export function CartDrawer() {
                       </p>
                       
                       <div className="flex items-center justify-between mt-auto">
-                        <div className="flex items-center bg-white border-2 border-black rounded-full p-1 shadow-[2px_2px_0px_0px_#000000]">
+                        <div className="flex items-center bg-white border border-black/10 rounded-full p-1 shadow-sm">
                           <button
                             onClick={() => updateItemQuantity(item.id, item.merchandise.id, item.quantity - 1)}
                             disabled={isLoading}
@@ -183,7 +207,7 @@ export function CartDrawer() {
 
           {/* Footer - Checkout Sticker */}
           {lines.length > 0 && (
-            <div className="bg-white border-4 border-black rounded-[2.5rem] p-6 shadow-[8px_8px_0px_0px_#ffb300] space-y-4 mt-auto">
+            <div className="bg-white/80 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-3xl p-6 shadow-xl space-y-4 mt-auto">
               <div className="flex items-center justify-between">
                 <span className={cn("text-4xl lowercase", runWild.className)}>subtotal</span>
                 <span className={cn("text-2xl font-black uppercase", utoBlack.className)}>
@@ -196,7 +220,7 @@ export function CartDrawer() {
               <a
                 href={cart?.checkoutUrl}
                 className={cn(
-                  "block w-full bg-[#f20028] text-[#f3eee4] text-center text-xl uppercase font-bold py-4 rounded-full border-2 border-black shadow-[4px_4px_0px_0px_#000000] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#000000] transition-all",
+                  "block w-full bg-[#f20028] text-white text-center text-xl uppercase font-bold py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300",
                   utoBold.className
                 )}
               >

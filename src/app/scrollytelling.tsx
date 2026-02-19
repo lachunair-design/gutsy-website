@@ -1,9 +1,13 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Lenis from 'lenis';
+import SplitType from 'split-type';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,159 +19,161 @@ interface Props {
 
 export function HomeScrollytelling({ utoBlack, utoBold, runWild }: Props) {
   const containerRef = useRef(null);
-  const triggerRef = useRef(null);
-  const scissorsRef = useRef(null);
-  const bit1 = useRef(null);
-  const bit2 = useRef(null);
-  const bit3 = useRef(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Initialize Lenis for smooth, premium scroll feel
+    const lenis = new Lenis();
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    return () => lenis.destroy();
+  }, []);
 
   useGSAP(() => {
-    const isMobile = window.innerWidth < 768;
-    const sections = gsap.utils.toArray(".story-beat");
+    const panels = gsap.utils.toArray(".story-panel");
     
-    gsap.set([bit1.current, bit2.current, bit3.current, scissorsRef.current], { 
-      willChange: "transform, opacity, filter" 
-    });
-
-    const tl = gsap.timeline({
+    // Horizontal Move
+    gsap.to(panels, {
+      xPercent: -100 * (panels.length - 1),
+      ease: "none",
       scrollTrigger: {
-        trigger: triggerRef.current,
-        start: "top top",
-        end: "+=500%", // Extended for smoother flow
+        trigger: containerRef.current,
         pin: true,
-        scrub: 1.2, 
-        anticipatePin: 1,
-      },
-    });
-
-    const xDist = isMobile ? 40 : 100;
-
-    // --- 1. THE CUT (BEAT 2 VISUAL) ---
-    tl.to(scissorsRef.current, { opacity: 1, scale: 1.2, duration: 0.3 }, 0.5)
-      // Scissors move to first gap
-      .to(scissorsRef.current, { x: isMobile ? -15 : -30, duration: 0.2 }, 0.7)
-      .to(scissorsRef.current, { rotate: -20, duration: 0.1, repeat: 1, yoyo: true }, 0.8)
-      // Scissors move to second gap
-      .to(scissorsRef.current, { x: isMobile ? 15 : 30, duration: 0.2 }, 0.9)
-      .to(scissorsRef.current, { rotate: 20, duration: 0.1, repeat: 1, yoyo: true }, 1.0)
-      
-      // The Separation (Breaking it down)
-      .to(bit1.current, { x: -xDist, rotate: -15, filter: "blur(0px)", duration: 0.8 }, 1.1)
-      .to(bit3.current, { x: xDist, rotate: 15, filter: "blur(0px)", duration: 0.8 }, 1.1)
-      .to(scissorsRef.current, { opacity: 0, scale: 0.5, duration: 0.3 }, 1.2);
-
-    // --- 2. THE GLOW (BIOAVAILABLE STATE) ---
-    tl.to([bit1.current, bit2.current, bit3.current], { 
-      fill: "#ffb300", 
-      filter: "drop-shadow(0 0 15px #ffb300)",
-      scale: 1.1,
-      duration: 1 
-    }, 1.8);
-
-    // --- 3. TEXT & BG FLOW (GUTSY Palette with Smooth Gradient Step) ---
-    sections.forEach((section: any, i) => {
-      // Added an intermediate dark-cream to prevent the harsh black-to-light jump
-      const bgColors = ["#000000", "#000000", "#f20028", "#f3eee4"];
-      tl.to(triggerRef.current, { backgroundColor: bgColors[i], duration: 0.6 }, i);
-
-      // Mobile Headlines: Optimized for impact (text-7xl)
-      tl.fromTo(section, 
-        { opacity: 0, y: 40, filter: "blur(10px)" }, 
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5 }, 
-        i
-      );
-
-      if (i < sections.length - 1) {
-        tl.to(section, { opacity: 0, y: -40, filter: "blur(10px)", duration: 0.5 }, i + 0.8);
+        scrub: 1,
+        snap: 1 / (panels.length - 1),
+        end: () => "+=" + (sliderRef.current?.offsetWidth || "3000"),
       }
     });
 
-    // --- 4. FINAL PULSE & CTA ENTRANCE ---
-    tl.fromTo(".cta-btn", 
-      { scale: 0.8, opacity: 0, y: 20 }, 
-      { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.7)" }, 
-      3.5
-    );
+    // High-end Text Reveal using SplitType
+    const splitElements = gsap.utils.toArray('.reveal-text');
+    splitElements.forEach((el: any) => {
+      const split = new SplitType(el, { types: 'words,chars' });
+      gsap.from(split.chars, {
+        opacity: 0,
+        y: 50,
+        rotateX: -90,
+        stagger: 0.02,
+        duration: 1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: el,
+          containerAnimation: gsap.to(panels, { xPercent: -100 * (panels.length - 1), ease: "none" }),
+          start: "left center",
+        }
+      });
+    });
 
-    gsap.to(".feels-light-text", {
-      scale: 1.03,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut"
+    // Background Color Sync
+    const bgColors = ["#000000", "#0a0a0a", "#f20028", "#F9F8F6"];
+    panels.forEach((panel: any, i: number) => {
+      ScrollTrigger.create({
+        trigger: panel,
+        containerAnimation: gsap.to(panels, { xPercent: -100 * (panels.length - 1), ease: "none" }),
+        start: "left center",
+        onEnter: () => gsap.to(containerRef.current, { backgroundColor: bgColors[i], duration: 0.8 }),
+        onEnterBack: () => gsap.to(containerRef.current, { backgroundColor: bgColors[i], duration: 0.8 }),
+      });
     });
 
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="w-full">
-      <div ref={triggerRef} className="h-screen w-full relative overflow-hidden transition-colors duration-700">
+    <div ref={containerRef} className="w-full overflow-hidden bg-black transition-colors duration-1000">
+      <div ref={sliderRef} className="flex w-[400%] h-screen">
         
-        {/* SVG CONTAINER - Increased visibility to 80% */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-          <svg viewBox="0 0 200 200" className="w-full h-[60vh] md:h-full max-w-[800px] opacity-80">
-            <circle ref={bit1} cx="70" cy="100" r="12" fill="#f20028" />
-            <circle ref={bit2} cx="100" cy="100" r="12" fill="#f20028" />
-            <circle ref={bit3} cx="130" cy="100" r="12" fill="#f20028" />
-            <g ref={scissorsRef} style={{ opacity: 0 }} transform="translate(100, 100)">
-                <path d="M-10,-10 L10,10 M-10,10 L10,-10" stroke="#ffb300" strokeWidth="3" strokeLinecap="round" />
-            </g>
-          </svg>
-        </div>
-
-        <div className="relative z-10 h-full w-full">
-          
-          {/* BEAT 1 */}
-          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-32 opacity-0">
-            <div className="max-w-4xl space-y-6">
-              <h2 className={cn("text-7xl md:text-[160px] text-[#f20028] leading-[0.8] tracking-tighter", utoBlack.className)}>
-                  Why most<br/>protein sucks
+        {/* PANEL 1: THE PROBLEM */}
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
+          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
+            <div className="w-full md:w-1/2 space-y-8 text-left">
+              <p className={cn("text-xs uppercase tracking-[0.4em] text-[#f20028] font-black", utoBold.className)}>01. The Problem</p>
+              <h2 className={cn("reveal-text text-7xl md:text-[140px] text-[#f20028] leading-[0.8] tracking-tighter", utoBlack.className)}>
+                Why most<br />protein sucks
               </h2>
-              <p className="text-[#f3eee4] text-2xl md:text-4xl font-medium leading-tight max-w-xl opacity-90">
-                Massive protein molecules. Your stomach struggles to break them down.
+              <p className="text-[#f3eee4]/50 text-xl md:text-2xl max-w-md leading-relaxed">
+                Standard molecules are tangled and clunky. They sit in your gut like a brick.
               </p>
             </div>
-          </section>
-
-          {/* BEAT 2 */}
-          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-32 opacity-0">
-            <div className="max-w-4xl space-y-4">
-              <p className={cn("text-4xl md:text-7xl text-[#ffb300] lowercase", runWild.className)}>the science of light</p>
-              <h2 className={cn("text-7xl md:text-[140px] text-[#f3eee4] leading-[0.8] tracking-tighter", utoBlack.className)}>
-                  We break it<br/>down first
-              </h2>
+            <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+              <div className="w-full max-w-lg aspect-square">
+                <DotLottieReact src="https://lottie.host/804d096d-3e51-4043-9836-8c459f0868f1/9Yj1K7U3U9.lottie" loop autoplay />
+              </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* BEAT 3 */}
-          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-32 opacity-0">
-            <div className="max-w-5xl space-y-10">
-              <h2 className={cn("text-7xl md:text-[140px] text-[#000000] leading-[0.8] tracking-tighter", utoBlack.className)}>
-                Five core<br/>ingredients.
+        {/* PANEL 2: THE SCIENCE */}
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
+          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
+            <div className="w-full md:w-1/2 space-y-8 text-left">
+              <p className={cn("text-3xl md:text-5xl text-[#ffb300]", runWild.className)}>the science of light</p>
+              <h2 className={cn("reveal-text text-7xl md:text-[120px] text-white leading-[0.8] tracking-tighter", utoBlack.className)}>
+                We break it<br />down first
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-[#000000] font-bold uppercase tracking-[0.2em] text-sm md:text-xl">
-                {["Pea & Rice", "Kiwifruit", "Adaptogens", "Coconut Milk", "Monk Fruit"].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4">
-                    <div className="w-8 h-[2px] bg-[#000000]/20" />
-                    <span>{item}</span>
-                  </div>
+              <p className="text-white/40 text-xl md:text-2xl max-w-md">
+                Enzymes split massive molecules into tiny, bioavailable peptides.
+              </p>
+              
+
+[Image of the human digestive system]
+
+            </div>
+            <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+              <div className="w-full max-w-lg aspect-square">
+                <DotLottieReact src="https://lottie.host/505373a0-8a4e-4f3b-85d7-8d8a7c1e57c6/XGq6WfS1Ue.lottie" loop autoplay />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* PANEL 3: THE INGREDIENTS */}
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
+          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
+            <div className="w-full md:w-1/2 space-y-8 text-left">
+              <h2 className={cn("reveal-text text-7xl md:text-[120px] text-white leading-[0.8] tracking-tighter", utoBlack.className)}>
+                Only five<br />ingredients.
+              </h2>
+              <div className="flex flex-wrap gap-4">
+                {["Pea", "Rice", "Kiwi", "Coconut", "Monk Fruit"].map(ing => (
+                  <span key={ing} className={cn("px-8 py-3 rounded-full border border-white/20 text-white text-xl", utoBold.className)}>
+                    {ing}
+                  </span>
                 ))}
               </div>
             </div>
-          </section>
-
-          {/* BEAT 4 */}
-          <section className="story-beat absolute inset-0 flex items-center px-8 md:px-32 opacity-0">
-            <div className="max-w-4xl space-y-12">
-              <h2 className={cn("feels-light-text text-8xl md:text-[220px] text-[#000000] leading-[0.75] tracking-tighter", utoBlack.className)}>
-                Feels<br/>light
-              </h2>
-              <button className={cn("cta-btn bg-[#f20028] text-[#f3eee4] px-14 py-6 md:px-20 md:py-8 rounded-full text-2xl md:text-3xl font-bold transition-all hover:bg-black shadow-2xl", utoBold.className)}>
-                Shop Gutsy
-              </button>
+            <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+              <div className="w-full max-w-lg aspect-square opacity-90">
+                <DotLottieReact src="https://lottie.host/a8b54e3f-671e-436f-876e-5d25902095f3/Ym0f4qO7Zp.lottie" loop autoplay />
+              </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
+
+        {/* PANEL 4: THE RESOLUTION */}
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-[#F9F8F6]">
+          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
+            <div className="w-full md:w-1/2 space-y-12 text-left">
+              <h2 className={cn("reveal-text text-9xl md:text-[200px] text-black leading-[0.75] tracking-tighter", utoBlack.className)}>
+                Feels<br />light
+              </h2>
+              <Link href="/shop" className={cn(
+                "inline-flex h-20 px-16 items-center rounded-full bg-[#f20028] text-white text-2xl shadow-2xl hover:bg-black transition-all duration-500",
+                utoBold.className
+              )}>
+                Shop Gutsy
+              </Link>
+            </div>
+            <div className="w-full md:w-1/2 flex justify-center md:justify-end">
+              <div className="w-full max-w-xl aspect-square">
+                <DotLottieReact src="https://lottie.host/f7e43d41-382b-450e-9270-e69e32a6797a/4N7X7zK4Xp.lottie" loop autoplay />
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );

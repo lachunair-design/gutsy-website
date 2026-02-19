@@ -80,10 +80,10 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="bg-[#f3eee4] min-h-screen p-3 md:p-6 lg:p-8 pt-32 md:pt-44 pb-8 space-y-8 overflow-x-hidden selection:bg-[#ffb300]">
+    <div className="bg-[#f3eee4] min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 overflow-x-hidden selection:bg-[#ffb300]">
 
       {/* THE POUCH */}
-      <div ref={containerRef} className={cn("bg-[#f20028] rounded-[30px] md:rounded-[60px] lg:rounded-[80px] min-h-screen overflow-hidden relative", utoMedium.className)}>
+      <div ref={containerRef} className={cn("bg-[#f20028] min-h-screen overflow-hidden relative", utoMedium.className)}>
 
         {/* VERTICAL MARQUEE RAIL */}
         <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-black/10 z-0 flex flex-col items-center overflow-hidden py-10 pointer-events-none">
@@ -142,7 +142,7 @@ export default function AboutPage() {
           </div>
 
           {/* TRUST BADGES */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 border-t-4 border-black/20 pt-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 border-t border-black/10 pt-12">
             {[
               { icon: Leaf, text: "100% Vegan" },
               { icon: ShieldCheck, text: "No Gums/Fillers" },
@@ -162,7 +162,7 @@ export default function AboutPage() {
 
 
       {/* CTA SECTION */}
-      <section className="bg-black rounded-[30px] md:rounded-[60px] lg:rounded-[80px] py-20 md:py-32 border-4 border-[#f3eee4] shadow-[10px_10px_0px_0px_#ffb300] md:shadow-[15px_15px_0px_0px_#ffb300]">
+      <section className="bg-black py-20 md:py-32">
         <div className="mx-auto max-w-3xl px-6 text-center space-y-8 md:space-y-10">
           <h3 className={cn("text-5xl md:text-9xl uppercase leading-tight text-[#f3eee4]", utoBlack.className)}>READY?</h3>
           {emailStatus === 'success' ? (
@@ -178,11 +178,11 @@ export default function AboutPage() {
                   required
                   type="email"
                   placeholder="Email"
-                  className={cn("flex-1 h-14 md:h-16 px-8 rounded-full border-2 border-[#f3eee4] bg-transparent text-[#f3eee4] text-lg outline-none placeholder:text-[#f3eee4]/50 focus:bg-[#f3eee4]/10 transition-all", utoBold.className)}
+                  className={cn("flex-1 h-14 md:h-16 px-8 rounded-full border border-white/20 bg-transparent text-[#f3eee4] text-lg outline-none placeholder:text-[#f3eee4]/50 focus:bg-[#f3eee4]/10 focus:ring-2 focus:ring-[#ffb300]/30 transition-all duration-300", utoBold.className)}
                 />
                 <Button
                   disabled={emailStatus === 'sending'}
-                  className={cn("h-14 md:h-16 px-12 rounded-full bg-[#f20028] text-[#f3eee4] font-bold border-2 border-[#f3eee4] hover:bg-[#ffb300] hover:text-black transition-all disabled:opacity-50", utoBold.className)}
+                  className={cn("h-14 md:h-16 px-12 rounded-full bg-[#f20028] text-[#f3eee4] font-bold shadow-lg hover:shadow-xl hover:bg-[#ffb300] hover:text-black hover:scale-105 active:scale-95 transition-all duration-300 disabled:opacity-50", utoBold.className)}
                 >
                   {emailStatus === 'sending' ? 'Sending...' : 'Sign me up'}
                 </Button>

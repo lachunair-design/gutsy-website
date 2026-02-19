@@ -67,7 +67,7 @@ export default function FAQPage() {
                   <div key={index} id={faq.id} className="py-8 scroll-mt-32 group">
                     <button
                       onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                      className="flex w-full items-center justify-between text-left"
+                      className="flex w-full items-center justify-between text-left transition-all duration-300"
                     >
                       <span className={cn(
                         "text-2xl md:text-4xl leading-none tracking-tight transition-colors",
@@ -109,7 +109,7 @@ export default function FAQPage() {
                   </p>
                   <a
                     href="mailto:hello@eatgutsy.com"
-                    className={cn("inline-flex items-center justify-center w-full h-14 bg-black text-[#f3eee4] rounded-full text-lg font-bold hover:bg-[#f20028] transition-all duration-500", utoBold.className)}
+                    className={cn("inline-flex items-center justify-center w-full h-14 bg-black text-[#f3eee4] rounded-full text-lg font-bold shadow-lg hover:shadow-xl hover:bg-[#f20028] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300", utoBold.className)}
                   >
                     Email us
                   </a>

@@ -48,7 +48,7 @@ export function Header() {
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
-      scrolled ? "bg-white/80 backdrop-blur-lg py-4 shadow-sm" : "bg-transparent py-8 md:py-10"
+      scrolled ? "bg-white/70 backdrop-blur-xl backdrop-saturate-150 py-4 shadow-sm border-b border-white/30" : "bg-transparent py-8 md:py-10"
     )}>
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         
@@ -132,14 +132,21 @@ export function Header() {
             <button
               type="button"
               className={cn(
-                "lg:hidden flex items-center transition-all",
-                isDarkHeroPage ? "text-white" : "text-black"
+                "lg:hidden flex items-center min-h-[44px] min-w-[44px] justify-center transition-all",
+                isDarkHeroPage ? "text-white" : "text-black",
+                utoBold.className
               )}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
             >
-              <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"} />
-              </svg>
+              {mobileMenuOpen ? (
+                <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <span className="text-xs uppercase tracking-[0.2em]">Menu</span>
+              )}
             </button>
           </div>
         </div>
