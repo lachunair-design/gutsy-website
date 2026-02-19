@@ -128,7 +128,7 @@ export default async function HomePage() {
        <MarqueeRail />
 
       {/* ═══ SCROLLYTELLING — Keep current (black with transitions) ═══ */}
-      <Scrollytelling utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
+      {/*<Scrollytelling utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} /> */}
 
       {/* ═══ SCIENCE SECTION — Cream Background ═══ */}
       <section className="py-20 md:py-32 bg-[#f3eee4]">
