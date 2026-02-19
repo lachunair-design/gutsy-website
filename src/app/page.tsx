@@ -9,7 +9,7 @@ import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
-import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
+import { Scrollytelling } from './scrollytelling';
 import { WelcomePopup } from '@/components/welcome-popup';
 import { WaveDivider } from '@/components/wave-divider';
 
@@ -191,9 +191,9 @@ export default async function HomePage() {
               <span className="relative inline-block">
                 Five
                 {/* Hand-drawn circle accent */}
-                <svg className="absolute -inset-3 w-[calc(100%+24px)] h-[calc(100%+24px)] pointer-events-none" viewBox="0 0 120 80" fill="none" aria-hidden="true">
+                {/* <svg className="absolute -inset-3 w-[calc(100%+24px)] h-[calc(100%+24px)] pointer-events-none" viewBox="0 0 120 80" fill="none" aria-hidden="true">
                   <ellipse cx="60" cy="40" rx="52" ry="32" stroke="#ffb300" strokeWidth="2.5" strokeLinecap="round" className="animate-draw-circle" opacity="0.5" />
-                </svg>
+                </svg> */}
               </span>{' '}
               core ingredients.
             </h2>
