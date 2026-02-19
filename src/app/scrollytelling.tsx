@@ -13,7 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
   const containerRef = useRef<HTMLDivElement>(null);
-  // Fixed the 'never' type error by defining this as an HTMLDivElement
   const sliderRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,16 +28,17 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
   useGSAP(() => {
     const panels = gsap.utils.toArray(".story-panel");
     
+    // Fixed calculation for horizontal movement to prevent abrupt cut-off
     const scrollTween = gsap.to(panels, {
-      xPercent: -100 * (panels.length - 1),
+      x: () => -(sliderRef.current!.scrollWidth - window.innerWidth),
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
         pin: true,
         scrub: 1,
         snap: 1 / (panels.length - 1),
-        // Use a fallback value to ensure TypeScript is happy
-        end: () => "+=" + (sliderRef.current?.offsetWidth || 3000),
+        end: () => "+=" + (sliderRef.current?.scrollWidth || 3000),
+        invalidateOnRefresh: true,
       }
     });
 
@@ -55,6 +55,24 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           trigger: text,
           containerAnimation: scrollTween,
           start: "left center",
+          toggleActions: "play none none reverse",
+        }
+      });
+    });
+
+    // Added animation for the Lottie icons/illustrations on the right
+    const lottieContainers = gsap.utils.toArray('.lottie-wrapper');
+    lottieContainers.forEach((lottie: any) => {
+      gsap.from(lottie, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1,
+        ease: "back.out(1.7)",
+        scrollTrigger: {
+          trigger: lottie,
+          containerAnimation: scrollTween,
+          start: "left center+=20%",
+          toggleActions: "play none none reverse",
         }
       });
     });
@@ -73,10 +91,10 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
 
   return (
     <div ref={containerRef} className="w-full overflow-hidden transition-colors duration-1000">
-      <div ref={sliderRef} className="flex w-[400%] h-screen">
+      <div ref={sliderRef} className="flex w-[400vw] h-screen">
         
         {/* PANEL 1: BLACK BG */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-black">
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-8 text-left">
               <h2 className={cn("reveal-text text-7xl md:text-[140px] text-[#f20028] leading-[0.8] tracking-tighter", utoBlack.className)}>
@@ -87,15 +105,15 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
               </p>
             </div>
             <div className="w-full md:w-1/2 flex justify-end">
-              <div className="w-full max-w-lg aspect-square">
+              <div className="lottie-wrapper w-full max-w-lg aspect-square">
                 <DotLottieReact src="https://lottie.host/804d096d-3e51-4043-9836-8c459f0868f1/9Yj1K7U3U9.lottie" loop autoplay />
               </div>
             </div>
           </div>
         </section>
 
-        {/* PANEL 2: BONE BG - FIXED TEXT COLOR */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-[#F9F8F6]">
+        {/* PANEL 2: BONE BG */}
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-8 text-left">
               <p className={cn("text-3xl md:text-5xl text-[#f20028]", runWild.className)}>the science of light</p>
@@ -105,9 +123,9 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
               <p className="text-black/60 text-xl md:text-2xl max-w-md">
                 Enzymes split massive molecules into tiny, bioavailable peptides.
               </p>
-                          </div>
+            </div>
             <div className="w-full md:w-1/2 flex justify-end">
-              <div className="w-full max-w-lg aspect-square">
+              <div className="lottie-wrapper w-full max-w-lg aspect-square">
                 <DotLottieReact src="https://lottie.host/505373a0-8a4e-4f3b-85d7-8d8a7c1e57c6/XGq6WfS1Ue.lottie" loop autoplay />
               </div>
             </div>
@@ -115,7 +133,7 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
         </section>
 
         {/* PANEL 3: RED BG */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-[#f20028]">
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-8 text-left">
               <h2 className={cn("reveal-text text-7xl md:text-[120px] text-white leading-[0.8] tracking-tighter", utoBlack.className)}>
@@ -130,15 +148,15 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
               </div>
             </div>
             <div className="w-full md:w-1/2 flex justify-end">
-              <div className="w-full max-w-lg aspect-square opacity-90">
+              <div className="lottie-wrapper w-full max-w-lg aspect-square opacity-90">
                 <DotLottieReact src="https://lottie.host/a8b54e3f-671e-436f-876e-5d25902095f3/Ym0f4qO7Zp.lottie" loop autoplay />
               </div>
             </div>
           </div>
         </section>
 
-        {/* PANEL 4: BONE BG - FIXED TEXT COLOR */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32 bg-[#F9F8F6]">
+        {/* PANEL 4: BONE BG */}
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
           <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
             <div className="w-full md:w-1/2 space-y-12 text-left">
               <h2 className={cn("reveal-text text-9xl md:text-[200px] text-black leading-[0.75] tracking-tighter", utoBlack.className)}>
@@ -152,7 +170,7 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
               </Link>
             </div>
             <div className="w-full md:w-1/2 flex justify-end">
-              <div className="w-full max-w-xl aspect-square">
+              <div className="lottie-wrapper w-full max-w-xl aspect-square">
                 <DotLottieReact src="https://lottie.host/f7e43d41-382b-450e-9270-e69e32a6797a/4N7X7zK4Xp.lottie" loop autoplay />
               </div>
             </div>
