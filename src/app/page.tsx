@@ -177,7 +177,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
      
 
@@ -309,6 +308,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <FunFactCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
+
 
       {/* ═══ EMAIL CAPTURE — White Background ═══ */}
       {/*<section className="bg-[#FDFBF7]">
