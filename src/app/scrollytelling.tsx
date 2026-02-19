@@ -28,7 +28,6 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
   useGSAP(() => {
     const panels = gsap.utils.toArray(".story-panel");
     
-    // Fixed calculation for horizontal movement to prevent abrupt cut-off
     const scrollTween = gsap.to(panels, {
       x: () => -(sliderRef.current!.scrollWidth - window.innerWidth),
       ease: "none",
@@ -60,19 +59,20 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
       });
     });
 
-    // Added animation for the Lottie icons/illustrations on the right
-    const lottieContainers = gsap.utils.toArray('.lottie-wrapper');
-    lottieContainers.forEach((lottie: any) => {
+    // Animate the Lottie container as it enters the view
+    const lotties = gsap.utils.toArray('.lottie-container');
+    lotties.forEach((lottie: any) => {
       gsap.from(lottie, {
-        scale: 0.8,
+        scale: 0.7,
         opacity: 0,
+        x: 100,
         duration: 1,
-        ease: "back.out(1.7)",
         scrollTrigger: {
           trigger: lottie,
           containerAnimation: scrollTween,
-          start: "left center+=20%",
-          toggleActions: "play none none reverse",
+          start: "left right",
+          end: "center center",
+          scrub: true
         }
       });
     });
@@ -94,18 +94,18 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
       <div ref={sliderRef} className="flex w-[400vw] h-screen">
         
         {/* PANEL 1: BLACK BG */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
-          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
-            <div className="w-full md:w-1/2 space-y-8 text-left">
-              <h2 className={cn("reveal-text text-7xl md:text-[140px] text-[#f20028] leading-[0.8] tracking-tighter", utoBlack.className)}>
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
+          <div className="flex w-full items-center justify-between gap-8">
+            <div className="w-[60%] space-y-8 text-left">
+              <h2 className={cn("reveal-text text-7xl md:text-[110px] xl:text-[130px] text-[#f20028] leading-[0.9] tracking-tighter whitespace-nowrap", utoBlack.className)}>
                 Why most<br />protein sucks
               </h2>
               <p className="text-[#f3eee4]/70 text-xl md:text-2xl max-w-md">
                 Standard molecules are tangled and clunky. They sit in your gut like a brick.
               </p>
             </div>
-            <div className="w-full md:w-1/2 flex justify-end">
-              <div className="lottie-wrapper w-full max-w-lg aspect-square">
+            <div className="lottie-container w-[35%] flex justify-center">
+              <div className="w-full max-w-md aspect-square">
                 <DotLottieReact src="https://lottie.host/804d096d-3e51-4043-9836-8c459f0868f1/9Yj1K7U3U9.lottie" loop autoplay />
               </div>
             </div>
@@ -113,19 +113,19 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
         </section>
 
         {/* PANEL 2: BONE BG */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
-          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
-            <div className="w-full md:w-1/2 space-y-8 text-left">
-              <p className={cn("text-3xl md:text-5xl text-[#f20028]", runWild.className)}>the science of light</p>
-              <h2 className={cn("reveal-text text-7xl md:text-[120px] text-black leading-[0.8] tracking-tighter", utoBlack.className)}>
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
+          <div className="flex w-full items-center justify-between gap-8">
+            <div className="w-[60%] space-y-6 text-left">
+              <p className={cn("text-2xl md:text-4xl text-[#f20028]", runWild.className)}>the science of light</p>
+              <h2 className={cn("reveal-text text-7xl md:text-[100px] xl:text-[110px] text-black leading-[0.9] tracking-tighter", utoBlack.className)}>
                 We break it<br />down first
               </h2>
               <p className="text-black/60 text-xl md:text-2xl max-w-md">
                 Enzymes split massive molecules into tiny, bioavailable peptides.
               </p>
             </div>
-            <div className="w-full md:w-1/2 flex justify-end">
-              <div className="lottie-wrapper w-full max-w-lg aspect-square">
+            <div className="lottie-container w-[35%] flex justify-center">
+              <div className="w-full max-w-md aspect-square">
                 <DotLottieReact src="https://lottie.host/505373a0-8a4e-4f3b-85d7-8d8a7c1e57c6/XGq6WfS1Ue.lottie" loop autoplay />
               </div>
             </div>
@@ -133,22 +133,22 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
         </section>
 
         {/* PANEL 3: RED BG */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
-          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
-            <div className="w-full md:w-1/2 space-y-8 text-left">
-              <h2 className={cn("reveal-text text-7xl md:text-[120px] text-white leading-[0.8] tracking-tighter", utoBlack.className)}>
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
+          <div className="flex w-full items-center justify-between gap-8">
+            <div className="w-[60%] space-y-8 text-left">
+              <h2 className={cn("reveal-text text-7xl md:text-[100px] xl:text-[110px] text-white leading-[0.9] tracking-tighter", utoBlack.className)}>
                 Only five<br />ingredients.
               </h2>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3">
                 {["Pea", "Rice", "Kiwi", "Coconut", "Monk Fruit"].map(ing => (
-                  <span key={ing} className={cn("px-8 py-3 rounded-full border border-white/40 text-white text-xl", utoBold.className)}>
+                  <span key={ing} className={cn("px-6 py-2 rounded-full border border-white/40 text-white text-lg md:text-xl", utoBold.className)}>
                     {ing}
                   </span>
                 ))}
               </div>
             </div>
-            <div className="w-full md:w-1/2 flex justify-end">
-              <div className="lottie-wrapper w-full max-w-lg aspect-square opacity-90">
+            <div className="lottie-container w-[35%] flex justify-center">
+              <div className="w-full max-w-md aspect-square opacity-90">
                 <DotLottieReact src="https://lottie.host/a8b54e3f-671e-436f-876e-5d25902095f3/Ym0f4qO7Zp.lottie" loop autoplay />
               </div>
             </div>
@@ -156,21 +156,21 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
         </section>
 
         {/* PANEL 4: BONE BG */}
-        <section className="story-panel w-screen h-full flex items-center px-10 md:px-32">
-          <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12">
-            <div className="w-full md:w-1/2 space-y-12 text-left">
-              <h2 className={cn("reveal-text text-9xl md:text-[200px] text-black leading-[0.75] tracking-tighter", utoBlack.className)}>
+        <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
+          <div className="flex w-full items-center justify-between gap-8">
+            <div className="w-[60%] space-y-12 text-left">
+              <h2 className={cn("reveal-text text-9xl md:text-[150px] xl:text-[180px] text-black leading-[0.8] tracking-tighter", utoBlack.className)}>
                 Feels<br />light
               </h2>
               <Link href="/shop" className={cn(
-                "inline-flex h-20 px-16 items-center rounded-full bg-[#f20028] text-white text-2xl shadow-2xl hover:bg-black transition-all duration-500",
+                "inline-flex h-16 md:h-20 px-10 md:px-16 items-center rounded-full bg-[#f20028] text-white text-xl md:text-2xl shadow-2xl hover:bg-black transition-all duration-500",
                 utoBold.className
               )}>
                 Shop Gutsy
               </Link>
             </div>
-            <div className="w-full md:w-1/2 flex justify-end">
-              <div className="lottie-wrapper w-full max-w-xl aspect-square">
+            <div className="lottie-container w-[35%] flex justify-center">
+              <div className="w-full max-w-lg aspect-square">
                 <DotLottieReact src="https://lottie.host/f7e43d41-382b-450e-9270-e69e32a6797a/4N7X7zK4Xp.lottie" loop autoplay />
               </div>
             </div>
