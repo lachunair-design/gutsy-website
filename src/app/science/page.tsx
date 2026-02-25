@@ -3,7 +3,16 @@
 import { useState, useEffect, useRef } from 'react';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
-import { Microscope, Zap, Activity, Info, Beaker, ShieldCheck, Thermometer } from 'lucide-react';
+import { 
+  Microscope, 
+  Zap, 
+  Activity, 
+  Info, 
+  Beaker, 
+  ShieldCheck, 
+  Thermometer, 
+  ChevronRight 
+} from 'lucide-react';
 
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
@@ -11,30 +20,121 @@ const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 const facts = [
-  { num: "01", id: "formula", title: "Your old protein powder wasn't the problem. Its formula was.", content: "Most people who switched to GUTSY tell us the same thing: they thought bloating was just what protein powders do. Some lived with it for years. Some tried switching brands. Some gave up entirely and started eating sad, protein-free salads. What they didn't know is that the bloating isn't a side effect of protein. It's a side effect of large, intact protein molecules landing in your gut before your digestive system is ready for them." },
-  { num: "02", id: "hydrolysis", title: "What 'hydrolyzed' means. (It's simpler than it sounds.)", content: "Think of a protein molecule like a very long necklace of beads. Standard protein gives your gut the whole necklace and says 'good luck.' Hydrolyzed protein gives your gut a handful of short chains, already broken apart. Your digestive system barely has to work. It's basically getting a cheat code.", hasVisual: "hydrolysis" },
-  { num: "03", id: "complete-protein", title: "Two plants. One complete protein. 23g per scoop.", content: "Here's a myth worth killing: plant protein is 'incomplete.' Pea protein is low in methionine. Rice protein is low in lysine. Put them together and they cover every essential amino acid your body needs, achieving a PDCAAS score near 1—the same range as whey. Yes, really." },
-  { num: "04", id: "ingredients", title: "7 ingredients. Not 17. Not 27. Seven.", content: "Turn over most tubs and start counting: Xanthan gum, guar gum, carrageenan, maltodextrin. The list is long because it's fixing problems created by cheap raw materials. GUTSY contains only what's necessary: Protein, Coconut Milk, Cacao/Vanilla, Maca/Reishi, Monk Fruit, Actazin®, and Himalayan Salt. That's it." },
-  { num: "05", id: "kiwifruit-science", title: "The kiwifruit ingredient doing more work than you'd expect.", content: "Every serving contains 600mg of Actazin®, a standardized green kiwifruit powder. It's the clinically proven amount required to support bowel regularity. It swells to three times its volume in the colon, adding bulk and making things easier to pass. Gentle. Not laxative." },
-  { num: "06", id: "absorption", title: "The kiwifruit also helps you actually absorb the protein.", content: "Green kiwifruit contains actinidin, a proteolytic enzyme that actively breaks down dietary proteins. So while the protein arrives partially pre-digested, the actinidin continues the job in your stomach. Faster amino acid availability means faster recovery.", hasVisual: "synergy" },
-  { num: "07", id: "sugar", title: "No added sugar. What you're actually tasting.", content: "Sweetness comes from monk fruit extract—a zero-sugar, zero-glycemic fruit used for a thousand years. Total sugars are well under 1g per serving, naturally occurring from coconut milk. No stevia aftertaste, no sucralose, no chemical notes." },
-  { num: "08", id: "heavy-metals", title: "We tested for heavy metals. Here are the actual numbers.", content: "Most brands hope you won't ask. We publish. Our results sit roughly 100x below EU limits for lead and 15x below for cadmium. If you put this in your body daily, you deserve to see the COA.", hasTable: "metals" },
-  { num: "09", id: "testing", title: "Every batch is tested before it ships. No exceptions.", content: "Our facility is GMP-certified—pharmaceutical quality framework. We test for Salmonella, Listeria, E. coli, and verify nutritional composition against the label. The reports exist. If you want to see them, email us. We like the nerdy ones." },
-  { num: "10", id: "failure", title: "8 months. 47 formulas. One product.", content: "GUTSY was built because the founder couldn't find a powder that didn't make her feel wrecked. We adjusted hydrolysis methods and botanical ratios until beta testers started using the words 'super light' without being prompted. This is built on 47 failures and one stubborn question." },
-  { num: "11", id: "macros", title: "133 to 137 calories. Where they go.", content: "No empty calories, no filler carbs. 23g of protein for 133-137 kcal is a ratio that usually makes people do a double-take.", hasTable: "macros" },
-  { num: "12", id: "vegan", title: "100% vegan. And everything that actually means.", content: "No whey hiding in a 'blend.' No casein in the flavoring. Removing dairy removes a common trigger for digestive discomfort, even for those who aren't strictly lactose intolerant. The same logic applies to soy. Not in GUTSY. Not ever." },
-  { num: "13", id: "glycaemic", title: "The glycaemic load is low.", content: "With under 1g of sugar and fiber from Actazin®, there is no spike and no crash. Just protein doing what protein is supposed to do without the fog of a sugar-laden formula." },
-  { num: "14", id: "additives", title: "No additives. Why that's harder than it sounds.", content: "GUTSY has no emulsifiers or thickeners. We skipped them because a better raw ingredient creates fewer problems to fix. Pre-digested protein is naturally more soluble; it didn't need to be rescued by xanthan gum." },
-  { num: "15", id: "lifestyle", title: "It's not just a shake.", content: "Beyond 300ml of water, GUTSY works in oats, pancakes, and smoothies. Vanilla Calm holds up in warm lattes without going 'gluey' because of the absence of gums. It's designed so you can go about your life without waiting for your gut to catch up." },
-  { num: "16", id: "planet", title: "Plant protein has a lower climate footprint.", content: "Peas and rice require significantly less land and water than animal sources. Peas are nitrogen-fixing—they replenish soil. While we haven't commissioned a specific LCA yet, the category-wide data is clear. When we have our own numbers, we'll publish them. Because that's what you do when you're serious." }
+  { 
+    num: "01", 
+    id: "formula",
+    title: "Your old protein powder wasn't the problem. Its formula was.", 
+    content: "Most people who switched to GUTSY tell us the same thing: they thought bloating was just what protein powders do. Some lived with it for years. Some tried switching brands. Some gave up entirely and started eating sad, protein-free salads. What they didn't know is that the bloating isn't a side effect of protein. It's a side effect of large, intact protein molecules landing in your gut before your digestive system is ready for them." 
+  },
+  { 
+    num: "02", 
+    id: "hydrolysis",
+    title: "What 'hydrolyzed' means. (It's simpler than it sounds.)", 
+    content: "Think of a protein molecule like a very long necklace of beads. Standard protein gives your gut the whole necklace and says 'good luck.' Hydrolyzed protein gives your gut a handful of short chains, already broken apart. Your digestive system barely has to work. It's basically getting a cheat code.",
+    hasVisual: "hydrolysis"
+  },
+  { 
+    num: "03", 
+    id: "complete-protein",
+    title: "Two plants. One complete protein. 23g per scoop.", 
+    content: "Here's a myth worth killing: plant protein is 'incomplete.' Technically true for individual sources in isolation. Pea protein is low in methionine. Rice protein is low in lysine. Put them together and they cover every essential amino acid your body needs, which is why the combination achieves a PDCAAS score near 1. PDCAAS is the benchmark the nutrition world uses to measure protein quality, and near 1 puts you in the same range as whey. Yes, really." 
+  },
+  { 
+    num: "04", 
+    id: "ingredients",
+    title: "7 ingredients. Not 17. Not 27. Seven.", 
+    content: "Turn over most protein powder tubs and start counting. Xanthan gum. Guar gum. Sunflower lecithin. Carrageenan. Maltodextrin. Acesulfame potassium. The list is long, and most of it is there to fix problems created by cheap raw materials. No gums. No binders. No fillers. Nothing that isn't doing a specific, defensible job." 
+  },
+  { 
+    num: "05", 
+    id: "kiwifruit-science",
+    title: "The kiwifruit ingredient doing more work than you'd expect.", 
+    content: "Every serving of GUTSY contains 600mg of Actazin®, a standardized green kiwifruit powder made in New Zealand. Clinical studies on Actazin® show it increases stool frequency and improves stool consistency. The kiwifruit fiber can swell to more than three times its original volume in the colon, adding bulk to stool and making it easier to pass. Gentle. Not laxative." 
+  },
+  { 
+    num: "06", 
+    id: "absorption",
+    title: "The kiwifruit also helps you actually absorb the protein.", 
+    content: "Green kiwifruit contains a unique enzyme called actinidin. Actinidin is proteolytic, meaning it actively breaks down dietary proteins. So the 600mg in every GUTSY scoop isn't just working on bowel regularity. It's also helping break down the protein you just consumed.",
+    hasVisual: "synergy"
+  },
+  { 
+    num: "07", 
+    id: "sugar",
+    title: "No added sugar. What you're actually tasting.", 
+    content: "Sweetness comes from monk fruit extract—a whole food extract with zero sugar content and zero glycemic impact. Total sugars are well under 1g per serving, naturally occurring from the coconut milk powder. No stevia aftertaste, no sucralose, no chemical notes." 
+  },
+  { 
+    num: "08", 
+    id: "heavy-metals",
+    title: "We tested for heavy metals. Here are the actual numbers.", 
+    content: "Third-party heavy metals testing isn't standard practice. We do it on every batch through an ISO 17025-accredited laboratory. EU maximum permitted levels for lead in food supplements are 3 mg/kg. Our results sit roughly 100x below that limit.",
+    hasTable: "metals"
+  },
+  { 
+    num: "09", 
+    id: "testing",
+    title: "Every batch is tested before it ships. No exceptions.", 
+    content: "Our manufacturing facility is GMP-certified. Testing covers microbial safety (Salmonella, Listeria, E. coli), nutritional composition (verified against the label), and full heavy metal panels. If you want to see the reports, email us. We genuinely like the people who ask." 
+  },
+  { 
+    num: "10", 
+    id: "failure",
+    title: "8 months. 47 formulas. One product.", 
+    content: "GUTSY was built by a founder who spent 8 months testing 47 different formulations, adjusting protein sources, hydrolysis methods, and sweetener ratios. The only filter that mattered: does it feel light? This is a product built on 47 failures and one stubborn question." 
+  },
+  { 
+    num: "11", 
+    id: "macros",
+    title: "133 to 137 calories. Where they go.", 
+    content: "Vanilla Calm delivers 133 kcal. Cacao Boost delivers 137 kcal. The fat comes from coconut milk powder: medium-chain fatty acids, naturally occurring. There are no empty calories or hidden sugars in the formula.",
+    hasTable: "macros"
+  },
+  { 
+    num: "12", 
+    id: "vegan",
+    title: "100% vegan. And everything that actually means.", 
+    content: "GUTSY is free from dairy, lactose, gluten, and soy. Every single ingredient is plant-derived. Removing dairy removes one more variable working against your gut, even if you aren't strictly lactose intolerant." 
+  },
+  { 
+    num: "13", 
+    id: "glycaemic",
+    title: "The glycaemic load is low.", 
+    content: "Under 1g of sugar per serving, confirmed by independent lab analysis. The sweetness comes from monk fruit, which has zero glycaemic impact. No spike. No crash. Just protein doing what protein is supposed to do." 
+  },
+  { 
+    num: "14", 
+    id: "additives",
+    title: "No additives. Why that's harder than it sounds.", 
+    content: "Most protein powders contain emulsifiers and thickeners to fix gritty texture. GUTSY has none. No xanthan gum, no guar gum, no carrageenan. The reason we can skip them is better raw ingredients: pre-digested protein is naturally more soluble." 
+  },
+  { 
+    num: "15", 
+    id: "lifestyle",
+    title: "It's not just a shake.", 
+    content: "Beyond the shaker, GUTSY works in overnight oats, pancakes, and smoothies. Vanilla Calm holds up in warm lattes without going gluey. The 'light' experience means you can work and train without waiting for your gut to catch up." 
+  },
+  { 
+    num: "16", 
+    id: "planet",
+    title: "Plant protein has a lower climate footprint.", 
+    content: "Producing protein from plants requires significantly less land and water. Peas are nitrogen-fixing crops that naturally replenish soil. Choosing plant protein over whey consistently shows lower environmental impact as a category." 
+  }
 ];
 
 export default function SciencePage() {
   const [activeSection, setActiveSection] = useState("");
   const [quizScore, setQuizScore] = useState<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentScroll = window.scrollY;
+      setScrollProgress((currentScroll / totalScroll) * 100);
+    };
+
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => {
         if (e.isIntersecting) {
@@ -45,113 +145,134 @@ export default function SciencePage() {
           }
         }
       }),
-      { threshold: 0.3, rootMargin: "-10% 0px -70% 0px" }
+      { threshold: 0.2, rootMargin: "-20% 0px -60% 0px" }
     );
+
     facts.forEach((f) => {
       const el = document.getElementById(f.id);
       if (el) observer.observe(el);
     });
-    return () => observer.disconnect();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      const pos = el.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 140;
+      const pos = el.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 160;
       window.scrollTo({ top: pos, behavior: 'smooth' });
     }
   };
 
-  const handleQuiz = (val: number) => setQuizScore(val);
-
   return (
     <div className={cn("bg-[#f3eee4] min-h-screen text-black selection:bg-[#f20028]/10 overflow-x-hidden relative", utoMedium.className)}>
       
-      {/* BG EFFECTS */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-[20%] left-[5%] w-72 h-72 bg-[#ffb300]/5 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[10%] right-[5%] w-96 h-96 bg-[#f20028]/5 rounded-full blur-[150px] animate-pulse" />
+      {/* MOBILE PROGRESS PILLAR */}
+      <div className="lg:hidden fixed left-0 top-0 bottom-0 w-1 z-[90] bg-black/5">
+        <div className="bg-[#f20028] transition-all duration-150 ease-out w-full" style={{ height: `${scrollProgress}%` }} />
       </div>
 
-      {/* MOBILE NAV */}
-      <div className="lg:hidden sticky top-[80px] z-[80] bg-[#f3eee4]/80 backdrop-blur-md border-b border-black/5 py-4 overflow-hidden">
-        <div ref={scrollContainerRef} className="flex gap-4 px-6 overflow-x-auto no-scrollbar">
+      {/* MOBILE NAVIGATOR */}
+      <div className="lg:hidden sticky top-[80px] z-[80] bg-[#f3eee4]/95 backdrop-blur-xl border-b border-black/5 py-3">
+        <div ref={scrollContainerRef} className="flex gap-3 px-6 overflow-x-auto no-scrollbar scroll-smooth">
           {facts.map((f) => (
-            <button key={`nav-${f.id}`} id={`nav-${f.id}`} onClick={() => scrollTo(f.id)} className={cn("whitespace-nowrap px-4 py-2 rounded-full text-[10px] uppercase tracking-widest transition-all border", activeSection === f.id ? "bg-black text-white border-black" : "bg-white/50 text-black/40 border-black/5")}>
-              {f.num}. {f.id.replace('-', ' ')}
+            <button key={`nav-${f.id}`} id={`nav-${f.id}`} onClick={() => scrollTo(f.id)} className={cn("whitespace-nowrap px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all border shrink-0", activeSection === f.id ? "bg-[#f20028] text-white border-[#f20028]" : "bg-white/50 text-black/40 border-black/5")}>
+              {f.num}
             </button>
           ))}
         </div>
       </div>
 
-      {/* HERO */}
-      <section className="bg-black text-[#f3eee4] pt-32 pb-20 md:pt-48 md:pb-32 relative overflow-hidden z-10">
+      {/* HERO SECTION */}
+      <section className="bg-black text-[#f3eee4] pt-24 pb-16 md:pt-48 md:pb-32 relative overflow-hidden z-10">
         <div className="mx-auto max-w-7xl px-8 relative z-10">
           <div className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="h-px w-12 bg-[#ffb300]" />
-              <p className={cn("text-xs uppercase tracking-[0.3em] text-[#ffb300]", utoBold.className)}>Laboratory Grade / Human Spirit</p>
-            </div>
-            <h1 className={cn("text-6xl md:text-[140px] leading-[0.8] tracking-tighter mb-6", utoBlack.className)}>Actual <br /> Chemistry.</h1>
-            <p className={cn("text-3xl md:text-5xl text-[#ffb300] lowercase italic opacity-90", runWild.className)}>16 facts about gutsy and nutrition—minus the wellness theater.</p>
+            <h1 className={cn("text-6xl md:text-[140px] leading-[0.85] tracking-tighter mb-6", utoBlack.className)}>
+              Actual <br /> Chemistry.
+            </h1>
+            <p className={cn("text-2xl md:text-5xl text-[#ffb300] lowercase italic opacity-90 leading-tight", runWild.className)}>
+              16 facts about gutsy—minus the wellness theater.
+            </p>
           </div>
         </div>
-        <div className="absolute inset-0 opacity-10 pointer-events-none border-[#f3eee4]/20 grid grid-cols-6 lg:grid-cols-12" />
-        <Microscope className="absolute bottom-0 right-0 p-12 opacity-20 hidden md:block animate-pulse w-64 h-64 text-[#ffb300] stroke-[0.5]" />
-      </section>
-
-      {/* INTRO */}
-      <section className="py-20 border-b border-black/5 relative z-10">
-        <div className="mx-auto max-w-7xl px-8 flex flex-col md:flex-row gap-12 items-center">
-          <p className="text-xl md:text-2xl leading-relaxed text-black/80 italic max-w-3xl">
-            Everything on this page is backed by third-party lab testing, supplier clinical data, and ingredient science. We wrote it so you don&apos;t have to wade through a 60-page COA. <span className="text-[#f20028]">You&apos;re welcome.</span>
-          </p>
-          <Zap className="hidden md:block text-[#f20028] w-20 h-20 animate-bounce" />
-        </div>
+        <Microscope className="absolute bottom-0 right-0 p-12 opacity-10 hidden md:block animate-pulse w-96 h-96 text-[#ffb300] stroke-[0.5]" />
       </section>
 
       {/* MAIN CONTENT */}
-      <section className="py-16 md:py-24 relative z-10">
+      <section className="py-12 md:py-24 relative z-10">
         <div className="mx-auto max-w-7xl px-8 flex flex-col lg:flex-row gap-20">
-          <aside className="hidden lg:block w-64 flex-shrink-0 sticky top-32 h-fit space-y-4 border-l border-black/5 pl-6">
+          
+          {/* DESKTOP TOC */}
+          <aside className="hidden lg:block w-64 sticky top-32 h-fit border-l border-black/5 pl-6">
             <p className={cn("text-[10px] uppercase tracking-widest text-black/40 mb-6", utoBold.className)}>The Evidence</p>
             {facts.map((f) => (
-              <button key={f.id} onClick={() => scrollTo(f.id)} className={cn("block text-left text-xs uppercase tracking-wider transition-all hover:text-[#f20028]", activeSection === f.id ? "text-[#f20028] font-bold translate-x-2" : "text-black/40")}>
+              <button key={f.id} onClick={() => scrollTo(f.id)} className={cn("block text-left text-xs uppercase tracking-wider mb-4 transition-all hover:text-[#f20028]", activeSection === f.id ? "text-[#f20028] font-bold translate-x-2" : "text-black/40")}>
                 {f.num}. {f.id.replace('-', ' ')}
               </button>
             ))}
           </aside>
 
-          <div className="flex-1 space-y-32 md:space-y-40">
+          {/* FACTS LIST */}
+          <div className="flex-1 space-y-24 md:space-y-40">
             {facts.map((fact) => (
-              <div key={fact.num} id={fact.id} className="grid grid-cols-1 lg:grid-cols-10 gap-8 items-start group scroll-mt-32">
-                <span className={cn("lg:col-span-1 text-5xl md:text-6xl text-[#f20028] opacity-10 group-hover:opacity-100 transition-opacity", utoBlack.className)}>{fact.num}</span>
+              <div key={fact.num} id={fact.id} className="grid grid-cols-1 lg:grid-cols-10 gap-4 md:gap-8 items-start group scroll-mt-32">
+                <div className="flex items-center gap-4 lg:col-span-1">
+                  <span className={cn("text-4xl md:text-6xl text-[#f20028] transition-opacity", utoBlack.className, activeSection === fact.id ? "opacity-100" : "opacity-10")}>
+                    {fact.num}
+                  </span>
+                  <div className="h-px flex-1 bg-black/5 lg:hidden" />
+                </div>
+                
                 <div className="lg:col-span-9 max-w-2xl">
-                  <h2 className={cn("text-2xl md:text-5xl mb-6 leading-tight group-hover:translate-x-2 transition-transform", utoBold.className)}>{fact.title}</h2>
-                  <p className="text-base md:text-xl text-black/70 leading-relaxed mb-8">{fact.content}</p>
+                  <h2 className={cn("text-2xl md:text-5xl mb-6 leading-tight", utoBold.className)}>{fact.title}</h2>
+                  <p className="text-lg md:text-xl text-black/70 leading-relaxed mb-8">{fact.content}</p>
                   
-                  {fact.hasVisual && <div className="my-8 p-8 border border-dashed border-black/10 rounded-3xl text-center text-[10px] uppercase tracking-widest text-black/30 bg-white/30 backdrop-blur-sm">[Visual: {fact.hasVisual === 'hydrolysis' ? 'Enzymatic Hydrolysis' : 'Actinidin Synergy'}]</div>}
-                  
+                  {fact.hasVisual && (
+                    <div className="my-8 aspect-square md:aspect-video flex items-center justify-center border border-dashed border-black/10 rounded-[32px] text-[10px] uppercase tracking-[0.2em] text-black/30 bg-white/20 backdrop-blur-sm italic">
+                      [Visual: {fact.hasVisual === 'hydrolysis' ? 'Molecule Breakdown' : 'Enzyme Synergy'}]
+                    </div>
+                  )}
+
                   {fact.hasTable === 'metals' && (
-                    <div className="mt-8 bg-white rounded-[32px] p-6 shadow-sm border border-black/5 group/table overflow-hidden">
-                      <Activity className="absolute -top-4 -right-4 w-24 h-24 opacity-5 group-hover/table:scale-110 transition-transform" />
-                      <div className="overflow-x-auto"><table className="w-full text-left border-collapse min-w-[400px]">
-                        <thead><tr className="border-b-2 border-black uppercase text-[10px] tracking-widest"><th className="py-4">Metal</th><th className="py-4">Cacao Boost</th><th className="py-4">Vanilla Calm</th></tr></thead>
-                        <tbody className={cn("text-base md:text-xl", utoMedium.className)}>
-                          <tr className="border-b border-black/5 hover:bg-zinc-50 transition-colors"><td className="py-4">Lead (Pb)</td><td className="py-4">0.020 mg/kg</td><td className="py-4 text-[#f20028] font-bold">0.028 mg/kg</td></tr>
-                          <tr className="border-b border-black/5"><td className="py-4">Arsenic (As)</td><td className="py-4">0.029 mg/kg</td><td className="py-4">0.035 mg/kg</td></tr>
-                          <tr className="border-b border-black/5"><td className="py-4">Cadmium (Cd)</td><td className="py-4">0.068 mg/kg</td><td className="py-4">0.064 mg/kg</td></tr>
-                        </tbody>
-                      </table></div>
+                    <div className="mt-8 bg-white rounded-[32px] p-8 shadow-sm border border-black/5 relative overflow-hidden group/table">
+                      <div className="flex items-center justify-between mb-8">
+                        <p className={cn("text-xs uppercase tracking-widest", utoBold.className)}>Batch Analysis 821317</p>
+                        <ShieldCheck className="w-5 h-5 text-[#f20028]" />
+                      </div>
+                      <div className="space-y-6">
+                        {[
+                          { m: "Lead (Pb)", c: "0.020", v: "0.028", l: "100x below limit" },
+                          { m: "Cadmium (Cd)", c: "0.068", v: "0.064", l: "15x below limit" }
+                        ].map((row, i) => (
+                          <div key={i} className="flex flex-col gap-2 border-b border-black/5 pb-6 last:border-0">
+                            <p className="text-[10px] uppercase text-black/40 tracking-widest">{row.m}</p>
+                            <div className="flex justify-between items-baseline">
+                              <span className="text-3xl">{row.c} <span className="text-xs opacity-30">mg/kg</span></span>
+                              <span className="text-[10px] font-black text-[#f20028] uppercase">{row.l}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                   
                   {fact.hasTable === 'macros' && (
-                    <div className="mt-8 bg-black text-[#f3eee4] rounded-[32px] p-6 shadow-xl grid grid-cols-2 md:grid-cols-4 gap-6">
-                      <div className="border-l border-white/20 pl-4 transition-all hover:border-[#f20028]"><p className="opacity-50 text-[9px] uppercase mb-1">Protein</p><p className="text-2xl md:text-4xl">23g</p></div>
-                      <div className="border-l border-white/20 pl-4 transition-all hover:border-[#f20028]"><p className="opacity-50 text-[9px] uppercase mb-1">Sugars</p><p className="text-2xl md:text-4xl">&lt;1g</p></div>
-                      <div className="border-l border-white/20 pl-4 transition-all hover:border-[#f20028]"><p className="opacity-50 text-[9px] uppercase mb-1">Vanilla</p><p className="text-2xl md:text-4xl text-[#ffb300]">133</p></div>
-                      <div className="border-l border-white/20 pl-4 transition-all hover:border-[#f20028]"><p className="opacity-50 text-[9px] uppercase mb-1">Cacao</p><p className="text-2xl md:text-4xl text-[#ffb300]">137</p></div>
+                    <div className="mt-8 grid grid-cols-2 gap-4 md:gap-8">
+                      {[
+                        { l: "Protein", v: "23g" },
+                        { l: "Sugars", v: "<1g" },
+                        { l: "Vanilla", v: "133", u: "kcal" },
+                        { l: "Cacao", v: "137", u: "kcal" }
+                      ].map((m, i) => (
+                        <div key={i} className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5 transition-transform hover:scale-[1.02]">
+                          <p className="opacity-50 text-[10px] uppercase mb-1">{m.l}</p>
+                          <p className="text-3xl md:text-4xl">{m.v}{m.u && <span className="text-xs ml-1 opacity-50">{m.u}</span>}</p>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -161,45 +282,54 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* BLOAT SCALE QUIZ */}
-      <section className="py-24 bg-white border-y border-black/5 relative z-10">
+      {/* THE BLOAT SCALE QUIZ */}
+      <section className="py-24 bg-white relative z-10 border-y border-black/5">
         <div className="mx-auto max-w-4xl px-8 text-center">
-          <Thermometer className="w-12 h-12 mx-auto mb-6 text-[#f20028]" />
+          <Thermometer className="w-10 h-10 mx-auto mb-6 text-[#f20028]" />
           <h2 className={cn("text-4xl md:text-6xl mb-4 tracking-tighter", utoBlack.className)}>The Bloat Scale</h2>
-          <p className="text-lg text-black/60 mb-12">Be honest. How do you feel 20 minutes after your current shake?</p>
+          <p className="text-lg text-black/60 mb-12">How do you feel 20 minutes after your current shake?</p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { score: 1, label: "Fine", desc: "No issues, just protein.", color: "hover:bg-green-50" },
-              { score: 2, label: "The Brick", desc: "A heavy, sitting-in-the-stomach feeling.", color: "hover:bg-yellow-50" },
-              { score: 3, label: "The Balloon", desc: "Visible bloating and audible regret.", color: "hover:bg-red-50" }
+              { s: 1, l: "Fine", d: "No issues, just protein." },
+              { s: 2, l: "The Brick", d: "A heavy, sitting-in-the-stomach feeling." },
+              { s: 3, l: "The Balloon", d: "Visible bloating and audible regret." }
             ].map((q) => (
-              <button key={q.score} onClick={() => handleQuiz(q.score)} className={cn("p-8 border border-black/10 rounded-[32px] transition-all group text-left", q.color, quizScore === q.score && "bg-black text-white border-black")}>
-                <span className={cn("text-3xl block mb-2", utoBold.className)}>{q.label}</span>
-                <p className="opacity-60 text-sm">{q.desc}</p>
+              <button key={q.s} onClick={() => setQuizScore(q.s)} className={cn("p-8 border rounded-[32px] transition-all text-left group", quizScore === q.s ? "bg-black text-white border-black" : "bg-[#f3eee4]/30 border-black/5 hover:border-black/20")}>
+                <span className={cn("text-2xl block mb-2", utoBold.className)}>{q.l}</span>
+                <p className="opacity-60 text-xs">{q.d}</p>
               </button>
             ))}
           </div>
 
           {quizScore && (
-            <div className="mt-12 p-8 bg-[#f3eee4] rounded-[40px] animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <p className={cn("text-2xl mb-4", utoBold.className)}>
-                {quizScore === 1 ? "You're a rare breed. (Or you're already drinking Gutsy)." : quizScore === 2 ? "That's the 'intact necklace' effect. Your gut is working overtime." : "That's excess fermentation. You're basically a science experiment."}
+            <div className="mt-8 p-10 bg-[#f20028] text-white rounded-[40px] text-left animate-in slide-in-from-bottom-4">
+              <p className={cn("text-2xl md:text-3xl mb-4", utoBold.className)}>
+                {quizScore === 1 ? "You're a lucky one." : "This is precisely why GUTSY exists."}
               </p>
-              <p className="text-lg opacity-70">Hydrolyzed protein was designed precisely for this. We did the heavy lifting so your gut doesn&apos;t have to.</p>
+              <p className="text-lg opacity-90 leading-relaxed">
+                Most proteins are giant molecules your gut has to wrestle with. We enzymatically pre-digest ours into tiny peptides so your stomach doesn&apos;t have to do the heavy lifting.
+              </p>
             </div>
           )}
         </div>
       </section>
 
       {/* FUN FACTS */}
-      <section className="py-20 md:py-24 bg-[#ffb300] text-black relative z-10">
+      <section className="py-24 bg-[#ffb300] text-black relative z-10">
         <div className="mx-auto max-w-7xl px-8">
-            <h2 className={cn("text-4xl md:text-7xl mb-12 tracking-tighter", utoBlack.className)}>The Science <span className={cn("text-2xl md:text-4xl text-black/60 block", runWild.className)}>(but make it fashion)</span></h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[{ t: "Smart Guts", s: "500M neurons in your gut. It's pickier than your actual brain." }, { t: "Acid Trip", s: "Stomach acid is serious. Gutsy stays on its good side." }, { t: "Red Factory", s: "2M red blood cells/sec. All protein-built." }, { t: "Pea-nomenal", s: "Legumes, not veg. Useless info for your head." }].map((item, i) => (
-                  <div key={i} className="bg-white/40 p-6 rounded-2xl border border-black/5 hover:bg-white transition-all group">
-                      <div className="mb-4 h-px w-8 bg-black transition-all group-hover:w-full" /><p className={cn("text-lg mb-2", utoBold.className)}>{item.t}</p><p className="text-sm opacity-80">{item.s}</p>
+            <h2 className={cn("text-4xl md:text-7xl mb-16 tracking-tighter", utoBlack.className)}>The Science <span className={cn("text-2xl md:text-4xl text-black/60 block", runWild.className)}>(but make it fashion)</span></h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { t: "Smart Guts", s: "500M neurons in your gut. It's pickier than your actual brain." },
+                  { t: "Acid Trip", s: "Stomach acid is serious. Gutsy stays on its good side." },
+                  { t: "Red Factory", s: "2M red blood cells/sec. All protein-built." },
+                  { t: "Pea-nomenal", s: "Legumes, not veg. Useless info for your head." }
+                ].map((item, i) => (
+                  <div key={i} className="bg-white/40 p-8 rounded-3xl border border-black/5 hover:bg-white transition-all group">
+                    <div className="mb-6 h-px w-8 bg-black transition-all group-hover:w-full" />
+                    <p className={cn("text-xl mb-2", utoBold.className)}>{item.t}</p>
+                    <p className="text-sm opacity-80">{item.s}</p>
                   </div>
                 ))}
             </div>
@@ -207,14 +337,20 @@ export default function SciencePage() {
       </section>
 
       {/* FOOTER SOURCES */}
-      <section className="py-16 bg-black text-white/40 relative z-10">
+      <section className="py-16 bg-black text-white/30 relative z-10">
         <div className="mx-auto max-w-7xl px-8">
-            <div className="flex items-center gap-2 mb-8 text-[#ffb300]"><Beaker className="w-4 h-4" /><p className="text-[10px] uppercase tracking-[0.3em]">Scientific Verification Panel</p></div>
-            <ul className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-[8px] uppercase tracking-[0.2em]">
-                {["Actazin® data", "Hydrolysis data", "Lab Reports 2025", "PDCAAS/FAO Ref"].map((s, i) => (
-                  <li key={i} className="flex gap-2"><ShieldCheck className="w-3 h-3" /> {s}</li>
+            <div className="flex items-center gap-3 mb-10 text-[#ffb300]">
+              <Beaker className="w-5 h-5" />
+              <p className="text-xs uppercase tracking-[0.4em]">Scientific Verification Panel</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                {["Actazin® Data", "Hydrolysis Science", "Laboratory Reports 2025", "PDCAAS/FAO Ref"].map((s, i) => (
+                  <div key={i} className="flex items-center gap-4 py-4 border-t border-white/10">
+                    <ShieldCheck className="w-4 h-4 text-[#ffb300]" />
+                    <span className="text-[10px] uppercase tracking-widest">{s}</span>
+                  </div>
                 ))}
-            </ul>
+            </div>
         </div>
       </section>
     </div>
