@@ -1,29 +1,20 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import Lenis from 'lenis';
 import SplitType from 'split-type';
 
+// Lenis is initialized globally in SmoothScrollProvider (layout.tsx).
+// ScrollTrigger is automatically synced with Lenis via lenis.on('scroll', ScrollTrigger.update).
 gsap.registerPlugin(ScrollTrigger);
 
 export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
   const containerRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const lenis = new Lenis();
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
-  }, []);
 
   useGSAP(() => {
     const panels = gsap.utils.toArray(".story-panel");
