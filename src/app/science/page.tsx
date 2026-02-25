@@ -220,83 +220,92 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* MAIN CONTENT */}
+      {/* MAIN CONTENT GRID */}
       <section className="py-12 md:py-24 relative z-10">
-        <div className="mx-auto max-w-7xl px-8 flex flex-col lg:flex-row gap-20">
-          
-          {/* DESKTOP TOC - STICKY BAR */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-40 h-fit border-l border-black/5 pl-6">
-              <p className={cn("text-[10px] uppercase tracking-widest text-black/40 mb-6", utoBold.className)}>The Evidence</p>
-              <div className="space-y-4">
-                {facts.map((f) => (
-                  <button key={f.id} onClick={() => scrollTo(f.id)} className={cn("block text-left text-xs uppercase tracking-wider transition-all hover:text-[#f20028]", activeSection === f.id ? "text-[#f20028] font-bold translate-x-2" : "text-black/40")}>
-                    {f.num}. {f.id.replace('-', ' ')}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          {/* FACTS LIST */}
-          <div className="flex-1 space-y-24 md:space-y-40">
-            {facts.map((fact) => (
-              <div key={fact.num} id={fact.id} className="grid grid-cols-1 lg:grid-cols-10 gap-4 md:gap-8 items-start group scroll-mt-48">
-                <div className="flex items-center gap-4 lg:col-span-1">
-                  <span className={cn("text-4xl md:text-6xl text-[#f20028] transition-opacity", utoBlack.className, activeSection === fact.id ? "opacity-100" : "opacity-10")}>
-                    {fact.num}
-                  </span>
-                  <div className="h-px flex-1 bg-black/5 lg:hidden" />
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="flex flex-col lg:flex-row gap-20">
+            
+            {/* DESKTOP TOC - STRICTLY STICKY */}
+            <aside className="hidden lg:block w-64 flex-shrink-0 relative">
+              <div className="sticky top-40 h-fit border-l border-black/5 pl-6">
+                <p className={cn("text-[10px] uppercase tracking-widest text-black/40 mb-6", utoBold.className)}>The Evidence</p>
+                <div className="flex flex-col gap-4">
+                  {facts.map((f) => (
+                    <button 
+                      key={f.id} 
+                      onClick={() => scrollTo(f.id)} 
+                      className={cn(
+                        "block text-left text-xs uppercase tracking-wider transition-all hover:text-[#f20028] transform",
+                        activeSection === f.id ? "text-[#f20028] font-bold translate-x-2" : "text-black/40"
+                      )}
+                    >
+                      {f.num}. {f.id.replace('-', ' ')}
+                    </button>
+                  ))}
                 </div>
-                
-                <div className="lg:col-span-9 max-w-2xl">
-                  <h2 className={cn("text-2xl md:text-5xl mb-6 leading-tight", utoBold.className)}>{fact.title}</h2>
-                  <div className="text-lg md:text-xl text-black/70 leading-relaxed space-y-6">
-                    {fact.content.split('\n\n').map((p, i) => (
-                      <p key={i}>{p}</p>
-                    ))}
+              </div>
+            </aside>
+
+            {/* FACTS LIST */}
+            <div className="flex-1 space-y-24 md:space-y-40">
+              {facts.map((fact) => (
+                <div key={fact.num} id={fact.id} className="grid grid-cols-1 lg:grid-cols-10 gap-4 md:gap-8 items-start group scroll-mt-48">
+                  <div className="flex items-center gap-4 lg:col-span-1">
+                    <span className={cn("text-4xl md:text-6xl text-[#f20028] transition-opacity", utoBlack.className, activeSection === fact.id ? "opacity-100" : "opacity-10")}>
+                      {fact.num}
+                    </span>
+                    <div className="h-px flex-1 bg-black/5 lg:hidden" />
                   </div>
                   
-                  {fact.hasVisual && (
-                    <div className="my-8 aspect-square md:aspect-video flex items-center justify-center border border-dashed border-black/10 rounded-[32px] text-[10px] uppercase tracking-[0.2em] text-black/30 bg-white/20 backdrop-blur-sm italic">
-                      [Visual: {fact.hasVisual === 'hydrolysis' ? 'Molecule Breakdown' : 'Enzyme Synergy'}]
+                  <div className="lg:col-span-9 max-w-2xl">
+                    <h2 className={cn("text-2xl md:text-5xl mb-6 leading-tight", utoBold.className)}>{fact.title}</h2>
+                    <div className="text-lg md:text-xl text-black/70 leading-relaxed space-y-6">
+                      {fact.content.split('\n\n').map((p, i) => (
+                        <p key={i}>{p}</p>
+                      ))}
                     </div>
-                  )}
+                    
+                    {fact.hasVisual && (
+                      <div className="my-8 aspect-square md:aspect-video flex items-center justify-center border border-dashed border-black/10 rounded-[32px] text-[10px] uppercase tracking-[0.2em] text-black/30 bg-white/20 backdrop-blur-sm italic">
+                        [Visual: {fact.hasVisual === 'hydrolysis' ? 'Molecule Breakdown' : 'Enzyme Synergy'}]
+                      </div>
+                    )}
 
-                  {fact.hasTable === 'metals' && (
-                    <div className="mt-8 bg-white rounded-[32px] p-8 shadow-sm border border-black/5 relative overflow-hidden group/table">
-                      <div className="flex items-center justify-between mb-8">
-                        <p className={cn("text-xs uppercase tracking-widest", utoBold.className)}>Laboratory Batch Analysis</p>
-                        <ShieldCheck className="w-5 h-5 text-[#f20028]" />
-                      </div>
-                      <div className="space-y-6">
-                        {[
-                          { m: "Lead (Pb)", c: "0.020", v: "0.028", l: "100x below EU limit" },
-                          { m: "Cadmium (Cd)", c: "0.068", v: "0.064", l: "15x below EU limit" }
-                        ].map((row, i) => (
-                          <div key={i} className="flex flex-col gap-2 border-b border-black/5 pb-6 last:border-0">
-                            <p className="text-[10px] uppercase text-black/40 tracking-widest">{row.m}</p>
-                            <div className="flex justify-between items-baseline">
-                              <span className="text-3xl">{row.c} <span className="text-xs opacity-30">mg/kg</span></span>
-                              <span className="text-[10px] font-black text-[#f20028] uppercase">{row.l}</span>
+                    {fact.hasTable === 'metals' && (
+                      <div className="mt-8 bg-white rounded-[32px] p-8 shadow-sm border border-black/5 relative overflow-hidden group/table">
+                        <div className="flex items-center justify-between mb-8">
+                          <p className={cn("text-xs uppercase tracking-widest", utoBold.className)}>Laboratory Batch Analysis</p>
+                          <ShieldCheck className="w-5 h-5 text-[#f20028]" />
+                        </div>
+                        <div className="space-y-6">
+                          {[
+                            { m: "Lead (Pb)", c: "0.020", v: "0.028", l: "100x below EU limit" },
+                            { m: "Cadmium (Cd)", c: "0.068", v: "0.064", l: "15x below EU limit" }
+                          ].map((row, i) => (
+                            <div key={i} className="flex flex-col gap-2 border-b border-black/5 pb-6 last:border-0">
+                              <p className="text-[10px] uppercase text-black/40 tracking-widest">{row.m}</p>
+                              <div className="flex justify-between items-baseline">
+                                <span className="text-3xl">{row.c} <span className="text-xs opacity-30">mg/kg</span></span>
+                                <span className="text-[10px] font-black text-[#f20028] uppercase">{row.l}</span>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  
-                  {fact.hasTable === 'macros' && (
-                    <div className="mt-8 grid grid-cols-2 gap-4 md:gap-8">
-                      <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Protein</p><p className="text-3xl md:text-4xl">23g</p></div>
-                      <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Sugars</p><p className="text-3xl md:text-4xl">&lt;1g</p></div>
-                      <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Vanilla</p><p className="text-3xl md:text-4xl text-[#ffb300]">133 <span className="text-xs">kcal</span></p></div>
-                      <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Cacao</p><p className="text-3xl md:text-4xl text-[#ffb300]">137 <span className="text-xs">kcal</span></p></div>
-                    </div>
-                  )}
+                    )}
+                    
+                    {fact.hasTable === 'macros' && (
+                      <div className="mt-8 grid grid-cols-2 gap-4 md:gap-8">
+                        <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Protein</p><p className="text-3xl md:text-4xl">23g</p></div>
+                        <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Sugars</p><p className="text-3xl md:text-4xl">&lt;1g</p></div>
+                        <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Vanilla</p><p className="text-3xl md:text-4xl text-[#ffb300]">133 <span className="text-xs">kcal</span></p></div>
+                        <div className="bg-black text-[#f3eee4] rounded-2xl p-6 border border-white/5"><p className="opacity-50 text-[10px] uppercase mb-1">Cacao</p><p className="text-3xl md:text-4xl text-[#ffb300]">137 <span className="text-xs">kcal</span></p></div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
