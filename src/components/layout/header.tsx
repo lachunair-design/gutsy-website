@@ -12,6 +12,7 @@ const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 
 const navigation = [
+  { name: 'Science', href: '/science' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
   { name: 'FAQs', href: '/FAQ' },
@@ -25,9 +26,13 @@ export function Header() {
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
-  // On the home page, the header starts transparent over the full-bleed image
+  // Header starts transparent on home, FAQ, Contact, and Science due to dark/full-bleed heroes
   const isHomePage = pathname === '/';
-  const isDarkHeroPage = pathname === '/FAQ' || pathname === '/contact' || (isHomePage && !scrolled);
+  const isDarkHeroPage = 
+    pathname === '/FAQ' || 
+    pathname === '/contact' || 
+    pathname === '/science' || 
+    (isHomePage && !scrolled);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,7 +72,7 @@ export function Header() {
               fill
               className={cn(
                 "object-contain transition-all duration-300",
-                isDarkHeroPage ? "brightness-0 invert" : "brightness-0"
+                isDarkHeroPage && !scrolled ? "brightness-0 invert" : "brightness-0"
               )}
               priority
             />
@@ -83,7 +88,7 @@ export function Header() {
                 href={item.href}
                 className={cn(
                   "text-sm uppercase tracking-[0.2em] transition-all hover:opacity-60",
-                  isDarkHeroPage ? "text-white" : "text-black",
+                  isDarkHeroPage && !scrolled ? "text-white" : "text-black",
                   utoBold.className
                 )}
               >
@@ -95,7 +100,7 @@ export function Header() {
               href="/products"
               className={cn(
                 "h-12 px-8 flex items-center justify-center rounded-full transition-all hover:scale-105 active:scale-95",
-                isDarkHeroPage 
+                isDarkHeroPage && !scrolled 
                   ? "bg-white text-black hover:bg-[#ffb300]" 
                   : "bg-[#f20028] text-white hover:bg-black",
                 utoBold.className
@@ -113,7 +118,7 @@ export function Header() {
             >
               <div className={cn(
                 "relative w-10 h-10 overflow-hidden rounded-full border-2 transition-colors",
-                isDarkHeroPage ? "border-white/20 bg-white/10" : "border-black/10 bg-black/5"
+                isDarkHeroPage && !scrolled ? "border-white/20 bg-white/10" : "border-black/10 bg-black/5"
               )}>
                 <Image
                   src="/images/cart-image-girl-1.png"
@@ -133,7 +138,7 @@ export function Header() {
               type="button"
               className={cn(
                 "lg:hidden flex items-center min-h-[44px] min-w-[44px] justify-center transition-all",
-                isDarkHeroPage ? "text-white" : "text-black",
+                isDarkHeroPage && !scrolled ? "text-white" : "text-black",
                 utoBold.className
               )}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
