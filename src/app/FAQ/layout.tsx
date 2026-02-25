@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'FAQs | GUTSY — Shipping, Ingredients, How It Works',
-  description: 'Answers to common questions about GUTSY protein powder. Shipping in UAE, ingredients, how to use it, vegan info, and return policy.',
+  title: 'Random Answers | GUTSY — No Wellness Theater',
+  description: 'Everything you need to know about GUTSY protein, health, and nutrition. Stark facts, zero fillers.',
   openGraph: {
-    title: 'FAQs | GUTSY',
-    description: 'Everything you need to know about GUTSY protein — ingredients, shipping, returns, and more.',
+    title: 'Random Answers | GUTSY',
+    description: 'The editorial deep-dive into GUTSY ingredients and science.',
   },
 };
 
