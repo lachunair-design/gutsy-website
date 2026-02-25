@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
-import { ChevronRight, FlaskConical, Beaker, ShieldCheck } from 'lucide-react';
+import { Microscope, Zap, Activity, Info } from 'lucide-react';
 
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
@@ -19,7 +19,8 @@ const facts = [
   { 
     num: "02", 
     title: "What 'hydrolyzed' means. (It's simpler than it sounds.)", 
-    content: "Think of a protein molecule like a very long necklace of beads. Standard protein gives your gut the whole necklace and says 'good luck.' Hydrolyzed protein gives your gut a handful of short chains, already broken apart. Your digestive system barely has to work. It's basically getting a cheat code." 
+    content: "Think of a protein molecule like a very long necklace of beads. Standard protein gives your gut the whole necklace and says 'good luck.' Hydrolyzed protein gives your gut a handful of short chains, already broken apart. Your digestive system barely has to work. It's basically getting a cheat code.",
+    hasVisual: "hydrolysis"
   },
   { 
     num: "03", 
@@ -39,7 +40,8 @@ const facts = [
   { 
     num: "06", 
     title: "The kiwifruit also helps you actually absorb the protein.", 
-    content: "Green kiwifruit contains actinidin, a proteolytic enzyme that actively breaks down dietary proteins. So while the protein arrives partially pre-digested, the actinidin continues the job in your stomach. Faster amino acid availability means faster recovery." 
+    content: "Green kiwifruit contains actinidin, a proteolytic enzyme that actively breaks down dietary proteins. So while the protein arrives partially pre-digested, the actinidin continues the job in your stomach. Faster amino acid availability means faster recovery.",
+    hasVisual: "synergy"
   },
   { 
     num: "07", 
@@ -103,6 +105,10 @@ export default function SciencePage() {
       <section className="bg-black text-[#f3eee4] pt-32 pb-20 md:pt-48 md:pb-32 relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-8 relative z-10">
           <div className="max-w-4xl">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-px w-12 bg-[#ffb300]" />
+              <p className={cn("text-xs uppercase tracking-[0.3em] text-[#ffb300]", utoBold.className)}>Laboratory Grade / Human Spirit</p>
+            </div>
             <h1 className={cn("text-6xl md:text-[140px] leading-[0.8] tracking-tighter mb-6", utoBlack.className)}>
               Actual <br /> Chemistry.
             </h1>
@@ -112,15 +118,21 @@ export default function SciencePage() {
           </div>
         </div>
         <div className="absolute inset-0 opacity-10 pointer-events-none border-[0.5px] border-[#f3eee4]/20 grid grid-cols-6 lg:grid-cols-12" />
+        <div className="absolute bottom-0 right-0 p-12 opacity-20 hidden md:block animate-pulse">
+           <Microscope className="w-64 h-64 text-[#ffb300] stroke-[0.5]" />
+        </div>
       </section>
 
       {/* INTRO */}
-      <section className="py-20 border-b border-black/5">
-        <div className="mx-auto max-w-7xl px-8">
+      <section className="py-20 border-b border-black/5 relative overflow-hidden">
+        <div className="mx-auto max-w-7xl px-8 flex flex-col md:flex-row gap-12 items-center">
           <div className="max-w-3xl">
             <p className="text-xl md:text-2xl leading-relaxed text-black/80 italic">
               Everything on this page is backed by third-party lab testing, supplier clinical data, and ingredient science. We wrote it so you don&apos;t have to wade through a 60-page COA. <span className="text-[#f20028]">You&apos;re welcome.</span>
             </p>
+          </div>
+          <div className="flex-1 flex justify-end">
+            <Zap className="text-[#f20028] w-12 h-12 md:w-20 md:h-20 animate-bounce" />
           </div>
         </div>
       </section>
@@ -130,11 +142,13 @@ export default function SciencePage() {
         <div className="mx-auto max-w-7xl px-8">
           <div className="space-y-40">
             {facts.map((fact) => (
-              <div key={fact.num} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                <span className={cn("lg:col-span-2 text-6xl md:text-8xl text-[#f20028] opacity-20", utoBlack.className)}>{fact.num}</span>
+              <div key={fact.num} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start group">
+                <span className={cn("lg:col-span-2 text-6xl md:text-8xl text-[#f20028] opacity-20 group-hover:opacity-100 transition-opacity duration-700", utoBlack.className)}>
+                  {fact.num}
+                </span>
                 <div className="lg:col-span-10">
                   <div className="max-w-3xl">
-                    <h2 className={cn("text-3xl md:text-5xl mb-8 leading-tight", utoBold.className)}>
+                    <h2 className={cn("text-3xl md:text-5xl mb-8 leading-tight group-hover:translate-x-2 transition-transform duration-500", utoBold.className)}>
                       {fact.title}
                     </h2>
                     <p className="text-lg md:text-xl text-black/70 leading-relaxed mb-12">
@@ -142,10 +156,25 @@ export default function SciencePage() {
                     </p>
                   </div>
 
+                  {fact.hasVisual === "hydrolysis" && (
+                    <div className="my-12">
+                      
+                    </div>
+                  )}
+
+                  {fact.hasVisual === "synergy" && (
+                    <div className="my-12">
+                      
+                    </div>
+                  )}
+
                   {/* Fact 08: Metals Table */}
                   {fact.hasTable === "metals" && (
-                    <div className="mt-8 bg-white rounded-[40px] p-8 md:p-12 shadow-sm border border-black/5">
-                      <table className="w-full text-left border-collapse">
+                    <div className="mt-8 bg-white rounded-[40px] p-8 md:p-12 shadow-sm border border-black/5 relative overflow-hidden">
+                      <div className="absolute top-0 right-0 p-8 opacity-5">
+                        <Activity className="w-32 h-32" />
+                      </div>
+                      <table className="w-full text-left border-collapse relative z-10">
                         <thead>
                           <tr className="border-b-2 border-black uppercase text-xs tracking-widest">
                             <th className="py-4">Metal</th>
@@ -154,22 +183,25 @@ export default function SciencePage() {
                           </tr>
                         </thead>
                         <tbody className={cn("text-lg md:text-xl", utoMedium.className)}>
-                          <tr className="border-b border-black/5"><td className="py-4">Lead (Pb)</td><td className="py-4">0.020 mg/kg</td><td className="py-4 text-[#f20028]">0.028 mg/kg</td></tr>
-                          <tr className="border-b border-black/5"><td className="py-4">Arsenic (As)</td><td className="py-4">0.029 mg/kg</td><td className="py-4">0.035 mg/kg</td></tr>
-                          <tr className="border-b border-black/5"><td className="py-4">Cadmium (Cd)</td><td className="py-4">0.068 mg/kg</td><td className="py-4">0.064 mg/kg</td></tr>
+                          <tr className="border-b border-black/5 hover:bg-zinc-50 transition-colors"><td className="py-4">Lead (Pb)</td><td className="py-4">0.020 mg/kg</td><td className="py-4 text-[#f20028] font-bold">0.028 mg/kg</td></tr>
+                          <tr className="border-b border-black/5 hover:bg-zinc-50 transition-colors"><td className="py-4">Arsenic (As)</td><td className="py-4">0.029 mg/kg</td><td className="py-4">0.035 mg/kg</td></tr>
+                          <tr className="border-b border-black/5 hover:bg-zinc-50 transition-colors"><td className="py-4">Cadmium (Cd)</td><td className="py-4">0.068 mg/kg</td><td className="py-4">0.064 mg/kg</td></tr>
                         </tbody>
                       </table>
+                      <div className="mt-6 flex items-center gap-2 text-[10px] uppercase tracking-widest text-black/40">
+                        <Info className="w-3 h-3" /> Measured via ISO 17025 accredited laboratory
+                      </div>
                     </div>
                   )}
 
                   {/* Fact 11: Macros Table */}
                   {fact.hasTable === "macros" && (
-                    <div className="mt-8 bg-black text-[#f3eee4] rounded-[40px] p-8 md:p-12 shadow-xl">
+                    <div className="mt-8 bg-black text-[#f3eee4] rounded-[40px] p-8 md:p-12 shadow-xl border border-white/10 group-hover:border-[#f20028]/50 transition-colors">
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        <div><p className="opacity-50 text-xs uppercase mb-2">Protein</p><p className="text-4xl">23g</p></div>
-                        <div><p className="opacity-50 text-xs uppercase mb-2">Sugars</p><p className="text-4xl">&lt;1g</p></div>
-                        <div><p className="opacity-50 text-xs uppercase mb-2">Vanilla</p><p className="text-4xl">133kcal</p></div>
-                        <div><p className="opacity-50 text-xs uppercase mb-2">Cacao</p><p className="text-4xl">137kcal</p></div>
+                        <div className="border-l border-white/20 pl-4"><p className="opacity-50 text-[10px] uppercase mb-2">Protein</p><p className="text-4xl">23g</p></div>
+                        <div className="border-l border-white/20 pl-4"><p className="opacity-50 text-[10px] uppercase mb-2">Sugars</p><p className="text-4xl">&lt;1g</p></div>
+                        <div className="border-l border-white/20 pl-4"><p className="opacity-50 text-[10px] uppercase mb-2">Vanilla</p><p className="text-4xl text-[#ffb300]">133</p></div>
+                        <div className="border-l border-white/20 pl-4"><p className="opacity-50 text-[10px] uppercase mb-2">Cacao</p><p className="text-4xl text-[#ffb300]">137</p></div>
                       </div>
                     </div>
                   )}
@@ -180,27 +212,30 @@ export default function SciencePage() {
         </div>
       </section>
 
-      {/* FUN FACTS SECTION (Keep Fashionable) */}
+      {/* FUN FACTS SECTION */}
       <section className="py-24 bg-[#ffb300] text-black">
         <div className="mx-auto max-w-7xl px-8">
             <h2 className={cn("text-5xl md:text-7xl mb-16 tracking-tighter", utoBlack.className)}>The Science <span className={cn("text-3xl md:text-4xl text-black/60 block", runWild.className)}>(but make it fashion)</span></h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {/* Sample items from your Fun Facts carousel */}
-                <div className="bg-white/40 p-6 rounded-2xl border border-black/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="bg-white/40 p-8 rounded-2xl border border-black/5 hover:bg-white transition-all duration-500 hover:-translate-y-2 group">
+                    <div className="mb-4 h-px w-8 bg-black transition-all group-hover:w-full" />
                     <p className={cn("text-xl mb-2", utoBold.className)}>Smart Guts</p>
-                    <p className="text-sm">Your gut has 500 million neurons. It&apos;s a second brain that&apos;s much pickier about what it drinks.</p>
+                    <p className="text-sm opacity-80">Your gut has 500 million neurons. It&apos;s a second brain that&apos;s much pickier about what it drinks.</p>
                 </div>
-                <div className="bg-white/40 p-6 rounded-2xl border border-black/5">
+                <div className="bg-white/40 p-8 rounded-2xl border border-black/5 hover:bg-white transition-all duration-500 hover:-translate-y-2 group">
+                    <div className="mb-4 h-px w-8 bg-black transition-all group-hover:w-full" />
                     <p className={cn("text-xl mb-2", utoBold.className)}>Acid Trip</p>
-                    <p className="text-sm">Your stomach produces 2L of hydrochloric acid daily. Gutsy is designed to stay on its good side.</p>
+                    <p className="text-sm opacity-80">Your stomach produces 2L of hydrochloric acid daily. Gutsy is designed to stay on its good side.</p>
                 </div>
-                <div className="bg-white/40 p-6 rounded-2xl border border-black/5">
+                <div className="bg-white/40 p-8 rounded-2xl border border-black/5 hover:bg-white transition-all duration-500 hover:-translate-y-2 group">
+                    <div className="mb-4 h-px w-8 bg-black transition-all group-hover:w-full" />
                     <p className={cn("text-xl mb-2", utoBold.className)}>The Red Factory</p>
-                    <p className="text-sm">Your body builds 2 million red blood cells every second. Every one of them is made of protein.</p>
+                    <p className="text-sm opacity-80">Your body builds 2 million red blood cells every second. Every one of them is made of protein.</p>
                 </div>
-                <div className="bg-white/40 p-6 rounded-2xl border border-black/5">
+                <div className="bg-white/40 p-8 rounded-2xl border border-black/5 hover:bg-white transition-all duration-500 hover:-translate-y-2 group">
+                    <div className="mb-4 h-px w-8 bg-black transition-all group-hover:w-full" />
                     <p className={cn("text-xl mb-2", utoBold.className)}>Pea-nomenal</p>
-                    <p className="text-sm">Peas are technically legumes, not vegetables. This is useless info that will now live in your head forever.</p>
+                    <p className="text-sm opacity-80">Peas are legumes, not vegetables. This is useless info that will now live in your head forever.</p>
                 </div>
             </div>
         </div>
@@ -208,12 +243,16 @@ export default function SciencePage() {
 
       {/* SOURCES */}
       <section className="py-20 bg-black text-white/40">
-        <div className="mx-auto max-w-7xl px-8 text-[10px] md:text-xs uppercase tracking-[0.2em]">
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <li>Actazin® clinical data: Anagenix Limited</li>
-                <li>ZymeBase Inc.: Protein hydrolysis data</li>
-                <li>J.S. Hamilton Baltic SIA: Test Reports Dec 2025</li>
-                <li>FAO/WHO Protein Quality Evaluation 1991</li>
+        <div className="mx-auto max-w-7xl px-8">
+            <div className="flex items-center gap-2 mb-8 text-[#ffb300]">
+              <Beaker className="w-4 h-4" />
+              <p className="text-[10px] uppercase tracking-[0.3em]">Scientific Verification Panel</p>
+            </div>
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-[9px] md:text-[10px] uppercase tracking-[0.2em]">
+                <li className="flex gap-2"><ShieldCheck className="w-3 h-3 flex-shrink-0" /> Actazin® clinical data: Anagenix Limited</li>
+                <li className="flex gap-2"><ShieldCheck className="w-3 h-3 flex-shrink-0" /> ZymeBase Inc.: Protein hydrolysis data</li>
+                <li className="flex gap-2"><ShieldCheck className="w-3 h-3 flex-shrink-0" /> J.S. Hamilton Baltic SIA: Test Reports Dec 2025</li>
+                <li className="flex gap-2"><ShieldCheck className="w-3 h-3 flex-shrink-0" /> FAO/WHO Protein Quality Evaluation 1991</li>
             </ul>
         </div>
       </section>
