@@ -105,7 +105,7 @@ const facts = [
   { 
     num: "14", 
     id: "additives",
-    title: "No additives. Here's why that's harder to pull off than it sounds.", 
+    title: "No additives. Here's why that's harder than it sounds.", 
     content: "Most protein powders contain emulsifiers, stabilisers, thickeners, anti-caking agents, and pH regulators. These exist to solve problems: gritty texture, poor mixability, short shelf life, chalky aftertaste. The additives themselves aren't always dangerous, but they are a signal. A long additives list means the product needed rescuing. GUTSY has none of them. No xanthan gum, no guar gum, no carrageenan, no sunflower lecithin, no maltodextrin, no acesulfame potassium, no dipotassium phosphate, no silicon dioxide. The reason we can skip all of that is the same reason we chose enzymatically hydrolyzed protein in the first place: a better raw ingredient creates fewer downstream problems to fix. Pre-digested protein is naturally more soluble. Monk fruit is a clean sweetener that needs no masking agent. Actazin® is a fiber that works with digestion rather than quietly fermenting against it. The product we built didn't need to be rescued by additives. That was the whole point of 8 months and 47 formulas." 
   },
   { 
@@ -224,20 +224,24 @@ export default function SciencePage() {
       <section className="py-12 md:py-24 relative z-10">
         <div className="mx-auto max-w-7xl px-8 flex flex-col lg:flex-row gap-20">
           
-          {/* DESKTOP TOC */}
-          <aside className="hidden lg:block w-64 sticky top-32 h-fit border-l border-black/5 pl-6">
-            <p className={cn("text-[10px] uppercase tracking-widest text-black/40 mb-6", utoBold.className)}>The Evidence</p>
-            {facts.map((f) => (
-              <button key={f.id} onClick={() => scrollTo(f.id)} className={cn("block text-left text-xs uppercase tracking-wider mb-4 transition-all hover:text-[#f20028]", activeSection === f.id ? "text-[#f20028] font-bold translate-x-2" : "text-black/40")}>
-                {f.num}. {f.id.replace('-', ' ')}
-              </button>
-            ))}
+          {/* DESKTOP TOC - STICKY BAR */}
+          <aside className="hidden lg:block w-64 flex-shrink-0">
+            <div className="sticky top-40 h-fit border-l border-black/5 pl-6">
+              <p className={cn("text-[10px] uppercase tracking-widest text-black/40 mb-6", utoBold.className)}>The Evidence</p>
+              <div className="space-y-4">
+                {facts.map((f) => (
+                  <button key={f.id} onClick={() => scrollTo(f.id)} className={cn("block text-left text-xs uppercase tracking-wider transition-all hover:text-[#f20028]", activeSection === f.id ? "text-[#f20028] font-bold translate-x-2" : "text-black/40")}>
+                    {f.num}. {f.id.replace('-', ' ')}
+                  </button>
+                ))}
+              </div>
+            </div>
           </aside>
 
           {/* FACTS LIST */}
           <div className="flex-1 space-y-24 md:space-y-40">
             {facts.map((fact) => (
-              <div key={fact.num} id={fact.id} className="grid grid-cols-1 lg:grid-cols-10 gap-4 md:gap-8 items-start group scroll-mt-32">
+              <div key={fact.num} id={fact.id} className="grid grid-cols-1 lg:grid-cols-10 gap-4 md:gap-8 items-start group scroll-mt-48">
                 <div className="flex items-center gap-4 lg:col-span-1">
                   <span className={cn("text-4xl md:text-6xl text-[#f20028] transition-opacity", utoBlack.className, activeSection === fact.id ? "opacity-100" : "opacity-10")}>
                     {fact.num}
