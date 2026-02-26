@@ -13,7 +13,6 @@ import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 import { WelcomePopup } from '@/components/welcome-popup';
 import { WaveDivider } from '@/components/wave-divider';
 import { HomeAnimations } from '@/components/animations/home-animations';
-import { ParticleField } from '@/components/effects/particle-field';
 import { RadialMarquee } from '@/components/effects/radial-marquee';
 import { Tooltip } from '@/components/ui/tooltip';
 import { ReviewSlider } from '@/components/reviews/review-slider';
@@ -89,9 +88,6 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
-
-        {/* Floating particles — gold/cream dots that drift upward */}
-        <ParticleField count={55} />
 
         {/* Spinning radial text badge — desktop only */}
         <div className="absolute bottom-10 right-10 z-20 hidden md:block" aria-hidden="true">

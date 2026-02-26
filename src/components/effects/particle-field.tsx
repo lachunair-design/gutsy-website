@@ -5,23 +5,48 @@ import { useRef, useEffect } from 'react';
 interface Particle {
   x: number;
   y: number;
-  vy: number; // upward drift speed
-  vx: number; // base horizontal speed
-  phase: number; // for sine-wave sway
+  vy: number;
+  vx: number;
+  phase: number;
   radius: number;
   alpha: number;
-  alphaDir: number; // +1 or -1
+  alphaDir: number;
   color: string;
 }
 
-const COLORS = [
-  '#ffb300', // gutsy gold
-  'rgba(243,238,228,0.75)', // gutsy cream
-  'rgba(255,255,255,0.55)', // soft white
-  'rgba(255,179,0,0.4)', // faded gold
+// When fixed=true (site-wide overlay) we keep particles very subtle so they
+// don't obscure text on light sections. On dark sections (hero, CTA) they
+// become naturally more visible due to the contrast.
+const COLORS_GLOBAL = [
+  'rgba(255,179,0,0.9)',    // gutsy gold
+  'rgba(243,238,228,0.9)',  // gutsy cream
+  'rgba(255,255,255,0.8)',  // soft white
+  'rgba(255,179,0,0.6)',    // faded gold
 ];
 
-export function ParticleField({ count = 55 }: { count?: number }) {
+const COLORS_LOCAL = [
+  '#ffb300',
+  'rgba(243,238,228,0.75)',
+  'rgba(255,255,255,0.55)',
+  'rgba(255,179,0,0.4)',
+];
+
+interface ParticleFieldProps {
+  count?: number;
+  /**
+   * When true the canvas is position:fixed and covers the full viewport —
+   * suitable for use in layout to add ambient particles across all pages.
+   * Particles are rendered at lower opacity so they don't obscure content.
+   *
+   * When false (default) the canvas is position:absolute and fills its
+   * nearest positioned parent — suitable for section-level use.
+   */
+  fixed?: boolean;
+}
+
+export function ParticleField({ count, fixed = false }: ParticleFieldProps) {
+  // Default count differs between modes
+  const particleCount = count ?? (fixed ? 75 : 55);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -30,30 +55,42 @@ export function ParticleField({ count = 55 }: { count?: number }) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Respect reduced-motion preference
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let animId: number;
+    const COLORS = fixed ? COLORS_GLOBAL : COLORS_LOCAL;
+    // Global overlay: cap alpha lower so particles are subtle over page content
+    const alphaMax = fixed ? 0.22 : 0.6;
+    const alphaMin = fixed ? 0.03 : 0.06;
 
     function setSize() {
       if (!canvas) return;
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      if (fixed) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      } else {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+      }
     }
     setSize();
 
-    const observer = new ResizeObserver(setSize);
-    observer.observe(canvas);
+    const resizeHandler = () => setSize();
+    if (fixed) {
+      window.addEventListener('resize', resizeHandler);
+    }
 
-    // Build particle pool
-    const particles: Particle[] = Array.from({ length: count }, () => ({
+    const observer = fixed ? null : new ResizeObserver(setSize);
+    observer?.observe(canvas);
+
+    const particles: Particle[] = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       vy: -(Math.random() * 0.4 + 0.15),
       vx: (Math.random() - 0.5) * 0.2,
       phase: Math.random() * Math.PI * 2,
       radius: Math.random() * 2.5 + 0.8,
-      alpha: Math.random() * 0.45 + 0.1,
+      alpha: Math.random() * (alphaMax - alphaMin) + alphaMin,
       alphaDir: Math.random() > 0.5 ? 1 : -1,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
     }));
@@ -63,25 +100,18 @@ export function ParticleField({ count = 55 }: { count?: number }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (const p of particles) {
-        // Move
         p.phase += 0.018;
         p.x += p.vx + Math.sin(p.phase) * 0.25;
         p.y += p.vy;
 
-        // Pulse alpha
-        p.alpha += p.alphaDir * 0.004;
-        if (p.alpha >= 0.6) { p.alpha = 0.6; p.alphaDir = -1; }
-        if (p.alpha <= 0.06) { p.alpha = 0.06; p.alphaDir = 1; }
+        p.alpha += p.alphaDir * 0.003;
+        if (p.alpha >= alphaMax) { p.alpha = alphaMax; p.alphaDir = -1; }
+        if (p.alpha <= alphaMin) { p.alpha = alphaMin; p.alphaDir = 1; }
 
-        // Wrap top → reset at bottom
-        if (p.y < -8) {
-          p.y = canvas.height + 8;
-          p.x = Math.random() * canvas.width;
-        }
+        if (p.y < -8) { p.y = canvas.height + 8; p.x = Math.random() * canvas.width; }
         if (p.x < -8) p.x = canvas.width + 8;
         if (p.x > canvas.width + 8) p.x = -8;
 
-        // Draw
         ctx.save();
         ctx.globalAlpha = p.alpha;
         ctx.fillStyle = p.color;
@@ -98,16 +128,37 @@ export function ParticleField({ count = 55 }: { count?: number }) {
 
     return () => {
       cancelAnimationFrame(animId);
-      observer.disconnect();
+      observer?.disconnect();
+      if (fixed) window.removeEventListener('resize', resizeHandler);
     };
-  }, [count]);
+  }, [particleCount, fixed]);
+
+  if (fixed) {
+    return (
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className="pointer-events-none"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: 15,
+          // mix-blend-mode: screen makes particles show clearly on dark
+          // sections and fade gracefully on light ones
+          mixBlendMode: 'screen',
+        }}
+      />
+    );
+  }
 
   return (
     <canvas
       ref={canvasRef}
       aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 11 }} // above hero image (z-0), below text (z-20)
+      style={{ zIndex: 11 }}
     />
   );
 }

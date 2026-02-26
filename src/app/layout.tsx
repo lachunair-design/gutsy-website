@@ -9,6 +9,7 @@ import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provi
 import { TransitionProvider } from '@/components/transitions/transition-context';
 import { PageTransitionOverlay } from '@/components/transitions/page-transition-overlay';
 import { WordsLoader } from '@/components/loaders/words-loader';
+import { ParticleField } from '@/components/effects/particle-field';
 
 // FIXED FONT PATHS: Using relative paths to ensure successful Vercel builds
 const utoBlack = localFont({ 
@@ -97,6 +98,8 @@ export default function RootLayout({
               >
                 Skip to content
               </a>
+              {/* Global ambient particles — fixed overlay across every page */}
+              <ParticleField fixed />
               {/* Entry words animation — first visit only */}
               <WordsLoader />
               <Header />
