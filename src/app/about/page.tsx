@@ -20,12 +20,6 @@ export default function AboutPage() {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
   const yMove = useTransform(scrollYProgress, [0, 1], [-50, 200]);
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setEmailStatus('sending');
-    setTimeout(() => setEmailStatus('success'), 1500);
-  };
-
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.to(".scrawl-top", { x: -25, rotate: -6, scrollTrigger: { trigger: heroRef.current, scrub: 1 } });
@@ -53,10 +47,10 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="bg-linen min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 overflow-x-hidden selection:bg-yellow selection:text-black">
+    <div className="bg-linen min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 overflow-x-hidden selection:bg-yellow selection:text-black font-uto">
       
       {/* THE STORY START */}
-      <div ref={containerRef} className="bg-red min-h-[85vh] overflow-hidden relative font-uto">
+      <div ref={containerRef} className="bg-red min-h-[85vh] overflow-hidden relative">
         <motion.div style={{ y: yMove }} className="absolute inset-0 w-full h-full mix-blend-multiply opacity-10 z-0 flex items-center justify-center pointer-events-none">
           <Image src="/images/MARATHON.png" alt="Visual Accent" fill className="object-contain scale-125" priority />
         </motion.div>
@@ -64,31 +58,31 @@ export default function AboutPage() {
         <div className="mx-auto max-w-5xl px-6 pt-20 pb-32 relative z-10 text-center">
           <div ref={heroRef} className="relative mb-20 flex flex-col items-center">
             <h2 className="scrawl-top text-linen text-5xl md:text-9xl lowercase mb-[-1.5rem] md:mb-[-4rem] mr-[15%] rotate-[-5deg] z-20 font-runwild">
-              the honest
+              the accidental
             </h2>
-            <h1 className="text-black text-[60px] md:text-[180px] leading-[0.8] uppercase tracking-tighter z-10 font-uto font-black">
+            <h1 className="text-black text-[60px] md:text-[180px] leading-[0.8] uppercase tracking-tighter z-10 font-black">
               backstory
             </h1>
             <h2 className="scrawl-bottom text-linen text-4xl md:text-7xl lowercase mt-[-1rem] md:mt-[-2.5rem] ml-[25%] rotate-[3deg] z-20 opacity-90 font-runwild">
-              from us
+              no boardroom required
             </h2>
           </div>
 
           <div className="max-w-2xl mx-auto space-y-10 text-linen text-xl md:text-2xl leading-relaxed font-medium">
-            <p className="font-uto italic text-black uppercase font-black text-2xl">
-              GUTSY didn&apos;t start in a boardroom. It started because Lakshmi was tired of feeling like she&apos;d swallowed a brick every morning.
+            <p className="italic text-black uppercase font-black text-2xl">
+              We didn&apos;t set out to disrupt an industry. We just wanted a shake that didn&apos;t feel like a physical burden.
             </p>
             <p>
-              Two years ago, we got serious about our health. Lakshmi was hitting her protein goals, but her gut was paying the price. We&apos;re talking constant bloating, skin breakouts, and a kitchen counter full of expensive tubs that either tasted like dust or made her feel heavy for hours.
+              Two years ago we realized that most plant protein is basically just a heavy brick in a fancy tub. We were hitting our goals but our stomachs were staging a full-scale protest. We spent way too much money on powders that tasted like dust and felt like wet cement for hours afterward. 
             </p>
             <p>
-              Sujith, who was tired of seeing the Amazon boxes and hearing the complaints, finally said: &quot;Let&apos;s just make it ourselves.&quot; We spent a year down a rabbit hole of lab reports and ingredient science to figure out how to keep only what actually works.
+              Instead of just complaining about the Amazon boxes we decided to actually look at the molecules. We spent a year down a rabbit hole of lab reports to figure out why standard protein is so clunky. Turns out the industry just assumes your gut is an industrial furnace.
             </p>
-            <p className="font-runwild italic text-black text-4xl leading-none">
-              &quot;We didn&apos;t have a background in supplements. We just had a stubborn question: why is this so hard?&quot;
+            <p className="font-runwild italic text-black text-4xl md:text-5xl leading-none">
+              &quot;We have zero background in marketing. We just had a stubborn question: why is this so hard to digest?&quot;
             </p>
             <p>
-              We realized standard protein is molecularly clunky. It&apos;s too big for the gut to handle, so it ferments and causes gas. Our fix? We use enzymes to pre-break down the protein into tiny pieces so your body doesn&apos;t have to struggle. No gums, no mystery fillers, just a shake that actually feels light.
+              We found out that standard protein chains are too long. They sit in your gut and ferment because your body is struggling to break them down. Our solution was to use enzymes to pre-break those chains into tiny pieces before they ever hit the bag. No mystery fillers and no clunky molecules. Just a shake that actually leaves you alone.
             </p>
           </div>
         </div>
@@ -100,32 +94,27 @@ export default function AboutPage() {
           
           {/* LAKSHMI */}
           <div className="founder-card flex flex-col items-center">
-            <div className="relative w-full aspect-[4/5] bg-white rounded-3xl overflow-hidden border border-black/5 shadow-sm flex items-center justify-center text-black/20 italic">
-              {/* Founder Image Placeholder */}
+            <div className="relative w-full aspect-[4/5] bg-white rounded-3xl overflow-hidden border border-black/5 shadow-sm flex items-center justify-center text-black/20 italic p-12 text-center">
               [Image: Lakshmi - candid, smiling]
             </div>
             <div className="mt-8 text-center">
-              <h3 className="font-uto font-black text-4xl uppercase tracking-tighter">Lakshmi</h3>
+              <h3 className="font-black text-4xl uppercase tracking-tighter">Lakshmi</h3>
               <p className="font-runwild text-3xl text-red mt-2">The one who was tired of the bloat</p>
             </div>
           </div>
 
           {/* SUJITH */}
           <div className="founder-card flex flex-col items-center md:mt-32">
-            <div className="relative w-full aspect-[4/5] bg-white rounded-3xl overflow-hidden border border-black/5 shadow-sm flex items-center justify-center text-black/20 italic">
-              {/* Founder Image Placeholder */}
+            <div className="relative w-full aspect-[4/5] bg-white rounded-3xl overflow-hidden border border-black/5 shadow-sm flex items-center justify-center text-black/20 italic p-12 text-center">
               [Image: Sujith - candid, in the kitchen/gym]
             </div>
             <div className="mt-8 text-center">
-              <h3 className="font-uto font-black text-4xl uppercase tracking-tighter">Sujith</h3>
+              <h3 className="font-black text-4xl uppercase tracking-tighter">Sujith</h3>
               <p className="font-runwild text-3xl text-red mt-2">The one who actually built it</p>
             </div>
           </div>
-
         </div>
       </section>
-
-      
     </div>
   );
 }
