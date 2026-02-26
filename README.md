@@ -41,24 +41,32 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 
 ## Brand
 
-Brand Identity Primary Palette The core colors that define the GUTSY identity.
+## Brand Identity
 
-Token,Hex,RGB,Usage Linen,#F3EEE4,243/238/228,"Page backgrounds, secondary text" Black,#000000,0/0/0,"Primary headlines, body text, deep backgrounds" Red,#F20028,242/0/40,"Primary CTAs, urgent accents, energy" Yellow,#FFB300,255/179/0,"Highlights, badges, secondary CTAs"
+### Primary Palette
+| Token | Hex | Usage |
+|---|---|---|
+| **Linen** | `#F3EEE4` | Page backgrounds, secondary text |
+| **Black** | `#000000` | Primary headlines, body text |
+| **Red** | `#F20028` | Primary CTAs, urgent accents |
+| **Yellow** | `#FFB300` | Highlights, secondary CTAs |
 
-Secondary Palette Supporting colors for UI states, category tags, and illustrative elements.
+### Secondary Palette
+| Token | Hex | RGB |
+|---|---|---|
+| **Scarlett** | `#560033` | 86/0/51 |
+| **Orange** | `#FF5200` | 255/82/0 |
+| **Lilac** | `#890EFF` | 137/14/255 |
+| **Pink** | `#FF7CFF` | 255/124/255 |
+| **Green** | `#00B453` | 0/180/83 |
+| **Blue** | `#004EFF` | 0/78/255 |
 
-Token,Hex,RGB Scarlett,#560033,86/0/51 Orange,#FF5200,255/82/0 Lilac,#890EFF,137/14/255 Pink,#FF7CFF,255/124/255 Green,#00B453,0/180/83 Blue,#004EFF,0/78/255
+### Typography
 
-Typography Primary Typeface: Uto Var Used for headlines and primary UI. Headlines should follow a 1.1x leading rule (e.g., 80pt size with 88pt leading).
-
-Weight,Token,Usage Black,900,Hero headlines Bold,700,"Standard headlines, subheads" Regular,400,Body copy (1.4x leading)
-
-Secondary Typeface: Crunold A high-contrast typeface used for special callouts, key messages, and brand emphasis.
-
-Tertiary Typeface: RunWild Used sparingly for handwritten accents and "human-touch" subheadings.
-
-Font files live in public/fonts/ and are loaded via next/font/local.
-
+- **Primary: Uto Var** (Black, Bold, Regular). Headlines follow 1.1x leading.
+- **Secondary: Crunold**. High-contrast typeface for brand emphasis.
+- **Tertiary: RunWild**. Handwritten accents for human-touch subheadings.
+  
 Font files live in `public/fonts/` and are loaded via `next/font/local`.
 
 ## Getting Started
