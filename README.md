@@ -9,16 +9,25 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 - **Styling**: Tailwind CSS
 - **E-commerce**: Shopify Storefront API (2024-01)
 - **Animations**: GSAP (ScrollTrigger, Observer) + Framer Motion
+- **Smooth Scroll**: Lenis
+- **Lottie**: @lottiefiles/dotlottie-react
+- **Text Splitting**: SplitType
+- **Icons**: Lucide React
 - **Deployment**: Vercel (recommended)
 
 ## Features
 
 - Premium lifestyle aesthetic with scroll-driven storytelling
-- GSAP-powered scrollytelling section with animated protein molecule breakdown
-- Welcome popup with quiz flow and email capture
-- Marquee rail with scroll-velocity-reactive speed
-- Fun fact carousel with auto-advance timer
+- GSAP-powered horizontal scrollytelling with Lottie animations and SplitType text reveals
+- The Logic carousel with rotating gut-science facts and auto-advance timer
+- Welcome popup with email capture and 10% discount code flow
+- Marquee rail with scroll-velocity-reactive speed (GSAP Observer)
+- Proof slider testimonial carousel with IntersectionObserver
 - Shopify headless cart with drawer UI and focus trapping
+- Page transition overlays with context-driven curtain animations
+- Canvas particle field effect (global fixed overlay)
+- First-visit words loader entry animation
+- Lenis smooth scroll integrated with GSAP ScrollTrigger
 - Fully responsive across all breakpoints
 - WCAG AA accessibility (skip-to-content, ARIA labels, focus rings, reduced motion support)
 - SEO-optimized metadata with Open Graph and Twitter cards
@@ -28,18 +37,17 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 
 | Route | Description |
 |---|---|
-| `/` | Homepage — hero, scrollytelling, science, ingredients, product lineup, social proof, comparison |
-| `/about` | Brand story with parallax hero and vertical marquee |
-| `/contact` | Contact form, WhatsApp, and Instagram cards |
-| `/FAQ` | Accordion FAQ with deep-linking via hash and sidebar contact card |
-| `/products` | Product grid |
+| `/` | Homepage — hero, marquee rail, science breakdown, product lineup, proof slider, logic carousel, final CTA |
+| `/science` | The Logic — 16 science facts with sticky nav, scroll progress, bloat quiz |
+| `/about` | The Accidental Backstory — brand story with parallax hero and founder cards |
+| `/contact` | Human Support — contact form, WhatsApp, Instagram, email cards |
+| `/FAQ` | Boring Answers — accordion FAQ with category sidebar and deep-linking |
+| `/products` | The Goods — product detail, amazing vs less amazing, no-list, science section |
 | `/products/[handle]` | Dynamic product detail (SSG with revalidation) |
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Service |
 | `/shipping` | Shipping Policy |
 | Custom 404 | Illustrated lost-gut-character page |
-
-## Brand
 
 ## Brand Identity
 
@@ -63,10 +71,10 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 
 ### Typography
 
-- **Primary: Uto Var** (Black, Bold, Regular). Headlines follow 1.1x leading.
+- **Primary: Uto** (Black, Bold, Medium, Var Regular). Headlines follow 1.1x leading.
 - **Secondary: Crunold**. High-contrast typeface for brand emphasis.
 - **Tertiary: RunWild**. Handwritten accents for human-touch subheadings.
-  
+
 Font files live in `public/fonts/` and are loaded via `next/font/local`.
 
 ## Getting Started
@@ -128,41 +136,74 @@ Font files live in `public/fonts/` and are loaded via `next/font/local`.
 ```
 src/
 ├── app/
-│   ├── about/              # Brand story page
-│   ├── contact/            # Contact form page
-│   ├── FAQ/                # Accordion FAQ page
-│   ├── privacy/            # Privacy Policy
+│   ├── about/                 # The Accidental Backstory page
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── contact/               # Human Support page
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── FAQ/                   # Boring Answers page
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── privacy/               # Privacy Policy
+│   │   └── page.tsx
 │   ├── products/
-│   │   └── [handle]/       # Dynamic product detail (SSG)
-│   ├── shipping/           # Shipping Policy
-│   ├── terms/              # Terms of Service
-│   ├── fun-fact-carousel.tsx  # Auto-advancing fun facts
-│   ├── scrollytelling.tsx     # GSAP scroll-pinned story
-│   ├── globals.css         # Global styles and animations
-│   ├── layout.tsx          # Root layout (header, footer, cart, skip-to-content)
-│   ├── not-found.tsx       # Custom 404
-│   └── page.tsx            # Homepage
+│   │   ├── [handle]/          # Dynamic product detail (SSG)
+│   │   │   └── page.tsx
+│   │   └── page.tsx           # The Goods (product listing)
+│   ├── science/               # The Logic (16 facts)
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── shipping/              # Shipping Policy
+│   │   └── page.tsx
+│   ├── terms/                 # Terms of Service
+│   │   └── page.tsx
+│   ├── the-logic-carousel.tsx # Auto-advancing gut-science facts carousel
+│   ├── scrollytelling.tsx     # GSAP horizontal scroll-pinned story (4 panels)
+│   ├── globals.css            # Global styles, font faces, animations
+│   ├── layout.tsx             # Root layout (header, footer, cart, particles, transitions)
+│   ├── not-found.tsx          # Custom 404 (lost gut character)
+│   ├── page.tsx               # Homepage
+│   ├── robots.ts              # SEO robots config
+│   └── sitemap.ts             # Sitemap generation
 ├── components/
+│   ├── animations/
+│   │   └── home-animations.tsx    # GSAP scroll animations for homepage sections
 │   ├── cart/
-│   │   └── cart-drawer.tsx    # Slide-out cart with focus trap
+│   │   └── cart-drawer.tsx        # Slide-out shopping bag with focus trap
+│   ├── effects/
+│   │   ├── particle-field.tsx     # Canvas particle effect (fixed global overlay)
+│   │   └── radial-marquee.tsx     # Rotating circular marquee text
 │   ├── layout/
-│   │   ├── header.tsx         # Fixed header with scroll state
-│   │   └── footer.tsx         # 4-column footer with newsletter
+│   │   ├── header.tsx             # Fixed nav with scroll state and mobile menu
+│   │   └── footer.tsx             # 4-column footer with newsletter signup
+│   ├── loaders/
+│   │   └── words-loader.tsx       # Entry animation overlay (first visit only)
 │   ├── product/
-│   │   ├── product-card.tsx   # Product grid card
-│   │   └── product-detail.tsx # Full product page component
+│   │   ├── product-card.tsx       # Product grid card
+│   │   └── product-detail.tsx     # Full product page component
+│   ├── providers/
+│   │   └── smooth-scroll-provider.tsx  # Lenis smooth scroll + GSAP sync
+│   ├── reviews/
+│   │   └── proof-slider.tsx       # Testimonial carousel with IntersectionObserver
+│   ├── transitions/
+│   │   ├── transition-context.tsx     # Page transition context & hook
+│   │   ├── page-transition-overlay.tsx # Transition curtain overlay
+│   │   └── transition-link.tsx        # Drop-in Link replacement with transitions
 │   ├── ui/
-│   │   └── button.tsx         # Base button component
-│   ├── email-capture.tsx      # Newsletter signup section
-│   ├── marquee-rail.tsx       # GSAP horizontal marquee
-│   ├── wave-divider.tsx       # SVG section divider
-│   └── welcome-popup.tsx      # Quiz-style welcome modal
+│   │   ├── button.tsx             # Base button (primary, secondary, outline, ghost)
+│   │   └── tooltip.tsx            # Pure CSS tooltip
+│   ├── email-capture.tsx          # Newsletter signup (compact & full variants)
+│   ├── marquee-rail.tsx           # GSAP horizontal marquee with Observer
+│   ├── wave-divider.tsx           # RippedDivider SVG section divider
+│   └── welcome-popup.tsx          # Session popup with email capture
 └── lib/
     ├── shopify/
-    │   ├── cart-context.tsx    # Cart state (React Context + localStorage)
-    │   ├── index.ts           # Storefront API queries
-    │   └── types.ts           # Shopify type definitions
-    └── utils.ts               # cn(), formatPrice()
+    │   ├── cart-context.tsx        # Cart state (React Context + localStorage)
+    │   ├── index.ts               # Storefront API functions
+    │   ├── queries.ts             # GraphQL fragments and queries
+    │   └── types.ts               # Shopify type definitions
+    └── utils.ts                   # cn(), formatPrice()
 ```
 
 ## Development

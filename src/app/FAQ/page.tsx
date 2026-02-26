@@ -9,35 +9,44 @@ const sections = [
     title: "...THE GOODS",
     tagline: "how to actually consume this stuff.",
     faqs: [
-      { id: 'use', question: 'How do I use it?', answer: 'Mix one scoop with 300ml of water or whatever liquid you prefer. Shake it until it disappears. Drink it. There is no magical window of time where it works better, so just drink it whenever you remember you need protein.' },
-      { id: 'protein-count', question: 'Is 20g actually enough?', answer: 'Yes. It is a complete protein with a PDCAAS score of 1.0. That means your body can actually use every gram. We don’t do amino acid spiking or any of that other weird stuff the industry uses to inflate numbers.' },
-      { id: 'packaging', question: 'Why a pouch instead of a giant tub?', answer: 'Because giant plastic tubs are essentially empty space and bad for the planet. Our pouches are easier to store and don’t look like you’re trying to build a fortress of supplements in your kitchen.' }
+      { id: 'protein-enough', question: 'Is 20g of protein actually enough?', answer: 'Yes. It is a complete protein with a PDCAAS score of 1.0. That means your body can actually use every gram. We do not do amino acid spiking or any of the other industry tricks used to inflate numbers on a label. If you are a 120kg bodybuilder you might need two scoops. For the rest of us, one is plenty.' },
+      { id: 'taste', question: 'Does it taste like "plants"?', answer: 'Most plant proteins taste like a dusty field. We used real Cacao and natural Vanilla and then we hydrolyzed the base. Pre-breaking the protein does not just help your gut. It also removes the beany aftertaste that usually requires a mountain of stevia to hide. It tastes clean.' },
+      { id: 'storage', question: 'How do I store this?', answer: 'In the pouch. Zip it shut. Keep it in a cool, dry place. Do not leave it in a hot car in Dubai unless you want to find out what happens to monk fruit at 50°C.' }
     ]
   },
   {
-    title: "...THE SCIENCE",
-    tagline: "the part where we explain why it doesn’t hurt.",
+    title: "...THE LOGIC",
+    tagline: "the part where we explain why it does not hurt.",
     faqs: [
-      { id: 'ingredients', question: 'What is actually inside?', answer: 'Seven things. Hydrolyzed pea and rice protein, coconut milk powder, monk fruit, Actazin kiwifruit extract, Himalayan salt. That is it. If we couldn’t pronounce it, we didn’t put it in.' },
-      { id: 'actazin', question: 'What is Actazin?', answer: 'It is a premium kiwifruit extract from New Zealand. It contains a natural enzyme called actinidin that helps your stomach break down protein faster. It is basically the assist your gut needs to stay light.' },
-      { id: 'science', question: 'Why is it pre-broken down?', answer: 'Because your stomach shouldn’t have to do 100% of the work. We use enzymes to snip the protein chains into tiny pieces before they hit the bag. It means less fermentation in your gut and zero bloat.' }
+      { id: 'bloat', question: 'Why do I feel bloated with other brands?', answer: 'Because their molecules are clunky. Standard protein lands in your stomach in long, tangled chains. Your gut has to wrestle with them to break them apart. While it is wrestling, the protein ferments. Fermentation causes gas. Gas causes the parade float feeling. We do the work first so your stomach does not have to.' },
+      { id: 'kiwifruit', question: 'What is the deal with the Kiwifruit?', answer: 'We use 600mg of Actazin. It is a clinical dose of New Zealand green kiwifruit. It contains an enzyme called actinidin. Think of it as a secondary digestive system that helps break down the protein and keeps your bathroom schedule predictable. It is a tool, not a garnish.' },
+      { id: 'ibs', question: 'Is it safe for people with IBS?', answer: 'We built this specifically because we could not find anything that did not wreck our own digestion. We removed the gums, the dairy, and the soy. Those are the big three triggers. However, everyone is different. If you have a specific medical condition you should talk to a doctor who knows your history.' }
     ]
   },
   {
     title: "...THE ARRIVAL",
     tagline: "getting it from us to you.",
     faqs: [
-      { id: 'delivery-areas', question: 'Where do you deliver?', answer: 'We ship across the UAE. Dubai, Abu Dhabi, Sharjah, the whole lot. If you live in the middle of a desert dunes reach out and we will see if we can find a camel that delivers.' },
-      { id: 'delivery-timing', question: 'When will it get here?', answer: 'Usually 24 to 48 hours for Dubai and Abu Dhabi. Give us 72 hours for the other Emirates. We move as fast as the couriers allow.' },
-      { id: 'shipping-cost', question: 'Is shipping free?', answer: 'It is free for all orders over 150 AED. If you spend less than that we charge a flat fee of 15 AED to cover the fuel.' }
+      { id: 'delivery-speed', question: 'How fast is "fast" in Dubai?', answer: 'If you order before noon, we usually try to get it to you by the next day. If you are in Abu Dhabi or the other Emirates, give us 48 to 72 hours. We move as fast as the couriers and the traffic allow.' },
+      { id: 'international', question: 'Do you ship internationally?', answer: 'Right now we are focusing on the GCC. If you are in London or New York and you really want a bag, reach out to us. We will see if we can make it happen without the shipping cost exceeding the price of the protein.' },
+      { id: 'subscription-swap', question: 'Can I change my subscription flavor?', answer: 'Yes. You can swap between Cacao Boost and Vanilla Calm every month. You can also pause or cancel without having to talk to a customer service rep who is trained to make you feel guilty.' }
     ]
   },
   {
-    title: "...THE COMMITMENT",
-    tagline: "subscriptions and changing your mind.",
+    title: "...THE NO-LIST",
+    tagline: "for the skeptics and the label-readers.",
     faqs: [
-      { id: 'subscriptions', question: 'How do I cancel a subscription?', answer: 'You can cancel anytime through your dashboard. We don’t hide the cancel button behind a maze of phone calls. We want you to stay because you like the protein, not because you’re trapped.' },
-      { id: 'returns', question: 'Can I return an open bag?', answer: 'We can’t take back food products once they are opened for obvious hygiene reasons. But if your bag arrives damaged or the courier sat on it, let us know and we will fix it immediately.' }
+      { id: 'xanthan', question: 'Why no Xanthan Gum?', answer: 'Gums make shakes feel thick and creamy. They are also basically industrial glue for your intestines. They cause bloating in a lot of people. We decided a slightly lighter texture was a fair trade for not feeling like you swallowed a balloon.' },
+      { id: 'natural', question: 'Is it really "Natural"?', answer: 'That word is legally meaningless. We prefer the word Transparent. We show you our lab tests for heavy metals and we tell you exactly what every ingredient does. If you find something in the bag that should not be there, tell us. We will be just as surprised as you.' },
+      { id: 'hate-it', question: 'What if I hate it?', answer: 'If it does not leave you feeling light, or if the taste is not for you, tell us. We will give you your money back on your first bag. We are not interested in keeping your money if you are not into the product.' }
+    ]
+  },
+  {
+    title: "...THE ACCIDENTAL STUFF",
+    tagline: "the origin story questions.",
+    faqs: [
+      { id: 'formulas', question: 'Why 47 formulas?', answer: 'Because the first 46 were not good enough. Some tasted like chalk. Some still caused bloat. Some did not dissolve. We stayed in the lab until we found the one that actually worked. It was a long 8 months.' },
+      { id: 'more-products', question: 'Are you guys going to launch more products?', answer: 'Maybe. But only if we find another category that is as clunky and broken as the protein industry. We are not interested in making me-too supplements just to fill a shelf.' }
     ]
   }
 ];

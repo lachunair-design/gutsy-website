@@ -14,7 +14,7 @@ import {
   Clock 
 } from 'lucide-react';
 
-export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any, utoBold: any, runWild: any }) {
+export function TheLogicCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any, utoBold: any, runWild: any }) {
   const [currentFactIndex, setCurrentFactIndex] = useState(0);
 
   const funFacts = [

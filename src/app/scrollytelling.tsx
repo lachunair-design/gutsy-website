@@ -86,10 +86,10 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           <div className="flex w-full items-center justify-between gap-8">
             <div className="w-[60%] space-y-8 text-left">
               <h2 className={cn("reveal-text text-7xl md:text-[110px] xl:text-[130px] text-red leading-[0.9] tracking-tighter uppercase font-black", utoBlack.className)}>
-                It&apos;s too<br />big to digest.
+                A tangled<br />molecular mess.
               </h2>
               <p className="text-linen/70 text-xl md:text-2xl max-w-md font-medium">
-                Standard protein molecules are massive and clunky. They sit in your gut and ferment while your body struggles to break them down. That fermentation is the bloat.
+                Standard protein is sold in long, tangled chains. Your gut has to wrestle with them for hours. That is where the bloat comes from.
               </p>
             </div>
             <div className="lottie-container w-[35%] flex justify-center">
@@ -109,7 +109,7 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
                 Broken down<br />into pieces
               </h2>
               <p className="text-black/60 text-xl md:text-2xl max-w-md font-medium">
-                We use enzymes to snip long protein chains into tiny pieces before they reach your scoop. Your body absorbs them instantly with zero effort.
+                We use enzymes to snip those chains into tiny peptides first. Your body absorbs them instantly with zero effort.
               </p>
             </div>
             <div className="lottie-container w-[35%] flex justify-center">
@@ -151,8 +151,11 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
               <h2 className={cn("reveal-text text-9xl md:text-[150px] xl:text-[180px] text-black leading-[0.8] tracking-tighter uppercase font-black", utoBlack.className)}>
                 It feels<br />light.
               </h2>
+              <p className="text-black/50 text-xl md:text-2xl max-w-md font-medium">
+                It is not magic. It is just better engineering.
+              </p>
               <Link href="/products" className="inline-flex h-16 md:h-20 px-10 md:px-16 items-center rounded-full bg-red text-linen text-xl md:text-2xl shadow-xl hover:bg-black transition-all duration-500 font-bold uppercase tracking-widest">
-                Shop Gutsy
+                Grab a bag
               </Link>
             </div>
             <div className="lottie-container w-[35%] flex justify-center">

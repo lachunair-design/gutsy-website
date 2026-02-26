@@ -72,13 +72,13 @@ export default async function HomePage() {
               data-animate="hero-body"
               className="text-white text-xl md:text-3xl max-w-xl font-bold leading-tight mb-14 opacity-90"
             >
-              Most protein is clunky. We pre-break down our molecules so your gut doesn&apos;t have to. No bloat. No brick.
+              Standard plant molecules are too large for your gut to handle. They sit there and ferment. We pre-break ours down so you actually feel light.
             </p>
 
             <div data-animate="hero-cta" className="flex flex-col sm:flex-row gap-4 sm:gap-6">
               <Link href="#lineup">
                 <Button className={cn("h-16 md:h-20 px-12 rounded-full bg-red text-white text-xl md:text-2xl font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500 shadow-2xl", utoBold.className)}>
-                  The Goods
+                  Grab a bag
                 </Button>
               </Link>
               <Link href="/about">
@@ -166,11 +166,11 @@ export default async function HomePage() {
       <section data-animate="cta-section" className="py-32 md:py-56 bg-black px-6 overflow-hidden relative">
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <p className={cn("text-3xl md:text-5xl text-red lowercase mb-8", runWild.className)}>
-            fuel that actually feels good
+            tired of feeling heavy?
           </p>
 
           <h2 className={cn("text-7xl md:text-[160px] text-white leading-[0.8] tracking-tighter mb-16 uppercase font-black", utoBlack.className)}>
-            Ready to <br /> transform?
+            Grab a <br /> bag.
           </h2>
 
           <div className="flex flex-col items-center gap-12">

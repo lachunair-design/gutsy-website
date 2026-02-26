@@ -53,7 +53,7 @@ export function Footer() {
               10% off for the curious
             </h3>
             <p className={cn("text-xl md:text-3xl text-red lowercase mb-10 leading-tight", runWild.className)}>
-              we do not like spam either. join the list and we will send a code for your first bag.
+              we do not like spam either. join the list and we will send you a code for your first bag. no hustle-culture emails.
             </p>
 
             {status === 'success' ? (
