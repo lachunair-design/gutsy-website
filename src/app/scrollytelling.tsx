@@ -8,8 +8,6 @@ import { cn } from "@/lib/utils";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import SplitType from 'split-type';
 
-// Lenis is initialized globally in SmoothScrollProvider (layout.tsx).
-// ScrollTrigger is automatically synced with Lenis via lenis.on('scroll', ScrollTrigger.update).
 gsap.registerPlugin(ScrollTrigger);
 
 export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
@@ -18,16 +16,17 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
 
   useGSAP(() => {
     const panels = gsap.utils.toArray(".story-panel");
-    
+    if (!sliderRef.current || !containerRef.current) return;
+
     const scrollTween = gsap.to(panels, {
-      x: () => -(sliderRef.current!.scrollWidth - window.innerWidth),
+      xPercent: -100 * (panels.length - 1),
       ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
         pin: true,
         scrub: 1,
         snap: 1 / (panels.length - 1),
-        end: () => "+=" + (sliderRef.current?.scrollWidth || 3000),
+        end: () => `+=${sliderRef.current?.offsetWidth}`,
         invalidateOnRefresh: true,
       }
     });
@@ -44,55 +43,53 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
         scrollTrigger: {
           trigger: text,
           containerAnimation: scrollTween,
-          start: "left center",
+          start: "left 80%",
           toggleActions: "play none none reverse",
         }
       });
     });
 
-    // Animate the Lottie container as it enters the view
     const lotties = gsap.utils.toArray('.lottie-container');
     lotties.forEach((lottie: any) => {
       gsap.from(lottie, {
-        scale: 0.7,
+        scale: 0.5,
         opacity: 0,
-        x: 100,
         duration: 1,
         scrollTrigger: {
           trigger: lottie,
           containerAnimation: scrollTween,
-          start: "left right",
-          end: "center center",
+          start: "left 90%",
+          end: "left 50%",
           scrub: true
         }
       });
     });
 
-    const bgColors = ["#000000", "#F9F8F6", "#f20028", "#F9F8F6"];
+    const bgColors = ["#000000", "#F3EEE4", "#F20028", "#F3EEE4"];
     panels.forEach((panel: any, i: number) => {
       ScrollTrigger.create({
         trigger: panel,
         containerAnimation: scrollTween,
         start: "left center",
-        onEnter: () => gsap.to(containerRef.current, { backgroundColor: bgColors[i], duration: 0.8 }),
-        onEnterBack: () => gsap.to(containerRef.current, { backgroundColor: bgColors[i], duration: 0.8 }),
+        onEnter: () => gsap.to(containerRef.current, { backgroundColor: bgColors[i], duration: 0.6 }),
+        onEnterBack: () => gsap.to(containerRef.current, { backgroundColor: bgColors[i], duration: 0.6 }),
       });
     });
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="w-full overflow-hidden transition-colors duration-1000">
+    <div ref={containerRef} className="w-full overflow-hidden bg-black transition-colors duration-700">
       <div ref={sliderRef} className="flex w-[400vw] h-screen">
         
-        {/* PANEL 1: BLACK BG */}
+        {/* PANEL 1: MOLECULE SIZE */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
           <div className="flex w-full items-center justify-between gap-8">
             <div className="w-[60%] space-y-8 text-left">
-              <h2 className={cn("reveal-text text-7xl md:text-[110px] xl:text-[130px] text-[#f20028] leading-[0.9] tracking-tighter whitespace-nowrap", utoBlack.className)}>
-                Why most<br />protein sucks
+              <h2 className={cn("reveal-text text-7xl md:text-[110px] xl:text-[130px] text-red leading-[0.9] tracking-tighter uppercase font-black", utoBlack.className)}>
+                It&apos;s too<br />big to digest.
               </h2>
-              <p className="text-[#f3eee4]/70 text-xl md:text-2xl max-w-md">
-                Standard molecules are tangled and clunky. They sit in your gut like a brick.
+              <p className="text-linen/70 text-xl md:text-2xl max-w-md font-medium">
+                Standard protein molecules are massive and clunky. They sit in your gut and ferment while your body struggles to break them down. That fermentation is the bloat.
               </p>
             </div>
             <div className="lottie-container w-[35%] flex justify-center">
@@ -103,16 +100,16 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           </div>
         </section>
 
-        {/* PANEL 2: BONE BG */}
+        {/* PANEL 2: PRE-DIGESTION */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
           <div className="flex w-full items-center justify-between gap-8">
             <div className="w-[60%] space-y-6 text-left">
-              <p className={cn("text-2xl md:text-4xl text-[#f20028]", runWild.className)}>the science of light</p>
-              <h2 className={cn("reveal-text text-7xl md:text-[100px] xl:text-[110px] text-black leading-[0.9] tracking-tighter", utoBlack.className)}>
-                We break it<br />down first
+              <p className={cn("text-2xl md:text-4xl text-red lowercase", runWild.className)}>we do the work first</p>
+              <h2 className={cn("reveal-text text-7xl md:text-[100px] xl:text-[110px] text-black leading-[0.9] tracking-tighter uppercase font-black", utoBlack.className)}>
+                Broken down<br />into pieces
               </h2>
-              <p className="text-black/60 text-xl md:text-2xl max-w-md">
-                Enzymes split massive molecules into tiny, bioavailable peptides.
+              <p className="text-black/60 text-xl md:text-2xl max-w-md font-medium">
+                We use enzymes to snip long protein chains into tiny pieces before they reach your scoop. Your body absorbs them instantly with zero effort.
               </p>
             </div>
             <div className="lottie-container w-[35%] flex justify-center">
@@ -123,20 +120,21 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           </div>
         </section>
 
-        {/* PANEL 3: RED BG */}
+        {/* PANEL 3: KIWIFRUIT ASSIST */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
           <div className="flex w-full items-center justify-between gap-8">
             <div className="w-[60%] space-y-8 text-left">
-              <h2 className={cn("reveal-text text-7xl md:text-[100px] xl:text-[110px] text-white leading-[0.9] tracking-tighter", utoBlack.className)}>
-                Only five<br />ingredients.
+              <h2 className={cn("reveal-text text-7xl md:text-[100px] xl:text-[110px] text-linen leading-[0.9] tracking-tighter uppercase font-black", utoBlack.className)}>
+                Natural<br />Assist.
               </h2>
               <div className="flex flex-wrap gap-3">
-                {["Pea", "Rice", "Kiwi", "Coconut", "Monk Fruit"].map(ing => (
-                  <span key={ing} className={cn("px-6 py-2 rounded-full border border-white/40 text-white text-lg md:text-xl", utoBold.className)}>
+                {["Hydrolyzed Pea", "Rice", "Kiwifruit", "Coconut", "Monk Fruit"].map(ing => (
+                  <span key={ing} className="px-6 py-2 rounded-full border border-linen/40 text-linen text-lg md:text-xl font-bold uppercase tracking-widest">
                     {ing}
                   </span>
                 ))}
               </div>
+              <p className="text-linen/80 text-xl font-medium">We added kiwifruit powder because it contains a natural enzyme that helps your stomach finish the job even faster.</p>
             </div>
             <div className="lottie-container w-[35%] flex justify-center">
               <div className="w-full max-w-md aspect-square opacity-90">
@@ -146,17 +144,14 @@ export function HomeScrollytelling({ utoBlack, utoBold, runWild }: any) {
           </div>
         </section>
 
-        {/* PANEL 4: BONE BG */}
+        {/* PANEL 4: THE RESULT */}
         <section className="story-panel w-screen h-full flex items-center px-10 md:px-24">
           <div className="flex w-full items-center justify-between gap-8">
             <div className="w-[60%] space-y-12 text-left">
-              <h2 className={cn("reveal-text text-9xl md:text-[150px] xl:text-[180px] text-black leading-[0.8] tracking-tighter", utoBlack.className)}>
-                Feels<br />light
+              <h2 className={cn("reveal-text text-9xl md:text-[150px] xl:text-[180px] text-black leading-[0.8] tracking-tighter uppercase font-black", utoBlack.className)}>
+                It feels<br />light.
               </h2>
-              <Link href="/shop" className={cn(
-                "inline-flex h-16 md:h-20 px-10 md:px-16 items-center rounded-full bg-[#f20028] text-white text-xl md:text-2xl shadow-2xl hover:bg-black transition-all duration-500",
-                utoBold.className
-              )}>
+              <Link href="/products" className="inline-flex h-16 md:h-20 px-10 md:px-16 items-center rounded-full bg-red text-linen text-xl md:text-2xl shadow-xl hover:bg-black transition-all duration-500 font-bold uppercase tracking-widest">
                 Shop Gutsy
               </Link>
             </div>

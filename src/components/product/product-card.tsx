@@ -26,9 +26,9 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Link href={`/products/${product.handle}`} className="group block">
-      {/* 1. COMPACT & SOFTENED IMAGE CONTAINER */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-white rounded-[32px] mb-6 shadow-sm transition-all duration-500 group-hover:shadow-xl">
+    <Link href={`/products/${product.handle}`} className="group block font-uto">
+      {/* 1. BRANDED IMAGE CONTAINER */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-white rounded-[32px] mb-6 shadow-sm border border-black/5 transition-all duration-500 group-hover:shadow-xl">
         {product.featuredImage ? (
           <Image
             src={product.featuredImage.url}
@@ -38,7 +38,7 @@ export function ProductCard({ product }: ProductCardProps) {
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#f3eee4] text-black/10">
+          <div className="absolute inset-0 flex items-center justify-center bg-linen text-black/10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -54,31 +54,36 @@ export function ProductCard({ product }: ProductCardProps) {
 
         {/* 2. REFINED SOLD OUT BADGE */}
         {!product.availableForSale && (
-          <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-black text-[10px] uppercase tracking-[0.2em] font-bold px-3 py-1.5 rounded-full shadow-sm">
+          <div className="absolute top-4 left-4 bg-linen/90 backdrop-blur-md text-black text-[10px] uppercase tracking-[0.2em] font-black px-4 py-2 rounded-full shadow-sm border border-black/5">
             Sold out
           </div>
         )}
 
-        {/* 3. PREMIUM ACTION BUTTON (No hard shadows) */}
+        {/* 3. BRANDED ACTION BUTTON */}
         <div className="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
           <Button
             onClick={handleAddToCart}
             disabled={!product.availableForSale || isLoading}
-            className="w-full h-14 rounded-full bg-black text-[#f3eee4] hover:bg-[#f20028] border-none shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-300 hover-bounce"
+            className="w-full h-14 rounded-full bg-black text-linen hover:bg-red border-none shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-300 font-bold uppercase tracking-widest text-xs"
           >
-            {product.availableForSale ? 'Add to cart' : 'Sold out'}
+            {product.availableForSale ? 'Add to cart' : 'Restocking'}
           </Button>
         </div>
       </div>
 
-      {/* 4. EDITORIAL TYPOGRAPHY */}
+      {/* 4. TYPOGRAPHY - NO JARGON */}
       <div className="px-2 space-y-1">
-        <h3 className="text-xl font-bold text-black tracking-tight">
+        <h3 className="text-xl font-black text-black uppercase tracking-tight group-hover:text-red transition-colors duration-300">
           {product.title}
         </h3>
         <p className="text-sm uppercase tracking-[0.2em] text-black/40 font-black">
           {formatPrice(price.amount, price.currencyCode)}
         </p>
+        <div className="pt-2">
+            <span className="text-[10px] uppercase font-black text-red tracking-widest px-2 py-1 bg-red/5 rounded-md">
+                Pre-broken down
+            </span>
+        </div>
       </div>
     </Link>
   );

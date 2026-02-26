@@ -7,7 +7,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { Leaf, ShieldCheck, Truck, Recycle } from 'lucide-react';
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -16,11 +15,10 @@ if (typeof window !== "undefined") {
 export default function AboutPage() {
   const containerRef = useRef(null);
   const heroRef = useRef(null);
-  const pouchSectionRef = useRef(null);
   const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success'>('idle');
 
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end end"] });
-  const yMove = useTransform(scrollYProgress, [0, 1], [-50, 250]);
+  const yMove = useTransform(scrollYProgress, [0, 1], [-50, 200]);
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,144 +28,136 @@ export default function AboutPage() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to(".scrawl-top", {
-        x: -30, rotate: -8,
-        scrollTrigger: { trigger: heroRef.current, start: "top bottom", scrub: 1 }
+      // Scrawl Parallax
+      gsap.to(".scrawl-top", { x: -25, rotate: -6, scrollTrigger: { trigger: heroRef.current, scrub: 1 } });
+      gsap.to(".scrawl-bottom", { x: 25, rotate: 5, scrollTrigger: { trigger: heroRef.current, scrub: 1 } });
+
+      // Image Animations
+      gsap.from(".founder-card", {
+        y: 80,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1.5,
+        ease: "expo.out",
+        scrollTrigger: { trigger: ".founder-section", start: "top 80%" }
       });
 
-      gsap.to(".scrawl-bottom", {
-        x: 30, rotate: 6,
-        scrollTrigger: { trigger: heroRef.current, start: "top bottom", scrub: 1 }
+      // Floating effect to mimic "lightness"
+      gsap.to(".founder-card", {
+        y: -12,
+        duration: 2.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: 0.4
       });
-
-      gsap.from(".story-item", {
-        y: 40, opacity: 0, stagger: 0.15, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: ".story-grid", start: "top 90%" }
-      });
-
-      gsap.fromTo(".gutsy-pouch-animation",
-        { scale: 1.1, filter: "drop-shadow(0px 20px 40px rgba(0,0,0,0.2))" },
-        {
-          scale: 0.95,
-          rotate: -5,
-          filter: "drop-shadow(0px 10px 15px rgba(0,0,0,0.1))",
-          scrollTrigger: {
-            trigger: pouchSectionRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: 1.5,
-          }
-        }
-      );
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <div className="bg-linen min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 overflow-x-hidden selection:bg-yellow">
-      <div ref={containerRef} className="bg-red min-h-screen overflow-hidden relative font-uto font-medium">
-        
-        {/* VERTICAL MARQUEE RAIL */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 md:w-16 bg-black/10 z-0 flex flex-col items-center overflow-hidden py-10 pointer-events-none">
-          <div className="animate-vertical-marquee flex flex-col gap-8 whitespace-nowrap">
-             {[...Array(6)].map((_, i) => (
-               <p key={i} className="text-linen/20 text-xs md:text-sm uppercase tracking-widest [writing-mode:vertical-lr] rotate-180 font-bold">
-                 NO BLOAT — FEELS LIGHT — PRE-DIGESTED —
-               </p>
-             ))}
-          </div>
-        </div>
-
-        {/* PARALLAX BG */}
+    <div className="bg-linen min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 overflow-x-hidden selection:bg-yellow selection:text-black">
+      
+      {/* THE STORY START */}
+      <div ref={containerRef} className="bg-red min-h-[85vh] overflow-hidden relative font-uto">
         <motion.div style={{ y: yMove }} className="absolute inset-0 w-full h-full mix-blend-multiply opacity-10 z-0 flex items-center justify-center pointer-events-none">
-          <Image src="/images/MARATHON.png" alt="Visual Accent" fill className="object-contain scale-150 md:scale-125" priority />
+          <Image src="/images/MARATHON.png" alt="Visual Accent" fill className="object-contain scale-125" priority />
         </motion.div>
 
-        {/* CONTENT */}
-        <div className="mx-auto max-w-6xl px-6 md:px-12 pt-20 md:pt-32 pb-32 md:pb-48 relative z-10">
-          <div ref={heroRef} className="relative mb-32 md:mb-40 flex flex-col items-center">
-            <h2 className="scrawl-top text-linen text-5xl md:text-9xl lowercase mb-[-1.5rem] md:mb-[-4rem] mr-[20%] md:mr-[30%] rotate-[-5deg] z-20 font-runwild">
-              the heavy
+        <div className="mx-auto max-w-5xl px-6 pt-20 pb-32 relative z-10 text-center">
+          <div ref={heroRef} className="relative mb-20 flex flex-col items-center">
+            <h2 className="scrawl-top text-linen text-5xl md:text-9xl lowercase mb-[-1.5rem] md:mb-[-4rem] mr-[15%] rotate-[-5deg] z-20 font-runwild">
+              the honest
             </h2>
-            <h1 className="text-black text-[60px] md:text-[180px] leading-[0.8] uppercase tracking-tighter md:tracking-tight text-center z-10 font-uto font-black">
-              history
+            <h1 className="text-black text-[60px] md:text-[180px] leading-[0.8] uppercase tracking-tighter z-10 font-uto font-black">
+              backstory
             </h1>
-            <h2 className="scrawl-bottom text-linen text-4xl md:text-7xl lowercase mt-[-1rem] md:mt-[-2.5rem] ml-[30%] md:ml-[40%] rotate-[3deg] z-20 opacity-90 font-runwild">
-              by laks
+            <h2 className="scrawl-bottom text-linen text-4xl md:text-7xl lowercase mt-[-1rem] md:mt-[-2.5rem] ml-[25%] rotate-[3deg] z-20 opacity-90 font-runwild">
+              from us
             </h2>
           </div>
 
-          <div className="story-grid grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 text-center md:text-left text-linen mb-24">
-            <div className="story-item space-y-4 px-4 md:px-0">
-               <p className="text-5xl md:text-6xl text-black lowercase font-runwild">the kitchen sink drama</p>
-               <p className="text-xl font-bold italic text-black uppercase leading-tight font-uto">A decade of corporate strategy couldn&apos;t solve a bloated stomach.</p>
-               <p className="text-lg opacity-90 leading-relaxed font-medium">I spent years at companies like Talabat and Deliveroo, but my real full-time job was managing the inevitable swell that followed every &quot;clean&quot; protein shake. The industry seemed content to sell us neon-coloured sand and call it wellness.</p>
-            </div>
-            <div className="story-item space-y-4 px-4 md:px-0">
-              <p className="text-5xl md:text-6xl text-black lowercase font-runwild">the scientific apology</p>
-              <p className="text-xl font-bold italic text-black uppercase leading-tight font-uto">We pre-digest it, so your gut doesn&apos;t have to.</p>
-              <p className="text-lg opacity-90 leading-relaxed font-medium">GUTSY wasn&apos;t born from a desire to be &quot;loud.&quot; It was born because I wanted a supplement that behaved with some decorum. We use enzymes to break down protein before it ever touches your lips. It&apos;s not magic; it&apos;s just manners.</p>
-            </div>
-            <div className="story-item space-y-4 px-4 md:px-0">
-              <p className="text-5xl md:text-6xl text-black lowercase font-runwild">the dubai standard</p>
-              <p className="text-xl font-bold italic text-black uppercase leading-tight font-uto">Built for the disciplined, not the loud.</p>
-              <p className="text-lg opacity-90 leading-relaxed font-medium">Launching in the GCC meant rejecting the viral aesthetic. We aren&apos;t here for the hustle culture or the &quot;soft life&quot; influencers. We&apos;re here for the people who appreciate clinical integrity and a protein that actually lets them finish their day without feeling like a parade float.</p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 border-t border-black/10 pt-12">
-            {[
-              { icon: Leaf, text: "100% Vegan" },
-              { icon: ShieldCheck, text: "No Gums/Fillers" },
-              { icon: Truck, text: "UAE Shipping" },
-              { icon: Recycle, text: "Sustainable" }
-            ].map((badge, i) => (
-              <div key={i} className="flex flex-col items-center text-center space-y-2 group">
-                <badge.icon className="w-8 h-8 md:w-10 md:h-10 text-black transition-transform group-hover:scale-110" />
-                <span className="text-xs md:text-sm uppercase font-black tracking-widest text-black font-uto">{badge.text}</span>
-              </div>
-            ))}
+          <div className="max-w-2xl mx-auto space-y-10 text-linen text-xl md:text-2xl leading-relaxed font-medium">
+            <p className="font-uto italic text-black uppercase font-black text-2xl">
+              GUTSY didn&apos;t start in a boardroom. It started because Lakshmi was tired of Amazon deliveries and unpronounceable labels.
+            </p>
+            <p>
+              Two years ago, we got serious about our health. Lakshmi hit her protein goals, but her gut didn&apos;t thank her for it. The result? Terrible bloating, horrible acne, and a kitchen counter cluttered with brands that either tasted like cardboard or felt like bricks in the stomach.
+            </p>
+            <p>
+              Sujith, tired of the constant deliveries and even more constant complaining, suggested a radical alternative: we make it ourselves. We spent a year down a rabbit hole of additives and fillers to figure out how to keep only what we actually need.
+            </p>
+            <p className="font-crunold italic text-black text-3xl">
+              &quot;We have no experience in supplements or marketing. But we&apos;re doing this anyway.&quot;
+            </p>
+            <p>
+              We don&apos;t care for the loud, neon-lit hustle. We just want a supplement that has some manners. So we pre-digest the protein with enzymes so your stomach doesn&apos;t have to. It&apos;s simple, it&apos;s personal, and it actually works.
+            </p>
           </div>
         </div>
       </div>
 
-      <section ref={pouchSectionRef} className="py-24 md:py-48 flex flex-col items-center justify-center bg-linen overflow-hidden">
-        <div className="relative w-64 h-80 md:w-96 md:h-[500px] gutsy-pouch-animation">
-          <Image src="/images/GUTSY_POUCH_RENDER.png" alt="The GUTSY Pouch" fill className="object-contain" />
-        </div>
-        <div className="mt-12 text-center px-6">
-          <p className="font-runwild text-4xl md:text-6xl text-red">breathe out.</p>
-          <p className="font-uto font-black uppercase tracking-tighter text-2xl md:text-4xl">the bloat stops here.</p>
+      {/* THE FOUNDERS */}
+      <section className="founder-section py-32 bg-linen relative z-20">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+          
+          {/* LAKSHMI */}
+          <div className="founder-card flex flex-col items-center">
+            <div className="relative w-full aspect-[4/5] bg-gutsy-gray-100 rounded-3xl overflow-hidden border-2 border-black/5 shadow-inner flex items-center justify-center text-black/20 italic">
+              {/* Founder Image Placeholder */}
+              Lakshmi Placeholder
+            </div>
+            <div className="mt-8 text-center">
+              <h3 className="font-uto font-black text-4xl uppercase tracking-tighter">Lakshmi</h3>
+              <p className="font-runwild text-3xl text-red mt-2">The one who complained</p>
+            </div>
+          </div>
+
+          {/* SUJITH */}
+          <div className="founder-card flex flex-col items-center md:mt-32">
+            <div className="relative w-full aspect-[4/5] bg-gutsy-gray-100 rounded-3xl overflow-hidden border-2 border-black/5 shadow-inner flex items-center justify-center text-black/20 italic">
+              {/* Founder Image Placeholder */}
+              Sujith Placeholder
+            </div>
+            <div className="mt-8 text-center">
+              <h3 className="font-uto font-black text-4xl uppercase tracking-tighter">Sujith</h3>
+              <p className="font-runwild text-3xl text-red mt-2">The one who fixed it</p>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <section className="bg-black py-20 md:py-32">
-        <div className="mx-auto max-w-3xl px-6 text-center space-y-8 md:space-y-10">
-          <h3 className="text-5xl md:text-9xl uppercase leading-tight text-linen font-uto font-black">READY?</h3>
+      {/* CONSOLIDATED CTA */}
+      <section className="bg-black py-24 md:py-40">
+        <div className="mx-auto max-w-4xl px-6 text-center space-y-12">
+          <h3 className="text-6xl md:text-[140px] uppercase leading-none text-linen font-uto font-black tracking-tighter">LET&apos;S BE FRIENDS.</h3>
+          
           {emailStatus === 'success' ? (
-            <div className="space-y-4">
-              <p className="text-4xl md:text-6xl text-yellow lowercase font-runwild">Check your inbox!</p>
-              <p className="text-linen uppercase font-bold tracking-widest font-uto">You&apos;re officially on the list.</p>
+            <div className="animate-fade-in-up">
+              <p className="text-4xl md:text-6xl text-yellow lowercase font-runwild">Welcome to the inner circle.</p>
+              <p className="text-linen uppercase font-bold tracking-[0.2em] font-uto text-sm mt-4">Check your inbox for 10% off your first order.</p>
             </div>
           ) : (
-            <>
-              <p className="text-4xl md:text-7xl lowercase text-yellow leading-none font-runwild">get 10% off your first order</p>
-              <form onSubmit={handleEmailSubmit} className="flex flex-col md:flex-row gap-4 pt-4 max-w-xl mx-auto">
+            <div className="space-y-8">
+              <p className="text-3xl md:text-5xl lowercase text-yellow font-runwild opacity-90 max-w-xl mx-auto">
+                no loud marketing, just the good stuff. join the list for 10% off.
+              </p>
+              <form onSubmit={handleEmailSubmit} className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto pt-6">
                 <input
                   required
                   type="email"
-                  placeholder="Email"
-                  className="flex-1 h-14 md:h-16 px-8 rounded-full border border-white/20 bg-transparent text-linen text-lg outline-none placeholder:text-linen/50 focus:bg-linen/10 focus:ring-2 focus:ring-yellow/30 transition-all duration-300 font-uto font-bold"
+                  placeholder="Your Email Address"
+                  className="flex-1 h-20 px-10 rounded-full border border-white/10 bg-white/5 text-linen text-xl outline-none placeholder:text-linen/30 focus:bg-white/10 focus:ring-2 focus:ring-yellow/40 transition-all font-uto font-bold"
                 />
                 <Button
                   disabled={emailStatus === 'sending'}
-                  className="h-14 md:h-16 px-12 rounded-full bg-red text-linen font-bold shadow-lg hover:shadow-xl hover:bg-yellow hover:text-black hover:scale-105 active:scale-95 transition-all duration-300 disabled:opacity-50 font-uto"
+                  className="h-20 px-14 rounded-full bg-red text-linen font-black text-lg hover:bg-yellow hover:text-black hover:scale-105 active:scale-95 transition-all font-uto uppercase tracking-widest"
                 >
-                  {emailStatus === 'sending' ? 'Sending...' : 'Sign me up'}
+                  {emailStatus === 'sending' ? 'Sending...' : 'Sign Up'}
                 </Button>
               </form>
-            </>
+            </div>
           )}
         </div>
       </section>
