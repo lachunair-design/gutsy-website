@@ -6,7 +6,7 @@ import gsap from 'gsap';
 import { cn } from '@/lib/utils';
 import SplitType from 'split-type';
 
-const SESSION_KEY = 'gutsy-founder-letter-seen';
+const SESSION_KEY = 'gutsy-diagnostic-entry-seen';
 
 export function WordsLoader() {
   const [show, setShow] = useState(false);
@@ -15,6 +15,7 @@ export function WordsLoader() {
   const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Only show once per session to respect the user's time
     if (typeof sessionStorage === 'undefined' || sessionStorage.getItem(SESSION_KEY)) return;
     sessionStorage.setItem(SESSION_KEY, '1');
     setShow(true);
@@ -24,25 +25,25 @@ export function WordsLoader() {
     if (!show) return;
 
     const split = new SplitType('.letter-text', { types: 'lines' });
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
 
-    tl.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 })
+    tl.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5 })
       .fromTo(imageRef.current, 
-        { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.1 }, 
-        { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.2 }, 
-        "-=0.4")
+        { clipPath: 'inset(0% 100% 0% 0%)' }, 
+        { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: "expo.inOut" })
       .fromTo(split.lines, 
-        { y: 20, opacity: 0 }, 
-        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8 }, 
-        "-=0.8");
+        { y: 30, opacity: 0 }, 
+        { y: 0, opacity: 1, stagger: 0.05, duration: 1, ease: "power4.out" }, 
+        "-=1");
 
     return () => { tl.kill(); };
   }, [show]);
 
   const handleExit = () => {
     gsap.to(overlayRef.current, {
-      yPercent: -100,
-      duration: 1,
+      opacity: 0,
+      scale: 1.05,
+      duration: 0.8,
       ease: "expo.inOut",
       onComplete: () => setShow(false)
     });
@@ -53,52 +54,31 @@ export function WordsLoader() {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[1000] bg-linen flex flex-col md:flex-row items-stretch overflow-hidden font-uto"
+      className="fixed inset-0 z-[1000] bg-black flex flex-col md:flex-row items-stretch overflow-hidden font-uto"
     >
-      {/* PHOTO SIDE */}
-      <div ref={imageRef} className="relative w-full h-[40vh] md:h-full md:w-1/2 bg-black/5 overflow-hidden">
-        {/* [Placeholder for photo of Lakshmi and Sujith] */}
-        <div className="absolute inset-0 flex items-center justify-center italic text-black/20 text-sm p-12 text-center">
-          
-        </div>
+      {/* VISUAL SIDE - High Contrast Diagnostic */}
+      <div ref={imageRef} className="relative w-full h-[30vh] md:h-full md:w-1/2 bg-zinc-900 overflow-hidden border-r border-white/5">
         <Image 
           src="/images/founders-placeholder.jpg" 
-          alt="Lakshmi and Sujith" 
+          alt="Gutsy Founders Sujith and Lakshmi" 
           fill 
-          className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+          className="object-cover grayscale brightness-50"
+          priority
         />
-      </div>
-
-      {/* LETTER SIDE */}
-      <div className="flex-1 flex flex-col justify-center p-8 md:p-20 bg-linen">
-        <div ref={textRef} className="max-w-md space-y-6">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-red font-black">A note from the founders</p>
-          
-          <div className="letter-text space-y-4 text-black/80 text-lg md:text-xl leading-relaxed">
-            <p>Hello,</p>
-            <p>
-              We’re glad you’re here. Most protein powders are molecularly clunky—they sit in your gut and ferment because they’re too big to be absorbed. We know this because we spent 8 months and 47 failed formulas trying to fix it for ourselves.
-            </p>
-            <p>
-              GUTSY is the result. We pre-break down the protein into peptides so your body doesn’t have to struggle. It’s not magic; it’s just better engineering.
-            </p>
-            <p>We hope it makes you feel as light as it does us.</p>
-          </div>
-
-          <div className="pt-4">
-            <p className="font-runwild text-4xl text-black leading-none">Lakshmi & Sujith</p>
-            <p className="text-[10px] uppercase tracking-widest text-black/40 mt-2">Founders, Gutsy</p>
-          </div>
-
-          <button 
-            onClick={handleExit}
-            className="group mt-12 flex items-center gap-4 text-black font-black uppercase tracking-[0.2em] text-xs hover:text-red transition-colors"
-          >
-            Enter Gutsy 
-            <span className="w-12 h-px bg-black group-hover:bg-red group-hover:w-20 transition-all duration-500" />
-          </button>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
+        <div className="absolute bottom-12 left-12">
+          <p className="text-[10px] uppercase tracking-[0.5em] text-yellow font-black">Establishing Diagnostic Context</p>
         </div>
       </div>
-    </div>
-  );
-}
+
+      {/* CONTENT SIDE */}
+      <div className="flex-1 flex flex-col justify-center p-8 md:p-24 bg-black">
+        <div ref={textRef} className="max-w-xl space-y-10">
+          <div className="space-y-4">
+            <p className="text-[10px] uppercase tracking-[0.5em] text-red font-black">Entry Protocol 01 // The Backstory</p>
+            <h2 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
+              No boardroom <br /> required.
+            </h2>
+          </div>
+          
+          <div className="letter-text space-y-6 text-white/60 text-
