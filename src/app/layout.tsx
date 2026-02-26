@@ -5,6 +5,11 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { CartProvider } from '@/lib/shopify/cart-context';
 import { CartDrawer } from '@/components/cart/cart-drawer';
+import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider';
+import { TransitionProvider } from '@/components/transitions/transition-context';
+import { PageTransitionOverlay } from '@/components/transitions/page-transition-overlay';
+import { WordsLoader } from '@/components/loaders/words-loader';
+import { ParticleField } from '@/components/effects/particle-field';
 
 // FIXED FONT PATHS: Using relative paths to ensure successful Vercel builds
 const utoBlack = localFont({ 
@@ -85,17 +90,26 @@ export default function RootLayout({
     <html lang="en" className={`${utoBlack.variable} ${runWild.variable}`}>
       <body className="antialiased bg-[#f3eee4] selection:bg-[#ffb300] selection:text-black">
         <CartProvider>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#f20028] focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:text-sm focus:font-bold focus:uppercase focus:outline-none"
-          >
-            Skip to content
-          </a>
-          <Header />
-          {/* Main content wrapper */}
-          <main id="main-content">{children}</main>
-          <Footer />
-          <CartDrawer />
+          <TransitionProvider>
+            <SmoothScrollProvider>
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#f20028] focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:text-sm focus:font-bold focus:uppercase focus:outline-none"
+              >
+                Skip to content
+              </a>
+              {/* Global ambient particles — fixed overlay across every page */}
+              <ParticleField fixed />
+              {/* Entry words animation — first visit only */}
+              <WordsLoader />
+              <Header />
+              {/* Main content wrapper */}
+              <main id="main-content">{children}</main>
+              <Footer />
+              <CartDrawer />
+              <PageTransitionOverlay />
+            </SmoothScrollProvider>
+          </TransitionProvider>
         </CartProvider>
       </body>
     </html>

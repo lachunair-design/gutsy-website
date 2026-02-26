@@ -39,7 +39,8 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 | `/shipping` | Shipping Policy |
 | Custom 404 | Illustrated lost-gut-character page |
 
-Brand Identity
+## Brand
+
 ## Brand Identity
 
 ### Primary Palette

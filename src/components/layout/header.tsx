@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import { useCart } from '@/lib/shopify/cart-context';
 import { cn } from '@/lib/utils';
 import localFont from 'next/font/local';
+import { TransitionLink } from '@/components/transitions/transition-link';
 
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
@@ -58,7 +59,7 @@ export function Header() {
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         
         {/* LOGO - Premium Inversion */}
-        <Link
+        <TransitionLink
           href="/"
           className={cn(
             "group relative transition-all duration-500",
@@ -77,13 +78,13 @@ export function Header() {
               priority
             />
           </div>
-        </Link>
+        </TransitionLink>
 
         <div className="flex items-center gap-6 md:gap-10">
           {/* NAVIGATION LINKS - Minimal Editorial Style */}
           <div className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => (
-              <Link
+              <TransitionLink
                 key={item.name}
                 href={item.href}
                 className={cn(
@@ -93,21 +94,21 @@ export function Header() {
                 )}
               >
                 {item.name}
-              </Link>
+              </TransitionLink>
             ))}
 
-            <Link
+            <TransitionLink
               href="/products"
               className={cn(
                 "h-12 px-8 flex items-center justify-center rounded-full transition-all hover:scale-105 active:scale-95",
-                isDarkHeroPage && !scrolled 
-                  ? "bg-white text-black hover:bg-[#ffb300]" 
+                isDarkHeroPage && !scrolled
+                  ? "bg-white text-black hover:bg-[#ffb300]"
                   : "bg-[#f20028] text-white hover:bg-black",
                 utoBold.className
               )}
             >
               Shop Now
-            </Link>
+            </TransitionLink>
           </div>
 
           {/* CART & MOBILE TOGGLE */}
@@ -165,22 +166,22 @@ export function Header() {
         >
           <div className="flex flex-col space-y-8">
             {navigation.map((item) => (
-              <Link
+              <TransitionLink
                 key={item.name}
                 href={item.href}
                 className={cn("text-5xl uppercase tracking-tighter text-black", utoBlack.className)}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
-              </Link>
+              </TransitionLink>
             ))}
-            <Link
+            <TransitionLink
               href="/products"
               className={cn("text-6xl uppercase text-[#f20028] pt-8 border-t border-zinc-100", utoBlack.className)}
               onClick={() => setMobileMenuOpen(false)}
             >
               Shop All
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </nav>

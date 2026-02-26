@@ -12,11 +12,23 @@ import { FunFactCarousel } from './fun-fact-carousel';
 import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 import { WelcomePopup } from '@/components/welcome-popup';
 import { WaveDivider } from '@/components/wave-divider';
+import { HomeAnimations } from '@/components/animations/home-animations';
+import { RadialMarquee } from '@/components/effects/radial-marquee';
+import { Tooltip } from '@/components/ui/tooltip';
+import { ReviewSlider } from '@/components/reviews/review-slider';
 
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
+
+const TESTIMONIALS = [
+  { quote: "Finally a protein that doesn't make me feel like I swallowed a brick. Game changer.", name: "Sarah K.", location: "Dubai" },
+  { quote: "I've tried everything. This is the first protein powder that doesn't bloat me. Period.", name: "Ahmed R.", location: "Abu Dhabi" },
+  { quote: "The taste is incredible and my stomach actually thanks me. Will never go back.", name: "Maya L.", location: "Dubai" },
+  { quote: "Two weeks in and my digestion has completely changed. Light, clean energy all day.", name: "Tariq M.", location: "Dubai" },
+  { quote: "Skeptical at first, but the science makes sense. No gum ingredients, no bloat. Love it.", name: "Priya S.", location: "Abu Dhabi" },
+];
 
 export default async function HomePage() {
   let products: ShopifyProduct[] = [];
@@ -29,7 +41,7 @@ export default async function HomePage() {
 
       {/* ═══ HERO SECTION ═══ */}
       <section className="relative w-full h-screen overflow-hidden flex items-center">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0" data-animate="hero-image">
           <Image
             src="/images/girl-on-tennis-with-cacao.png"
             alt="GUTSY Lifestyle - Woman enjoying an active lifestyle with GUTSY protein"
@@ -43,21 +55,26 @@ export default async function HomePage() {
 
         <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-8">
           <div className="max-w-4xl">
-            <h2 className={cn("text-[#f3eee4] text-4xl md:text-6xl lowercase mb-2", runWild.className)}>
+            <h2
+              data-animate="hero-eyebrow"
+              className={cn("text-[#f3eee4] text-4xl md:text-6xl lowercase mb-2", runWild.className)}
+            >
               finally, a protein that
             </h2>
-            <h1 className={cn("text-white text-8xl md:text-[160px] leading-[0.8] uppercase tracking-tighter mb-10 relative inline-block", utoBlack.className)}>
+            <h1
+              data-animate="hero-title"
+              className={cn("text-white text-8xl md:text-[160px] leading-[0.8] uppercase tracking-tighter mb-10 relative inline-block", utoBlack.className)}
+            >
               FEELS LIGHT
-              {/* Hand-drawn circle accent on "LIGHT" */}
-              {/*<svg className="absolute -right-4 top-1/2 w-[55%] h-[120%] -translate-y-1/2 pointer-events-none" viewBox="0 0 200 100" fill="none" aria-hidden="true">
-                <ellipse cx="100" cy="50" rx="90" ry="40" stroke="#f20028" strokeWidth="2" strokeLinecap="round" className="animate-draw-circle" opacity="0.5" />
-              </svg>*/}
             </h1>
-            <p className="text-[#f3eee4] text-xl md:text-2xl max-w-md font-medium leading-tight mb-12 opacity-90">
+            <p
+              data-animate="hero-body"
+              className="text-[#f3eee4] text-xl md:text-2xl max-w-md font-medium leading-tight mb-12 opacity-90"
+            >
               No bloat. No brick in your stomach. Just enzymatically pre-digested protein.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+            <div data-animate="hero-cta" className="flex flex-col sm:flex-row gap-4 sm:gap-6">
               <Link href="#lineup">
                 <Button className={cn("h-14 md:h-16 px-10 rounded-full bg-black text-white text-lg md:text-xl font-bold hover:shadow-xl transition-all duration-300 shadow-lg hover-bounce", utoBold.className)}>
                   Shop Now
@@ -72,8 +89,13 @@ export default async function HomePage() {
           </div>
         </div>
 
+        {/* Spinning radial text badge — desktop only */}
+        <div className="absolute bottom-10 right-10 z-20 hidden md:block" aria-hidden="true">
+          <RadialMarquee radius={100} fontSize={10.5} speed={28} />
+        </div>
+
         {/* Subtle scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-fade-in-up">
+        <div data-animate="hero-scroll" className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
           <p className={cn("text-white/40 text-xs uppercase tracking-[0.3em]", utoBold.className)}>
             Scroll to explore
           </p>
@@ -131,25 +153,29 @@ export default async function HomePage() {
       {/*<Scrollytelling utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} /> */}
 
       {/* ═══ SCIENCE SECTION — Cream Background ═══ */}
-      <section className="py-20 md:py-32 bg-[#f3eee4]">
+      <section data-animate="science-section" className="py-20 md:py-32 bg-[#f3eee4]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Illustrated protein breakdown diagram */}
-            <div className="flex items-center justify-center order-2 lg:order-1">
+            <div className="flex items-center justify-center order-2 lg:order-1" data-animate="science-svg">
               <svg viewBox="0 0 300 200" className="w-full max-w-md" aria-label="Diagram showing protein breakdown process" role="img">
                 {/* Large protein molecule */}
-                <circle cx="60" cy="100" r="35" fill="#f20028" opacity="0.2" stroke="#f20028" strokeWidth="1.5" strokeDasharray="4 3"/>
-                <text x="60" y="105" textAnchor="middle" className="text-[10px] fill-[#f20028] font-bold">PROTEIN</text>
+                <g data-animate="science-protein">
+                  <circle cx="60" cy="100" r="35" fill="#f20028" opacity="0.2" stroke="#f20028" strokeWidth="1.5" strokeDasharray="4 3"/>
+                  <text x="60" y="105" textAnchor="middle" className="text-[10px] fill-[#f20028] font-bold">PROTEIN</text>
+                </g>
 
                 {/* Arrow */}
-                <line x1="105" y1="100" x2="145" y2="100" stroke="#ffb300" strokeWidth="2" strokeDasharray="6 3"/>
-                <polygon points="145,94 157,100 145,106" fill="#ffb300"/>
-                <text x="130" y="85" textAnchor="middle" className="text-[8px] fill-[#ffb300] font-bold">ENZYMES</text>
+                <g data-animate="science-arrow">
+                  <line x1="105" y1="100" x2="145" y2="100" stroke="#ffb300" strokeWidth="2" strokeDasharray="6 3"/>
+                  <polygon points="145,94 157,100 145,106" fill="#ffb300"/>
+                  <text x="130" y="85" textAnchor="middle" className="text-[8px] fill-[#ffb300] font-bold">ENZYMES</text>
+                </g>
 
                 {/* Broken down pieces */}
-                <circle cx="190" cy="75" r="14" fill="#ffb300" opacity="0.3" stroke="#ffb300" strokeWidth="1.5"/>
-                <circle cx="220" cy="100" r="14" fill="#ffb300" opacity="0.3" stroke="#ffb300" strokeWidth="1.5"/>
-                <circle cx="190" cy="125" r="14" fill="#ffb300" opacity="0.3" stroke="#ffb300" strokeWidth="1.5"/>
+                <circle data-animate="science-peptide" cx="190" cy="75" r="14" fill="#ffb300" opacity="0.3" stroke="#ffb300" strokeWidth="1.5"/>
+                <circle data-animate="science-peptide" cx="220" cy="100" r="14" fill="#ffb300" opacity="0.3" stroke="#ffb300" strokeWidth="1.5"/>
+                <circle data-animate="science-peptide" cx="190" cy="125" r="14" fill="#ffb300" opacity="0.3" stroke="#ffb300" strokeWidth="1.5"/>
 
                 {/* Glow effect on small pieces */}
                 <circle cx="190" cy="75" r="20" fill="#ffb300" opacity="0.05"/>
@@ -162,13 +188,22 @@ export default async function HomePage() {
               </svg>
             </div>
             <div className="space-y-8 order-1 lg:order-2">
-              <p className={cn("text-4xl md:text-5xl text-[#f20028] lowercase", runWild.className)}>
+              <p
+                data-animate="science-label"
+                className={cn("text-4xl md:text-5xl text-[#f20028] lowercase", runWild.className)}
+              >
                 the science of light
               </p>
-              <h2 className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter", utoBlack.className)}>
+              <h2
+                data-animate="science-heading"
+                className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter", utoBlack.className)}
+              >
                 We break it down first.
               </h2>
-              <p className="text-lg md:text-xl text-black/70 leading-relaxed max-w-lg">
+              <p
+                data-animate="science-body"
+                className="text-lg md:text-xl text-black/70 leading-relaxed max-w-lg"
+              >
                 Enzymatic pre-digestion breaks massive protein molecules into tiny, bioavailable
                 peptides before they reach your stomach. Your gut does less work. You feel light.
               </p>
@@ -181,21 +216,17 @@ export default async function HomePage() {
      
 
       {/* ═══ INGREDIENTS SECTION — White Background ═══ */}
-      <section className="py-20 md:py-32 bg-[#FDFBF7]">
+      <section data-animate="ingredients-section" className="py-20 md:py-32 bg-[#FDFBF7]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
             <p className={cn("text-sm uppercase tracking-[0.2em] text-[#f20028] font-bold mb-4", utoBold.className)}>
               What&apos;s Inside
             </p>
-            <h2 className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter mb-4", utoBlack.className)}>
-              <span className="relative inline-block">
-                Five
-                {/* Hand-drawn circle accent */}
-                {/* <svg className="absolute -inset-3 w-[calc(100%+24px)] h-[calc(100%+24px)] pointer-events-none" viewBox="0 0 120 80" fill="none" aria-hidden="true">
-                  <ellipse cx="60" cy="40" rx="52" ry="32" stroke="#ffb300" strokeWidth="2.5" strokeLinecap="round" className="animate-draw-circle" opacity="0.5" />
-                </svg> */}
-              </span>{' '}
-              core ingredients.
+            <h2
+              data-animate="ingredients-heading"
+              className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter mb-4", utoBlack.className)}
+            >
+              Five core ingredients.
             </h2>
             <p className={cn("text-2xl md:text-3xl text-[#f20028] lowercase", runWild.className)}>
               nothing else.
@@ -203,18 +234,56 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { name: 'Pea & Rice Protein', benefit: 'Complete amino acid profile with 20g per serve', icon: 'pea' },
-              { name: 'Kiwifruit Extract', benefit: 'Natural enzymes that support digestion', icon: 'kiwi' },
-              { name: 'Coconut Milk', benefit: 'Creamy texture without dairy or gums', icon: 'coconut' },
-              { name: 'Adaptogens', benefit: 'Reishi or Maca for calm energy and balance', icon: 'adaptogen' },
-              { name: 'Monk Fruit', benefit: 'Natural sweetness with zero sugar impact', icon: 'monk' },
+              {
+                name: 'Pea & Rice Protein',
+                benefit: 'Complete amino acid profile with 20g per serve',
+                icon: 'pea',
+                science: 'All 9 essential amino acids. Pre-digested via protease enzymes so your gut absorbs peptides, not whole proteins.',
+              },
+              {
+                name: 'Kiwifruit Extract',
+                benefit: 'Natural enzymes that support digestion',
+                icon: 'kiwi',
+                science: 'Rich in actinidin — a natural cysteine protease that breaks down protein up to 2.5× faster than stomach enzymes alone.',
+              },
+              {
+                name: 'Coconut Milk',
+                benefit: 'Creamy texture without dairy or gums',
+                icon: 'coconut',
+                science: 'MCTs for clean energy. Zero carrageenan, zero guar gum — just the milk. That\'s why it doesn\'t bloat.',
+              },
+              {
+                name: 'Adaptogens',
+                benefit: 'Reishi or Maca for calm energy and balance',
+                icon: 'adaptogen',
+                science: 'Reishi mushroom (Vanilla Calm) supports immunity + focus. Maca root (Cacao Boost) supports hormonal balance + sustained energy.',
+              },
+              {
+                name: 'Monk Fruit',
+                benefit: 'Natural sweetness with zero sugar impact',
+                icon: 'monk',
+                science: 'Zero glycaemic index. 300× sweeter than cane sugar — so you need almost none. Ancient Chinese natural sweetener.',
+              },
             ].map((ingredient) => (
-              <div key={ingredient.name} className="bg-white rounded-3xl p-6 shadow-md hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 text-center">
+              <div
+                key={ingredient.name}
+                data-animate="ingredient-card"
+                className="bg-white rounded-3xl p-6 shadow-md hover:shadow-xl hover:translate-y-[-4px] transition-all duration-300 text-center"
+              >
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <IngredientIcon type={ingredient.icon} />
                 </div>
-                <h3 className={cn("text-lg uppercase tracking-wide mb-2", utoBold.className)}>
+                <h3 className={cn("text-lg uppercase tracking-wide mb-2 flex items-center justify-center gap-1.5", utoBold.className)}>
                   {ingredient.name}
+                  <Tooltip content={ingredient.science} position="top">
+                    <button
+                      type="button"
+                      aria-label={`More info about ${ingredient.name}`}
+                      className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-black/20 text-black/40 text-[10px] leading-none hover:border-[#f20028] hover:text-[#f20028] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f20028]"
+                    >
+                      i
+                    </button>
+                  </Tooltip>
                 </h3>
                 <p className="text-sm text-black/60 leading-relaxed">
                   {ingredient.benefit}
@@ -242,48 +311,31 @@ export default async function HomePage() {
       </section>
 
       {/* ═══ SOCIAL PROOF — Yellow Background ═══ */}
-      <section className="py-20 md:py-32 bg-[#ffb300]">
+      <section data-animate="testimonials-section" className="py-20 md:py-32 bg-[#ffb300]">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
             <p className={cn("text-sm uppercase tracking-[0.2em] text-black/50 font-bold mb-4", utoBold.className)}>
               What People Say
             </p>
-            <h2 className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter", utoBlack.className)}>
+            <h2
+              data-animate="testimonials-heading"
+              className={cn("text-5xl md:text-7xl text-black leading-[0.85] tracking-tighter", utoBlack.className)}
+            >
               Real people. Real guts.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { quote: "Finally a protein that doesn't make me feel like I swallowed a brick. Game changer.", name: "Sarah K.", location: "Dubai" },
-              { quote: "I've tried everything. This is the first protein powder that doesn't bloat me. Period.", name: "Ahmed R.", location: "Abu Dhabi" },
-              { quote: "The taste is incredible and my stomach actually thanks me. Will never go back.", name: "Maya L.", location: "Dubai" },
-            ].map((testimonial, i) => (
-              <div key={i} className="bg-white/80 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <svg key={j} className="w-5 h-5 text-[#ffb300]" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-lg text-black leading-relaxed mb-6">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <div>
-                  <p className={cn("text-sm uppercase tracking-wide", utoBold.className)}>{testimonial.name}</p>
-                  <p className="text-xs text-black/50">{testimonial.location}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReviewSlider testimonials={TESTIMONIALS} nameClassName={utoBold.className} />
         </div>
       </section>
 
       {/* ═══ COMPARISON — Cream Background ═══ */}
-      <section className="py-20 md:py-32 bg-[#f3eee4]">
+      <section data-animate="comparison-section" className="py-20 md:py-32 bg-[#f3eee4]">
         <div className="max-w-5xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
-            <h2 className={cn("text-5xl md:text-7xl uppercase text-black tracking-tighter leading-none mb-4", utoBlack.className)}>
+            <h2
+              data-animate="comparison-heading"
+              className={cn("text-5xl md:text-7xl uppercase text-black tracking-tighter leading-none mb-4", utoBlack.className)}
+            >
               How We&apos;re Different
             </h2>
           </div>
@@ -297,12 +349,16 @@ export default async function HomePage() {
               ["Gums and thickeners that bloat", "Zero fillers or gums"],
               ["15+ mystery ingredients", "5 core ingredients"],
             ].map((row, i) => (
-              <div key={i} className={cn(
-                "grid grid-cols-2 py-6 md:py-8 px-6 text-lg md:text-2xl font-medium hover:bg-[#f3eee4]/50 transition-colors duration-300",
-                i < 2 && "border-b border-black/5"
-              )}>
-                <div className="opacity-30 pr-6">{row[0]}</div>
-                <div className="text-black">{row[1]}</div>
+              <div
+                key={i}
+                data-animate="comparison-row"
+                className={cn(
+                  "grid grid-cols-2 py-6 md:py-8 px-6 text-lg md:text-2xl font-medium hover:bg-[#f3eee4]/50 transition-colors duration-300",
+                  i < 2 && "border-b border-black/5"
+                )}
+              >
+                <div data-animate="comparison-col" className="opacity-30 pr-6">{row[0]}</div>
+                <div data-animate="comparison-col" className="text-black">{row[1]}</div>
               </div>
             ))}
           </div>
@@ -321,24 +377,35 @@ export default async function HomePage() {
       <WaveDivider from="#FDFBF7" to="black" />
 
       {/* ═══ FOOTER CTA — Black Background ═══ */}
-      <section className="py-20 md:py-32 bg-black px-6">
+      <section data-animate="cta-section" className="py-20 md:py-32 bg-black px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <p className={cn("text-2xl md:text-3xl text-[#f20028] lowercase italic mb-4", runWild.className)}>
+          <p
+            data-animate="cta-eyebrow"
+            className={cn("text-2xl md:text-3xl text-[#f20028] lowercase italic mb-4", runWild.className)}
+          >
             fuel that actually feels good
           </p>
 
-          <h2 className={cn("text-6xl md:text-[120px] text-[#f3eee4] leading-[0.9] tracking-tighter mb-10", utoBlack.className)}>
+          <h2
+            data-animate="cta-heading"
+            className={cn("text-6xl md:text-[120px] text-[#f3eee4] leading-[0.9] tracking-tighter mb-10", utoBlack.className)}
+          >
             Ready to transform?
           </h2>
 
           <div className="flex flex-col items-center gap-8">
-            <Link href="#lineup">
-              <Button className={cn("h-14 md:h-16 px-16 rounded-full bg-[#f20028] text-white text-xl md:text-2xl font-bold transition-all duration-300 shadow-xl hover-bounce", utoBold.className)}>
-                Shop Gutsy
-              </Button>
-            </Link>
+            <div data-animate="cta-button">
+              <Link href="#lineup">
+                <Button className={cn("h-14 md:h-16 px-16 rounded-full bg-[#f20028] text-white text-xl md:text-2xl font-bold transition-all duration-300 shadow-xl hover-bounce", utoBold.className)}>
+                  Shop Gutsy
+                </Button>
+              </Link>
+            </div>
 
-            <div className={cn("flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/30 font-black", utoBold.className)}>
+            <div
+              data-animate="cta-badges"
+              className={cn("flex flex-wrap justify-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.2em] text-white/30 font-black", utoBold.className)}
+            >
               <span>Enzymatically Pre-Digested</span>
               <span className="hidden md:inline">•</span>
               <span>Zero Bloat</span>
@@ -348,6 +415,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* GSAP scroll-triggered animations (no DOM output) */}
+      <HomeAnimations />
     </div>
   );
 }
