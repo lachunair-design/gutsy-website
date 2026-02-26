@@ -13,11 +13,23 @@ import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 import { WelcomePopup } from '@/components/welcome-popup';
 import { WaveDivider } from '@/components/wave-divider';
 import { HomeAnimations } from '@/components/animations/home-animations';
+import { ParticleField } from '@/components/effects/particle-field';
+import { RadialMarquee } from '@/components/effects/radial-marquee';
+import { Tooltip } from '@/components/ui/tooltip';
+import { ReviewSlider } from '@/components/reviews/review-slider';
 
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
+
+const TESTIMONIALS = [
+  { quote: "Finally a protein that doesn't make me feel like I swallowed a brick. Game changer.", name: "Sarah K.", location: "Dubai" },
+  { quote: "I've tried everything. This is the first protein powder that doesn't bloat me. Period.", name: "Ahmed R.", location: "Abu Dhabi" },
+  { quote: "The taste is incredible and my stomach actually thanks me. Will never go back.", name: "Maya L.", location: "Dubai" },
+  { quote: "Two weeks in and my digestion has completely changed. Light, clean energy all day.", name: "Tariq M.", location: "Dubai" },
+  { quote: "Skeptical at first, but the science makes sense. No gum ingredients, no bloat. Love it.", name: "Priya S.", location: "Abu Dhabi" },
+];
 
 export default async function HomePage() {
   let products: ShopifyProduct[] = [];
@@ -76,6 +88,14 @@ export default async function HomePage() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Floating particles — gold/cream dots that drift upward */}
+        <ParticleField count={55} />
+
+        {/* Spinning radial text badge — desktop only */}
+        <div className="absolute bottom-10 right-10 z-20 hidden md:block" aria-hidden="true">
+          <RadialMarquee radius={100} fontSize={10.5} speed={28} />
         </div>
 
         {/* Subtle scroll indicator */}
@@ -218,11 +238,36 @@ export default async function HomePage() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {[
-              { name: 'Pea & Rice Protein', benefit: 'Complete amino acid profile with 20g per serve', icon: 'pea' },
-              { name: 'Kiwifruit Extract', benefit: 'Natural enzymes that support digestion', icon: 'kiwi' },
-              { name: 'Coconut Milk', benefit: 'Creamy texture without dairy or gums', icon: 'coconut' },
-              { name: 'Adaptogens', benefit: 'Reishi or Maca for calm energy and balance', icon: 'adaptogen' },
-              { name: 'Monk Fruit', benefit: 'Natural sweetness with zero sugar impact', icon: 'monk' },
+              {
+                name: 'Pea & Rice Protein',
+                benefit: 'Complete amino acid profile with 20g per serve',
+                icon: 'pea',
+                science: 'All 9 essential amino acids. Pre-digested via protease enzymes so your gut absorbs peptides, not whole proteins.',
+              },
+              {
+                name: 'Kiwifruit Extract',
+                benefit: 'Natural enzymes that support digestion',
+                icon: 'kiwi',
+                science: 'Rich in actinidin — a natural cysteine protease that breaks down protein up to 2.5× faster than stomach enzymes alone.',
+              },
+              {
+                name: 'Coconut Milk',
+                benefit: 'Creamy texture without dairy or gums',
+                icon: 'coconut',
+                science: 'MCTs for clean energy. Zero carrageenan, zero guar gum — just the milk. That\'s why it doesn\'t bloat.',
+              },
+              {
+                name: 'Adaptogens',
+                benefit: 'Reishi or Maca for calm energy and balance',
+                icon: 'adaptogen',
+                science: 'Reishi mushroom (Vanilla Calm) supports immunity + focus. Maca root (Cacao Boost) supports hormonal balance + sustained energy.',
+              },
+              {
+                name: 'Monk Fruit',
+                benefit: 'Natural sweetness with zero sugar impact',
+                icon: 'monk',
+                science: 'Zero glycaemic index. 300× sweeter than cane sugar — so you need almost none. Ancient Chinese natural sweetener.',
+              },
             ].map((ingredient) => (
               <div
                 key={ingredient.name}
@@ -232,8 +277,17 @@ export default async function HomePage() {
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <IngredientIcon type={ingredient.icon} />
                 </div>
-                <h3 className={cn("text-lg uppercase tracking-wide mb-2", utoBold.className)}>
+                <h3 className={cn("text-lg uppercase tracking-wide mb-2 flex items-center justify-center gap-1.5", utoBold.className)}>
                   {ingredient.name}
+                  <Tooltip content={ingredient.science} position="top">
+                    <button
+                      type="button"
+                      aria-label={`More info about ${ingredient.name}`}
+                      className="inline-flex items-center justify-center w-4 h-4 rounded-full border border-black/20 text-black/40 text-[10px] leading-none hover:border-[#f20028] hover:text-[#f20028] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f20028]"
+                    >
+                      i
+                    </button>
+                  </Tooltip>
                 </h3>
                 <p className="text-sm text-black/60 leading-relaxed">
                   {ingredient.benefit}
@@ -274,34 +328,7 @@ export default async function HomePage() {
               Real people. Real guts.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { quote: "Finally a protein that doesn't make me feel like I swallowed a brick. Game changer.", name: "Sarah K.", location: "Dubai" },
-              { quote: "I've tried everything. This is the first protein powder that doesn't bloat me. Period.", name: "Ahmed R.", location: "Abu Dhabi" },
-              { quote: "The taste is incredible and my stomach actually thanks me. Will never go back.", name: "Maya L.", location: "Dubai" },
-            ].map((testimonial, i) => (
-              <div
-                key={i}
-                data-animate="testimonial-card"
-                className="bg-white/80 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, j) => (
-                    <svg key={j} className="w-5 h-5 text-[#ffb300]" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-lg text-black leading-relaxed mb-6">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <div>
-                  <p className={cn("text-sm uppercase tracking-wide", utoBold.className)}>{testimonial.name}</p>
-                  <p className="text-xs text-black/50">{testimonial.location}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReviewSlider testimonials={TESTIMONIALS} nameClassName={utoBold.className} />
         </div>
       </section>
 

@@ -8,6 +8,7 @@ import { CartDrawer } from '@/components/cart/cart-drawer';
 import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider';
 import { TransitionProvider } from '@/components/transitions/transition-context';
 import { PageTransitionOverlay } from '@/components/transitions/page-transition-overlay';
+import { WordsLoader } from '@/components/loaders/words-loader';
 
 // FIXED FONT PATHS: Using relative paths to ensure successful Vercel builds
 const utoBlack = localFont({ 
@@ -96,6 +97,8 @@ export default function RootLayout({
               >
                 Skip to content
               </a>
+              {/* Entry words animation — first visit only */}
+              <WordsLoader />
               <Header />
               {/* Main content wrapper */}
               <main id="main-content">{children}</main>
