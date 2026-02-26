@@ -10,7 +10,7 @@ export function PageTransitionOverlay() {
       ref={overlayRef}
       aria-hidden="true"
       role="presentation"
-      className="fixed inset-0 z-[500] bg-[#f20028] flex items-center justify-center pointer-events-none select-none"
+      className="hidden pointer-events-none select-none"
       style={{ visibility: 'hidden', transform: 'translateY(100%)' }}
     >
       {/* Branded GUTSY wordmark shown during the transition curtain */}

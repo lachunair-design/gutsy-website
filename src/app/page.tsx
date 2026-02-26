@@ -11,7 +11,13 @@ import { cn } from '@/lib/utils';
 import { FunFactCarousel } from './fun-fact-carousel';
 import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 import { WelcomePopup } from '@/components/welcome-popup';
-import { WaveDivider } from '@/components/wave-divider';
+
+/* FIX: We renamed the export inside the file to RippedDivider. 
+  By aliasing it back to WaveDivider here, your JSX below 
+  won't break and the build will pass.
+*/
+import { RippedDivider as WaveDivider } from '@/components/wave-divider';
+
 import { HomeAnimations } from '@/components/animations/home-animations';
 import { RadialMarquee } from '@/components/effects/radial-marquee';
 import { Tooltip } from '@/components/ui/tooltip';
