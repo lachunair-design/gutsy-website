@@ -102,12 +102,59 @@
 
 ---
 
-## 6. BORING ANSWERS (FAQ Page)
+### 6. BORING ANSWERS (FAQ Page)
 
-### Key Snippets
-* **On Subscriptions:** We don't hide the cancel button behind a maze of phone calls. We want you to stay because you like the protein, not because you are trapped.
-* **On Delivery:** We ship across the UAE. If you live in the middle of a desert dune reach out and we will see if we can find a camel that delivers.
-* **On Quality:** Every batch is tested. No exceptions. We genuinely like the people who ask for the reports.
+#### ...THE GOODS
+
+**Q: Is 20g of protein actually enough?**
+A: Yes. It is a complete protein with a PDCAAS score of 1.0. That means your body can actually use every gram. We do not do amino acid spiking or any of the other industry tricks used to inflate numbers on a label. If you are a 120kg bodybuilder you might need two scoops. For the rest of us, one is plenty.
+
+**Q: Does it taste like "plants"?**
+A: Most plant proteins taste like a dusty field. We used real Cacao and natural Vanilla and then we hydrolyzed the base. Pre-breaking the protein does not just help your gut. It also removes the beany aftertaste that usually requires a mountain of stevia to hide. It tastes clean.
+
+**Q: How do I store this?**
+A: In the pouch. Zip it shut. Keep it in a cool, dry place. Do not leave it in a hot car in Dubai unless you want to find out what happens to monk fruit at 50°C.
+
+#### ...THE LOGIC (SCIENCE)
+
+**Q: Why do I feel bloated with other brands?**
+A: Because their molecules are clunky. Standard protein lands in your stomach in long, tangled chains. Your gut has to wrestle with them to break them apart. While it is wrestling, the protein ferments. Fermentation causes gas. Gas causes the parade float feeling. We do the work first so your stomach does not have to.
+
+**Q: What is the deal with the Kiwifruit?**
+A: We use 600mg of Actazin. It is a clinical dose of New Zealand green kiwifruit. It contains an enzyme called actinidin. Think of it as a secondary digestive system that helps break down the protein and keeps your bathroom schedule predictable. It is a tool, not a garnish.
+
+**Q: Is it safe for people with IBS?**
+A: We built this specifically because we could not find anything that did not wreck our own digestion. We removed the gums, the dairy, and the soy. Those are the big three triggers. However, everyone is different. If you have a specific medical condition you should talk to a doctor who knows your history.
+
+#### ...LOGISTICS & DELIVERY
+
+**Q: How fast is "fast" in Dubai?**
+A: If you order before noon, we usually try to get it to you by the next day. If you are in Abu Dhabi or the other Emirates, give us 48 to 72 hours. We move as fast as the couriers and the traffic allow.
+
+**Q: Do you ship internationally?**
+A: Right now we are focusing on the GCC. If you are in London or New York and you really want a bag, reach out to us. We will see if we can make it happen without the shipping cost exceeding the price of the protein.
+
+**Q: Can I change my subscription flavor?**
+A: Yes. You can swap between Cacao Boost and Vanilla Calm every month. You can also pause or cancel without having to talk to a customer service rep who is trained to make you feel guilty.
+
+#### ...THE "NO-LIST" & SKEPTICS
+
+**Q: Why no Xanthan Gum?**
+A: Gums make shakes feel thick and creamy. They are also basically industrial glue for your intestines. They cause bloating in a lot of people. We decided a slightly lighter texture was a fair trade for not feeling like you swallowed a balloon.
+
+**Q: Is it really "Natural"?**
+A: That word is legally meaningless. We prefer the word Transparent. We show you our lab tests for heavy metals and we tell you exactly what every ingredient does. If you find something in the bag that should not be there, tell us. We will be just as surprised as you.
+
+**Q: What if I hate it?**
+A: If it does not leave you feeling light, or if the taste is not for you, tell us. We will give you your money back on your first bag. We are not interested in keeping your money if you are not into the product.
+
+#### ...THE "ACCIDENTAL" STUFF
+
+**Q: Why 47 formulas?**
+A: Because the first 46 were not good enough. Some tasted like chalk. Some still caused bloat. Some did not dissolve. We stayed in the lab until we found the one that actually worked. It was a long 8 months.
+
+**Q: Are you guys going to launch more products?**
+A: Maybe. But only if we find another category that is as clunky and broken as the protein industry. We are not interested in making me-too supplements just to fill a shelf.
 
 ---
 
