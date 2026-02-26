@@ -17,16 +17,16 @@ export default function ContactPage() {
   return (
     <div className="bg-linen min-h-screen text-black selection:bg-yellow/30 overflow-x-hidden font-uto">
       
-      {/* 1. HERO: THE OATLY APPROACH */}
+      {/* 1. HERO: PURE GUTSY VIBE */}
       <section className="bg-black text-linen pt-32 md:pt-40 pb-16 md:pb-20">
         <div className="mx-auto max-w-7xl px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="max-w-3xl">
               <h1 className="text-6xl md:text-9xl leading-[0.85] tracking-tighter mb-4 font-black uppercase">
-                Customer <br/> Service?
+                Human <br/> Support.
               </h1>
               <p className="text-3xl md:text-4xl text-yellow lowercase italic font-runwild">
-                this is the page for people who couldn&apos;t find oat-related answers. or protein ones.
+                for people who have questions about peptides or why their current protein feels like a brick.
               </p>
             </div>
             <div className="hidden lg:block text-[10px] uppercase tracking-[0.3em] opacity-40 mb-2 font-bold">
@@ -41,21 +41,21 @@ export default function ContactPage() {
         <div className="mx-auto max-w-7xl px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             
-            {/* Left: The Form for "Disappointed Consumers" or "Secret Admirers" */}
+            {/* Left: The Form */}
             <div className="lg:col-span-7 bg-white p-8 md:p-12 rounded-[40px] shadow-sm border border-black/5">
               {status === 'success' ? (
                 <div className="py-12 text-center space-y-6">
                   <CheckCircle2 className="w-16 h-16 text-red mx-auto" />
-                  <h2 className="text-4xl font-black uppercase tracking-tighter">You did it.</h2>
-                  <p className="text-xl font-runwild text-red">Now you just have to wait for us to type back.</p>
+                  <h2 className="text-4xl font-black uppercase tracking-tighter">Message received.</h2>
+                  <p className="text-xl font-runwild text-red">Now you just have to wait for us to finish our workout and type back.</p>
                   <Button onClick={() => setStatus('idle')} className="bg-black text-white rounded-full px-10 h-14 font-bold uppercase tracking-widest text-xs">Send another one</Button>
                 </div>
               ) : (
                 <div className="space-y-10">
                   <div className="space-y-2">
-                    <p className="text-xs uppercase tracking-widest font-black text-black/40">Choose your path</p>
+                    <p className="text-xs uppercase tracking-widest font-black text-black/40">Choose your frequency</p>
                     <p className="text-xl font-medium leading-tight">
-                      Are you a disappointed consumer, a straight-shooting journalist, or just someone who wants to talk about molecular peptides at 2am? 
+                      Are you a bloated consumer looking for relief, a journalist who wants the real science, or just a human who wants to talk about molecular chains? 
                     </p>
                   </div>
 
@@ -69,10 +69,10 @@ export default function ContactPage() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <textarea required rows={5} placeholder="Type your message here. Be as weirdly specific as you like." className="w-full p-8 rounded-[32px] bg-linen border border-black/5 focus:ring-2 focus:ring-red/20 outline-none resize-none font-bold" />
+                      <textarea required rows={5} placeholder="Type your message here. If you have a question about your gut, be as specific as you like." className="w-full p-8 rounded-[32px] bg-linen border border-black/5 focus:ring-2 focus:ring-red/20 outline-none resize-none font-bold" />
                     </div>
                     <button className="w-full h-20 bg-red text-linen text-xl rounded-full transition-all flex items-center justify-center gap-3 hover:bg-black font-black uppercase tracking-widest">
-                      {status === 'sending' ? 'Sending into the void...' : 'Click this to send'}
+                      {status === 'sending' ? 'Sending to the gut lab...' : 'Click to send'}
                       <ArrowRight className="w-5 h-5" />
                     </button>
                   </form>
@@ -80,7 +80,7 @@ export default function ContactPage() {
               )}
             </div>
 
-            {/* Right: The "Actually Fast" Options */}
+            {/* Right: The Fast Options */}
             <div className="lg:col-span-5 flex flex-col gap-4">
               <div className="bg-linen p-8 rounded-[40px] border border-black/5 space-y-4">
                 <p className="text-[10px] uppercase tracking-widest font-black text-black/40">If you hate forms</p>
@@ -109,7 +109,7 @@ export default function ContactPage() {
                   <a href="mailto:hello@eatgutsy.com" className="text-2xl md:text-3xl font-black block hover:text-red transition-colors break-all">hello@eatgutsy.com</a>
                 </div>
                 <div className="pt-6 border-t border-white/10">
-                  <p className="text-[10px] uppercase tracking-[0.3em] font-black text-white/40 mb-2">Want to work with us?</p>
+                  <p className="text-[10px] uppercase tracking-[0.3em] font-black text-white/40 mb-2">Retail & Partnership</p>
                   <a href="mailto:partners@eatgutsy.com" className="font-bold hover:text-yellow transition-colors">partners@eatgutsy.com</a>
                 </div>
               </div>
@@ -119,10 +119,10 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 3. FOOTER SNARK */}
+      {/* 3. FOOTER */}
       <section className="py-12 text-center">
          <p className="text-[10px] uppercase tracking-[0.5em] font-black text-black/20">
-            congratulations for reaching the bottom of a contact page. pour yourself a shake to celebrate.
+            congratulations for reaching the bottom of a contact page. go drink some protein to celebrate.
          </p>
       </section>
     </div>
