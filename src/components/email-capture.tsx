@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
+import localFont from 'next/font/local';
 
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
@@ -26,13 +26,13 @@ export function EmailCapture({ compact = false }: EmailCaptureProps) {
   if (compact) {
     return (
       <div className="w-full">
-        {/* Footer Variant: Clean, low-friction, premium */}
-        <p className={cn('text-[10px] uppercase tracking-[0.25em] mb-4 opacity-50 text-white', utoBold.className)}>
-          Join the gut club
+        {/* Footer Variant: Low friction. Zero fluff. */}
+        <p className={cn('text-[10px] uppercase tracking-[0.3em] mb-4 font-black text-white/40', utoBold.className)}>
+          10% off for the curious
         </p>
         {status === 'success' ? (
-          <p className={cn('text-2xl text-[#f20028] animate-in fade-in slide-in-from-bottom-2', runWild.className)}>
-            you&apos;re in!
+          <p className={cn('text-2xl text-yellow animate-in fade-in slide-in-from-bottom-2', runWild.className)}>
+            check your inbox.
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="flex gap-2">
@@ -42,17 +42,17 @@ export function EmailCapture({ compact = false }: EmailCaptureProps) {
               placeholder="email@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 h-12 px-5 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-white/20 text-sm focus:outline-none focus:border-[#f20028] transition-all"
+              className="flex-1 h-14 px-6 rounded-full bg-white/5 border border-white/10 text-white placeholder:text-white/20 text-sm focus:outline-none focus:border-red transition-all"
             />
             <button
               type="submit"
               disabled={status === 'submitting'}
               className={cn(
-                'h-12 px-6 rounded-full bg-white text-black text-xs uppercase tracking-widest hover:bg-[#f20028] hover:text-white transition-all duration-300 disabled:opacity-60',
+                'h-14 px-8 rounded-full bg-white text-black text-[10px] uppercase tracking-widest font-black hover:bg-red hover:text-white transition-all duration-300 disabled:opacity-60',
                 utoBold.className
               )}
             >
-              {status === 'submitting' ? '...' : 'Join'}
+              {status === 'submitting' ? '...' : 'Get it'}
             </button>
           </form>
         )}
@@ -61,62 +61,60 @@ export function EmailCapture({ compact = false }: EmailCaptureProps) {
   }
 
   return (
-    <div className="py-24 md:py-32 px-6 text-center bg-[#F9F8F6]">
-      {/* Editorial Heading: Super-scale Graza energy */}
+    <div className="py-24 md:py-40 px-6 text-center bg-linen border-t border-black/5">
+      {/* Editorial Heading: Massive scale anti-marketing */}
       <h2 className={cn(
-        'text-[64px] md:text-[120px] lg:text-[140px] text-black leading-[0.8] tracking-[-0.04em] mb-6', 
+        'text-[60px] md:text-[120px] lg:text-[160px] text-black leading-[0.8] tracking-tighter mb-6 uppercase font-black', 
         utoBlack.className
       )}>
-        Stay Gutsy
+        The List.
       </h2>
       
       <p className={cn(
-        'text-3xl md:text-5xl text-[#f20028] mb-12 max-w-2xl mx-auto -rotate-1', 
+        'text-3xl md:text-5xl text-red mb-12 max-w-3xl mx-auto -rotate-1 leading-tight', 
         runWild.className
       )}>
-        tips, drops & gut-friendly goodness.
+        we do not like spam either. join the list and we will send a code for your first bag.
       </p>
 
       {status === 'success' ? (
-        <div className="animate-in zoom-in-95 duration-500">
-          <p className={cn('text-4xl md:text-5xl text-black', runWild.className)}>
-            you&apos;re on the list!
+        <div className="animate-in zoom-in-95 duration-500 py-10">
+          <p className={cn('text-5xl md:text-7xl text-black font-black uppercase tracking-tighter', utoBlack.className)}>
+            Check your inbox.
           </p>
+          <p className={cn('text-2xl text-red mt-4', runWild.className)}>it is already on the way.</p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
-          <input
-            type="email"
-            required
-            placeholder="your@email.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={cn(
-              'flex-[2] h-16 md:h-20 px-8 rounded-full bg-white border border-black/5 text-black text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-all shadow-[0_4px_20px_rgba(0,0,0,0.03)]',
-              utoBold.className
-            )}
-          />
-          <button
-            type="submit"
-            disabled={status === 'submitting'}
-            className={cn(
-              'flex-1 h-16 md:h-20 px-10 rounded-full bg-black text-white text-lg tracking-tight hover:bg-[#f20028] active:scale-[0.98] transition-all duration-500 shadow-xl disabled:opacity-60',
-              utoBold.className
-            )}
-          >
-            {status === 'submitting' ? 'Saving...' : 'Sign me up'}
-          </button>
-        </form>
+        <div className="space-y-8">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-2xl mx-auto">
+            <input
+              type="email"
+              required
+              placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={cn(
+                'flex-[2] h-18 md:h-24 px-10 rounded-full bg-white border border-black/5 text-black text-xl placeholder:text-black/20 focus:outline-none focus:border-black transition-all shadow-sm',
+                utoBold.className
+              )}
+            />
+            <button
+              type="submit"
+              disabled={status === 'submitting'}
+              className={cn(
+                'flex-1 h-18 md:h-24 px-12 rounded-full bg-red text-white text-xs uppercase tracking-widest font-black hover:bg-black active:scale-[0.98] transition-all duration-500 shadow-xl disabled:opacity-60',
+                utoBold.className
+              )}
+            >
+              {status === 'submitting' ? '...' : 'Join the list'}
+            </button>
+          </form>
+
+          <p className={cn("text-[10px] uppercase tracking-[0.4em] text-black/30 font-black", utoBold.className)}>
+            NO HUSTLE CULTURE EMAILS. EVER.
+          </p>
+        </div>
       )}
-      
-      {/* Playful Fine Print */}
-      <div className="mt-12 flex items-center justify-center gap-4 opacity-20">
-        <div className="h-[1px] w-12 bg-black" />
-        <p className={cn("text-[9px] uppercase tracking-[0.4em] text-black font-black", utoBold.className)}>
-          NO SPAM. JUST GOOD GUTS.
-        </p>
-        <div className="h-[1px] w-12 bg-black" />
-      </div>
     </div>
   );
 }

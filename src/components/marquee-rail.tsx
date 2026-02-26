@@ -13,13 +13,14 @@ if (typeof window !== "undefined") {
 }
 
 const MARQUEE_ITEMS = [
-  'No Gluten',
-  'No Heavy Metals',
-  'Vegan',
-  'Allergen-Free',
-  'No Unnecessary Fillers',
-  'Dairy-Free',
-  'Third-Party Tested',
+  'Pre-broken down for humans',
+  '600mg Actazin clinical dose',
+  'Zero Gums',
+  'Hydrolyzed Peptides',
+  'Seven Ingredients only',
+  'No Wellness Theatre',
+  'Third-party tested results',
+  'Dairy-free logic',
 ];
 
 export function MarqueeRail() {
@@ -32,10 +33,9 @@ export function MarqueeRail() {
 
       const tl = horizontalLoop(scrollingText, {
         repeat: -1,
-        speed: 1.2,
+        speed: 1.5, // Slightly faster for a more energetic feel
       });
 
-      // Interactive Scroll Sensitivity
       Observer.create({
         target: window,
         type: "wheel,touch,scroll",
@@ -56,29 +56,29 @@ export function MarqueeRail() {
   return (
     <section 
       ref={railRef} 
-      className="py-12 bg-[#F9F8F6] border-y border-black/5 overflow-hidden group/rail cursor-default"
+      className="py-10 bg-black border-y border-white/10 overflow-hidden group/rail cursor-default"
     >
       <div className="rail flex whitespace-nowrap">
         {[...Array(4)].map((_, setIndex) => (
           <div key={setIndex} className="rail-item flex items-center">
             {MARQUEE_ITEMS.map((item, i) => (
-              <div key={i} className="flex items-center px-8 group/item">
+              <div key={i} className="flex items-center px-12 group/item">
                 
-                {/* Rhode-style Soft Bullet (Switches to red on hover) */}
-                <div className="mr-6 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-black/10 transition-all duration-500 group-hover/item:bg-[#f20028] group-hover/item:scale-150 group-hover/item:shadow-[0_0_15px_rgba(242,0,40,0.4)]" />
+                {/* Technical Diagnostic Indicator */}
+                <div className="mr-8 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-yellow transition-all duration-300 group-hover/item:bg-red group-hover/item:scale-125" />
                 </div>
                 
-                {/* Premium Claim Text */}
+                {/* Blunt Claim Text */}
                 <span className={cn(
-                  "text-black text-sm md:text-base uppercase tracking-[0.4em] font-black transition-colors duration-500 group-hover/item:text-[#f20028]",
+                  "text-white text-[10px] md:text-xs uppercase tracking-[0.5em] font-black transition-colors duration-300 group-hover/item:text-yellow",
                   utoBold.className
                 )}>
                   {item}
                 </span>
 
-                {/* Asymmetrical Divider from your second screenshot */}
-                <div className="ml-16 h-12 w-[1px] bg-black/5 rotate-[25deg] origin-center" />
+                {/* The "Enzyme Snip" Divider */}
+                <div className="ml-16 h-8 w-[1px] bg-white/20 -rotate-[30deg] origin-center" />
               </div>
             ))}
           </div>
@@ -88,7 +88,7 @@ export function MarqueeRail() {
   );
 }
 
-// GSAP loop function remains the same to ensure high performance
+// GSAP horizontalLoop remains the same for performance
 function horizontalLoop(items: HTMLElement[], config: any) {
   let tl = gsap.timeline({
     repeat: config.repeat,
