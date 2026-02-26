@@ -5,12 +5,11 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { Beaker, Wind, Zap, ShieldCheck } from 'lucide-react';
 
-// Using your established brand tokens from tailwind.config.ts
 export const revalidate = 60;
 
 export const metadata = {
   title: 'Shop | GUTSY',
-  description: 'Enzymatically pre-digested protein that actually feels light. Shop Vanilla Calm and Cacao Boost.',
+  description: 'Protein that actually feels light. No bloat, no fillers, just better engineering.',
 };
 
 export default async function ProductsPage() {
@@ -48,14 +47,14 @@ export default async function ProductsPage() {
           ) : (
             <div className="text-center py-20">
               <p className="text-5xl md:text-7xl lowercase text-black/10 mb-4 font-runwild">
-                products loading soon
+                getting the bags ready...
               </p>
             </div>
           )}
         </div>
       </section>
 
-      {/* 3. THE SCIENCE OF MANNERS: Conversational Science Section */}
+      {/* 3. THE DIAGNOSTIC: Why we built this */}
       <section className="py-24 md:py-32 bg-linen overflow-hidden">
         <div className="mx-auto max-w-7xl px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -63,68 +62,68 @@ export default async function ProductsPage() {
             <div className="space-y-8">
               <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
                 Because your gut <br />
-                <span className="text-red font-runwild lowercase text-5xl md:text-7xl">has enough to do.</span>
+                <span className="text-red font-runwild lowercase text-5xl md:text-7xl">shouldn&apos;t have to struggle.</span>
               </h2>
               
-              <div className="space-y-6 text-xl leading-relaxed opacity-90">
+              <div className="space-y-6 text-xl leading-relaxed opacity-90 font-medium">
                 <p>
-                  Most protein powders hit your stomach like a bag of wet cement. They rely on your gut to do 100% of the heavy lifting, which usually leads to that lovely &quot;parade float&quot; feeling Lakshmi knows all too well.
-                </p>
-                <p className="font-crunold italic text-2xl text-black">
-                  We decided to give the protein some manners.
+                  Most protein powders hit your stomach like a bag of wet cement. They rely on your gut to do 100% of the heavy lifting, which usually leads to that lovely &quot;parade float&quot; feeling Lakshmi lived with for two years.
                 </p>
                 <p>
-                  By using enzymes to enzymatically pre-digest our pea and rice protein, we break down the complex chains before you even take a sip. It’s not a &quot;hack&quot;—it&apos;s just science doing the work so you don&apos;t have to.
+                  We realized the problem was molecular. Standard protein is just too clunky. So, we use enzymes to <span className="text-red font-black uppercase italic">pre-break down</span> the protein into tiny pieces before you even take a sip. 
+                </p>
+                <p>
+                  It’s not magic—it&apos;s just better engineering so your body doesn&apos;t have to wrestle with your shake.
                 </p>
               </div>
 
               {/* ICON GRID */}
-              <div className="grid grid-cols-2 gap-8 pt-8">
+              <div className="grid grid-cols-2 gap-8 pt-8 border-t border-black/5">
                 <div className="flex items-start gap-4">
                   <Wind className="w-8 h-8 text-red shrink-0" />
                   <div>
                     <p className="font-black uppercase text-sm tracking-widest">Zero Bloat</p>
-                    <p className="text-sm opacity-60">Pre-digested for instant comfort.</p>
+                    <p className="text-sm opacity-60">Pre-broken down for instant comfort.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <Zap className="w-8 h-8 text-red shrink-0" />
                   <div>
-                    <p className="font-black uppercase text-sm tracking-widest">Instant Labs</p>
+                    <p className="font-black uppercase text-sm tracking-widest">Fast Track</p>
                     <p className="text-sm opacity-60">Absorbs faster than standard whey.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* ANIMATED IMAGE PLACEHOLDER */}
-            <div className="relative aspect-square bg-gutsy-gray-100 rounded-3xl overflow-hidden border-2 border-black/5 group">
-               <div className="absolute inset-0 flex items-center justify-center">
-                  <p className="font-runwild text-3xl text-black/20 group-hover:scale-110 transition-transform duration-500">
-                    Science Visual Placeholder
+            {/* DIAGNOSTIC VISUAL */}
+            <div className="relative aspect-square bg-white rounded-[40px] overflow-hidden border border-black/5 shadow-sm flex items-center justify-center p-12">
+               <div className="text-center space-y-4">
+                  <Beaker className="w-16 h-16 text-red mx-auto opacity-20" />
+                  <p className="font-runwild text-3xl text-black/30">
+                    [Visual: Enzymatic breakdown from clunky chains to light peptides]
                   </p>
                </div>
-               {/* When you have the asset:
-                  <Image src="/images/science-molecule.png" fill className="object-cover" alt="Molecular breakdown" /> 
-               */}
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. THE &quot;NO-LIST&quot;: Clinical Integrity Section */}
+      {/* 4. THE &quot;NO-LIST&quot;: What we took out */}
       <section className="py-24 bg-black text-linen">
         <div className="mx-auto max-w-7xl px-8 text-center">
-          <h2 className="font-runwild text-5xl md:text-7xl text-yellow mb-4">the strictly-no-thanks list</h2>
-          <p className="font-uto font-black uppercase text-3xl md:text-5xl tracking-tighter mb-16">
+          <p className="font-runwild text-5xl md:text-7xl text-yellow mb-4">the strictly-no-thanks list</p>
+          <h2 className="font-uto font-black uppercase text-3xl md:text-5xl tracking-tighter mb-16">
             If Lakshmi couldn&apos;t pronounce it, <br /> Sujith took it out.
-          </p>
+          </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
             {['No Gums', 'No Fillers', 'No Soy', 'No Dairy'].map((item) => (
-              <div key={item} className="group">
-                <ShieldCheck className="w-12 h-12 text-yellow mx-auto mb-4 group-hover:rotate-12 transition-transform" />
-                <p className="font-black uppercase tracking-widest">{item}</p>
+              <div key={item} className="group flex flex-col items-center">
+                <div className="w-20 h-20 rounded-full border border-white/10 flex items-center justify-center mb-6 group-hover:border-yellow group-hover:bg-yellow/5 transition-all">
+                  <ShieldCheck className="w-10 h-10 text-yellow group-hover:scale-110 transition-transform" />
+                </div>
+                <p className="font-black uppercase tracking-[0.2em] text-sm">{item}</p>
               </div>
             ))}
           </div>
@@ -132,11 +131,13 @@ export default async function ProductsPage() {
       </section>
 
       {/* 5. FINAL CTA */}
-      <section className="py-24 bg-linen">
-        <div className="mx-auto max-w-4xl px-8 text-center space-y-8">
-          <p className="font-runwild text-4xl text-red">Ready to feel light?</p>
-          <h3 className="text-5xl md:text-8xl font-black uppercase tracking-tighter">Start your recovery.</h3>
-          <button className="bg-red text-linen px-12 py-6 rounded-full font-black uppercase tracking-widest hover:bg-yellow hover:text-black transition-all transform hover:scale-105 active:scale-95">
+      <section className="py-32 bg-linen border-t border-black/5">
+        <div className="mx-auto max-w-4xl px-8 text-center space-y-10">
+          <div className="space-y-2">
+            <p className="font-runwild text-4xl text-red">Ready to actually feel light?</p>
+            <h3 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none">Grab your bag.</h3>
+          </div>
+          <button className="bg-red text-linen px-16 h-20 rounded-full font-black uppercase tracking-widest hover:bg-black transition-all hover:scale-105 active:scale-95 shadow-xl">
             Shop the lineup
           </button>
         </div>
