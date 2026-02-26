@@ -1,45 +1,29 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
-import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
+import { X, ArrowRight, Check } from 'lucide-react';
 
-// Brand Fonts
-const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
-const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
-const runWild = localFont({ src: '../../public/fonts/RunWild.ttf' });
-
-const QUIZ_OPTIONS = [
-  'Post-workout recovery',
-  'Daily nutrition',
-  'Energy boost',
-  'All of the above',
-];
+const SESSION_KEY = 'gutsy-popup-dismissed';
 
 export function WelcomePopup() {
   const [isOpen, setIsOpen] = useState(false);
-  const [step, setStep] = useState<'quiz' | 'email' | 'success'>('quiz');
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [step, setStep] = useState<'intro' | 'success'>('intro');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting'>('idle');
 
   useEffect(() => {
-    const dismissed = sessionStorage.getItem('gutsy-popup-dismissed');
+    if (typeof sessionStorage === 'undefined') return;
+    const dismissed = sessionStorage.getItem(SESSION_KEY);
     if (!dismissed) {
-      const timer = setTimeout(() => setIsOpen(true), 1500);
+      const timer = setTimeout(() => setIsOpen(true), 3000); 
       return () => clearTimeout(timer);
     }
   }, []);
 
   const handleClose = () => {
     setIsOpen(false);
-    sessionStorage.setItem('gutsy-popup-dismissed', 'true');
-  };
-
-  const handleQuizSelect = (option: string) => {
-    setSelectedOption(option);
-    setTimeout(() => setStep('email'), 400);
+    sessionStorage.setItem(SESSION_KEY, 'true');
   };
 
   const handleEmailSubmit = (e: React.FormEvent) => {
@@ -49,124 +33,65 @@ export function WelcomePopup() {
     setTimeout(() => {
       setStep('success');
       setStatus('idle');
-      setTimeout(handleClose, 2500);
-    }, 1000);
+      setTimeout(handleClose, 3000);
+    }, 1200);
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[300] flex flex-col items-center justify-center bg-[#F9F8F6] animate-in fade-in slide-in-from-bottom-full duration-700 ease-in-out">
-      
-      {/* Minimalist Close Icon - Moved to corner with higher prominence */}
-      <button
-        onClick={handleClose}
-        className="absolute top-8 right-8 z-10 w-12 h-12 flex items-center justify-center rounded-full bg-black/5 hover:bg-black/10 transition-all active:scale-90"
-        aria-label="Close"
-      >
-        <svg width="20" height="20" viewBox="0 0 14 14" fill="none" stroke="black" strokeWidth="1.5">
-          <path d="M1 1L13 13M1 13L13 1" />
-        </svg>
-      </button>
-
-      <div className="w-full max-w-2xl px-6 py-12 flex flex-col items-center justify-center min-h-screen">
+    <div className="fixed inset-0 z-[600] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-500">
+      <div className="relative w-full max-w-lg bg-linen rounded-[40px] p-8 md:p-14 shadow-2xl border border-black/5 text-center">
         
-        {step === 'quiz' && (
-          <div className="w-full space-y-12 animate-in fade-in zoom-in-95 duration-700">
-            <div className="text-center space-y-4">
-              <h2 className={cn(
-                "text-[50px] md:text-[80px] leading-[0.8] text-black tracking-tighter", 
-                utoBlack.className
-              )}>
-                Welcome to <br/>
-                <span className="inline-block mt-4 h-[0.9em]">
-                  <Image src="/images/gutsy-logomark.png" alt="GUTSY" width={180} height={80} className="h-full w-auto brightness-0" />
-                </span>
+        <button
+          onClick={handleClose}
+          className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full bg-black/5 hover:bg-black text-black hover:text-linen transition-all"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {step === 'intro' ? (
+          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="space-y-2">
+              <h2 className="text-black text-5xl md:text-6xl font-black uppercase tracking-tighter leading-none font-uto">
+                You&apos;re Gutsy, <br />
+                <span className="text-red font-runwild text-4xl md:text-5xl lowercase -rotate-2 inline-block mt-2">we love it.</span>
               </h2>
-              <p className={cn("text-3xl md:text-5xl text-[#f20028] -rotate-2", runWild.className)}>
-                Get 10% off your first order
+              <p className="text-black/60 text-lg md:text-xl font-medium pt-4">
+                Here&apos;s 10% off your first order.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-              <p className={cn("col-span-full text-[10px] uppercase tracking-[0.4em] text-black/40 text-center mb-4", utoBold.className)}>
-                Select your goal to unlock
-              </p>
-              {QUIZ_OPTIONS.map((option) => (
-                <button
-                  key={option}
-                  onClick={() => handleQuizSelect(option)}
-                  className={cn(
-                    "w-full py-6 px-8 rounded-full border border-black/10 bg-white text-black text-lg transition-all duration-300 hover:border-black hover:scale-[1.02] active:scale-[0.98] text-center shadow-sm hover:shadow-xl",
-                    utoBold.className
-                  )}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {step === 'email' && (
-          <div className="w-full max-w-md space-y-10 animate-in fade-in slide-in-from-right-12 duration-500">
-            <div className="text-center space-y-3">
-              <p className={cn("text-3xl text-[#f20028]", runWild.className)}>
-                {selectedOption}
-              </p>
-              <h2 className={cn("text-[50px] md:text-[60px] leading-none text-black tracking-tighter", utoBlack.className)}>
-                Great choice.
-              </h2>
-              <p className="text-black/50 text-lg leading-relaxed">
-                Unlock your discount by joining the club.
-              </p>
-            </div>
-
-            <form onSubmit={handleEmailSubmit} className="space-y-4">
+            <form onSubmit={handleEmailSubmit} className="relative max-w-sm mx-auto">
               <input
                 type="email"
                 required
-                autoFocus
-                placeholder="your@email.com"
+                placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className={cn(
-                  "w-full h-20 px-10 rounded-full bg-white border border-black/10 text-black text-xl focus:outline-none focus:border-black transition-all placeholder:text-black/15 shadow-sm",
-                  utoBold.className
-                )}
+                className="w-full h-16 px-8 rounded-full bg-white border border-black/10 text-black text-lg outline-none focus:ring-2 focus:ring-red/20 transition-all font-uto font-bold"
               />
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className={cn(
-                  "w-full h-20 rounded-full bg-[#f20028] text-white text-xl tracking-wide shadow-2xl hover:bg-black hover:shadow-black/20 transition-all duration-500 disabled:opacity-60",
-                  utoBold.className
-                )}
+                className="absolute right-2 top-2 bottom-2 aspect-square rounded-full bg-red text-linen flex items-center justify-center hover:bg-black transition-all disabled:opacity-50"
               >
-                {status === 'submitting' ? 'Saving...' : 'Reveal My Code'}
+                {status === 'submitting' ? (
+                  <div className="w-5 h-5 border-2 border-linen/30 border-t-linen rounded-full animate-spin" />
+                ) : (
+                  <ArrowRight className="w-5 h-5" />
+                )}
               </button>
             </form>
-            <p className="text-center text-[10px] text-black/30 tracking-[0.3em] font-black">
-              NO SPAM. JUST GOOD GUTS.
-            </p>
           </div>
-        )}
-
-        {step === 'success' && (
-          <div className="text-center space-y-8 animate-in zoom-in-95 duration-500">
-            <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-[#f20028] text-white shadow-2xl animate-bounce">
-               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
+        ) : (
+          <div className="py-8 space-y-6 animate-in zoom-in-95 duration-500">
+            <div className="w-20 h-20 bg-red rounded-full flex items-center justify-center mx-auto">
+              <Check className="w-10 h-10 text-linen stroke-[3]" />
             </div>
-            <div>
-              <h2 className={cn("text-[60px] md:text-[80px] leading-none text-black tracking-tighter mb-4", utoBlack.className)}>
-                You&apos;re in!
-              </h2>
-              <p className={cn("text-4xl text-[#f20028] -rotate-1", runWild.className)}>
-                Check your inbox, friend.
-              </p>
-            </div>
+            <h2 className="text-black text-5xl font-black uppercase tracking-tighter font-uto">
+              Check your inbox.
+            </h2>
           </div>
         )}
       </div>
