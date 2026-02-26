@@ -13,10 +13,10 @@ const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 
 const navigation = [
-  { name: 'Science', href: '/science' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
-  { name: 'FAQs', href: '/FAQ' },
+  { name: 'The Logic', href: '/science' },
+  { name: 'The Accidental Backstory', href: '/about' },
+  { name: 'Human Support', href: '/contact' },
+  { name: 'Boring Answers', href: '/FAQ' },
 ];
 
 export function Header() {
@@ -27,7 +27,6 @@ export function Header() {
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
-  // Header starts transparent on home, FAQ, Contact, and Science due to dark/full-bleed heroes
   const isHomePage = pathname === '/';
   const isDarkHeroPage = 
     pathname === '/FAQ' || 
@@ -58,7 +57,7 @@ export function Header() {
     )}>
       <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         
-        {/* LOGO - Premium Inversion */}
+        {/* LOGO */}
         <TransitionLink
           href="/"
           className={cn(
@@ -81,14 +80,14 @@ export function Header() {
         </TransitionLink>
 
         <div className="flex items-center gap-6 md:gap-10">
-          {/* NAVIGATION LINKS - Minimal Editorial Style */}
-          <div className="hidden lg:flex items-center gap-8">
+          {/* NAVIGATION LINKS */}
+          <div className="hidden xl:flex items-center gap-8">
             {navigation.map((item) => (
               <TransitionLink
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "text-sm uppercase tracking-[0.2em] transition-all hover:opacity-60",
+                  "text-[10px] uppercase tracking-[0.2em] transition-all hover:opacity-60",
                   isDarkHeroPage && !scrolled ? "text-white" : "text-black",
                   utoBold.className
                 )}
@@ -100,14 +99,14 @@ export function Header() {
             <TransitionLink
               href="/products"
               className={cn(
-                "h-12 px-8 flex items-center justify-center rounded-full transition-all hover:scale-105 active:scale-95",
+                "h-12 px-8 flex items-center justify-center rounded-full transition-all hover:scale-105 active:scale-95 text-[10px] uppercase tracking-widest",
                 isDarkHeroPage && !scrolled
                   ? "bg-white text-black hover:bg-[#ffb300]"
                   : "bg-[#f20028] text-white hover:bg-black",
                 utoBold.className
               )}
             >
-              Shop Now
+              The Goods
             </TransitionLink>
           </div>
 
@@ -138,7 +137,7 @@ export function Header() {
             <button
               type="button"
               className={cn(
-                "lg:hidden flex items-center min-h-[44px] min-w-[44px] justify-center transition-all",
+                "xl:hidden flex items-center min-h-[44px] min-w-[44px] justify-center transition-all",
                 isDarkHeroPage && !scrolled ? "text-white" : "text-black",
                 utoBold.className
               )}
@@ -151,25 +150,35 @@ export function Header() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <span className="text-xs uppercase tracking-[0.2em]">Menu</span>
+                <span className="text-[10px] uppercase tracking-[0.2em] font-black">Menu</span>
               )}
             </button>
           </div>
         </div>
 
-        {/* MOBILE MENU - Soft Overlay */}
+        {/* MOBILE MENU */}
         <div
           className={cn(
-            'fixed inset-0 top-[80px] z-[90] lg:hidden bg-white px-8 py-12 transition-all duration-500 ease-in-out',
+            'fixed inset-0 top-0 z-[110] xl:hidden bg-white px-8 py-24 transition-all duration-500 ease-in-out',
             mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
           )}
         >
-          <div className="flex flex-col space-y-8">
+          {/* Close button for mobile menu */}
+          <button 
+            onClick={() => setMobileMenuOpen(false)}
+            className="absolute top-8 right-8 text-black"
+          >
+             <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+             </svg>
+          </button>
+
+          <div className="flex flex-col space-y-6 pt-12">
             {navigation.map((item) => (
               <TransitionLink
                 key={item.name}
                 href={item.href}
-                className={cn("text-5xl uppercase tracking-tighter text-black", utoBlack.className)}
+                className={cn("text-4xl uppercase tracking-tighter text-black leading-none", utoBlack.className)}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
@@ -177,11 +186,17 @@ export function Header() {
             ))}
             <TransitionLink
               href="/products"
-              className={cn("text-6xl uppercase text-[#f20028] pt-8 border-t border-zinc-100", utoBlack.className)}
+              className={cn("text-6xl uppercase text-[#f20028] pt-8 border-t border-zinc-100 leading-none", utoBlack.className)}
               onClick={() => setMobileMenuOpen(false)}
             >
-              Shop All
+              The Goods
             </TransitionLink>
+          </div>
+
+          <div className="mt-auto pb-12">
+            <p className="text-[10px] uppercase tracking-[0.3em] font-black opacity-30">
+               Dispatching from Dubai. Reward yourself with a shake.
+            </p>
           </div>
         </div>
       </nav>
