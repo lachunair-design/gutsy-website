@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* UTO Font Family */
+/* UTO Font Family - Manual declarations preserved for specific weight control */
 @font-face {
   font-family: 'Uto';
   src: url('/fonts/Uto Black.otf') format('opentype');
@@ -43,7 +43,8 @@ html {
 }
 
 body {
-  @apply antialiased text-[#000000] bg-[#f3eee4];
+  /* Updated to use your Tailwind brand tokens */
+  @apply antialiased text-black bg-linen;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -56,13 +57,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f3eee4;
+  @apply bg-linen;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
-  border: 2px solid #f3eee4;
-  border-radius: 10px;
+  @apply border-2 border-linen rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -82,12 +82,14 @@ body {
 
 /* Focus styles */
 *:focus-visible {
-  @apply outline-none ring-2 ring-[#f20028] ring-offset-2;
+  /* Updated to use brand red */
+  @apply outline-none ring-2 ring-red ring-offset-2;
 }
 
 /* Selection */
 ::selection {
-  @apply bg-[#ffb300] text-black;
+  /* Updated to use brand yellow */
+  @apply bg-yellow text-black;
 }
 
 /* Vertical text helper */
@@ -96,7 +98,7 @@ body {
   text-orientation: mixed;
 }
 
-/* ── Animations ── */
+/* ── Animations ── (Unchanged, as requested) */
 
 /* Fade in */
 @keyframes fade-in {

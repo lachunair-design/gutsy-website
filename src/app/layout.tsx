@@ -14,7 +14,12 @@ import { ParticleField } from '@/components/effects/particle-field';
 // FIXED FONT PATHS: Using relative paths to ensure successful Vercel builds
 const utoBlack = localFont({ 
   src: '../../public/fonts/Uto Black.otf',
-  variable: '--font-uto-black'
+  variable: '--font-uto'
+});
+
+const crunold = localFont({
+  src: '../../public/fonts/Crunold.otf', // Ensure this file exists in your public/fonts/
+  variable: '--font-crunold'
 });
 
 const runWild = localFont({ 
@@ -52,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'GUTSY | Protein Powder That Won&apos;t Make You Bloated',
     description: 'Stop the bloat. Our enzymatically pre-digested protein is designed to feel light and absorb instantly.',
-    url: 'https://eatgutsy.com', // Updated to your likely domain
+    url: 'https://eatgutsy.com', 
     siteName: 'GUTSY',
     images: [
       {
@@ -87,14 +92,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${utoBlack.variable} ${runWild.variable}`}>
-      <body className="antialiased bg-[#f3eee4] selection:bg-[#ffb300] selection:text-black">
+    <html lang="en" className={`${utoBlack.variable} ${crunold.variable} ${runWild.variable}`}>
+      <body className="antialiased bg-linen selection:bg-yellow selection:text-black">
         <CartProvider>
           <TransitionProvider>
             <SmoothScrollProvider>
               <a
                 href="#main-content"
-                className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#f20028] focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:text-sm focus:font-bold focus:uppercase focus:outline-none"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-red focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:text-sm focus:font-bold focus:uppercase focus:outline-none"
               >
                 Skip to content
               </a>
