@@ -27,8 +27,8 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/products/${product.handle}`} className="group block font-uto">
-      {/* 1. BRANDED IMAGE CONTAINER */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-white rounded-[32px] mb-6 shadow-sm border border-black/5 transition-all duration-500 group-hover:shadow-xl">
+      {/* 1. DIAGNOSTIC IMAGE CONTAINER */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-white rounded-[32px] mb-6 shadow-sm border border-black/5 transition-all duration-500 group-hover:shadow-xl group-hover:border-black/10">
         {product.featuredImage ? (
           <Image
             src={product.featuredImage.url}
@@ -52,36 +52,42 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         )}
 
-        {/* 2. REFINED SOLD OUT BADGE */}
+        {/* 2. STATUS BADGE */}
         {!product.availableForSale && (
           <div className="absolute top-4 left-4 bg-linen/90 backdrop-blur-md text-black text-[10px] uppercase tracking-[0.2em] font-black px-4 py-2 rounded-full shadow-sm border border-black/5">
             Sold out
           </div>
         )}
 
-        {/* 3. BRANDED ACTION BUTTON */}
+        {/* 3. DIRECT ACTION BUTTON */}
         <div className="absolute inset-x-0 bottom-0 p-6 opacity-0 translate-y-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
           <Button
             onClick={handleAddToCart}
             disabled={!product.availableForSale || isLoading}
-            className="w-full h-14 rounded-full bg-black text-linen hover:bg-red border-none shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-300 font-bold uppercase tracking-widest text-xs"
+            className="w-full h-14 rounded-full bg-black text-linen hover:bg-red border-none shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-300 font-bold uppercase tracking-widest text-[10px]"
           >
             {product.availableForSale ? 'Add to cart' : 'Restocking'}
           </Button>
         </div>
       </div>
 
-      {/* 4. TYPOGRAPHY - NO JARGON */}
+      {/* 4. CLINICAL TYPOGRAPHY */}
       <div className="px-2 space-y-1">
-        <h3 className="text-xl font-black text-black uppercase tracking-tight group-hover:text-red transition-colors duration-300">
-          {product.title}
-        </h3>
-        <p className="text-sm uppercase tracking-[0.2em] text-black/40 font-black">
-          {formatPrice(price.amount, price.currencyCode)}
-        </p>
-        <div className="pt-2">
-            <span className="text-[10px] uppercase font-black text-red tracking-widest px-2 py-1 bg-red/5 rounded-md">
+        <div className="flex justify-between items-start">
+          <h3 className="text-xl font-black text-black uppercase tracking-tight leading-none group-hover:text-red transition-colors duration-300">
+            {product.title}
+          </h3>
+          <p className="text-sm font-black text-black/30">
+            {formatPrice(price.amount, price.currencyCode)}
+          </p>
+        </div>
+        
+        <div className="pt-2 flex flex-wrap gap-2">
+            <span className="text-[9px] uppercase font-black text-red tracking-[0.15em] px-2.5 py-1 border border-red/20 rounded-full">
                 Pre-broken down
+            </span>
+            <span className="text-[9px] uppercase font-black text-black/40 tracking-[0.15em] px-2.5 py-1 border border-black/10 rounded-full">
+                Hydrolyzed
             </span>
         </div>
       </div>

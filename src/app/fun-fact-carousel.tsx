@@ -7,9 +7,9 @@ import {
   ArrowRight, 
   Brain, 
   FlaskConical, 
-  Apple, 
+  Zap, 
   Droplets, 
-  Sword, 
+  EyeOff, 
   ShieldCheck, 
   Clock 
 } from 'lucide-react';
@@ -20,42 +20,42 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
   const funFacts = [
     { 
       icon: <Brain className="w-6 h-6" />, 
-      text: "Your gut has its own nervous system—the second brain. If it feels like a parade float, it's trying to tell you something. Listen to it." 
+      text: "Your gut has its own nervous system—the 'second brain.' If it feels like a parade float after a shake, it's trying to tell you something. Usually: 'I can't digest this.'" 
     },
     { 
-      icon: <FlaskConical className="w-6 h-6" />, 
-      text: "Most 'clean' proteins are still just big, heavy molecules. We pre-digest ours with enzymes so your stomach doesn't have to do the heavy lifting." 
+      icon: <Zap className="w-6 h-6" />, 
+      text: "Standard protein molecules are just too clunky. We use enzymes to pre-break ours down into tiny pieces so your stomach doesn't have to wrestle with them." 
     },
     { 
-      icon: <Apple className="w-6 h-6" />, 
-      text: "Kiwifruit contains actinidin, a natural enzyme that behaves with real decorum—it breaks down protein so it actually absorbs." 
+      icon: <EyeOff className="w-6 h-6" />, 
+      text: "Gums and fillers are only there to hide a bad texture. We skipped them. Your gut will notice the difference immediately, even if the marketing world doesn't." 
     },
     { 
       icon: <ShieldCheck className="w-6 h-6" />, 
-      text: "If you can't pronounce half the ingredients on the label, your gut probably can't process them either. We kept only what we actually need." 
+      text: "If you can't pronounce half the ingredients on the tub, your body probably doesn't know what to do with them either. We kept it to seven things. That's it." 
     },
     { 
       icon: <Clock className="w-6 h-6" />, 
-      text: "The average person tolerates digestive discomfort from protein for months before switching. Lakshmi did it for two years. You don't have to." 
+      text: "Most people just accept the bloat for months before they realize it's the powder. Lakshmi did it for two years. Honestly, you've suffered enough." 
     }
   ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentFactIndex((prev) => (prev + 1) % funFacts.length);
-    }, 5500);
+    }, 6500); // Slightly longer to let the casual tone sink in
     return () => clearInterval(timer);
   }, [funFacts.length]);
 
   return (
     <section className="py-24 md:py-32 bg-linen overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 font-uto">
         <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-24">
           
-          {/* TITLE AREA WITH BRANDED RED ACCENT */}
+          {/* TITLE AREA */}
           <div className="flex flex-col shrink-0 lg:sticky lg:top-32 group">
             <div className="relative inline-block">
-                <h2 className={cn("text-7xl md:text-[110px] text-black leading-[0.8] tracking-tighter uppercase", utoBlack.className)}>
+                <h2 className={cn("text-7xl md:text-[110px] text-black leading-[0.8] tracking-tighter uppercase font-black", utoBlack.className)}>
                 The <br/> Truths
                 </h2>
                 <svg 
@@ -77,7 +77,7 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
                 </svg>
             </div>
             
-            <p className={cn("text-3xl md:text-5xl text-red lowercase mt-8 -rotate-2", runWild.className)}>
+            <p className={cn("text-3xl md:text-5xl text-red lowercase mt-8 -rotate-2 font-runwild", runWild.className)}>
               just for us
             </p>
             
@@ -85,22 +85,22 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
               <div 
                 key={currentFactIndex}
                 className="absolute inset-0 bg-red origin-left animate-timer-progress"
-                style={{ animationDuration: '5500ms' }}
+                style={{ animationDuration: '6500ms' }}
               />
             </div>
           </div>
 
           {/* CONTENT CARD */}
-          <div className="flex-1 w-full bg-white border border-black/5 rounded-[50px] md:rounded-[80px] p-10 md:p-20 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.05)] relative group/card">
+          <div className="flex-1 w-full bg-white border border-black/5 rounded-[40px] md:rounded-[60px] p-10 md:p-16 shadow-sm relative group/card">
             
-            <div className="flex flex-col gap-10 min-h-[300px] justify-between">
+            <div className="flex flex-col gap-10 min-h-[280px] justify-between">
               <div className="space-y-8">
-                <div className="w-16 h-16 flex items-center justify-center bg-red rounded-3xl text-white rotate-3 shadow-lg shadow-red/20 group-hover/card:-rotate-3 transition-transform">
+                <div className="w-14 h-14 flex items-center justify-center bg-red rounded-2xl text-linen rotate-3 shadow-lg shadow-red/10 group-hover/card:-rotate-3 transition-transform duration-500">
                   {funFacts[currentFactIndex].icon}
                 </div>
                 
                 <p className={cn(
-                  "text-3xl md:text-[44px] text-black leading-[1.1] tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-500", 
+                  "text-2xl md:text-[38px] text-black leading-[1.15] tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-700 font-bold", 
                   utoBold.className
                 )}>
                    {funFacts[currentFactIndex].text}
@@ -111,20 +111,20 @@ export function FunFactCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any,
                 <div className="flex gap-3">
                   <button 
                     onClick={() => setCurrentFactIndex((prev) => (prev - 1 + funFacts.length) % funFacts.length)}
-                    className="w-12 h-12 flex items-center justify-center rounded-full border border-black/10 hover:bg-black hover:text-white transition-all active:scale-90"
+                    className="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 hover:bg-black hover:text-white transition-all active:scale-90"
                   >
-                    <ArrowLeft className="w-5 h-5" />
+                    <ArrowLeft className="w-4 h-4" />
                   </button>
                   <button 
                     onClick={() => setCurrentFactIndex((prev) => (prev + 1) % funFacts.length)}
-                    className="w-12 h-12 flex items-center justify-center rounded-full border border-black/10 hover:bg-black hover:text-white transition-all active:scale-90"
+                    className="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 hover:bg-black hover:text-white transition-all active:scale-90"
                   >
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
                 
-                <span className={cn("text-xs text-black/30 font-black tracking-[0.3em] uppercase", utoBold.className)}>
-                  {currentFactIndex + 1} / {funFacts.length}
+                <span className="text-[10px] text-black/30 font-black tracking-[0.3em] uppercase">
+                  Fact {currentFactIndex + 1} / {funFacts.length}
                 </span>
               </div>
             </div>

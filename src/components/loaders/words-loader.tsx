@@ -1,24 +1,21 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import { cn } from '@/lib/utils';
+import SplitType from 'split-type';
 
-const WORDS = ['FEEL', 'LIGHT', 'GUTSY'] as const;
-const SESSION_KEY = 'gutsy-words-loader-seen';
+const SESSION_KEY = 'gutsy-founder-letter-seen';
 
 export function WordsLoader() {
   const [show, setShow] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const subRef = useRef<HTMLSpanElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof sessionStorage === 'undefined' || sessionStorage.getItem(SESSION_KEY)) return;
-    
-    // Check for reduced motion for accessibility
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
     sessionStorage.setItem(SESSION_KEY, '1');
     setShow(true);
   }, []);
@@ -26,85 +23,82 @@ export function WordsLoader() {
   useEffect(() => {
     if (!show) return;
 
-    const tl = gsap.timeline({
-      defaults: { ease: "expo.out" }
-    });
+    const split = new SplitType('.letter-text', { types: 'lines' });
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-    // Cycle through words with a sharper, more editorial rhythm
-    WORDS.forEach((_, i) => {
-      const el = wordRefs.current[i];
-      if (!el) return;
-
-      tl.fromTo(
-        el,
-        { y: 100, opacity: 0, scale: 0.9, filter: 'blur(10px)' },
-        { y: 0, opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.6 },
-        i === 0 ? 0 : "-=0.4"
-      );
-
-      if (i === WORDS.length - 1) {
-        // Final word reveal
-        tl.fromTo(
-          subRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 0.4, y: 0, duration: 0.4 },
-          "-=0.2"
-        );
-
-        // A "snap" exit: Wipe the overlay with a slight delay
-        tl.to(overlayRef.current, {
-          yPercent: -100,
-          duration: 1,
-          ease: "expo.inOut",
-          delay: 0.5
-        });
-
-        tl.add(() => setShow(false));
-      } else {
-        // Quick exit for non-final words
-        tl.to(el, {
-          y: -100,
-          opacity: 0,
-          scale: 1.1,
-          filter: 'blur(10px)',
-          duration: 0.4,
-          delay: 0.2
-        });
-      }
-    });
+    tl.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.8 })
+      .fromTo(imageRef.current, 
+        { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.1 }, 
+        { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.2 }, 
+        "-=0.4")
+      .fromTo(split.lines, 
+        { y: 20, opacity: 0 }, 
+        { y: 0, opacity: 1, stagger: 0.1, duration: 0.8 }, 
+        "-=0.8");
 
     return () => { tl.kill(); };
   }, [show]);
+
+  const handleExit = () => {
+    gsap.to(overlayRef.current, {
+      yPercent: -100,
+      duration: 1,
+      ease: "expo.inOut",
+      onComplete: () => setShow(false)
+    });
+  };
 
   if (!show) return null;
 
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[500] bg-black flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[1000] bg-linen flex flex-col md:flex-row items-stretch overflow-hidden font-uto"
     >
-      <div className="relative flex items-center justify-center h-32 md:h-48">
-        {WORDS.map((word, i) => (
-          <span
-            key={word}
-            ref={(el) => { wordRefs.current[i] = el; }}
-            className={cn(
-              "absolute text-linen text-7xl md:text-[160px] font-black uppercase tracking-tighter leading-none opacity-0",
-              word === 'GUTSY' ? 'text-red' : 'text-linen'
-            )}
-            style={{ fontFamily: 'var(--font-uto-black)', whiteSpace: 'nowrap' }}
-          >
-            {word}
-          </span>
-        ))}
+      {/* PHOTO SIDE */}
+      <div ref={imageRef} className="relative w-full h-[40vh] md:h-full md:w-1/2 bg-black/5 overflow-hidden">
+        {/* [Placeholder for photo of Lakshmi and Sujith] */}
+        <div className="absolute inset-0 flex items-center justify-center italic text-black/20 text-sm p-12 text-center">
+          
+        </div>
+        <Image 
+          src="/images/founders-placeholder.jpg" 
+          alt="Lakshmi and Sujith" 
+          fill 
+          className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+        />
       </div>
 
-      <span
-        ref={subRef}
-        className="mt-8 text-linen/40 text-[10px] uppercase tracking-[0.5em] font-black opacity-0"
-      >
-        Built by us
-      </span>
+      {/* LETTER SIDE */}
+      <div className="flex-1 flex flex-col justify-center p-8 md:p-20 bg-linen">
+        <div ref={textRef} className="max-w-md space-y-6">
+          <p className="text-[10px] uppercase tracking-[0.4em] text-red font-black">A note from the founders</p>
+          
+          <div className="letter-text space-y-4 text-black/80 text-lg md:text-xl leading-relaxed">
+            <p>Hello,</p>
+            <p>
+              We’re glad you’re here. Most protein powders are molecularly clunky—they sit in your gut and ferment because they’re too big to be absorbed. We know this because we spent 8 months and 47 failed formulas trying to fix it for ourselves.
+            </p>
+            <p>
+              GUTSY is the result. We pre-break down the protein into peptides so your body doesn’t have to struggle. It’s not magic; it’s just better engineering.
+            </p>
+            <p>We hope it makes you feel as light as it does us.</p>
+          </div>
+
+          <div className="pt-4">
+            <p className="font-runwild text-4xl text-black leading-none">Lakshmi & Sujith</p>
+            <p className="text-[10px] uppercase tracking-widest text-black/40 mt-2">Founders, Gutsy</p>
+          </div>
+
+          <button 
+            onClick={handleExit}
+            className="group mt-12 flex items-center gap-4 text-black font-black uppercase tracking-[0.2em] text-xs hover:text-red transition-colors"
+          >
+            Enter Gutsy 
+            <span className="w-12 h-px bg-black group-hover:bg-red group-hover:w-20 transition-all duration-500" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
