@@ -1,5 +1,5 @@
 # GUTSY MASTER COPY DECK  
-_Pre‑launch website copy – v1_
+_Pre‑launch website copy – v2 (with label data)_
 
 ---
 
@@ -60,8 +60,8 @@ _Appears directly under the hero._
 
 - **Feels light, not like a brick.**  
 - **Fewer, better ingredients. No gums.**  
-- **Built to reduce the “parade float” feeling.**  
-- **Plant‑based, low sugar, monk fruit sweetened.**
+- **Built to support digestion and regularity.**  
+- **100% vegan, no added sugar, gluten free, dairy free.**
 
 ---
 
@@ -76,7 +76,7 @@ _A simple explainer for skimmers._
    We use enzymes to hydrolyze the protein into smaller peptides before it ever reaches your shaker.
 
 3. **Your gut does less work.**  
-   Smaller pieces plus Actazin® and no gums means a shake that dissolves, feels lighter, and is easier to live with.
+   Smaller pieces plus Actazin® kiwi extract and no gums means a shake that dissolves, feels lighter, and is easier to live with.
 
 ---
 
@@ -104,7 +104,7 @@ _Panels or sections as you scroll._
   Most protein shakes hit your stomach like wet concrete. Too many ingredients, clunky molecules, mystery gums, and a side of “why am I so bloated.”
 
 - **Our Fix:**  
-  GUTSY is gut‑friendly, pre‑broken down protein with Actazin® and no gums. Fewer, smarter ingredients built to feel light, dissolve easily, and leave your gut alone.
+  GUTSY is gut‑friendly, pre‑broken down plant protein with Actazin® kiwi extract and no gums. Fewer, smarter ingredients built to feel light, dissolve easily, and leave your gut alone.
 
 ---
 
@@ -114,7 +114,7 @@ _Panels or sections as you scroll._
 | :------ | :----------- |
 | It actually dissolves. We pre‑snapped the molecules into peptides. | The price. Clinical doses of Actazin® cost more than vanilla dust on Amazon. |
 | Feels lighter. No “brick in the stomach” feeling. | It will not make you a hero. You still have to do the squats. |
-| Seven ingredients you can explain out loud. | You might start expecting more from other things you put in your body. |
+| Only 7 ingredients per flavor, no added fillers. | You might start expecting more from other things you put in your body. |
 
 ---
 
@@ -154,10 +154,8 @@ _Short version on Home, full table lives on Product page._
 
 ### 2.2 Plain‑English Summary
 
-_A short intro before the 16 facts._
-
 Most protein is just nutrition in the wrong format. Big, tangled molecules, plus gums and fillers, force your gut to do overtime and often end in bloat.  
-We changed the format: hydrolyzed protein, clinical‑dose kiwifruit extract, and a short ingredient list so your stomach has less work and fewer random surprises.
+We changed the format: hydrolyzed plant protein, clinical‑dose Actazin® kiwi extract, and a short ingredient list so your stomach has less work and fewer random surprises.
 
 ---
 
@@ -173,7 +171,7 @@ We changed the format: hydrolyzed protein, clinical‑dose kiwifruit extract, an
    No dairy, no soy, no xanthan, no guar, no carrageenan. Fewer usual suspects your gut has to fight with.
 
 4. **Tested and tidy:**  
-   Every batch is tested for heavy metals and made under GMP‑grade quality frameworks, so what is on the label is what ends up in your glass.
+   Every batch is third‑party tested for purity, heavy metals, and potency in a GMP‑certified facility, so what is on the label is what ends up in your glass.
 
 ---
 
@@ -198,28 +196,28 @@ We changed the format: hydrolyzed protein, clinical‑dose kiwifruit extract, an
    Kiwifruit contains actinidin. This enzyme continues breaking down the protein in your stomach.
 
 7. **The Sweetener:**  
-   Monk fruit. Zero sugar. Zero glycemic impact. Used for a thousand years. It works.
+   Monk fruit. No added sugar. Essentially no glycemic impact. Used for a thousand years. It works.
 
 8. **Heavy Metals:**  
-   We test every batch. Most brands hope you will not ask. We just show you the numbers.
+   We third‑party test every batch for purity, heavy metals, and potency. Most brands hope you will not ask. We just show you the numbers.
 
 9. **GMP Certified:**  
-   We use pharmaceutical‑grade quality frameworks. Not the “it is probably fine” method.
+   Made in Latvia in a GMP‑certified facility. Not the “it is probably fine” method.
 
 10. **The Failures:**  
     8 months. 47 formulas. This product is built on 47 failures and one stubborn question.
 
 11. **The Ratio:**  
-    23g of protein for 133 calories. Most people do a double‑take when they see that ratio.
+    23g of protein in around 133–137 calories, depending on flavor. Most people do a double‑take when they see that ratio.
 
 12. **The Vegan Truth:**  
-    No dairy tricks. No soy. Removing these variables removes the triggers for bloat.
+    No dairy tricks. No soy. 100% vegan. Removing these variables removes the triggers for bloat.
 
 13. **Blood Sugar:**  
-    Under 1g of total sugar. No spike. No crash. Just protein doing its job.
+    Under 1g of total sugar per serving. No spike. No crash. Just protein doing its job.
 
 14. **The No‑List:**  
-    No xanthan, no guar, no carrageenan. Better raw ingredients create fewer problems to fix.
+    No xanthan, no guar, no carrageenan. No added fillers. Better raw ingredients create fewer problems to fix.
 
 15. **The Usage:**  
     It is not just a shake. Use it in oats or yogurt. It does not go gluey when heated.
@@ -261,7 +259,7 @@ If you have a medical condition (especially IBS or anything gut‑related), talk
 
 - **Title:** Vanilla Calm  
 - **Price:** 185 AED  
-- **Badges:** Pre‑broken down · Hydrolyzed · Seven Ingredients  
+- **Badges:** Gut‑friendly · No added sugar · Gluten free · Dairy free · 100% vegan  
 
 #### Short description (card)
 
@@ -271,17 +269,17 @@ Vanilla Calm is a gut‑friendly protein shake that tastes like an actual treat,
 #### Long description (PDP body)
 
 Vanilla Calm is built for the “I love protein but hate feeling like I swallowed a brick” crowd.  
-We took pea and rice protein, pre‑broke the chains down into tiny peptides, and paired them with Actazin® and reishi so your gut does not have to wrestle with them for hours.  
-No gums, no dairy, no soy, no weird aftertaste.  
-Just a clean vanilla shake that dissolves easily, sits light, and lets you get on with your day instead of negotiating with your digestion.
+We took pea and rice protein, pre‑broke the chains down into tiny peptides, and paired them with 600mg of Actazin® kiwi extract and reishi mushroom so your gut does not have to wrestle with them for hours.  
+No gums, no dairy, no soy, no added sugar, no weird aftertaste.  
+Just a clean natural vanilla shake that dissolves easily, sits light at about 133 calories per serving, and lets you get on with your day instead of negotiating with your digestion.
 
 #### Bullet points (Benefits section)
 
-- **23g of complete protein** that rivals whey, minus the dairy drama.  
+- **23g of complete plant protein** that rivals whey, minus the dairy drama.  
 - **Hydrolyzed (pre‑broken down) base** designed to reduce the “parade float” feeling.  
-- **600mg Actazin®** to support regularity and help keep things moving.  
-- **Monk fruit** for sweetness without the sugar spike or stevia aftertaste.  
-- **No xanthan, no guar, no carrageenan,** no “mystery texture enhancers.”
+- **600mg Actazin® kiwi extract** to support digestion and regularity.  
+- **Reishi extract** for a calm‑leaning, take‑the‑edge‑off kind of support.  
+- **Monk fruit sweetened, no added sugar,** no xanthan, no guar, no carrageenan, no added fillers.
 
 #### Tastes like
 
@@ -297,7 +295,7 @@ Morning shakes, post‑workout, or the 4pm “I want something sweet but my gut 
 
 - **Title:** Cacao Boost  
 - **Price:** 185 AED  
-- **Badges:** Pre‑broken down · Hydrolyzed · Seven Ingredients  
+- **Badges:** Gut‑friendly · No added sugar · Gluten free · Dairy free · 100% vegan  
 
 #### Short description (card)
 
@@ -307,17 +305,17 @@ Cacao Boost is a chocolatey, gut‑friendly protein shake that skips the jitters
 #### Long description (PDP body)
 
 Cacao Boost exists because “protein plus energy” usually means “plus chaos in your stomach.”  
-We start with the same hydrolyzed pea and rice blend, then add real cacao, Actazin®, and maca.  
-The result: a shake that actually mixes, feels light, and gives you a gentle lift without the crash or the brick‑in‑the‑stomach feeling.  
-No gums, no dairy, no soy, and definitely no syrupy fake chocolate aftertaste.
+We start with the same hydrolyzed pea and rice blend, then add real cacao, 600mg of Actazin® kiwi extract, and maca root.  
+The result: a shake that actually mixes, feels light at around 137 calories per serving, and gives you a gentle lift without the crash or the brick‑in‑the‑stomach feeling.  
+No gums, no dairy, no soy, no added sugar, and definitely no syrupy fake chocolate aftertaste.
 
 #### Bullet points (Benefits section)
 
-- **23g of complete protein** with under 1g of sugar.  
-- **Hydrolyzed** for easier digestion and less post‑shake bloat.  
-- **Actazin®** to help your gut keep up with your training and your calendar.  
-- **Maca** for a subtle “keep‑going” boost, not wired energy.  
-- **Real cacao** for actual chocolate flavor, not “brown sweetness.”
+- **23g of complete plant protein** with around 137 calories per serving.  
+- **Hydrolyzed base** for easier digestion and less post‑shake bloat.  
+- **600mg Actazin® kiwi extract** to support digestion and regularity.  
+- **Maca root extract** for a subtle “keep‑going” boost, not wired energy.  
+- **Monk fruit sweetened, no added sugar,** real cacao for actual chocolate flavor, not “brown sweetness.”
 
 #### Tastes like
 
@@ -334,19 +332,21 @@ Post‑workout, late‑morning focus, or that “I could use a chocolate break b
 **How to use it without overthinking it**
 
 - **The simple version:**  
-  1. Add 1 scoop to 250–300ml of cold water or your favorite milk.  
+  1. Add 1 scoop (about 34g) to 300ml of cold water or your favorite non‑dairy milk.  
   2. Shake hard for 10–15 seconds.  
   3. Drink. Feel smug.  
 
 - **If you want to get fancy:**  
   - Blend into oats or yogurt (it does not go gluey when heated).  
   - Add a banana, ice, and a spoon of nut butter for a full meal.  
-  - Stir into coffee for a DIY iced latte situation.  
+  - Stir into coffee for a DIY iced mocha or vanilla latte situation.  
 
 - **When you will notice it:**  
   - **Day 1:** Less “cement mixer” feeling after your shake.  
   - **Week 1–2:** A more predictable bathroom schedule for most people.  
   - **Ongoing:** Protein you do not have to mentally negotiate with.
+
+_(Directions stay consistent with the label, just with extra personality.)_
 
 ---
 
@@ -354,7 +354,7 @@ Post‑workout, late‑morning focus, or that “I could use a chocolate break b
 
 We could have made this cheaper.  
 We could have padded the tub with gums, cut the Actazin® down to “marketing sprinkle” levels, and hoped you did not notice the bloat.  
-Instead, we pay for clinical‑dose kiwifruit extract, hydrolysis, and proper testing on every batch.  
+Instead, we pay for clinical‑dose kiwifruit extract, hydrolysis, and third‑party testing on every batch in a GMP‑certified facility.  
 The result is a bag that costs a bit more, but also does not sit in the back of your cupboard next to all the other “miracle” powders you regret buying.
 
 ---
@@ -375,9 +375,9 @@ The result is a bag that costs a bit more, but also does not sit in the back of 
 | :------------ | :------------ | :--------------------------- |
 | Protein format | Hydrolyzed, pre‑broken down peptides | Standard long‑chain protein |
 | Gut feel | Built to feel lighter and reduce bloat | Often “brick in the stomach” |
-| Gums & fillers | No xanthan, no guar, no carrageenan | Often multiple gums and stabilizers |
-| Sweetener | Monk fruit, low sugar | Sugar, sugar alcohols, or heavy stevia |
-| Ingredient count | ~7 per flavor | Often 15–25+ |
+| Gums & fillers | No xanthan, no guar, no carrageenan, no added fillers | Often multiple gums and stabilizers |
+| Sweetener | Monk fruit, no added sugar | Sugar, sugar alcohols, or heavy stevia |
+| Ingredient count | Only 7 ingredients per flavor | Often 15–25+ ingredients |
 
 ---
 
@@ -385,21 +385,36 @@ The result is a bag that costs a bit more, but also does not sit in the back of 
 
 _Can live as an accordion or info box on each PDP._
 
-- **Serving size:** 1 scoop  
-- **Servings per bag:** To be confirmed (label value)  
-- **Protein per serving:** 23g  
+**Vanilla Calm**
+
+- **Serving size:** 1 scoop (33.8g)  
+- **Servings per bag:** 15  
+- **Protein per serving:** 23g*  
 - **Calories per serving:** 133  
 - **Total sugar:** Under 1g  
 - **Sweetener:** Monk fruit  
-- **Allergen info:** No dairy, no soy, no gluten‑containing ingredients added.  
-- **Made in:** [Manufacturing country], dispatched from Dubai.  
+- **Allergen info:** Gluten‑free, dairy‑free, soy‑free.  
+- **Made in:** Latvia (GMP‑certified facility), dispatched from Dubai.  
+
+**Cacao Boost**
+
+- **Serving size:** 1 scoop (34.5g)  
+- **Servings per bag:** 15  
+- **Protein per serving:** 23g*  
+- **Calories per serving:** 137  
+- **Total sugar:** Under 1g  
+- **Sweetener:** Monk fruit  
+- **Allergen info:** Gluten‑free, dairy‑free, soy‑free.  
+- **Made in:** Latvia (GMP‑certified facility), dispatched from Dubai.  
+
+\*Protein on dry matter, as per label.
 
 ---
 
 ### 3.9 Trust, Testing & Safety (on PDP)
 
-- Tested for heavy metals on every batch.  
-- Made under GMP‑grade quality frameworks.  
+- Every batch is third‑party tested for purity, heavy metals, and potency.  
+- Made in Latvia in a GMP‑certified facility.  
 - No amino acid spiking, no label tricks, no “proprietary blends” hiding dosages.  
 
 (If you want the actual lab numbers, we will happily show you.)
@@ -412,7 +427,8 @@ _Can live as an accordion or info box on each PDP._
 - **Copy:**  
   If your first bag feels heavy or the taste is not for you, tell us and we will refund it.  
   Orders in Dubai usually arrive next day if you order before noon.  
-  Other Emirates: 48–72 hours, depending on couriers and traffic.
+  Other Emirates: 48–72 hours, depending on couriers and traffic.  
+  GCC‑only for now. If you are further away and really want a bag, reach out and we will see what is possible.
 
 ---
 
@@ -488,7 +504,7 @@ If we would not drink it every day ourselves, it does not go in the bag.
 
 Pick your channel of choice:
 
-- **Email:** [support@gutsy…]  
+- **Email:** support@alwaysgutsy.com  
 - **WhatsApp:** [link]  
 - **Form:** Leave your question and we will get back to you as soon as we step away from the shaker.
 
@@ -505,7 +521,7 @@ A: Yes. It is a complete protein with a PDCAAS score of 1.0. That means your bod
 A: Most plant proteins taste like a dusty field. We used real cacao and natural vanilla and then we hydrolyzed the base. Pre‑breaking the protein does not just help your gut. It also removes the beany aftertaste that usually requires a mountain of stevia to hide. It tastes clean.
 
 **Q: How do I store this?**  
-A: In the pouch. Zip it shut. Keep it in a cool, dry place. Do not leave it in a hot car in Dubai unless you want to find out what happens to monk fruit at 50°C.
+A: In the pouch. Zip it shut. Keep it in a cool, dry place below 25°C, away from direct sunlight. Best used within 2 months after opening. Do not leave it in a hot car in Dubai unless you want to find out what happens to monk fruit at 50°C.
 
 ---
 
@@ -574,11 +590,11 @@ If we could not explain their purpose to a fifth‑grader, they did not make the
 
 - **Pea Protein:** The main protein source. High in amino acids, gentle on most stomachs.  
 - **Brown Rice Protein:** Completes the amino acid profile so it rivals whey.  
-- **Actazin®:** New Zealand kiwifruit extract. It is the designated chaperone for the protein.  
+- **Actazin® Kiwi Powder:** New Zealand green kiwifruit extract. It is the designated chaperone for the protein.  
 - **Monk Fruit:** A fruit that provides sweetness without the blood sugar drama.  
 - **Coconut Milk Powder:** For creaminess without dairy or gums.  
-- **Real Cacao / Natural Vanilla:** Actual flavor, not “vanilla‑ish” or “chocolate‑ish” aroma.  
-- **Maca / Reishi (depending on flavor):** Adaptogenic support for days when life is doing the most.
+- **Natural Vanilla / Real Cacao:** Actual flavor, not “vanilla‑ish” or “chocolate‑ish” aroma.  
+- **Maca or Reishi (depending on flavor):** Adaptogenic support for days when life is doing the most.
 
 (That is it. No glitter, no fairy dust, no unpronounceable stabilizers.)
 
@@ -607,5 +623,153 @@ We use plants because peas and rice have a smaller carbon footprint than cows.
 It is not an activist statement. It is just math.  
 
 We also use pouches because shipping giant plastic tubs of air across the ocean seems like a poor use of everyone’s time.
+
+---
+
+---
+
+## 10. THE QUIZ (FIND YOUR MATCH)
+
+### 10.1 Quiz Hero (Dedicated Quiz Page)
+
+- **Headline:** Let’s find your gut’s favorite shake.  
+- **Sub‑headline:** 6 quick questions about your routine, your gut, and your flavor mood. No wrong answers, just better protein logic.  
+- **Primary CTA:** Start the 45‑second quiz  
+
+---
+
+### 10.2 Quiz Teaser Block (on Home)
+
+**Section title:** Not sure where to start?  
+
+**Body copy:**  
+Answer a few questions about your day, your digestion, and how sweet you like things.  
+We will match you with the GUTSY bag that makes the most sense for your gut (and your calendar).  
+
+**Button:** Take the quiz  
+
+**Micro‑copy under button:**  
+Takes less than a minute. No star signs. No personality type.
+
+---
+
+### 10.3 Quiz Questions (Copy Only)
+
+_You can adjust options in the UI, but this is the voice and intent._
+
+**Q1 – Time of day**
+
+- **Question:** When do you usually reach for protein?  
+- **Options:**  
+  - Morning, instead of or with breakfast  
+  - Right after I train  
+  - Afternoon pick‑me‑up  
+  - It changes every day  
+
+---
+
+**Q2 – Main goal**
+
+- **Question:** What is your main reason for adding protein right now?  
+- **Options:**  
+  - Hit my daily protein target without wrecking my stomach  
+  - Support training and recovery  
+  - Keep energy and focus steady through the day  
+  - Stay full between meals  
+
+---
+
+**Q3 – Gut sensitivity**
+
+- **Question:** How sensitive is your gut, honestly?  
+- **Options:**  
+  - Very. Most proteins make me feel bloated or gassy  
+  - A bit. Some brands are fine, some are not  
+  - Not really. I just prefer something lighter  
+  - I am still figuring it out  
+
+---
+
+**Q4 – Flavor mood**
+
+- **Question:** What sounds more like you most days?  
+- **Options:**  
+  - Calm vanilla, clean and not too sweet  
+  - Chocolate, but not a sugar bomb  
+  - I like both. Surprise me  
+  - I care more about how it feels than the flavor  
+
+---
+
+**Q5 – Caffeine & energy**
+
+- **Question:** How do you feel about extra “go” in your day?  
+- **Options:**  
+  - I want gentle, steady energy  
+  - I am already caffeinated enough, keep it calm  
+  - Depends on the day  
+  - I just do not want jitters or a crash  
+
+---
+
+**Q6 – Texture preference**
+
+- **Question:** How thick do you like your shakes?  
+- **Options:**  
+  - Light and easy to sip  
+  - Somewhere in the middle  
+  - Thick, almost dessert‑like  
+  - I am not sure yet  
+
+---
+
+### 10.4 Result Intros (Logic‑agnostic Copy)
+
+_Use these as top lines on the result screen, then map logic in your quiz tool._
+
+**Result title – Vanilla Calm match**  
+“Your gut is asking for calm.”  
+
+**Result body – Vanilla Calm**  
+You are a Vanilla Calm person. You want protein that pulls its weight without pulling focus.  
+Natural vanilla, hydrolyzed plant protein, Actazin® kiwi extract, and reishi for a shake that feels light and stays in the background while you get on with your day.
+
+---
+
+**Result title – Cacao Boost match**  
+“Your gut wants chocolate that plays nice.”  
+
+**Result body – Cacao Boost**  
+You are a Cacao Boost person. You want your protein to carry you through work, training, or long afternoons without sending your digestion into chaos.  
+Real cacao, hydrolyzed plant protein, Actazin® kiwi extract, and maca for a gentle lift and a chocolate hit that does not feel like a sugar event.
+
+---
+
+**Result title – Both could work**  
+“Your gut is flexible. Your taste buds can decide.”  
+
+**Result body – Both**  
+Based on your answers, both Vanilla Calm and Cacao Boost fit your routine.  
+Pick the flavor you are more likely to actually drink every day. Your gut will notice the hydrolyzed protein and Actazin® either way.
+
+---
+
+### 10.5 Email Gate Copy (If You Capture Email Before Results)
+
+**Headline:** Where should we send your match (and your code)?  
+
+**Body copy:**  
+Drop your email and we will send your quiz results, your recommended flavor, and a 10% code for your first bag.  
+No hustle‑culture newsletters. We only write when we have something useful to say.  
+
+**Field label:** Email  
+**Button:** Send me my match  
+
+---
+
+### 10.6 Quiz Exit Micro‑Copy
+
+**Link text under results:**  
+“Skip the quiz next time and go straight to The Goods.”  
 
 ---

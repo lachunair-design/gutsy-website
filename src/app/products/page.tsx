@@ -63,15 +63,15 @@ export default async function ProductsPage() {
               <ul className="space-y-6 text-lg font-medium">
                 <li className="flex gap-4">
                   <span className="text-red font-black">01</span>
-                  <p>It actually dissolves. We pre-break the molecules into tiny peptides so they don&apos;t clump into sad, dry flour-balls.</p>
+                  <p>It actually dissolves. We pre-snapped the molecules into peptides so they do not clump into sad, dry flour-balls.</p>
                 </li>
                 <li className="flex gap-4">
                   <span className="text-red font-black">02</span>
-                  <p>Zero Bloat. No parade float feelings. No bricks in your stomach. Just protein that goes to work and leaves you alone.</p>
+                  <p>Zero bloat. No &ldquo;brick in the stomach&rdquo; feeling. Just protein that goes to work and leaves you alone.</p>
                 </li>
                 <li className="flex gap-4">
                   <span className="text-red font-black">03</span>
-                  <p>Seven Ingredients. If we couldn&apos;t pronounce it we didn&apos;t put it in. That is a promise.</p>
+                  <p>Seven ingredients. If we could not explain its purpose to a fifth-grader, it did not make the cut.</p>
                 </li>
               </ul>
             </div>
@@ -80,15 +80,15 @@ export default async function ProductsPage() {
               <ul className="space-y-6 text-lg font-medium opacity-60">
                 <li className="flex gap-4">
                   <span className="font-black italic">01</span>
-                  <p>The price. We use clinical doses of Actazin instead of cheap mystery fillers. It costs more than that giant tub of dust on Amazon.</p>
+                  <p>The price. Clinical doses of Actazin&reg; cost more than vanilla dust on Amazon.</p>
                 </li>
                 <li className="flex gap-4">
                   <span className="font-black italic">02</span>
-                  <p>It isn&apos;t magic. It is just enzymatic hydrolysis. We didn&apos;t discover a new planet. We just applied logic to a shaker bottle.</p>
+                  <p>It will not make you a hero. You still have to do the squats.</p>
                 </li>
                 <li className="flex gap-4">
                   <span className="font-black italic">03</span>
-                  <p>You still have to train. This won&apos;t do the squats for you. We checked and there are still no shortcuts for that.</p>
+                  <p>It is not magic. It is just enzymatic hydrolysis. We applied logic to a shaker bottle.</p>
                 </li>
               </ul>
             </div>
@@ -153,11 +153,11 @@ export default async function ProductsPage() {
       <section className="py-32 bg-black text-linen">
         <div className="mx-auto max-w-4xl px-8 text-center space-y-10">
           <div className="space-y-2">
-            <p className="font-runwild text-4xl text-yellow">Ready to feel human again?</p>
-            <h3 className="text-6xl md:text-[100px] font-black uppercase tracking-tighter leading-[0.85]">Grab a bag. Or two.</h3>
+            <p className="font-runwild text-4xl text-yellow">tired of feeling heavy?</p>
+            <h3 className="text-6xl md:text-[100px] font-black uppercase tracking-tighter leading-[0.85]">Grab a bag.</h3>
           </div>
           <button className="bg-red text-linen px-16 h-20 rounded-full font-black uppercase tracking-widest hover:bg-yellow hover:text-black transition-all hover:scale-105 active:scale-95 shadow-xl">
-            Go to checkout
+            Grab a bag (if you want)
           </button>
         </div>
       </section>

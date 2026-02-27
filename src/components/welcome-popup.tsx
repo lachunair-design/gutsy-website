@@ -88,7 +88,7 @@ export function WelcomePopup() {
             </form>
 
             <p className="text-[10px] uppercase tracking-widest font-black text-black/30">
-              No hustle culture emails. We promise.
+              No hustle-culture emails. We only send stuff when we actually have something to say.
             </p>
           </div>
         ) : (

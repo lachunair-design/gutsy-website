@@ -70,19 +70,19 @@ export default function AboutPage() {
 
           <div className="max-w-2xl mx-auto space-y-10 text-linen text-xl md:text-2xl leading-relaxed font-medium">
             <p className="italic text-black uppercase font-black text-2xl">
-              We didn&apos;t set out to disrupt an industry. We just wanted a shake that didn&apos;t feel like a physical burden.
+              GUTSY did not start in a boardroom. It started because we were tired of feeling like we had swallowed a brick every morning.
             </p>
             <p>
-              Two years ago we realized that most plant protein is basically just a heavy brick in a fancy tub. We were hitting our goals but our stomachs were staging a full-scale protest. We spent way too much money on powders that tasted like dust and felt like wet cement for hours afterward. 
+              Two years ago we realized that most plant protein is just a heavy burden in a fancy tub. We were hitting our goals but our stomachs were staging a full-scale protest.
             </p>
             <p>
-              Instead of just complaining about the Amazon boxes we decided to actually look at the molecules. We spent a year down a rabbit hole of lab reports to figure out why standard protein is so clunky. Turns out the industry just assumes your gut is an industrial furnace.
+              We spent a year down a rabbit hole of lab reports to figure out why standard protein is so clunky. We found out the industry just assumes your gut is an industrial furnace.
             </p>
             <p className="font-runwild italic text-black text-4xl md:text-5xl leading-none">
-              &quot;We have zero background in marketing. We just had a stubborn question: why is this so hard to digest?&quot;
+              &quot;We just had a stubborn question: why is this so hard to digest?&quot;
             </p>
             <p>
-              We found out that standard protein chains are too long. They sit in your gut and ferment because your body is struggling to break them down. Our solution was to use enzymes to pre-break those chains into tiny pieces before they ever hit the bag. No mystery fillers and no clunky molecules. Just a shake that actually leaves you alone.
+              We used enzymes to pre-break those chains into tiny pieces before they ever hit the bag. No mystery fillers and no clunky molecules. Just a shake that actually leaves you alone.
             </p>
           </div>
         </div>

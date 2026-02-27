@@ -10,13 +10,13 @@ interface Testimonial {
   rating?: number;
 }
 
-interface ReviewSliderProps {
+interface ProofSliderProps {
   testimonials: Testimonial[];
   /** Font class to apply on author name */
   nameClassName?: string;
 }
 
-export function ReviewSlider({ testimonials, nameClassName }: ReviewSliderProps) {
+export function ProofSlider({ testimonials, nameClassName }: ProofSliderProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
