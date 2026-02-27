@@ -13,14 +13,11 @@ if (typeof window !== "undefined") {
 }
 
 const MARQUEE_ITEMS = [
-  'Pre-broken down for humans',
-  '600mg Actazin clinical dose',
-  'Zero Gums',
-  'Hydrolyzed Peptides',
-  'Seven Ingredients only',
-  'No Wellness Theatre',
-  'Third-party tested results',
-  'Dairy-free logic',
+  '🧬 Pre‑broken down protein',
+  '🥝 Actazin® from New Zealand kiwifruit',
+  '🚫 No gums, no dairy, no soy',
+  '📦 Dispatching from Dubai',
+  '💸 Refund on your first bag if it feels heavy',
 ];
 
 export function MarqueeRail() {
@@ -33,7 +30,7 @@ export function MarqueeRail() {
 
       const tl = horizontalLoop(scrollingText, {
         repeat: -1,
-        speed: 1.5, // Slightly faster for a more energetic feel
+        speed: 0.8,
       });
 
       Observer.create({

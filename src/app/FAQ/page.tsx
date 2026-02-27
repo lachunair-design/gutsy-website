@@ -209,9 +209,11 @@ export default function FAQPage() {
             Still <br /> Need Help?
           </h2>
           <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-            <button className={cn("h-20 px-16 bg-[#f20028] text-[#f3eee4] rounded-full text-xl font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all", utoBold.className)}>
-              Talk to a human
-            </button>
+            <Link href="/contact">
+              <button className={cn("h-20 px-16 bg-[#f20028] text-[#f3eee4] rounded-full text-xl font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all", utoBold.className)}>
+                Talk to a human
+              </button>
+            </Link>
             <p className="text-left max-w-xs text-sm opacity-40 italic">
               Did not find your answer? Send us a message via WhatsApp or email and a human will get back to you between shakes.
             </p>

@@ -115,6 +115,41 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* WHO WE ARE (REALLY) */}
+      <section className="py-24 md:py-32 bg-white">
+        <div className="max-w-4xl mx-auto px-6 space-y-6 text-black text-xl md:text-2xl leading-relaxed font-medium">
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4">
+            Who We Are (Really)
+          </h2>
+          <p>
+            We are not legacy supplement people.
+          </p>
+          <p>
+            We are people whose guts tapped out on standard protein, so we went looking for an option that did not wreck us.
+          </p>
+          <p>
+            When we could not find it, we spent months annoying manufacturers, reading lab reports, and testing version after version until our stomachs finally stopped complaining.
+          </p>
+        </div>
+      </section>
+
+      {/* WHAT WE REFUSE TO DO */}
+      <section className="py-24 md:py-32 bg-linen">
+        <div className="max-w-4xl mx-auto px-6 space-y-6 text-black text-xl md:text-2xl leading-relaxed font-medium">
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-4">
+            What We Refuse To Do
+          </h2>
+          <ul className="list-disc pl-6 space-y-3">
+            <li>Add ingredients just to make a label look impressive.</li>
+            <li>Use gums to fake “creaminess” and then pretend we do not know why people feel bloated.</li>
+            <li>Hide behind buzzwords like “natural” and never show the numbers.</li>
+          </ul>
+          <p>
+            If we would not drink it every day ourselves, it does not go in the bag.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

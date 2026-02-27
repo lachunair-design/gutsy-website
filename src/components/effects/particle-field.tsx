@@ -46,7 +46,7 @@ interface ParticleFieldProps {
 
 export function ParticleField({ count, fixed = false }: ParticleFieldProps) {
   // Default count differs between modes
-  const particleCount = count ?? (fixed ? 75 : 55);
+  const particleCount = count ?? (fixed ? 60 : 45);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -60,8 +60,8 @@ export function ParticleField({ count, fixed = false }: ParticleFieldProps) {
     let animId: number;
     const COLORS = fixed ? COLORS_GLOBAL : COLORS_LOCAL;
     // Global overlay: cap alpha lower so particles are subtle over page content
-    const alphaMax = fixed ? 0.22 : 0.6;
-    const alphaMin = fixed ? 0.03 : 0.06;
+    const alphaMax = fixed ? 0.28 : 0.7;
+    const alphaMin = fixed ? 0.05 : 0.08;
 
     function setSize() {
       if (!canvas) return;
@@ -86,10 +86,10 @@ export function ParticleField({ count, fixed = false }: ParticleFieldProps) {
     const particles: Particle[] = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vy: -(Math.random() * 0.4 + 0.15),
+      vy: -(Math.random() * 0.35 + 0.12),
       vx: (Math.random() - 0.5) * 0.2,
       phase: Math.random() * Math.PI * 2,
-      radius: Math.random() * 2.5 + 0.8,
+      radius: Math.random() * 3.2 + 1,
       alpha: Math.random() * (alphaMax - alphaMin) + alphaMin,
       alphaDir: Math.random() > 0.5 ? 1 : -1,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],

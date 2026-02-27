@@ -23,6 +23,7 @@ const footerLinks = {
     { name: 'The Accidental Backstory (About)', href: '/about' },
     { name: 'Boring Answers (FAQ)', href: '/FAQ' },
     { name: 'Human Support (Contact)', href: '/contact' },
+    { name: 'Ways to Use It (Recipes)', href: '/recipes' },
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy' },
@@ -113,10 +114,13 @@ export function Footer() {
               {/* Socials per brand-copy.md Section 0 */}
               <div className="flex items-center gap-3 pt-2">
                 <a href="https://instagram.com/gutsy.world" className="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white hover:bg-red transition-colors duration-300">
-                   Instagram
+                  Instagram
                 </a>
                 <a href="https://wa.me/971500000000" className="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white hover:bg-red transition-colors duration-300">
-                   WhatsApp
+                  WhatsApp
+                </a>
+                <a href="https://www.linkedin.com/company/alwaysgutsy" className="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white hover:bg-red transition-colors duration-300">
+                  LinkedIn
                 </a>
               </div>
             </div>

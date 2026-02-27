@@ -18,26 +18,34 @@ export function TheLogicCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any
   const [currentFactIndex, setCurrentFactIndex] = useState(0);
 
   const funFacts = [
-    { 
-      icon: <Brain className="w-6 h-6" />, 
-      text: "Your gut has its own nervous system—the 'second brain.' If it feels like a parade float after a shake, it's trying to tell you something. Usually: 'I can't digest this.'" 
+    {
+      icon: <Brain className="w-6 h-6" />,
+      text: 'Big protein molecules = more work for your gut.',
     },
-    { 
-      icon: <Zap className="w-6 h-6" />, 
-      text: "Standard protein molecules are just too clunky. We use enzymes to pre-break ours down into tiny pieces so your stomach doesn't have to wrestle with them." 
+    {
+      icon: <Zap className="w-6 h-6" />,
+      text: 'Hydrolyzed protein means smaller pieces, less wrestling.',
     },
-    { 
-      icon: <EyeOff className="w-6 h-6" />, 
-      text: "Gums and fillers are only there to hide a bad texture. We skipped them. Your gut will notice the difference immediately, even if the marketing world doesn't." 
+    {
+      icon: <Droplets className="w-6 h-6" />,
+      text: 'Actazin® from kiwi helps your gut keep things moving.',
     },
-    { 
-      icon: <ShieldCheck className="w-6 h-6" />, 
-      text: "If you can't pronounce half the ingredients on the tub, your body probably doesn't know what to do with them either. We kept it to seven things. That's it." 
+    {
+      icon: <EyeOff className="w-6 h-6" />,
+      text: 'No gums, no dairy, no soy – fewer usual suspects.',
     },
-    { 
-      icon: <Clock className="w-6 h-6" />, 
-      text: "Most people just accept the bloat for months before they realize it's the powder. Lakshmi did it for two years. Honestly, you've suffered enough." 
-    }
+    {
+      icon: <Clock className="w-6 h-6" />,
+      text: '23g of protein, about 133–137 calories per serving.',
+    },
+    {
+      icon: <ShieldCheck className="w-6 h-6" />,
+      text: 'Under 1g of sugar. Monk fruit sweetened.',
+    },
+    {
+      icon: <FlaskConical className="w-6 h-6" />,
+      text: 'Made in a GMP‑certified facility in Latvia and third‑party tested.',
+    },
   ];
 
   useEffect(() => {

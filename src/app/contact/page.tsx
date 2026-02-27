@@ -92,6 +92,7 @@ export default function ContactPage() {
                 <p className={cn("text-[10px] uppercase tracking-widest text-black/40", utoBold.className)}>If you hate forms</p>
                 <h3 className={cn("text-3xl uppercase tracking-tighter", utoBlack.className)}>Skip the queue.</h3>
                 <div className="grid grid-cols-1 gap-3 pt-4">
+                  {/* TODO: Replace [whatsapp-link] with live WhatsApp URL when available */}
                   <a href="[whatsapp-link]" className="flex items-center justify-between bg-white p-6 rounded-2xl border border-black/5 hover:border-[#f20028] transition-all group">
                     <div className="flex items-center gap-4">
                       <MessageCircle className="w-6 h-6 text-black" />

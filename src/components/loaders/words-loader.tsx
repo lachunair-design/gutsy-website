@@ -72,15 +72,13 @@ export function WordsLoader() {
       <div className="flex-1 flex flex-col justify-center p-8 md:p-24 bg-black">
         <div ref={textRef} className="max-w-xl space-y-10">
           <div className="space-y-4">
-            <p className="text-[10px] uppercase tracking-[0.5em] text-red font-black">GUTSY // The Accidental Backstory</p>
-            <h2 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.85]">
-              No boardroom <br /> required.
-            </h2>
+            <p className="text-[10px] uppercase tracking-[0.5em] text-red font-black">GUTSY // Entry Sequence</p>
           </div>
 
-          <div className="letter-text space-y-6 text-white/60 text-lg md:text-xl leading-relaxed font-medium">
-            <p>Built because we were tired of feeling heavy.</p>
-            <p>We pre-break our protein down so your gut does not have to.</p>
+          <div className="letter-text space-y-6 text-white text-4xl md:text-6xl font-black tracking-tighter leading-tight">
+            <p>Most protein is clunky.</p>
+            <p>Your gut deserves better engineering.</p>
+            <p>Welcome to GUTSY.</p>
           </div>
 
           <button

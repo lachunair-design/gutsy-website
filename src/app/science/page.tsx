@@ -12,6 +12,9 @@ import {
   Wind,
   Check
 } from 'lucide-react';
+import { ParticleField } from '@/components/effects/particle-field';
+import { KiwiIllustration } from '@/components/illustrations/kiwi-illustration';
+import { MoleculeIllustration } from '@/components/illustrations/molecule-illustration';
 
 const facts = [
   { 
@@ -172,13 +175,14 @@ export default function SciencePage() {
 
       {/* HERO SECTION */}
       <section className="bg-black text-linen pt-32 pb-20 md:pt-48 md:pb-32 relative overflow-hidden">
+        <ParticleField count={30} />
         <div className="mx-auto max-w-7xl px-8 relative z-10">
           <div className="max-w-4xl">
             <h1 className="text-6xl md:text-[140px] leading-[0.85] tracking-tighter mb-6 font-black uppercase">
               Actual <br className="md:hidden" /> Chemistry.
             </h1>
             <p className="text-2xl md:text-5xl text-yellow lowercase italic opacity-90 leading-tight font-runwild">
-              16 facts about gutsy. minus the wellness theatre.
+              16 facts about GUTSY. minus the wellness theatre.
             </p>
           </div>
         </div>
@@ -221,7 +225,7 @@ export default function SciencePage() {
                 </div>
 
                 {/* Content Column */}
-                <div className="lg:col-span-10 max-w-3xl space-y-8">
+                <div className="lg:col-span-10 max-w-3xl space-y-8 relative">
                   <h2 className="text-3xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
                     {fact.title}
                   </h2>
@@ -233,7 +237,7 @@ export default function SciencePage() {
                   {fact.hasVisual === 'hydrolysis' && (
                     <div className="p-12 bg-white rounded-[40px] border border-black/5 flex flex-col items-center justify-center text-center space-y-6">
                       <Beaker className="w-16 h-16 text-red opacity-20" />
-                      
+                      <MoleculeIllustration variant="broken" className="w-32 h-12" />
                       <p className="text-xs uppercase tracking-[0.2em] font-black text-black/30">Molecular Breakdown Diagram</p>
                     </div>
                   )}
@@ -329,6 +333,11 @@ export default function SciencePage() {
         <p className="text-[10px] uppercase tracking-[0.5em] font-black text-white/20 px-8">
           You read 16 facts about protein chemistry. That is impressive. Reward yourself with a shake.
         </p>
+        <div className="mt-4 text-xs text-white/40 px-8 max-w-xl mx-auto">
+          <p>
+            This page is here to explain how GUTSY is built, not to replace a doctor. If you have a medical condition (especially IBS or anything gut‑related), talk to someone who knows your history before making big changes.
+          </p>
+        </div>
       </div>
     </div>
   );

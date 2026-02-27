@@ -4,6 +4,8 @@ import { ShopifyProduct } from '@/lib/shopify/types';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { Beaker, Wind, Zap, ShieldCheck } from 'lucide-react';
+import { ParticleField } from '@/components/effects/particle-field';
+import { KiwiIllustration } from '@/components/illustrations/kiwi-illustration';
 
 export const revalidate = 60;
 
@@ -26,7 +28,8 @@ export default async function ProductsPage() {
     <div className="bg-linen min-h-screen text-black selection:bg-yellow/30 font-uto">
       
       {/* 1. THE HONEST HERO */}
-      <section className="bg-black text-linen pt-32 md:pt-40 pb-12 md:pb-16">
+      <section className="bg-black text-linen pt-32 md:pt-40 pb-12 md:pb-16 relative overflow-hidden">
+        <ParticleField count={24} />
         <div className="mx-auto max-w-7xl px-8">
           <div className="max-w-3xl">
             <h1 className="text-6xl md:text-[120px] leading-[0.85] tracking-tighter mb-4 font-black uppercase">
@@ -40,7 +43,10 @@ export default async function ProductsPage() {
       </section>
 
       {/* 2. PRODUCT DETAIL */}
-      <section className="py-16 md:py-24 border-b border-black/5">
+      <section className="py-16 md:py-24 border-b border-black/5 relative">
+        <div className="pointer-events-none absolute -top-10 -right-6 md:-right-16 opacity-40">
+          <KiwiIllustration size="sm" />
+        </div>
         <div className="mx-auto max-w-7xl px-8">
           {mainProduct ? (
             <ProductDetail product={mainProduct} inline />
@@ -145,6 +151,116 @@ export default async function ProductsPage() {
                   </p>
                </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3.4 Usage / How-to Section */}
+      <section className="py-24 bg-white border-t border-black/5">
+        <div className="mx-auto max-w-4xl px-8 space-y-8">
+          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">
+            How to use it without overthinking it
+          </h2>
+          <div className="space-y-6 text-lg leading-relaxed font-medium">
+            <div>
+              <p className="font-black">The simple version:</p>
+              <ol className="list-decimal pl-5 space-y-1 mt-2">
+                <li>Add 1 scoop (about 34g) to 300ml of cold water or your favorite non‑dairy milk.</li>
+                <li>Shake hard for 10–15 seconds.</li>
+                <li>Drink. Feel smug.</li>
+              </ol>
+            </div>
+            <div>
+              <p className="font-black">If you want to get fancy:</p>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li>Blend into oats or yogurt (it does not go gluey when heated).</li>
+                <li>Add a banana, ice, and a spoon of nut butter for a full meal.</li>
+                <li>Stir into coffee for a DIY iced mocha or vanilla latte situation.</li>
+              </ul>
+            </div>
+            <div>
+              <p className="font-black">When you will notice it:</p>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li><span className="font-bold">Day 1:</span> Less “cement mixer” feeling after your shake.</li>
+                <li><span className="font-bold">Week 1–2:</span> A more predictable bathroom schedule for most people.</li>
+                <li><span className="font-bold">Ongoing:</span> Protein you do not have to mentally negotiate with.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3.5 Why This Bag Is Not 79 AED */}
+      <section className="py-24 bg-linen border-t border-black/5">
+        <div className="mx-auto max-w-3xl px-8 space-y-6">
+          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">
+            Why this bag is not 79 AED
+          </h2>
+          <div className="space-y-4 text-lg leading-relaxed font-medium">
+            <p>We could have made this cheaper.</p>
+            <p>We could have padded the tub with gums, cut the Actazin® down to “marketing sprinkle” levels, and hoped you did not notice the bloat.</p>
+            <p>Instead, we pay for clinical‑dose kiwifruit extract, hydrolysis, and third‑party testing on every batch in a GMP‑certified facility.</p>
+            <p>The result is a bag that costs a bit more, but also does not sit in the back of your cupboard next to all the other “miracle” powders you regret buying.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 3.6 Is GUTSY For You? */}
+      <section className="py-24 bg-white border-t border-black/5">
+        <div className="mx-auto max-w-4xl px-8 space-y-8">
+          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">
+            Is GUTSY for you?
+          </h2>
+          <div className="overflow-x-auto rounded-[30px] border border-black/10 bg-linen">
+            <table className="w-full text-left text-sm md:text-base">
+              <thead>
+                <tr className="border-b border-black/10">
+                  <th className="p-4 md:p-6 font-black">For you if:</th>
+                  <th className="p-4 md:p-6 font-black">Probably not for you if:</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-black/10">
+                <tr>
+                  <td className="p-4 md:p-6">
+                    You like hitting your protein goals but hate feeling like a parade float after.
+                  </td>
+                  <td className="p-4 md:p-6">
+                    You want the absolute cheapest protein per gram.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="p-4 md:p-6">
+                    You have tried “clean” proteins that somehow still wrecked your digestion.
+                  </td>
+                  <td className="p-4 md:p-6">
+                    You are chasing instant miracles instead of consistent habits.
+                  </td>
+                </tr>
+                <tr>
+                  <td className="p-4 md:p-6">
+                    You read ingredient lists and want fewer, better ones.
+                  </td>
+                  <td className="p-4 md:p-6">
+                    You love that thick, gluey, dessert‑shake texture that comes from multiple gums.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* 3.10 Guarantee & Shipping Strip */}
+      <section className="py-20 bg-black text-linen">
+        <div className="mx-auto max-w-4xl px-8 space-y-4">
+          <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tighter">
+            No‑stress shake. No‑stress policy.
+          </h2>
+          <div className="space-y-3 text-sm md:text-base leading-relaxed font-medium">
+            <p>If your first bag feels heavy or the taste is not for you, tell us and we will refund it.</p>
+            <p>Orders in Dubai usually arrive next day if you order before noon.</p>
+            <p>Other Emirates: 48–72 hours, depending on couriers and traffic.</p>
+            <p>GCC‑only for now. If you are further away and really want a bag, reach out and we will see what is possible.</p>
           </div>
         </div>
       </section>

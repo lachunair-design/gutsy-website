@@ -134,8 +134,8 @@ export function CartDrawer() {
                   </svg>
                 </div>
                 <div className="space-y-1">
-                  <p className={cn("text-4xl lowercase text-black/20", runWild.className)}>it&apos;s empty here</p>
-                  <p className="text-sm text-black/30">Your gut is waiting for something good.</p>
+                  <p className={cn("text-4xl lowercase text-black/20", runWild.className)}>Your cart is empty.</p>
+                  <p className="text-sm text-black/30">So is your protein jar. Coincidence?</p>
                 </div>
                 <Button
                   onClick={closeCart}
@@ -207,26 +207,29 @@ export function CartDrawer() {
 
           {/* Footer - Checkout Sticker */}
           {lines.length > 0 && (
-            <div className="bg-white/80 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-3xl p-6 shadow-xl space-y-4 mt-auto">
-              <div className="flex items-center justify-between">
-                <span className={cn("text-4xl lowercase", runWild.className)}>subtotal</span>
-                <span className={cn("text-2xl font-black uppercase", utoBlack.className)}>
-                  {totalAmount ? formatPrice(totalAmount.amount, totalAmount.currencyCode) : '-'}
-                </span>
+              <div className="bg-white/80 backdrop-blur-xl backdrop-saturate-150 border border-white/40 rounded-3xl p-6 shadow-xl space-y-4 mt-auto">
+                <div className="flex items-center justify-between">
+                  <span className={cn("text-4xl lowercase", runWild.className)}>subtotal</span>
+                  <span className={cn("text-2xl font-black uppercase", utoBlack.className)}>
+                    {totalAmount ? formatPrice(totalAmount.amount, totalAmount.currencyCode) : '-'}
+                  </span>
+                </div>
+                <p className="text-[10px] uppercase tracking-widest font-bold opacity-40 leading-tight">
+                  Tax and shipping calculated at the next step.
+                </p>
+                <a
+                  href={cart?.checkoutUrl}
+                  className={cn(
+                    "block w-full bg-[#f20028] text-white text-center text-xl uppercase font-bold py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300",
+                    utoBold.className
+                  )}
+                >
+                  Checkout Now
+                </a>
+                <p className="text-[10px] uppercase tracking-[0.3em] font-black text-black/30 mt-1">
+                  Added to cart. Your gut just raised one eyebrow in cautious optimism.
+                </p>
               </div>
-              <p className="text-[10px] uppercase tracking-widest font-bold opacity-40 leading-tight">
-                Tax and shipping calculated at the next step.
-              </p>
-              <a
-                href={cart?.checkoutUrl}
-                className={cn(
-                  "block w-full bg-[#f20028] text-white text-center text-xl uppercase font-bold py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300",
-                  utoBold.className
-                )}
-              >
-                Checkout Now
-              </a>
-            </div>
           )}
         </div>
       </div>

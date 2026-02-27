@@ -20,6 +20,7 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 - Premium lifestyle aesthetic with scroll-driven storytelling
 - GSAP-powered horizontal scrollytelling with Lottie animations and SplitType text reveals
 - The Logic carousel with rotating gut-science facts and auto-advance timer
+- Brand-copy-aligned homepage sections (How it works, Problem / solution, Who it’s for)
 - Welcome popup with email capture and 10% discount code flow
 - Marquee rail with scroll-velocity-reactive speed (GSAP Observer)
 - Proof slider testimonial carousel with IntersectionObserver
@@ -27,6 +28,7 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 - Page transition overlays with context-driven curtain animations
 - Canvas particle field effect (global fixed overlay)
 - First-visit words loader entry animation
+- Gut quiz flow to match visitors with Vanilla Calm, Cacao Boost, or both
 - Lenis smooth scroll integrated with GSAP ScrollTrigger
 - Fully responsive across all breakpoints
 - WCAG AA accessibility (skip-to-content, ARIA labels, focus rings, reduced motion support)
@@ -37,13 +39,14 @@ A premium e-commerce website for GUTSY protein supplements, built with Next.js 1
 
 | Route | Description |
 |---|---|
-| `/` | Homepage — hero, marquee rail, science breakdown, product lineup, proof slider, logic carousel, final CTA |
-| `/science` | The Logic — 16 science facts with sticky nav, scroll progress, bloat quiz |
+| `/` | Homepage — hero, quick benefits, marquee rail, how it works, product lineup, comparison table, who it’s for, proof slider, logic carousel, refund guarantee, quiz teaser |
+| `/science` | The Logic — 16 science facts with sticky nav, scroll progress, and bloat scale |
 | `/about` | The Accidental Backstory — brand story with parallax hero and founder cards |
 | `/contact` | Human Support — contact form, WhatsApp, Instagram, email cards |
 | `/FAQ` | Boring Answers — accordion FAQ with category sidebar and deep-linking |
 | `/products` | The Goods — product detail, amazing vs less amazing, no-list, science section |
 | `/products/[handle]` | Dynamic product detail (SSG with revalidation) |
+| `/quiz` | Quiz — “Find your gut-friendly shake” 6-question flow with email capture and flavor match |
 | `/privacy` | Privacy Policy |
 | `/terms` | Terms of Service |
 | `/shipping` | Shipping Policy |
@@ -151,6 +154,8 @@ src/
 │   │   ├── [handle]/          # Dynamic product detail (SSG)
 │   │   │   └── page.tsx
 │   │   └── page.tsx           # The Goods (product listing)
+│   ├── quiz/                  # Gut quiz (find your match)
+│   │   └── page.tsx
 │   ├── science/               # The Logic (16 facts)
 │   │   ├── layout.tsx
 │   │   └── page.tsx
@@ -182,6 +187,8 @@ src/
 │   ├── product/
 │   │   ├── product-card.tsx       # Product grid card
 │   │   └── product-detail.tsx     # Full product page component
+│   ├── quiz/
+│   │   └── gut-quiz.tsx           # Stateful 6-question gut quiz with email gate
 │   ├── providers/
 │   │   └── smooth-scroll-provider.tsx  # Lenis smooth scroll + GSAP sync
 │   ├── reviews/
@@ -194,7 +201,7 @@ src/
 │   │   ├── button.tsx             # Base button (primary, secondary, outline, ghost)
 │   │   └── tooltip.tsx            # Pure CSS tooltip
 │   ├── email-capture.tsx          # Newsletter signup (compact & full variants)
-│   ├── marquee-rail.tsx           # GSAP horizontal marquee with Observer
+│   ├── marquee-rail.tsx           # GSAP horizontal marquee with Observer (brand-copy aligned items)
 │   ├── wave-divider.tsx           # RippedDivider SVG section divider
 │   └── welcome-popup.tsx          # Session popup with email capture
 └── lib/
@@ -234,6 +241,10 @@ npm run lint
 ### Other Platforms
 
 The project can be deployed to any platform that supports Next.js, including Netlify, AWS Amplify, Railway, or self-hosted.
+
+## Remaining Visual / Structural Work
+
+What’s still mainly visual/structural rather than copy: The optional sticky add-to-cart bar on PDP, kiwi/molecule illustration components, deeper section shape/gradient refresh, and a full spacing/overflow audit (Phase 4a, 5b–5e, 6a–6b) are not yet implemented; if you want, I can tackle those next, but from a copy + brand voice standpoint, the site is now consistent with the deck.
 
 ## License
 

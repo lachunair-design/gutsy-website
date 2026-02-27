@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/lib/shopify/cart-context';
 import { formatPrice, cn } from '@/lib/utils';
 import { ShopifyProduct, ShopifyProductVariant, ShopifyImage } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
+import { StickyAddBar } from './sticky-add-bar';
 
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
@@ -149,6 +150,24 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
 
   const selectedFlavorName = getFlavorName(selectedVariant);
   const nutrition = NUTRITION_DATA[selectedFlavorName] || Object.values(NUTRITION_DATA)[0] || null;
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (!ctaRef.current) return;
+    const target = ctaRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        setShowStickyBar(!entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className={cn('text-black', utoMedium.className)}>
@@ -231,8 +250,11 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
 
               {/* Description */}
               <p className="text-base md:text-lg opacity-80 font-medium leading-relaxed mb-8">
-                Hydrolyzed pea &amp; rice protein, enzymatically pre-digested for zero bloat and
-                maximum absorption. Five clean ingredients. Nothing else.
+                {selectedFlavorName === 'Vanilla Calm'
+                  ? 'Vanilla Calm is built for the “I love protein but hate feeling like I swallowed a brick” crowd. We took pea and rice protein, pre‑broke the chains down into tiny peptides, and paired them with 600mg of Actazin® kiwi extract and reishi mushroom so your gut does not have to wrestle with them for hours. No gums, no dairy, no soy, no added sugar, no weird aftertaste. Just a clean natural vanilla shake that dissolves easily, sits light at about 133 calories per serving, and lets you get on with your day instead of negotiating with your digestion.'
+                  : selectedFlavorName === 'Cacao Boost'
+                  ? 'Cacao Boost exists because “protein plus energy” usually means “plus chaos in your stomach.” We start with the same hydrolyzed pea and rice blend, then add real cacao, 600mg of Actazin® kiwi extract, and maca root. The result: a shake that actually mixes, feels light at around 137 calories per serving, and gives you a gentle lift without the crash or the brick‑in‑the‑stomach feeling. No gums, no dairy, no soy, no added sugar, and definitely no syrupy fake chocolate aftertaste.'
+                  : 'Hydrolyzed pea & rice protein with Actazin® kiwi extract in a short, tidy ingredient list so your gut has less work and fewer surprises.'}
               </p>
 
               {/* ── Flavor Selector ── */}
@@ -373,6 +395,7 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
 
               {/* ── CTA Button ── */}
               <button
+                ref={ctaRef}
                 onClick={purchaseType === 'subscribe' ? handleSubscribe : handleAddToCart}
                 disabled={!selectedVariant.availableForSale || isAdding}
                 className={cn(
@@ -389,8 +412,13 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
                     ? 'Sold Out'
                     : purchaseType === 'subscribe'
                       ? `Subscribe — ${formatPrice(subscribePrice.toFixed(2), currency)}/mo`
-                      : `Add to Bag — ${formatPrice((price * quantity).toFixed(2), currency)}`}
+                      : `Add to Stash — ${formatPrice((price * quantity).toFixed(2), currency)}`}
               </button>
+
+              {/* Trust statement from brand-copy 3.9 */}
+              <p className="mt-4 text-xs md:text-sm text-black/60">
+                Tested for heavy metals. Made under GMP‑grade quality frameworks.
+              </p>
 
               {/* ── Trust Badges ── */}
               <div className="mt-8 pt-6 border-t border-black/10">
@@ -529,6 +557,18 @@ export function ProductDetail({ product, inline = false }: ProductDetailProps) {
           </div>
         </div>
       </section>
+      {showStickyBar && selectedVariant.availableForSale && (
+        <StickyAddBar
+          title={product.title}
+          priceLabel={
+            purchaseType === 'subscribe'
+              ? `Subscribe — ${formatPrice(subscribePrice.toFixed(2), currency)}/mo`
+              : formatPrice((price * quantity).toFixed(2), currency)
+          }
+          disabled={isAdding}
+          onClick={purchaseType === 'subscribe' ? handleSubscribe : handleAddToCart}
+        />
+      )}
     </div>
   );
 }

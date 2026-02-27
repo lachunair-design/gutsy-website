@@ -12,12 +12,12 @@ import { TransitionLink } from '@/components/transitions/transition-link';
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 
-// Updated navigation names based on brand-copy.md
 const navigation = [
   { name: 'The Logic', href: '/science' },
   { name: 'The Accidental Backstory', href: '/about' },
   { name: 'Human Support', href: '/contact' },
   { name: 'Boring Answers', href: '/FAQ' },
+  { name: 'Ways to Use It', href: '/recipes' },
 ];
 
 export function Header() {
@@ -79,7 +79,11 @@ export function Header() {
 
       <div className={cn(
         "transition-all duration-500",
-        scrolled ? "bg-white/80 backdrop-blur-xl py-4 shadow-sm border-b border-white/20" : "bg-transparent py-6 md:py-8"
+        scrolled
+          ? "bg-white/80 backdrop-blur-xl py-4 shadow-sm border-b border-white/20"
+          : isDarkHeroPage
+          ? "bg-gradient-to-b from-black/40 to-transparent backdrop-blur-sm py-6 md:py-8"
+          : "bg-transparent py-6 md:py-8"
       )}>
         <nav className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
           
@@ -122,7 +126,7 @@ export function Header() {
                 </TransitionLink>
               ))}
 
-              {/* Primary CTA: The Goods / Your Stash */}
+              {/* Primary CTA: Your Stash */}
               <TransitionLink
                 href="/products"
                 className={cn(
@@ -133,7 +137,7 @@ export function Header() {
                   utoBold.className
                 )}
               >
-                The Goods
+                Your Stash
               </TransitionLink>
             </div>
 
@@ -216,7 +220,7 @@ export function Header() {
                 className={cn("text-6xl uppercase text-[#f20028] pt-8 border-t border-zinc-100 leading-none", utoBlack.className)}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                The Goods
+                Your Stash
               </TransitionLink>
             </div>
 

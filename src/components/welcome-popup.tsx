@@ -61,7 +61,7 @@ export function WelcomePopup() {
                 <span className="text-red font-runwild text-4xl md:text-6xl lowercase -rotate-2 inline-block mt-2">curious.</span>
               </h2>
               <p className="text-black/80 text-lg md:text-xl font-bold pt-4 leading-snug">
-                We do not like spam either. But we do like 10% off. Join the list and we will send a code for your first bag.
+                We do not like spam either. But we do like 10% off. Join the list and we will send you a code for your first bag. No hustle‑culture emails. We only send stuff when we actually have something to say.
               </p>
             </div>
 
@@ -87,9 +87,7 @@ export function WelcomePopup() {
               </button>
             </form>
 
-            <p className="text-[10px] uppercase tracking-widest font-black text-black/30">
-              No hustle-culture emails. We only send stuff when we actually have something to say.
-            </p>
+            <p className="text-[10px] uppercase tracking-widest font-black text-black/30" />
           </div>
         ) : (
           <div className="py-8 space-y-6 animate-in zoom-in-95 duration-500">
