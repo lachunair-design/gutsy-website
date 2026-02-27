@@ -3,21 +3,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ProductDetail } from '@/components/product/product-detail';
+import { ProductCard } from '@/components/product/product-card';
 import { MarqueeRail } from '@/components/marquee-rail';
-import { EmailCapture } from '@/components/email-capture';
-import { getProducts } from '@/lib/shopify';
-import { ShopifyProduct } from '@/lib/shopify/types';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { TheLogicCarousel } from './the-logic-carousel';
-import { HomeScrollytelling as Scrollytelling } from './scrollytelling';
 import { WelcomePopup } from '@/components/welcome-popup';
 import { RippedDivider } from '@/components/wave-divider';
 import { HomeAnimations } from '@/components/animations/home-animations';
-import { RadialMarquee } from '@/components/effects/radial-marquee';
-import { Tooltip } from '@/components/ui/tooltip';
 import { ProofSlider } from '@/components/reviews/proof-slider';
+import { useEffect, useState } from 'react';
 
 const utoBlack = localFont({ src: '../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../public/fonts/Uto Bold.otf' });
@@ -28,128 +23,154 @@ const PROOF = [
   { quote: "Finally a protein that doesn't make me feel like I swallowed a brick. Game changer.", name: "Sarah K.", location: "Dubai" },
   { quote: "I've tried everything. This is the first protein powder that doesn't bloat me. Period.", name: "Ahmed R.", location: "Abu Dhabi" },
   { quote: "The taste is incredible and my stomach actually thanks me. Will never go back.", name: "Maya L.", location: "Dubai" },
-  { quote: "Two weeks in and my digestion has completely changed. Light, clean energy all day.", name: "Tariq M.", location: "Dubai" },
-  { quote: "Skeptical at first, but the science makes sense. No gum ingredients, no bloat. Love it.", name: "Priya S.", location: "Abu Dhabi" },
 ];
 
-export default async function HomePage() {
-  let products: ShopifyProduct[] = [];
-  try { products = await getProducts(20); } catch (e) { console.error(e); }
-  const mainProduct = products[0] || null;
+export default function HomePage() {
+  const [isReturning, setIsReturning] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = document.cookie.includes('gutsy_visited=true');
+    setIsReturning(hasVisited);
+    if (!hasVisited) {
+      document.cookie = "gutsy_visited=true; max-age=31536000; path=/";
+    }
+  }, []);
 
   return (
     <div className={cn("bg-linen min-h-screen selection:bg-yellow/30", utoMedium.className)}>
       <WelcomePopup />
 
-      {/* ═══ HERO SECTION ═══ */}
-      <section className="relative w-full h-screen overflow-hidden flex items-center bg-black">
-        <div className="absolute inset-0 z-0" data-animate="hero-image">
+      {/* ═══ User Banner ═══ */}
+      <div className="bg-red text-white py-3 px-6 text-center text-xs md:text-sm tracking-widest font-bold z-50 relative">
+        {isReturning ? (
+          "Welcome back. Your stash is waiting." 
+        ) : (
+          <Link href="/science#quiz" className="hover:underline">
+            New here? Start with the 45‑second quiz to find your gut’s match.
+          </Link>
+        )}
+      </div>
+
+      {/* ═══ Hero Section ═══ */}
+      <section className="relative w-full h-[90vh] md:h-screen overflow-hidden flex items-center bg-black">
+        <div className="absolute inset-0 z-0">
           <Image
-            src="/images/girl-on-tennis-with-cacao.png"
-            alt="GUTSY Lifestyle"
+            src="/images/hero-bg.png"
+            alt="GUTSY"
             fill
-            className="object-cover object-center opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
+            className="object-cover opacity-60 grayscale"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40 z-10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
         </div>
 
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-8">
-          <div className="max-w-5xl">
-            <h2
-              data-animate="hero-eyebrow"
-              className={cn("text-yellow text-4xl md:text-6xl lowercase mb-4", runWild.className)}
-            >
-              finally, a protein that
-            </h2>
-            <h1
-              data-animate="hero-title"
-              className={cn("text-white text-[80px] md:text-[180px] leading-[0.75] uppercase tracking-tighter mb-12", utoBlack.className)}
-            >
-              FEELS LIGHT.
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-6">
+          <div className="max-w-4xl">
+            <h1 className={cn("text-white text-[56px] md:text-[110px] leading-[0.9] tracking-tighter mb-8", utoBlack.className)}>
+              Most protein is clunky.
             </h1>
-            <p
-              data-animate="hero-body"
-              className="text-white text-xl md:text-3xl max-w-xl font-bold leading-tight mb-14 opacity-90"
-            >
-              Standard plant molecules are too large for your gut to handle. They sit there and ferment. We pre-break ours down so you actually feel light.
+            <p className="text-white text-lg md:text-2xl max-w-xl mb-10 opacity-90 leading-tight">
+              Standard plant molecules are too large for your gut to handle all at once. They sit there and ferment. This is why you feel like a parade float. We pre‑break ours down so you actually feel light.
             </p>
 
-            <div data-animate="hero-cta" className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-              <Link href="#lineup">
-                <Button className={cn("h-16 md:h-20 px-12 rounded-full bg-red text-white text-xl md:text-2xl font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500 shadow-2xl", utoBold.className)}>
-                  Grab a bag
+            <div className="flex flex-col items-start gap-6">
+              <Link href="/products">
+                <Button className={cn("h-16 md:h-20 px-12 rounded-full bg-red text-white text-xl font-bold hover:bg-white hover:text-black transition-all", utoBold.className)}>
+                  Grab a bag (if you want)
                 </Button>
               </Link>
-              <Link href="/about">
-                <Button variant="outline" className={cn("h-16 md:h-20 px-12 rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-md text-white text-xl md:text-2xl font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500", utoBold.className)}>
-                  The Backstory
-                </Button>
-              </Link>
+              <p className={cn("text-white/60 text-sm md:text-base italic max-w-sm leading-snug", utoMedium.className)}>
+                If it feels heavy or you hate the taste, we refund your first bag. No awkward phone calls.
+              </p>
             </div>
           </div>
         </div>
-
-        {/* Diagnostic badge */}
-        <div className="absolute bottom-12 right-12 z-20 hidden md:block" aria-hidden="true">
-          <RadialMarquee radius={110} fontSize={10} speed={20} />
-        </div>
       </section>
+
+      {/* ═══ 1.2 Quick Benefits Strip ═══ */}
+      <div className="bg-white py-8 border-y border-black/5">
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between gap-8 text-xs md:text-sm font-bold tracking-widest text-black/60 uppercase">
+          <span>Feels light, not like a brick.</span>
+          <span>Fewer, better ingredients. No gums.</span>
+          <span>Built to support digestion.</span>
+          <span>100% vegan, no added sugar.</span>
+        </div>
+      </div>
 
       <MarqueeRail />
 
-      {/* ═══ SCIENCE: WE BREAK IT DOWN FIRST ═══ */}
-      <section data-animate="science-section" className="py-24 md:py-48 bg-linen">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
-            
-            <div className="lg:col-span-7 space-y-12">
-              <p className={cn("text-5xl md:text-7xl text-red lowercase leading-none", runWild.className)}>
-                the science of light
-              </p>
-              <h2 className={cn("text-6xl md:text-[110px] text-black leading-[0.85] tracking-tighter uppercase font-black", utoBlack.className)}>
-                We break it <br /> down first.
-              </h2>
-              <div className="space-y-6 max-w-xl">
-                <p className="text-xl md:text-2xl text-black/70 leading-relaxed font-bold">
-                  Your gut is not an industrial furnace. Standard protein molecules are long, tangled chains that cause fermentation and gas.
-                </p>
-                <p className="text-xl md:text-2xl text-black/70 leading-relaxed font-bold">
-                  We use enzymatic hydrolysis to snip those chains into tiny peptides before they reach the bag. It is called being pre-broken down. It is not magic. It is just better engineering.
-                </p>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5" data-animate="science-svg">
-              <div className="bg-white p-12 rounded-[60px] border border-black/5 shadow-sm">
-                 
-              </div>
-            </div>
+      {/* ═══ 3.1 The Lineup ═══ */}
+      <section id="lineup" className="py-24 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-baseline gap-4 mb-20">
+            <h2 className={cn("text-5xl md:text-[100px] tracking-tighter leading-none", utoBlack.className)}>
+              The lineup.
+            </h2>
+            <p className={cn("text-3xl md:text-5xl text-red", runWild.className)}>mostly just things that leave your gut alone</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+            <ProductCard 
+              title="Vanilla Calm"
+              price="185 AED"
+              description="For people who like their mornings productive and their stomachs quiet. Vanilla Calm is a gut‑friendly protein shake that tastes like an actual treat, not a punishment."
+              badges={["Gut-friendly", "No added sugar", "Vegan"]}
+            />
+            <ProductCard 
+              title="Cacao Boost"
+              price="185 AED"
+              description="For days when your brain and your gut both need a favor. Cacao Boost is a chocolatey, gut‑friendly protein shake that skips the jitters and the bloat."
+              badges={["Gut-friendly", "No added sugar", "Vegan"]}
+            />
           </div>
         </div>
       </section>
 
-      <RippedDivider from="linen" to="white" />
-
-      {/* ═══ THE LINEUP ═══ */}
-      <section id="lineup" className="py-24 md:py-40 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 text-center md:text-left">
-          <div className="flex flex-col md:flex-row items-baseline gap-6 mb-20 justify-center md:justify-start">
-            <h2 className={cn("text-7xl md:text-[160px] uppercase tracking-tighter text-black leading-none font-black", utoBlack.className)}>The Lineup.</h2>
-            <p className={cn("text-4xl md:text-6xl text-red mb-2", runWild.className)}>grab yours</p>
+      {/* ═══ 3.7 GUTSY vs Typical Protein ═══ */}
+      <section className="py-24 bg-linen">
+        <div className="max-w-5xl mx-auto px-6">
+          <h3 className={cn("text-4xl md:text-6xl mb-12 tracking-tight text-center", utoBlack.className)}>
+            GUTSY vs Typical Protein
+          </h3>
+          <div className="overflow-x-auto rounded-[40px] border border-black/5 bg-white">
+            <table className="w-full text-left text-sm md:text-lg">
+              <thead>
+                <tr className="border-b border-black/5">
+                  <th className="p-6 md:p-8 font-bold"></th>
+                  <th className="p-6 md:p-8 font-black text-red">GUTSY Protein</th>
+                  <th className="p-6 md:p-8 font-bold opacity-40">Typical Plant / Whey</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-black/5">
+                <tr>
+                  <td className="p-6 md:p-8 font-bold">Protein format</td>
+                  <td className="p-6 md:p-8">Hydrolyzed, pre‑broken down peptides</td>
+                  <td className="p-6 md:p-8 opacity-60">Standard long‑chain protein</td>
+                </tr>
+                <tr>
+                  <td className="p-6 md:p-8 font-bold">Gut feel</td>
+                  <td className="p-6 md:p-8">Built to feel lighter and reduce bloat</td>
+                  <td className="p-6 md:p-8 opacity-60">Often “brick in the stomach”</td>
+                </tr>
+                <tr>
+                  <td className="p-6 md:p-8 font-bold">Gums & fillers</td>
+                  <td className="p-6 md:p-8">No xanthan, no guar, no carrageenan</td>
+                  <td className="p-6 md:p-8 opacity-60">Often multiple gums and stabilizers</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          {mainProduct && <ProductDetail product={mainProduct} inline />}
         </div>
       </section>
 
-      {/* ═══ PROOF SECTION ═══ */}
-      <section data-animate="testimonials-section" className="py-24 md:py-40 bg-yellow">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="mb-20">
+      {/* ═══ Proof Section ═══ */}
+      <section className="py-24 md:py-40 bg-yellow">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-20 text-center md:text-left">
             <p className={cn("text-sm uppercase tracking-[0.4em] text-black/40 font-black mb-4", utoBold.className)}>
               Human Proof
             </p>
-            <h2 className={cn("text-6xl md:text-[100px] text-black leading-[0.85] tracking-tighter uppercase font-black", utoBlack.className)}>
+            <h2 className={cn("text-5xl md:text-[100px] text-black leading-[0.85] tracking-tighter font-black", utoBlack.className)}>
               Real people. <br /> Real guts.
             </h2>
           </div>
@@ -157,37 +178,43 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══ THE LOGIC CAROUSEL (Replaging Fun Facts) ═══ */}
-      <TheLogicCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
+      {/* ═══ The Logic Carousel ═══ */}
+      <TheLogicCarousel />
 
-      <RippedDivider from="linen" to="black" />
+      <RippedDivider from="linen" to="yellow" />
 
-      {/* ═══ FINAL CTA ═══ */}
-      <section data-animate="cta-section" className="py-32 md:py-56 bg-black px-6 overflow-hidden relative">
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <p className={cn("text-3xl md:text-5xl text-red lowercase mb-8", runWild.className)}>
-            tired of feeling heavy?
-          </p>
-
-          <h2 className={cn("text-7xl md:text-[160px] text-white leading-[0.8] tracking-tighter mb-16 uppercase font-black", utoBlack.className)}>
-            Grab a <br /> bag.
+      {/* ═══ 10.2 Quiz Teaser ═══ */}
+      <section className="bg-yellow py-24 mx-4 md:mx-8 rounded-[60px] overflow-hidden relative">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className={cn("text-4xl md:text-7xl mb-6 leading-[0.9]", utoBlack.className)}>
+            Not sure where to start?
           </h2>
+          <p className="text-xl md:text-2xl mb-12 font-bold max-w-2xl mx-auto opacity-80">
+            Answer a few questions about your day, your digestion, and how sweet you like things. We will match you with the GUTSY bag that makes the most sense.
+          </p>
+          <Link href="/science#quiz">
+            <Button className={cn("h-20 px-16 rounded-full bg-black text-white text-xl font-bold hover:bg-red transition-colors", utoBold.className)}>
+              Take the quiz
+            </Button>
+          </Link>
+          <p className="mt-6 text-sm uppercase tracking-widest font-bold opacity-40">
+            Takes less than a minute. No star signs.
+          </p>
+        </div>
+      </section>
 
-          <div className="flex flex-col items-center gap-12">
-            <Link href="#lineup">
-              <Button className={cn("h-20 md:h-28 px-20 rounded-full bg-red text-white text-2xl md:text-4xl font-black uppercase tracking-widest hover:scale-105 transition-all duration-500 shadow-2xl", utoBold.className)}>
-                Shop Gutsy
-              </Button>
-            </Link>
-
-            <div className={cn("flex flex-wrap justify-center gap-x-10 gap-y-4 text-[10px] uppercase tracking-[0.5em] text-white/20 font-black", utoBold.className)}>
-              <span>Enzymatically Pre-broken down</span>
-              <span className="hidden md:inline">/</span>
-              <span>Zero Bloat</span>
-              <span className="hidden md:inline">/</span>
-              <span>23g Complete Protein</span>
-            </div>
+      {/* ═══ 1.7 Refund Guarantee Block ═══ */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="inline-block px-8 py-2 rounded-full border-2 border-red text-red font-black uppercase tracking-widest mb-8">
+            Risk-Free
           </div>
+          <h2 className={cn("text-4xl md:text-7xl mb-8 leading-tight", utoBlack.className)}>
+            If it feels heavy, we give your money back.
+          </h2>
+          <p className="text-xl md:text-2xl font-bold opacity-70 mb-12">
+            If GUTSY does not leave you feeling light, or if the taste is just not your thing, tell us. We will refund your first bag. No awkward phone calls. No guilt‑trip scripts. Just protein that has to earn its place in your cupboard.
+          </p>
         </div>
       </section>
 
