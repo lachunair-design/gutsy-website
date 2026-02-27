@@ -218,7 +218,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ The Logic Carousel ═══ */}
-      <TheLogicCarousel />
+      <TheLogicCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
       <RippedDivider from="linen" to="yellow" />
 

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Plus } from 'lucide-react';
+import Link from 'next/link';
 import localFont from 'next/font/local';
 
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
