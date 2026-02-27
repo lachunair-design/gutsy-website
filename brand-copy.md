@@ -1,5 +1,5 @@
 # GUTSY MASTER COPY DECK  
-_Pre‑launch website copy – v2 (with label data)_
+_Pre‑launch website copy – v3_
 
 ---
 
@@ -41,7 +41,7 @@ _Pre‑launch website copy – v2 (with label data)_
 
 ---
 
-## 1. THE FRONT DOOR (HOME PAGE)
+## 1. THE FRONT DOOR (HOME PAGE) — `/`
 
 ### 1.1 Hero
 
@@ -51,6 +51,9 @@ _Pre‑launch website copy – v2 (with label data)_
   They sit there and ferment. This is why you feel like a parade float.  
   We pre‑break ours down so you actually feel light.  
 - **Primary CTA:** Grab a bag (if you want)  
+
+**Guarantee one‑liner under CTA:**  
+If it feels heavy or you hate the taste, we refund your first bag. No awkward phone calls.
 
 ---
 
@@ -67,8 +70,6 @@ _Appears directly under the hero._
 
 ### 1.3 Simple “How It Works” (3 Steps)
 
-_A simple explainer for skimmers._
-
 1. **Standard protein = tangled chains.**  
    Most powders land in your stomach as long, clunky molecules your gut has to wrestle with for hours.
 
@@ -80,21 +81,21 @@ _A simple explainer for skimmers._
 
 ---
 
-### 1.4 The Logic (Scrollytelling)
+### 1.4 The Logic (Scrollytelling Panels)
 
-_Panels or sections as you scroll._
+_Panels for `scrollytelling.tsx`._
 
-- **Panel 1:**  
-  Standard protein is a tangled molecular mess.
+- **Panel 1 – Headline:** Standard protein is a tangled molecular mess.  
+  **Body:** Long, heavy chains, too many fillers, and a gut that has to do all the hard work.
 
-- **Panel 2:**  
-  Your gut has to wrestle with it for hours. That is where the bloat comes from.
+- **Panel 2 – Headline:** Your gut is not an industrial furnace.  
+  **Body:** When it has to wrestle with clunky molecules for hours, you feel bloated, gassy, and slowed down.
 
-- **Panel 3:**  
-  We use enzymes to snip those chains into tiny peptides first.
+- **Panel 3 – Headline:** We do the hard part first.  
+  **Body:** We use enzymes to pre‑break those long chains into smaller peptides before they ever hit your shaker.
 
-- **Panel 4:**  
-  It is called being pre‑broken down. It is not magic. It is just better engineering.
+- **Panel 4 – Headline:** It is not magic. It is better engineering.  
+  **Body:** Hydrolyzed protein, Actazin® kiwi extract, and no gums. Just a shake your gut can live with.
 
 ---
 
@@ -129,8 +130,6 @@ _Panels or sections as you scroll._
 
 ### 1.8 Who It’s For (Quick Snapshot)
 
-_Short version on Home, full table lives on Product page._
-
 - **For you if:**  
   - You like hitting your protein goals but hate feeling like a parade float.  
   - You have tried “clean” proteins that somehow still wrecked your digestion.  
@@ -143,7 +142,61 @@ _Short version on Home, full table lives on Product page._
 
 ---
 
-## 2. THE LOGIC (SCIENCE PAGE)
+### 1.9 Marquee Rail Items
+
+_For `marquee-rail.tsx`._
+
+- Pre‑broken down plant protein  
+- With Actazin® kiwi extract for gut support  
+- No gums. No added fillers.  
+- Gluten free · Dairy free · Soy free  
+- Made in Latvia · Dispatching from Dubai  
+- Refund on your first bag if it feels heavy  
+
+---
+
+### 1.10 Logic Carousel Facts
+
+_For `the-logic-carousel.tsx` (short rotating facts)._
+
+- Big protein molecules = more work for your gut.  
+- Hydrolyzed protein means smaller pieces, less wrestling.  
+- Actazin® from kiwi helps your gut keep things moving.  
+- No gums, no dairy, no soy – fewer usual suspects.  
+- 23g of protein, about 133–137 calories per serving.  
+- Under 1g of sugar. Monk fruit sweetened.  
+- Made in a GMP‑certified facility in Latvia and third‑party tested.  
+
+---
+
+### 1.11 Quiz Teaser Block
+
+_Appears on Home._
+
+- **Section title:** Not sure where to start?  
+
+- **Body copy:**  
+  Answer a few questions about your day, your digestion, and how sweet you like things.  
+  We will match you with the GUTSY bag that makes the most sense for your gut (and your calendar).  
+
+- **Button:** Take the quiz  
+
+- **Micro‑copy under button:**  
+  Takes less than a minute. No star signs. No personality type.
+
+---
+
+### 1.12 Words Loader (First‑Visit Overlay)
+
+_For `words-loader.tsx`._
+
+- Slide 1: “Most protein is clunky.”  
+- Slide 2: “Your gut deserves better engineering.”  
+- Slide 3: “Welcome to GUTSY.”
+
+---
+
+## 2. THE LOGIC (SCIENCE PAGE) — `/science`
 
 ### 2.1 Hero
 
@@ -229,8 +282,6 @@ We changed the format: hydrolyzed plant protein, clinical‑dose Actazin® kiwi 
 
 ### 2.5 Further Reading (For the Nerds)
 
-_Will live as links or expandable text later._
-
 - Actazin® and kiwifruit research on digestion and regularity.  
 - Hydrolyzed protein and absorption.  
 - Monk fruit and glycemic impact.  
@@ -246,9 +297,9 @@ If you have a medical condition (especially IBS or anything gut‑related), talk
 
 ---
 
-## 3. THE GOODS (PRODUCTS PAGE)
+## 3. THE GOODS (PRODUCTS) — `/products` & `/products/[handle]`
 
-### 3.1 Hero
+### 3.1 Hero (Listing Page)
 
 - **Headline:** The lineup.  
 - **Sub‑headline:** mostly just things that leave your gut alone.
@@ -346,8 +397,6 @@ Post‑workout, late‑morning focus, or that “I could use a chocolate break b
   - **Week 1–2:** A more predictable bathroom schedule for most people.  
   - **Ongoing:** Protein you do not have to mentally negotiate with.
 
-_(Directions stay consistent with the label, just with extra personality.)_
-
 ---
 
 ### 3.5 Why This Bag Is Not 79 AED
@@ -382,8 +431,6 @@ The result is a bag that costs a bit more, but also does not sit in the back of 
 ---
 
 ### 3.8 Key Facts / Specs
-
-_Can live as an accordion or info box on each PDP._
 
 **Vanilla Calm**
 
@@ -445,7 +492,7 @@ _Can live as an accordion or info box on each PDP._
 
 ---
 
-## 4. THE ACCIDENTAL BACKSTORY (ABOUT PAGE)
+## 4. THE ACCIDENTAL BACKSTORY (ABOUT PAGE) — `/about`
 
 ### 4.1 Hero
 
@@ -487,7 +534,7 @@ If we would not drink it every day ourselves, it does not go in the bag.
 
 ---
 
-## 5. HUMAN SUPPORT (CONTACT PAGE)
+## 5. HUMAN SUPPORT (CONTACT PAGE) — `/contact`
 
 ### 5.1 Hero
 
@@ -510,11 +557,11 @@ Pick your channel of choice:
 
 ---
 
-## 6. BORING ANSWERS (FAQ PAGE)
+## 6. BORING ANSWERS (FAQ PAGE) — `/FAQ`
 
 ### 6.1 The Goods
 
-**Q: Is 20g of protein actually enough?**  
+**Q: Is 20–23g of protein actually enough?**  
 A: Yes. It is a complete protein with a PDCAAS score of 1.0. That means your body can actually use every gram. We do not do amino acid spiking or any of the other industry tricks used to inflate numbers on a label. If you are a 120kg bodybuilder you might need two scoops. For the rest of us, one is plenty.
 
 **Q: Does it taste like “plants”?**  
@@ -531,7 +578,7 @@ A: In the pouch. Zip it shut. Keep it in a cool, dry place below 25°C, away fro
 A: Because their molecules are clunky. Standard protein lands in your stomach in long, tangled chains. Your gut has to wrestle with them to break them apart. While it is wrestling, the protein ferments. Fermentation causes gas. Gas causes the parade float feeling. We do the work first so your stomach does not have to.
 
 **Q: What is the deal with the Kiwifruit?**  
-A: We use 600mg of Actazin. It is a clinical dose of New Zealand green kiwifruit. It contains an enzyme called actinidin. Think of it as a secondary digestive system that helps break down the protein and keeps your bathroom schedule predictable. It is a tool, not a garnish.
+A: We use 600mg of Actazin in every serving. It is a clinical dose of New Zealand green kiwifruit. It contains an enzyme called actinidin. Think of it as a secondary digestive system that helps break down the protein and keeps your bathroom schedule more predictable. It is a tool, not a garnish.
 
 **Q: Is it safe for people with IBS?**  
 A: We built this specifically because we could not find anything that did not wreck our own digestion. We removed the gums, the dairy, and the soy. Those are the big three triggers. However, everyone is different. If you have a specific medical condition you should talk to a doctor who knows your history.
@@ -626,11 +673,9 @@ We also use pouches because shipping giant plastic tubs of air across the ocean 
 
 ---
 
----
-
 ## 10. THE QUIZ (FIND YOUR MATCH)
 
-### 10.1 Quiz Hero (Dedicated Quiz Page)
+### 10.1 Quiz Hero (Dedicated Quiz Page /science or separate route)
 
 - **Headline:** Let’s find your gut’s favorite shake.  
 - **Sub‑headline:** 6 quick questions about your routine, your gut, and your flavor mood. No wrong answers, just better protein logic.  
@@ -638,24 +683,7 @@ We also use pouches because shipping giant plastic tubs of air across the ocean 
 
 ---
 
-### 10.2 Quiz Teaser Block (on Home)
-
-**Section title:** Not sure where to start?  
-
-**Body copy:**  
-Answer a few questions about your day, your digestion, and how sweet you like things.  
-We will match you with the GUTSY bag that makes the most sense for your gut (and your calendar).  
-
-**Button:** Take the quiz  
-
-**Micro‑copy under button:**  
-Takes less than a minute. No star signs. No personality type.
-
----
-
-### 10.3 Quiz Questions (Copy Only)
-
-_You can adjust options in the UI, but this is the voice and intent._
+### 10.2 Quiz Questions
 
 **Q1 – Time of day**
 
@@ -723,38 +751,36 @@ _You can adjust options in the UI, but this is the voice and intent._
 
 ---
 
-### 10.4 Result Intros (Logic‑agnostic Copy)
+### 10.3 Result Intros
 
-_Use these as top lines on the result screen, then map logic in your quiz tool._
+**Vanilla Calm result**
 
-**Result title – Vanilla Calm match**  
-“Your gut is asking for calm.”  
-
-**Result body – Vanilla Calm**  
-You are a Vanilla Calm person. You want protein that pulls its weight without pulling focus.  
-Natural vanilla, hydrolyzed plant protein, Actazin® kiwi extract, and reishi for a shake that feels light and stays in the background while you get on with your day.
+- **Title:** Your gut is asking for calm.  
+- **Body:**  
+  You are a Vanilla Calm person. You want protein that pulls its weight without pulling focus.  
+  Natural vanilla, hydrolyzed plant protein, Actazin® kiwi extract, and reishi for a shake that feels light and stays in the background while you get on with your day.
 
 ---
 
-**Result title – Cacao Boost match**  
-“Your gut wants chocolate that plays nice.”  
+**Cacao Boost result**
 
-**Result body – Cacao Boost**  
-You are a Cacao Boost person. You want your protein to carry you through work, training, or long afternoons without sending your digestion into chaos.  
-Real cacao, hydrolyzed plant protein, Actazin® kiwi extract, and maca for a gentle lift and a chocolate hit that does not feel like a sugar event.
-
----
-
-**Result title – Both could work**  
-“Your gut is flexible. Your taste buds can decide.”  
-
-**Result body – Both**  
-Based on your answers, both Vanilla Calm and Cacao Boost fit your routine.  
-Pick the flavor you are more likely to actually drink every day. Your gut will notice the hydrolyzed protein and Actazin® either way.
+- **Title:** Your gut wants chocolate that plays nice.  
+- **Body:**  
+  You are a Cacao Boost person. You want your protein to carry you through work, training, or long afternoons without sending your digestion into chaos.  
+  Real cacao, hydrolyzed plant protein, Actazin® kiwi extract, and maca for a gentle lift and a chocolate hit that does not feel like a sugar event.
 
 ---
 
-### 10.5 Email Gate Copy (If You Capture Email Before Results)
+**Both result**
+
+- **Title:** Your gut is flexible. Your taste buds can decide.  
+- **Body:**  
+  Based on your answers, both Vanilla Calm and Cacao Boost fit your routine.  
+  Pick the flavor you are more likely to actually drink every day. Your gut will notice the hydrolyzed protein and Actazin® either way.
+
+---
+
+### 10.4 Email Gate Copy
 
 **Headline:** Where should we send your match (and your code)?  
 
@@ -767,9 +793,9 @@ No hustle‑culture newsletters. We only write when we have something useful to 
 
 ---
 
-### 10.6 Quiz Exit Micro‑Copy
+### 10.5 Quiz Exit Micro‑Copy
 
 **Link text under results:**  
-“Skip the quiz next time and go straight to The Goods.”  
+“Skip the quiz next time and go straight to The Goods.”
 
 ---
