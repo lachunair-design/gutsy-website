@@ -514,7 +514,7 @@ Pick your channel of choice:
 
 ### 6.1 The Goods
 
-**Q: Is 20–23g of protein actually enough?**  
+**Q: Is 20g of protein actually enough?**  
 A: Yes. It is a complete protein with a PDCAAS score of 1.0. That means your body can actually use every gram. We do not do amino acid spiking or any of the other industry tricks used to inflate numbers on a label. If you are a 120kg bodybuilder you might need two scoops. For the rest of us, one is plenty.
 
 **Q: Does it taste like “plants”?**  
@@ -531,7 +531,7 @@ A: In the pouch. Zip it shut. Keep it in a cool, dry place below 25°C, away fro
 A: Because their molecules are clunky. Standard protein lands in your stomach in long, tangled chains. Your gut has to wrestle with them to break them apart. While it is wrestling, the protein ferments. Fermentation causes gas. Gas causes the parade float feeling. We do the work first so your stomach does not have to.
 
 **Q: What is the deal with the Kiwifruit?**  
-A: We use 600mg of Actazin in every serving. It is a clinical dose of New Zealand green kiwifruit. It contains an enzyme called actinidin. Think of it as a secondary digestive system that helps break down the protein and keeps your bathroom schedule more predictable. It is a tool, not a garnish.
+A: We use 600mg of Actazin. It is a clinical dose of New Zealand green kiwifruit. It contains an enzyme called actinidin. Think of it as a secondary digestive system that helps break down the protein and keeps your bathroom schedule predictable. It is a tool, not a garnish.
 
 **Q: Is it safe for people with IBS?**  
 A: We built this specifically because we could not find anything that did not wreck our own digestion. We removed the gums, the dairy, and the soy. Those are the big three triggers. However, everyone is different. If you have a specific medical condition you should talk to a doctor who knows your history.
