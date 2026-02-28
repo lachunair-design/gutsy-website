@@ -43,30 +43,32 @@ html {
 }
 
 body {
-  /* Updated to use your Tailwind brand tokens */
-  @apply antialiased text-black bg-linen;
+  /* Updated to handle the vertical gradient flow of the EDM design */
+  @apply antialiased text-black;
+  background-color: theme('colors.linen');
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-/* Custom scrollbar - Premium */
+/* Custom scrollbar - Adjusted for Yellow Design */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
+  /* Blends into the linen/yellow transitions */
   @apply bg-linen;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  @apply border-2 border-linen rounded-full;
+  /* High contrast black thumb as seen in premium branding */
+  @apply bg-black/10 border-2 border-linen rounded-full transition-colors;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.4);
+  @apply bg-black/30;
 }
 
 /* Utility to hide scrollbars */
@@ -78,18 +80,22 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+  
+  /* EDM Specific: Radial Glow for product bags */
+  .product-halo {
+    background: radial-gradient(circle, rgba(255,179,0,0.15) 0%, rgba(243,238,228,0) 70%);
+  }
 }
 
 /* Focus styles */
 *:focus-visible {
-  /* Updated to use brand red */
   @apply outline-none ring-2 ring-red ring-offset-2;
 }
 
 /* Selection */
 ::selection {
-  /* Updated to use brand yellow */
-  @apply bg-yellow text-black;
+  /* Inverted selection for the yellow theme */
+  @apply bg-black text-yellow;
 }
 
 /* Vertical text helper */
@@ -98,7 +104,19 @@ body {
   text-orientation: mixed;
 }
 
-/* ── Animations ── (Unchanged, as requested) */
+/* ── EDM Brand Specific Utilities ── */
+
+/* Circular Text Rotation for Badges */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 12s linear infinite;
+}
+
+/* ── Animations ── */
 
 /* Fade in */
 @keyframes fade-in {
@@ -200,7 +218,8 @@ body {
   .animate-fade-in-up,
   .animate-gentle-float,
   .animate-draw-circle,
-  .animate-draw-underline {
+  .animate-draw-underline,
+  .animate-rotate-slow {
     animation: none;
     opacity: 1;
     transform: none;

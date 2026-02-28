@@ -51,23 +51,28 @@ export function TheLogicCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentFactIndex((prev) => (prev + 1) % funFacts.length);
-    }, 6500); // Slightly longer to let the casual tone sink in
+    }, 6500); 
     return () => clearInterval(timer);
   }, [funFacts.length]);
 
   return (
-    <section className="py-24 md:py-32 bg-linen overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 font-uto">
+    // Updated background to have the "Yellow Glow" effect
+    <section className="py-24 md:py-40 bg-gradient-to-b from-linen to-yellow overflow-hidden relative">
+      {/* Decorative Glow Orb behind the title */}
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-yellow/30 blur-[120px] rounded-full -translate-x-1/2 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 font-uto relative z-10">
         <div className="flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-24">
           
           {/* TITLE AREA */}
           <div className="flex flex-col shrink-0 lg:sticky lg:top-32 group">
             <div className="relative inline-block">
-                <h2 className={cn("text-7xl md:text-[110px] text-black leading-[0.8] tracking-tighter uppercase font-black", utoBlack.className)}>
+                <h2 className={cn("text-7xl md:text-[120px] text-black leading-brand-none tracking-tighter uppercase font-black", utoBlack.className)}>
                 The <br/> Truths
                 </h2>
+                {/* SVG Underline adjusted to Black for the EDM aesthetic */}
                 <svg 
-                    className="absolute -bottom-4 left-0 w-full h-8 text-red overflow-visible"
+                    className="absolute -bottom-4 left-0 w-full h-8 text-black overflow-visible"
                     viewBox="0 0 300 20" 
                     fill="none" 
                 >
@@ -85,54 +90,57 @@ export function TheLogicCarousel({ utoBlack, utoBold, runWild }: { utoBlack: any
                 </svg>
             </div>
             
-            <p className={cn("text-3xl md:text-5xl text-red lowercase mt-8 -rotate-2 font-runwild", runWild.className)}>
+            {/* Swapped text-red to italic/bold black or subtle red if you want a pop */}
+            <p className={cn("text-3xl md:text-6xl text-black lowercase mt-10 -rotate-2 font-runwild", runWild.className)}>
               just for us
             </p>
             
-            <div className="mt-10 w-24 h-[3px] bg-black/5 relative overflow-hidden rounded-full">
+            {/* Progress Bar adjusted to Black on Yellow background */}
+            <div className="mt-12 w-32 h-[4px] bg-black/10 relative overflow-hidden rounded-full">
               <div 
                 key={currentFactIndex}
-                className="absolute inset-0 bg-red origin-left animate-timer-progress"
+                className="absolute inset-0 bg-black origin-left animate-timer-progress"
                 style={{ animationDuration: '6500ms' }}
               />
             </div>
           </div>
 
-          {/* CONTENT CARD */}
-          <div className="flex-1 w-full bg-white border border-black/5 rounded-[40px] md:rounded-[60px] p-10 md:p-16 shadow-sm relative group/card">
+          {/* CONTENT CARD (Updated to rounded-brand-xl and shadow-2xl) */}
+          <div className="flex-1 w-full bg-white border-4 border-black/5 rounded-brand-xl p-10 md:p-20 shadow-2xl relative group/card">
             
-            <div className="flex flex-col gap-10 min-h-[280px] justify-between">
-              <div className="space-y-8">
-                <div className="w-14 h-14 flex items-center justify-center bg-red rounded-2xl text-linen rotate-3 shadow-lg shadow-red/10 group-hover/card:-rotate-3 transition-transform duration-500">
+            <div className="flex flex-col gap-12 min-h-[320px] justify-between">
+              <div className="space-y-10">
+                {/* Icon box changed to Black/Yellow combo */}
+                <div className="w-16 h-16 flex items-center justify-center bg-black rounded-2xl text-yellow rotate-3 shadow-xl transition-transform duration-500 group-hover/card:-rotate-3">
                   {funFacts[currentFactIndex].icon}
                 </div>
                 
                 <p className={cn(
-                  "text-2xl md:text-[38px] text-black leading-[1.15] tracking-tight animate-in fade-in slide-in-from-bottom-4 duration-700 font-bold", 
+                  "text-2xl md:text-[44px] text-black leading-brand-tight tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-700 font-bold", 
                   utoBold.className
                 )}>
                    {funFacts[currentFactIndex].text}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-8 border-t border-black/5">
-                <div className="flex gap-3">
+              <div className="flex items-center justify-between pt-10 border-t-2 border-black/5">
+                <div className="flex gap-4">
                   <button 
                     onClick={() => setCurrentFactIndex((prev) => (prev - 1 + funFacts.length) % funFacts.length)}
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 hover:bg-black hover:text-white transition-all active:scale-90"
+                    className="w-12 h-12 flex items-center justify-center rounded-full border-2 border-black/10 hover:bg-black hover:text-yellow transition-all active:scale-90"
                   >
-                    <ArrowLeft className="w-4 h-4" />
+                    <ArrowLeft className="w-5 h-5" />
                   </button>
                   <button 
                     onClick={() => setCurrentFactIndex((prev) => (prev + 1) % funFacts.length)}
-                    className="w-10 h-10 flex items-center justify-center rounded-full border border-black/10 hover:bg-black hover:text-white transition-all active:scale-90"
+                    className="w-12 h-12 flex items-center justify-center rounded-full border-2 border-black/10 hover:bg-black hover:text-yellow transition-all active:scale-90"
                   >
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
                   </button>
                 </div>
                 
-                <span className="text-[10px] text-black/30 font-black tracking-[0.3em] uppercase">
-                  Fact {currentFactIndex + 1} / {funFacts.length}
+                <span className="text-[12px] text-black/40 font-black tracking-[0.4em] uppercase">
+                  {currentFactIndex + 1} / {funFacts.length}
                 </span>
               </div>
             </div>
