@@ -39,8 +39,10 @@ export function Footer() {
     e.preventDefault();
     if (!email) return;
     setStatus('submitting');
-    setTimeout(() => setStatus('success'), 800);
-  };
+    setTimeout(() => {
+      setStatus('success');
+    }, 800);
+  }; // Fixed: Missing brace was likely causing the JSX error
 
   return (
     <footer className={cn("bg-linen text-black selection:bg-yellow border-t border-black/5", utoMedium.className)}>
@@ -96,13 +98,11 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 lg:gap-8">
           
-          {/* Brand Info */}
           <div className="col-span-2 lg:col-span-2 space-y-8">
             <h2 className={cn("text-5xl tracking-tighter uppercase font-black", utoBlack.className)}>GUTSY</h2>
             <p className="text-xl font-bold leading-tight max-w-[240px]">
               Built because we were tired of feeling heavy.
             </p>
-            {/* Socials - Fixed overlapping text by using Lucide Icons */}
             <div className="flex items-center gap-4">
               <SocialCircle href="https://instagram.com/gutsy.world" icon={<Instagram size={20}/>} />
               <SocialCircle href="https://wa.me/971500000000" icon={<MessageCircle size={20}/>} />
@@ -110,7 +110,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Links: The Goods */}
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] mb-8 opacity-40 font-black">The Goods</h4>
             <ul className="space-y-4">
@@ -118,12 +117,12 @@ export function Footer() {
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm font-black uppercase tracking-widest hover:text-red transition-colors">
                     {link.name}
-                  </li>
-                ))}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Links: The Logic */}
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] mb-8 opacity-40 font-black">The Logic</h4>
             <ul className="space-y-4">
@@ -131,12 +130,12 @@ export function Footer() {
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm font-black uppercase tracking-widest hover:text-red transition-colors">
                     {link.name}
-                  </li>
-                ))}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Links: Legal */}
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] mb-8 opacity-40 font-black">Legal</h4>
             <ul className="space-y-4">
@@ -144,20 +143,20 @@ export function Footer() {
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm font-black uppercase tracking-widest opacity-40 hover:opacity-100 hover:text-red transition-all">
                     {link.name}
-                  </li>
-                ))}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       </div>
 
-      {/* ═══ 3. Bottom Bar ═══ */}
       <div className="border-t border-black/5 py-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[10px] uppercase tracking-[0.3em] font-black opacity-30">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.3em] font-black">
+          <p className="opacity-30">
             &copy; 2026 GUTSY. Dispatching from Dubai.
           </p>
-          <p className="text-[10px] uppercase tracking-[0.3em] font-black opacity-20 text-center md:text-right">
+          <p className="opacity-20 text-center md:text-right">
             You reached the bottom of the page. <br className="md:hidden"/> Go reward yourself with a shake.
           </p>
         </div>
@@ -166,7 +165,6 @@ export function Footer() {
   );
 }
 
-{/* Fixed Social Circle Component */}
 function SocialCircle({ href, icon }: { href: string, icon: React.ReactNode }) {
   return (
     <a 
