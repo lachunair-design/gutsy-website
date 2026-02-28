@@ -117,28 +117,29 @@ export default function FAQPage() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="bg-[#f3eee4] min-h-screen text-black selection:bg-red/10 pb-20">
+    <div className="bg-gradient-to-b from-linen-light via-yellow to-linen-light min-h-screen text-black selection:bg-black selection:text-yellow pb-20">
       
-      {/* THE OATLY-STYLE HERO */}
-      <section className="pt-48 pb-32 border-b border-black/5">
+      {/* ═══ HERO SECTION ═══ */}
+      <section className="pt-40 pb-20 border-b border-black/5">
         <div className="mx-auto max-w-7xl px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-12">
+          <div className="flex flex-col lg:flex-row justify-between items-end gap-12">
             <div className="max-w-4xl">
-              <h1 className={cn("text-6xl md:text-[130px] leading-[0.85] tracking-tighter uppercase mb-8", utoBlack.className)}>
+              <h1 className={cn("text-7xl md:text-[140px] leading-brand-none tracking-tighter uppercase mb-6", utoBlack.className)}>
                 Boring <br /> Answers.
               </h1>
-              <p className={cn("text-3xl md:text-5xl text-[#f20028] lowercase italic", runWild.className)}>
+              <p className={cn("text-3xl md:text-6xl text-black lowercase italic", runWild.className)}>
                 everything you probably wanted to ask but were too tired to type.
               </p>
             </div>
             
-            <div className="flex flex-col gap-3 text-right">
-              <p className={cn("text-[10px] uppercase tracking-[0.3em] font-black opacity-30 mb-2", utoBold.className)}>Jump to a category</p>
+            {/* Navigation Jump-links */}
+            <div className="flex flex-col gap-2 text-right">
+              <p className={cn("text-[10px] uppercase tracking-[0.4em] font-black opacity-30 mb-2", utoBold.className)}>Jump to a category</p>
               {sections.map((s) => (
                 <button 
                   key={s.title}
                   onClick={() => document.getElementById(s.title)?.scrollIntoView({ behavior: 'smooth' })}
-                  className={cn("text-lg md:text-xl uppercase hover:text-[#f20028] transition-colors text-left md:text-right font-bold", utoBold.className)}
+                  className={cn("text-sm md:text-lg uppercase hover:text-white transition-all text-left md:text-right font-black tracking-widest", utoBold.className)}
                 >
                   {s.title}
                 </button>
@@ -148,48 +149,50 @@ export default function FAQPage() {
         </div>
       </section>
 
-      {/* FAQ SECTIONS */}
+      {/* ═══ FAQ SECTIONS ═══ */}
       {sections.map((section) => (
-        <section key={section.title} id={section.title} className="py-24 border-b border-black/5 last:border-0">
+        <section key={section.title} id={section.title} className="py-16 md:py-20 border-b border-black/5 last:border-0 scroll-mt-32">
           <div className="mx-auto max-w-7xl px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
               
+              {/* Sticky Sidebar */}
               <div className="lg:col-span-4">
-                <div className="sticky top-40 space-y-4">
-                  <h2 className={cn("text-5xl md:text-6xl leading-none uppercase tracking-tighter", utoBlack.className)}>
+                <div className="lg:sticky lg:top-40 space-y-4">
+                  <h2 className={cn("text-4xl md:text-6xl leading-brand-none uppercase tracking-tighter", utoBlack.className)}>
                     {section.title}
                   </h2>
-                  <p className={cn("text-2xl md:text-3xl text-[#f20028] lowercase", runWild.className)}>
+                  <p className={cn("text-xl md:text-3xl text-black/60 lowercase", runWild.className)}>
                     {section.tagline}
                   </p>
                 </div>
               </div>
 
+              {/* Accordion List */}
               <div className="lg:col-span-8">
                 <div className="border-t border-black/10">
                   {section.faqs.map((faq) => (
-                    <div key={faq.id} className="border-b border-black/10 scroll-mt-48 transition-all hover:bg-black/[0.01]">
+                    <div key={faq.id} className="border-b border-black/10 transition-all hover:bg-white/10">
                       <button
                         onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
-                        className="flex w-full items-center justify-between py-10 text-left group"
+                        className="flex w-full items-center justify-between py-8 text-left group"
                       >
-                        <span className={cn("text-2xl md:text-3xl leading-tight tracking-tight max-w-[85%] font-bold uppercase", utoBold.className)}>
+                        <span className={cn("text-xl md:text-3xl leading-tight tracking-tight max-w-[85%] font-bold uppercase", utoBold.className)}>
                           {faq.question}
                         </span>
                         <div className={cn(
-                          "flex-shrink-0 w-10 h-10 rounded-full border border-black/10 flex items-center justify-center transition-all duration-500",
-                          openId === faq.id ? "bg-black text-[#f3eee4]" : "group-hover:border-black"
+                          "flex-shrink-0 w-12 h-12 rounded-full border-2 border-black flex items-center justify-center transition-all duration-500",
+                          openId === faq.id ? "bg-black text-yellow" : "group-hover:bg-black group-hover:text-yellow"
                         )}>
-                          <Plus className={cn("w-5 h-5 transition-transform duration-500", openId === faq.id && "rotate-45")} />
+                          <Plus className={cn("w-6 h-6 transition-transform duration-500", openId === faq.id && "rotate-45")} />
                         </div>
                       </button>
 
                       <div className={cn(
                         "grid transition-all duration-500 ease-in-out",
-                        openId === faq.id ? "grid-rows-[1fr] pb-12 opacity-100" : "grid-rows-[0fr] opacity-0"
+                        openId === faq.id ? "grid-rows-[1fr] pb-10 opacity-100" : "grid-rows-[0fr] opacity-0"
                       )}>
                         <div className="overflow-hidden">
-                          <p className="text-xl md:text-2xl leading-relaxed text-black/60 max-w-2xl">
+                          <p className="text-lg md:text-2xl leading-relaxed text-black font-medium max-w-2xl opacity-80">
                             {faq.answer}
                           </p>
                         </div>
@@ -203,27 +206,30 @@ export default function FAQPage() {
         </section>
       ))}
 
-      {/* THE "STILL CONFUSED" SECTION */}
-      <section className="mt-20 py-32 bg-black text-[#f3eee4] rounded-[60px] mx-4 md:mx-8 text-center relative overflow-hidden">
+      {/* ═══ CTA SECTION ═══ */}
+      <section className="mt-20 py-24 bg-black text-yellow rounded-brand-xl mx-4 md:mx-8 text-center relative overflow-hidden shadow-2xl">
+        {/* Subtle background glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-yellow/5 blur-3xl pointer-events-none" />
+        
         <div className="mx-auto max-w-5xl px-8 relative z-10">
-          <h2 className={cn("text-6xl md:text-[120px] leading-[0.8] tracking-tighter uppercase mb-12", utoBlack.className)}>
+          <h2 className={cn("text-6xl md:text-[140px] leading-brand-none tracking-tighter uppercase mb-12", utoBlack.className)}>
             Still <br /> Need Help?
           </h2>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-10">
             <Link href="/contact">
-              <button className={cn("h-20 px-16 bg-[#f20028] text-[#f3eee4] rounded-full text-xl font-black uppercase tracking-widest hover:scale-105 active:scale-95 transition-all", utoBold.className)}>
+              <button className={cn("h-20 px-16 bg-yellow text-black rounded-full text-xl font-black uppercase tracking-widest hover:bg-white transition-brand-out shadow-xl", utoBold.className)}>
                 Talk to a human
               </button>
             </Link>
-            <p className="text-left max-w-xs text-sm opacity-40 italic">
+            <p className="text-left max-w-xs text-sm font-bold opacity-60 leading-tight">
               Did not find your answer? Send us a message via WhatsApp or email and a human will get back to you between shakes.
             </p>
           </div>
         </div>
       </section>
 
-      {/* FINAL OATLY FOOTER REWARD */}
-      <div className="py-12 text-center">
+      {/* ═══ FOOTER REWARD ═══ */}
+      <div className="py-16 text-center">
         <p className={cn("text-[10px] uppercase tracking-[0.5em] font-black text-black/20", utoBold.className)}>
           You reached the bottom of the page. Go reward yourself with a shake.
         </p>
