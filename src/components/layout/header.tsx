@@ -12,24 +12,25 @@ import { TransitionLink } from '@/components/transitions/transition-link';
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 
+// Updated navigation: Removed 'The Logic' and 'Ways to Use It'
 const navigation = [
-  { name: 'The Logic', href: '/science' },
   { name: 'The Accidental Backstory', href: '/about' },
   { name: 'Human Support', href: '/contact' },
   { name: 'Boring Answers', href: '/FAQ' },
-  { name: 'Ways to Use It', href: '/recipes' },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showLogo, setShowLogo] = useState(true);
   const [scrolled, setScrolled] = useState(false);
-  const [isReturningUser, setIsReturningUser] = useState(false); // For user micro-copy
+  const [isReturningUser, setIsReturningUser] = useState(false); 
   const pathname = usePathname();
   const { cart, openCart } = useCart();
   const totalItems = cart?.totalQuantity || 0;
 
   const isHomePage = pathname === '/';
+  
+  // Note: /science remains in darkHeroPage logic for background handling if you navigate there manually
   const isDarkHeroPage = 
     pathname === '/FAQ' || 
     pathname === '/contact' || 
@@ -37,7 +38,6 @@ export function Header() {
     (isHomePage && !scrolled);
 
   useEffect(() => {
-    // Check for returning user cookie
     const hasVisited = document.cookie.split('; ').find(row => row.startsWith('gutsy_visited='));
     if (hasVisited) {
       setIsReturningUser(true);
