@@ -9,7 +9,6 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { TheLogicCarousel } from './the-logic-carousel';
 import { WelcomePopup } from '@/components/welcome-popup';
-import { RippedDivider } from '@/components/wave-divider';
 import { HomeAnimations } from '@/components/animations/home-animations';
 import { ProofSlider } from '@/components/reviews/proof-slider';
 import { HowItWorksSection } from '@/components/sections/how-it-works';
@@ -233,7 +232,6 @@ export default function HomePage() {
       {/* ═══ The Logic Carousel (Updated props) ═══ */}
       <TheLogicCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
-      <RippedDivider from="white" to="yellow" />
 
       {/* ═══ 10.2 Quiz Teaser ═══ */}
       <section className="bg-yellow py-32 mx-4 md:mx-8 rounded-brand-xl overflow-hidden relative border-4 border-black/5">

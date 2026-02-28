@@ -1,20 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image'; // Import Image for the logo
+import Image from 'next/image';
 import { useState } from 'react';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { Instagram, Linkedin, MessageCircle } from 'lucide-react';
 
-// Use the local font variables passed into the component or imported from layout
 const utoBlack = localFont({ src: '../../../public/fonts/Uto Black.otf' });
 const utoBold = localFont({ src: '../../../public/fonts/Uto Bold.otf' });
 const utoMedium = localFont({ src: '../../../public/fonts/Uto Medium.otf' });
 const runWild = localFont({ src: '../../../public/fonts/RunWild.ttf' });
 
 const footerLinks = {
-  // Navigation columns updated per brand-copy.md Section 0
   goods: [
     { name: 'The Goods (Shop All)', href: '/products' },
     { name: 'Vanilla Calm', href: '/products/vanilla-calm' },
@@ -45,11 +43,13 @@ export function Footer() {
     setTimeout(() => {
       setStatus('success');
     }, 800);
-  }; // Fixed: Missing brace was likely causing the JSX error
+  };
 
   return (
-    // Update: Apply soft yellow gradient to footer background
-    <footer className={cn("bg-gradient-to-b from-linen-light via-yellow to-linen-light text-black selection:bg-black selection:text-yellow border-t border-black/5", utoMedium.className)}>
+    <footer className={cn(
+      "bg-gradient-to-b from-linen-light via-yellow to-linen-light text-black selection:bg-black selection:text-yellow border-t border-black/5", 
+      utoMedium.className
+    )}>
       {/* ═══ 1. Newsletter Section ═══ */}
       <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 border-b border-black/5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -103,20 +103,17 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 lg:gap-8">
           
           <div className="col-span-2 lg:col-span-2 space-y-8">
-            {/* Update: Gutsy logo in the footer instead of the word "gutsy" */}
             <div className="relative w-32 h-10">
               <Image
-                src="/images/gutsy-logomark.png" // Placeholder, replace with your actual asset path
+                src="/images/gutsy-logomark.png"
                 alt="GUTSY"
                 fill
-                className="object-contain object-left brightness-0" // Using object-contain and object-left for positioning
+                className="object-contain object-left brightness-0"
               />
             </div>
-            {/* Brand Info per brand-copy.md Section 0 */}
             <p className="text-xl font-bold leading-tight max-w-[240px]">
               Built because we were tired of feeling heavy.
             </p>
-            {/* Social media icons below the logo */}
             <div className="flex items-center gap-4">
               <SocialCircle href="https://instagram.com/gutsy.world" icon={<Instagram size={20}/>} />
               <SocialCircle href="https://wa.me/971500000000" icon={<MessageCircle size={20}/>} />
@@ -124,6 +121,7 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Column: The Goods */}
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] mb-8 opacity-40 font-black">The Goods</h4>
             <ul className="space-y-4">
@@ -131,11 +129,13 @@ export function Footer() {
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm font-black uppercase tracking-widest hover:text-red transition-colors">
                     {link.name}
-                  </li>
-                ))}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Column: The Logic */}
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] mb-8 opacity-40 font-black">The Logic</h4>
             <ul className="space-y-4">
@@ -143,11 +143,13 @@ export function Footer() {
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm font-black uppercase tracking-widest hover:text-red transition-colors">
                     {link.name}
+                    </Link>
                   </li>
                 ))}
             </ul>
           </div>
 
+          {/* Column: Legal */}
           <div>
             <h4 className="text-[10px] uppercase tracking-[0.4em] mb-8 opacity-40 font-black">Legal</h4>
             <ul className="space-y-4">
@@ -155,14 +157,15 @@ export function Footer() {
                 <li key={link.name}>
                   <Link href={link.href} className="text-sm font-black uppercase tracking-widest opacity-40 hover:opacity-100 hover:text-red transition-all">
                     {link.name}
-                  </li>
-                ))}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Reward line & Bottom bar per brand-copy.md Section 0 */}
+      {/* ═══ 3. Bottom Bar ═══ */}
       <div className="border-t border-black/5 py-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] uppercase tracking-[0.3em] font-black">
           <p className="opacity-30">
@@ -177,7 +180,6 @@ export function Footer() {
   );
 }
 
-{/* Fixed Social Circle Component from page.tsx adjustment */}
 function SocialCircle({ href, icon }: { href: string, icon: React.ReactNode }) {
   return (
     <a 
