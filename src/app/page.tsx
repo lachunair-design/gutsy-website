@@ -75,7 +75,7 @@ export default function HomePage() {
 
             <div className="flex flex-col items-start gap-6" data-animate="hero-cta">
               <Link href="/products">
-                <Button className={cn("h-16 md:h-20 px-12 rounded-full bg-red text-white text-xl font-bold hover:bg-white hover:text-black transition-all", utoBold.className)}>
+                <Button className={cn("h-16 md:h-20 px-12 rounded-full bg-yellow text-black text-xl font-bold hover:bg-white hover:text-black transition-all", utoBold.className)}>
                   Grab a bag (if you want)
                 </Button>
               </Link>
@@ -229,7 +229,7 @@ export default function HomePage() {
             Answer a few questions about your day, your digestion, and how sweet you like things. We will match you with the GUTSY bag that makes the most sense for your gut (and your calendar).
           </p>
           <Link href="/quiz">
-            <Button className={cn("h-20 px-16 rounded-full bg-black text-white text-xl font-bold hover:bg-red transition-colors", utoBold.className)}>
+            <Button className={cn("h-20 px-16 rounded-full bg-black text-white text-xl font-bold hover:bg-white hover:text-black transition-colors", utoBold.className)}>
               Take the quiz
             </Button>
           </Link>
