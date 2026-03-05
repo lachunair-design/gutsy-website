@@ -43,11 +43,26 @@ html {
 }
 
 body {
-  /* Updated to use your Tailwind brand tokens */
-  @apply antialiased text-black bg-linen;
+  /* Updated to use your Tailwind brand tokens and global background asset */
+  @apply antialiased text-black bg-linen relative;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+/* ── Global Background Asset Implementation ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /* Visual Design Spec: Opacity 85% */
+  opacity: 0.85; 
+  background-image: url('/images/background.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
 }
 
 /* Custom scrollbar - Premium */
