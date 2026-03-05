@@ -217,7 +217,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ The Logic Carousel ═══ */}
-      <TheLogicCarousel />
+      <TheLogicCarousel utoBlack={utoBlack} utoBold={utoBold} runWild={runWild} />
 
       {/* ═══ 10.2 Quiz Teaser ═══ */}
       <section className="bg-yellow py-24 mx-4 md:mx-8 rounded-[60px] overflow-hidden relative">

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Plus } from 'lucide-react';
 import localFont from 'next/font/local';
