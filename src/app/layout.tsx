@@ -93,7 +93,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${utoBlack.variable} ${crunold.variable} ${runWild.variable}`}>
-      <body className="antialiased bg-linen selection:bg-yellow selection:text-black">
+      <body className="antialiased selection:bg-yellow selection:text-black">
         <CartProvider>
           <TransitionProvider>
             <SmoothScrollProvider>

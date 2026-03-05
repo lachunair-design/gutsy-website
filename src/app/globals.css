@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-edm-yellow: linear-gradient(180deg, #FDF4D4 0%, #FFD93D 100%);
+}
+
 /* UTO Font Family - Manual declarations preserved for specific weight control */
 @font-face {
   font-family: 'Uto';
@@ -43,8 +47,8 @@ html {
 }
 
 body {
-  /* Updated to use your Tailwind brand tokens */
-  @apply antialiased text-black bg-linen;
+  @apply antialiased text-black;
+  background: var(--bg-edm-yellow);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -57,12 +61,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-linen;
+  background: #FDF4D4;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.2);
-  @apply border-2 border-linen rounded-full;
+  border: 2px solid #FDF4D4;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

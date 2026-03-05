@@ -9,7 +9,6 @@ import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
 import { TheLogicCarousel } from './the-logic-carousel';
 import { WelcomePopup } from '@/components/welcome-popup';
-import { RippedDivider } from '@/components/wave-divider';
 import { HomeAnimations } from '@/components/animations/home-animations';
 import { ProofSlider } from '@/components/reviews/proof-slider';
 import { HowItWorksSection } from '@/components/sections/how-it-works';
@@ -40,7 +39,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className={cn("bg-linen min-h-screen selection:bg-yellow/30", utoMedium.className)}>
+    <div className={cn("min-h-screen selection:bg-yellow/30", utoMedium.className)}>
       <WelcomePopup />
 
       {/* ═══ Hero Section ═══ */}
@@ -63,7 +62,7 @@ export default function HomePage() {
           <div className="max-w-4xl">
             <h1
               data-animate="hero-title"
-              className={cn("text-white text-[56px] md:text-[110px] leading-[0.9] tracking-tighter mb-8", utoBlack.className)}
+              className={cn("text-white text-[56px] md:text-[110px] leading-[0.9] tracking-tighter mb-8 [hyphens:none]", utoBlack.className)}
             >
               Most protein is clunky.
             </h1>
@@ -109,7 +108,7 @@ export default function HomePage() {
       {/* ═══ 3.1 The Lineup ═══ */}
       <section
         id="lineup"
-        className="py-24 bg-white overflow-hidden"
+        className="py-24 bg-white overflow-hidden scroll-mt-24"
         data-animate="ingredients-section"
       >
         <div className="max-w-7xl mx-auto px-6">
@@ -145,7 +144,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══ 3.7 GUTSY vs Typical Protein ═══ */}
-      <section className="py-24 bg-linen" data-animate="comparison-section">
+      <section className="py-24 bg-white/60" data-animate="comparison-section">
         <div className="max-w-5xl mx-auto px-6">
           <h3
             data-animate="comparison-heading"
@@ -219,8 +218,6 @@ export default function HomePage() {
 
       {/* ═══ The Logic Carousel ═══ */}
       <TheLogicCarousel />
-
-      <RippedDivider from="linen" to="yellow" />
 
       {/* ═══ 10.2 Quiz Teaser ═══ */}
       <section className="bg-yellow py-24 mx-4 md:mx-8 rounded-[60px] overflow-hidden relative">
